@@ -1,0 +1,343 @@
+﻿ALCHEMY_LIQUIDS
+46:Water (water)
+48:Chilly Water (water_ice)
+49:Swamp Water (water_swamp)
+50:Oil (oil)
+51:Whiskey (alcohol)
+53:Teleportatium (magic_liquid_teleportation)
+56:Polymorphine (magic_liquid_polymorph)
+57:Chaotic Polymorphine (magic_liquid_random_polymorph)
+58:Berserkium (magic_liquid_berserk)
+59:Pheromone (magic_liquid_charm)
+60:Invisiblium (magic_liquid_invisibility)
+65:Swamp (swamp)
+66:Mud (mud)
+67:Blood (blood)
+69:Fungus (blood_fungi)
+70:Worm Blood (blood_worm)
+72:Toxic Sludge (radioactive_liquid)
+84:Cement (cement)
+134:Acid (acid)
+135:Lava (lava)
+165:Urine (urine)
+255:Purple Toxic Sludge (poison)
+
+ALCHEMY_SOLIDS
+86:Sand (sand)
+87:Bone Dust (bone)
+88:Soil (soil)
+91:Honey (honey)
+92:Pink Slime (slime)
+96:Snow (snow)
+98:Rotten Meat (rotten_meat)
+103:Wax (wax)
+104:Gold (gold)
+105:Silver (silver)
+106:Copper (copper)
+107:Brass (brass)
+108:Diamond (diamond)
+109:Coal (coal)
+113:Gunpowder (gunpowder)
+114:Explosive Gunpowder (gunpowder_explosive)
+120:Grass (grass)
+121:Fungus (fungi)
+
+ALCHEMY_MISC
+52:Gate-Opener
+54:Healthium
+55:Lively Concoction
+83:Creepy Liquid
+219:Mysterious Fungus
+220:Green Fungus
+257:Draught of Midas
+258:Alchemic Precursor
+261:Void Liquid
+
+MISC_MATERIALS
+0:Empty (air)
+1:Fire
+2:Spark
+3:Electric spark
+4:Fire
+5:Ground
+6:Nest
+7:Blue fungus
+8:Rock
+9:Water (non liquid)
+10:Hell slime
+11:Slime (non liquid)
+12:Volcanic rock
+13:Meteorite
+14:Brickwork
+15:Steel
+16:Glowing matter
+17:Packed snow
+18:Ice
+19:Frozen acid
+20:Ice
+21:Toxic ice
+22:Frozen poison
+23:Ice (green)
+24:Neon tube
+25:Glass
+30:Frozen rock
+31:Concrete
+32:Wood
+33:Cheese
+34:Smoke
+35:Cloud
+36:Cloud
+37:Smoke
+38:Steam
+39:Flammable gas
+40:Flammable gas
+41:Smoke
+42:Freezing vapour
+43:Funky vapour
+44:Toxic gas
+45:Toxic gas
+47:water (darker)
+61:Toxic mist
+62:Alcohol mist
+63:Blood mist
+64:Slime mist
+68:Blood
+71:Freezing liquid
+73:Toxic sludge
+74:Magical liquid (blue)
+75:Molten gold
+76:Molten wax
+77:Molten silver
+78:Molten copper
+79:Molten brass
+80:Molten glass
+81:Molten glass
+82:Molten metal
+85:Concrete
+89:Sandstone
+90:Fungal soil
+93:Dirt
+94:Vine
+95:Vine
+97:Snow
+99:Slimey meat
+100:Toxic meat
+101:Ice
+102:Herb
+110:Sulphur
+111:Salt
+112:Wet sodium
+115:Gunpowder
+116:Gunpowder (exploding)
+117:Slimey meat (exploding)
+118:Plastic
+119:Molten plastic
+122:Seed
+123:Moss
+124:Plant Material
+125:Seed
+126:Seed
+127:Fungal spore
+128:Plant seed
+129:Fungal spore
+130:Fungal spore
+131:Fungal spore
+132:Glowing Fungal spore
+133:Evergreen seed
+136:Wood
+148:Text
+166:Excrement
+168:Smoke
+172:Glass
+174:Blood (non liquid)
+176:Fire (blue)
+185:Spark (green)
+186:Spark (blue)
+187:Spark (red)
+188:Spark (red)
+189:Spark (white)
+202:Spark (white)
+203:Spark (yellow)
+212:Holy matter
+216:Rusty moss
+217:Moss
+218:Fungus
+221:Molten plastic
+222:Molten plastic
+223:Burning powder
+224:Sodium
+225:Steel
+226:Toxic gold
+227:Worm meat
+230:Hell slime
+231:Hell slime
+232:Spark (purple)
+233:Slime (green)
+234:Sandstone
+235:Barren soil
+236:Soil
+237:Volcanic sand
+238:Sand
+239:Blue sand
+240:Molten aluminium
+241:Molten steel
+242:Molten metal
+243:Molten aluminium
+244:Molten aluminium
+245:Molten metal
+246:Molten metal
+247:Molten metal
+248:Molten steel
+249:Molten steel
+250:Molten steel
+251:Molten steel
+252:Magical liquid (pink)
+253:Magical liquid (green)
+254:Toxic sludge
+256:Blood
+259:Liquid fire
+260:Fire
+262:Brine
+263:Water
+264:Fungal gas
+265:Poison gas
+266:Steam
+268:Corrupted rock
+269:Pressurized wood
+270:Wood
+271:Vibrant gold vein
+272:Gold vein
+273:Brick wall
+274:Wood
+275:Damp wood
+283:Frozen slime
+284:Frozen blood
+285:Rock
+286:Hardened steel
+287:Dense steel
+288:Metal pipe
+289:Smoking steel
+290:Mossy steel
+291:Mossy steel
+292:Spark (purple)
+293:Mossy brickwork
+294:Brickwork
+295:Glowing stone
+296:Glowing stone
+297:Glowing stone
+298:Brickwork
+299:Spark (purple)
+300:Brickwork
+301:Brickwork
+302:Brickwork
+303:Damp rock
+304:Spark (blue white)
+305:Poisonous rock
+306:Toxic rock
+307:Grey rock
+308:Coal vein
+309:Vault rock
+311:Magic wall
+312:Magic gate
+313:Extremely Dense rock
+314:Rock
+315:Wood
+316:Dense rock
+317:Rock
+318:Rusty ground
+319:Granite Ground
+320:Rusted metal
+321:Bone wall
+322:Lush ground
+325:Brickwork
+326:Hell rock
+327:Pea soup
+333:Hell rock
+
+NOT_PLACEABLE_MATERIALS
+26:Rock (non placable)
+27:Ice (non placable)
+28:Ice (non placable)
+29:Brittle glass (non placable)
+137:Wood (non placable)
+138:Wood (non placable)
+139:Wax (non placable)
+140:Bomb (non placable)
+141:Wood (non placable)
+142:Rock (non placable)
+143:Ice (non placable)
+144:Brick wall (non placable)
+145:Colapsed Concrete (non placable)
+156:TNT (non placable)
+157:TNT (non placable)
+149:Meteorite (non placable)
+150:Meteorite (non placable)
+151:Green Meteorite (non placable)
+152:Steel (non placable)
+153:Rusted steel (non placable)
+154:Rusted steel (non placable)
+155:Rusted steel (non placable)
+156:Plastic (non placable)
+157:Aluminium (non placable)
+158:Rock (non placable)
+159:Rock (non placable)
+160:Crystal (non placable)
+161:Crystal (non placable)
+162:Aluminium (non placable)
+163:Meat (non placable)
+164:Slimey meat (non placable)
+167:Who knows what (non placable)
+169:Ice (non placable)
+170:Ice (non placable)
+171:Glass(non placable)
+173:Neon tube (non placable)
+175:Snow (non placable)
+177:Neon tube (non placable)
+178:Neon tube (non placable)
+179:Purple crystal (non placable)
+180:Gold (non placable)
+181:Bone (non placable)
+182:Rusted metal (non placable)
+183:Rusted metal (non placable)
+184:Metal (non placable)
+190:Glass (non placable)
+191:Glass (non placable)
+192:Gem (non placable)
+193:ITEM (non placable)
+194:Dense rock (non placable)
+195:Rock (non placable)
+196:Rock (non placable)
+197:Metal (non placable)
+198:Metal (non placable)
+199:Aluminium (non placable)
+200:Plastic (non placable)
+201:Meteorite (non placable)
+204:Tough wood (non placable)
+205:Wood (non placable)
+206:Fungus (non placable)
+207:Fungal matter (non placable)
+208:Wood (non placable)
+209:Wood (non placable)
+210:Wood (non placable)
+211:Brickwork (non placable)
+213:TNT (non placable)
+214:Bomb (non placable)
+215:Wood (non placable)
+228:Slimey meat (non placable)
+229:Green slimey meat (non placable)
+267:Smoke (non placable)
+276:Frozen slime (non placable)
+277:Frozen blood (non placable)
+278:Frozen poison (non placable)
+279:Toxic ice (non placable)
+280:Ice (non placable)
+281:Frozen acid (non placable)
+282:Neon tube (non placable)
+310:Eroding rock (non placable)
+323:Gold (non placable)
+324:Gem (non placable)
+328:Nest (non placable)
+329:Cocoon (non placable)
+330:Gem (non placable)
+331:Gem (non placable)
+332:Gem (non placable)
