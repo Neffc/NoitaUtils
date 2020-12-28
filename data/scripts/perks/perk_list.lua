@@ -190,19 +190,19 @@ perk_list =
 	},
 	--[[
 	{
-		id = "DOUBLE_HP",
-		ui_name = "$perk_double_hp",
-		ui_description = "$perkdesc_double_hp",
-		ui_icon = "data/ui_gfx/perk_icons/double_hp.png",
-		perk_icon = "data/items_gfx/perks/double_hp.png",
+		id = "MULTIPLY_HP",
+		ui_name = "$perk_multiply_hp",
+		ui_description = "$perkdesc_multiply_hp",
+		ui_icon = "data/ui_gfx/perk_icons/multiply_hp.png",
+		perk_icon = "data/items_gfx/perks/multiply_hp.png",
 		--game_effect = "CANNOT_HEAL",
 		func = function( entity_perk_item, entity_who_picked, item_name )
-			-- TODO increase player damage taken (or implement CANNOT_HEAL)
+			-- TODO Game effect -> (CANNOT_HEAL) Player cannot regain HP
 			
 			local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
 			if( damagemodels ~= nil ) then
 				for i,damagemodel in ipairs(damagemodels) do
-					local max_hp = tonumber( ComponentGetValue( damagemodel, "max_hp" ) ) * 2
+					local max_hp = tonumber( ComponentGetValue( damagemodel, "max_hp" ) ) * 3
 					local max_hp_cap = tonumber( ComponentGetValue( damagemodel, "max_hp_cap" ) )
 					if max_hp_cap > 0 then
 						max_hp = math.min( max_hp, max_hp_cap )
@@ -349,6 +349,33 @@ perk_list =
 		perk_icon = "data/items_gfx/perks/projectile_homing.png",
 		game_effect = "PROJECTILE_HOMING",
 	},
+	{
+		id = "PROJECTILE_HOMING_SHOOTER",
+		ui_name = "$perk_projectile_homing_shooter",
+		ui_description = "$perkdesc_projectile_homing_shooter",
+		ui_icon = "data/ui_gfx/perk_icons/projectile_homing_shooter.png",
+		perk_icon = "data/items_gfx/perks/projectile_homing_shooter.png",
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
+			{ 
+				extra_modifier = "projectile_homing_shooter",
+			} )
+			
+			local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
+			if( damagemodels ~= nil ) then
+				for i,damagemodel in ipairs(damagemodels) do
+					local projectile_resistance = tonumber(ComponentObjectGetValue( damagemodel, "damage_multipliers", "projectile" ))
+					local explosion_resistance = tonumber(ComponentObjectGetValue( damagemodel, "damage_multipliers", "explosion" ))
+					
+					explosion_resistance = explosion_resistance * 0.7
+					projectile_resistance = projectile_resistance * 0.7
+					
+					ComponentObjectSetValue( damagemodel, "damage_multipliers", "projectile", tostring(projectile_resistance) )
+					ComponentObjectSetValue( damagemodel, "damage_multipliers", "explosion", tostring(explosion_resistance) )
+				end
+			end
+		end,
+	},
 	
 	-- PLAYER EFFECTS
 	
@@ -399,8 +426,33 @@ perk_list =
 					ComponentSetValue( damagemodel, "blood_sprite_large", "data/particles/bloodsplatters/bloodsplatter_purple_$[1-3].xml" )
 					
 					local projectile_resistance = tonumber(ComponentObjectGetValue( damagemodel, "damage_multipliers", "projectile" ))
-					projectile_resistance = projectile_resistance * 0.6
+					projectile_resistance = projectile_resistance * 0.5
 					ComponentObjectSetValue( damagemodel, "damage_multipliers", "projectile", tostring(projectile_resistance) )
+				end
+			end
+			
+		end,
+	},
+	{
+		id = "BLEED_OIL",
+		ui_name = "$perk_bleed_oil",
+		ui_description = "$perkdesc_bleed_oil",
+		ui_icon = "data/ui_gfx/perk_icons/oil_blood.png",
+		perk_icon = "data/items_gfx/perks/oil_blood.png",
+		func = function( entity_perk_item, entity_who_picked, item_name )
+		
+			local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
+			if( damagemodels ~= nil ) then
+				for i,damagemodel in ipairs(damagemodels) do
+					ComponentSetValue( damagemodel, "blood_material", "oil" )
+					ComponentSetValue( damagemodel, "blood_spray_material", "oil" )
+					ComponentSetValue( damagemodel, "blood_multiplier", "3.0" )
+					ComponentSetValue( damagemodel, "blood_sprite_directional", "data/particles/bloodsplatters/bloodsplatter_directional_oil_$[1-3].xml" )
+					ComponentSetValue( damagemodel, "blood_sprite_large", "data/particles/bloodsplatters/bloodsplatter_oil_$[1-3].xml" )
+					
+					local explosion_resistance = tonumber(ComponentObjectGetValue( damagemodel, "damage_multipliers", "explosion" ))
+					explosion_resistance = explosion_resistance * 0.6
+					ComponentObjectSetValue( damagemodel, "damage_multipliers", "explosion", tostring(explosion_resistance) )
 				end
 			end
 			
@@ -451,6 +503,45 @@ perk_list =
 				
 		end,
 	},
+	{
+		id = "EXTRA_KNOCKBACK",
+		ui_name = "$perk_extra_knockback",
+		ui_description = "$perkdesc_extra_knockback",
+		ui_icon = "data/ui_gfx/perk_icons/extra_knockback.png",
+		perk_icon = "data/items_gfx/perks/extra_knockback.png",
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
+			{ 
+				extra_modifier = "extra_knockback",
+			} )
+		end,
+	},
+	{
+		id = "LOWER_SPREAD",
+		ui_name = "$perk_lower_spread",
+		ui_description = "$perkdesc_lower_spread",
+		ui_icon = "data/ui_gfx/perk_icons/lower_spread.png",
+		perk_icon = "data/items_gfx/perks/lower_spread.png",
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
+			{ 
+				extra_modifier = "lower_spread",
+			} )
+		end,
+	},
+	{
+		id = "BOUNCE",
+		ui_name = "$perk_bounce",
+		ui_description = "$perkdesc_bounce",
+		ui_icon = "data/ui_gfx/perk_icons/bounce.png",
+		perk_icon = "data/items_gfx/perks/bounce.png",
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
+			{ 
+				extra_modifier = "bounce",
+			} )
+		end,
+	},
 
 	-- SECRET
 	{
@@ -487,6 +578,26 @@ perk_list =
 			-- TODO trick gold, drops blood gold which gives back hp+3
 		end,
 	},
+	
+	{
+		id = "GOLDEN_I",
+		ui_name = "$perk_golden_i",
+		ui_description = "$perkdesc_golden_i",
+		ui_icon = "data/ui_gfx/perk_icons/golden_i.png",
+		perk_icon = "data/items_gfx/perks/golden_i.png",
+		game_effect = "GOLDEN_I",
+		-- TODO game_effect; gold doesn't despawn after being seen
+	},
+	
+	{
+		id = "NO_PLAYER_KNOCKBACK",
+		ui_name = "$perk_no_player_knockback",
+		ui_description = "$perkdesc_no_player_knockback",
+		ui_icon = "data/ui_gfx/perk_icons/no_player_knockback.png",
+		perk_icon = "data/items_gfx/perks/no_player_knockback.png",
+		game_effect = "NO_PLAYER_KNOCKBACK",
+		-- TODO game_effect; player takes no knockback
+	},
 
 	-- CRITICALS
 	{
@@ -520,11 +631,6 @@ perk_list =
 		id = "FASTER_WANDS",
 		ui_name = "$perk_faster_wands",
 		ui_description = "$perkdesc_faster_wands",
-	},
-	{
-		id = "BOUNCE",
-		ui_name = "$perk_bounce",
-		ui_description = "$perkdesc_bounce",
 	},
 	{
 		id = "BERSERK",

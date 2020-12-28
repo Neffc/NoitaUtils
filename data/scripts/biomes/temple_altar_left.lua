@@ -10,6 +10,7 @@ RegisterSpawnFunction( 0xff6d934c, "spawn_hp" )
 RegisterSpawnFunction( 0xff33934c, "spawn_shopitem" )
 RegisterSpawnFunction( 0xff33935F, "spawn_cheap_shopitem" )
 RegisterSpawnFunction( 0xff10822d, "spawn_workshop" )
+RegisterSpawnFunction( 0xff5a822d, "spawn_workshop_extra" )
 RegisterSpawnFunction( 0xffFAABBA, "spawn_motordoor" )
 RegisterSpawnFunction( 0xffFAABBB, "spawn_pressureplate" )
 RegisterSpawnFunction( 0xffFF5A0A, "spawn_music_trigger" )
@@ -93,6 +94,10 @@ end
 
 function spawn_workshop( x, y )
 	EntityLoad( "data/entities/buildings/workshop.xml", x, y )
+end
+
+function spawn_workshop_extra( x, y )
+	EntityLoad( "data/entities/buildings/workshop_allow_mods.xml", x, y )
 end
 
 function spawn_motordoor( x, y )

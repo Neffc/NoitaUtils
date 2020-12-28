@@ -37,12 +37,12 @@ uniform vec2 tex_size;
 void main()
 {
 	vec2 sprite_uv = pixel_art_filter_uv( gl_TexCoord[0].xy, tex_size );
-	vec4 stain_uv  = texture2D( tex2, sprite_uv );
+	vec2 stain_uv = texture2D( tex2, sprite_uv ).xy;
 
-	vec2 stain_uv_orig = stain_uv.xy;
+	vec2 stain_uv_orig = stain_uv;
 
-	stain_uv.xy *= data.xy; // atlas scale;
-	stain_uv.xy += data.zw; // atlas offset;
+	stain_uv *= data.xy; // atlas scale;
+	stain_uv += data.zw; // atlas offset;
 
 	vec4 color = texture2D( tex,  sprite_uv );
 	vec4 stain = texture2D( tex3, stain_uv.xy );

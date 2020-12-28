@@ -259,6 +259,11 @@
 		
 	<HealthBarComponent>
 	</HealthBarComponent>
+	
+	<LuaComponent
+		script_death="data/scripts/animals/boss_dragon_death.lua"
+		>
+	</LuaComponent>
 
 
 	<!-- limbs ---------------------- -->

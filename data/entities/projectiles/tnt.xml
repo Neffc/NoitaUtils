@@ -97,7 +97,7 @@
 
   <AudioComponent
       file="data/audio/Desktop/projectiles.snd"
-      event_root="player_projectiles/bomb">
+      event_root="projectiles/tnt">
   </AudioComponent>
 
   <AudioLoopComponent

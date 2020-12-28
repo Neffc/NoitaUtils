@@ -51,7 +51,7 @@
 		</AnimalAIComponent>
 		
 		<DamageModelComponent 
-            hp="3"
+            hp="6"
             ragdoll_material="rock_box2d_nohit"
 			ragdoll_filenames_file="" 
 			blood_material="plasma_fading_green"

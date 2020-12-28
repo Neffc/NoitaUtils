@@ -349,7 +349,7 @@ actions =
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "2,3,4,5,6", -- HOMING_SHOOTER
 		spawn_probability                 = "1,1,1,1,1", -- HOMING_SHOOTER
-		price = 140,
+		price = 100,
 		mana = 10,
 		--max_uses = 100,
 		action 		= function()
@@ -3453,6 +3453,25 @@ actions =
 			c.fire_rate_wait = c.fire_rate_wait + 40
 		end,
 	},
+	{
+		id          = "DEATH_CROSS_BIG",
+		name 		= "$action_death_cross_big",
+		description = "$actiondesc_death_cross_big",
+		sprite 		= "data/ui_gfx/gun_actions/death_cross_big.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/death_cross_unidentified.png",
+		type 		= ACTION_TYPE_PROJECTILE,
+		spawn_level                       = "2,3,4,5,6", -- DEATH_CROSS
+		spawn_probability                        = "1,1,1,1,1", -- DEATH_CROSS
+		price = 310,
+		mana = 150,
+		max_uses = 8,
+		custom_xml_file = "data/entities/misc/custom_cards/death_cross.xml",
+		action 		= function()
+			add_projectile("data/entities/projectiles/deck/death_cross_big.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 70
+			shot_effects.recoil_knockback = shot_effects.recoil_knockback + 30.0
+		end,
+	},
 	--[[
 	{
 		id          = "PLASMA_FLARE",
@@ -3688,6 +3707,7 @@ actions =
 			c.fire_rate_wait = c.fire_rate_wait + 20
 		end,
 	},
+	-- Materials --
 	{
 		id          = "MATERIAL_WATER",
 		name 		= "$action_material_water",
@@ -3777,7 +3797,7 @@ actions =
 		type 		= ACTION_TYPE_MATERIAL,
 		spawn_level                       = "2,3,4,5,6", -- MATERIAL_BLOOD
 		spawn_probability                 = "1,1,1,1,1", -- MATERIAL_BLOOD
-		price = 150,
+		price = 100,
 		-- Note( Petri ): 10.7.2019 - removed uses. We have acid trail already
 		-- max_uses = 250,
 		mana = 0,
@@ -3785,25 +3805,6 @@ actions =
 		action 		= function()
 			add_projectile("data/entities/projectiles/deck/material_cement.xml")
 			c.fire_rate_wait = c.fire_rate_wait - 15
-			current_reload_time = current_reload_time - ACTION_DRAW_RELOAD_TIME_INCREASE - 10 -- this is a hack to get the cement reload time back to 0
-		end,
-	},
-	-- Materials --
-	{
-		id          = "MATERIAL_CEMENT",
-		name 		= "$action_material_cement",
-		description = "$actiondesc_material_cement",
-		sprite 		= "data/ui_gfx/gun_actions/material_cement.png",
-		type 		= ACTION_TYPE_MATERIAL,
-		spawn_level                       = "", -- MATERIAL_CEMENT
-		spawn_probability                 = "", -- MATERIAL_CEMENT
-		price = 100,
-		mana = 1,
-		mana        = 0,
-		sound_loop_tag = "sound_spray",
-		action 		= function()
-			add_projectile("data/entities/projectiles/deck/material_cement.xml")
-			c.fire_rate_wait = c.fire_rate_wait + 0
 			current_reload_time = current_reload_time - ACTION_DRAW_RELOAD_TIME_INCREASE - 10 -- this is a hack to get the cement reload time back to 0
 		end,
 	},

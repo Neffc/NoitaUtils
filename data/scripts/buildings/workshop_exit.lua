@@ -20,6 +20,10 @@ function collision_trigger()
 	local workshop_2 = EntityGetClosestWithTag( pos_x, pos_y, "workshop" )
 	EntityKill( workshop_2 );
 	--print("Destroyed workshop entity 2")
+	
+	local workshop_2b = EntityGetClosestWithTag( pos_x, pos_y, "workshop" )
+	EntityKill( workshop_2b );
+	--print("Destroyed workshop entity 2b")
 
 	local workshop_3 = EntityGetClosestWithTag( pos_x, pos_y, "workshop_show_hint" )
 	EntityKill( workshop_3 );
