@@ -31,7 +31,7 @@
     camera_shake_when_shot="2.0"
     shoot_light_flash_radius="64"
     hit_particle_force_multiplier="0.1"
-    create_shell_casing="1"
+    create_shell_casing="0"
     bounces_left="0"
     damage="1"	
 	muzzle_flash_file="data/entities/particles/muzzle_flashes/muzzle_flash_laser.xml"
@@ -119,9 +119,15 @@
   </ParticleEmitterComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
-      event_root="projectiles/laser">
+      file="data/audio/Desktop/projectiles.bank"
+      event_root="projectiles/laser_turret">
   </AudioComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/laser_turret.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

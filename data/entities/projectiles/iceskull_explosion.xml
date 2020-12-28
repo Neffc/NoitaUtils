@@ -40,6 +40,7 @@
 		shake_vegetation="0" 
 		sparks_enabled="0" 
 		stains_enabled="0" 
+		audio_enabled="0"
 		>
     </config_explosion>
   </ProjectileComponent>
@@ -48,7 +49,7 @@
   
   <LuaComponent
     execute_on_removed="1"
-    execute_every_n_frame="99999999"
+    execute_every_n_frame="-1"
     script_source_file="data/scripts/projectiles/iceskull_explosion.lua"
     remove_after_executed="0">
   </LuaComponent>

@@ -120,4 +120,8 @@
 	<ItemPickUpperComponent
     	is_in_npc="1" >
     </ItemPickUpperComponent>
+	
+	<VariableStorageComponent
+		_tags="no_gold_drop">
+	</VariableStorageComponent>
 </Entity>

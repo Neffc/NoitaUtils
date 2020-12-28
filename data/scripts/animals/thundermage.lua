@@ -1,9 +1,11 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 local entity_id    = GetUpdatedEntityID()
 local pos_x, pos_y = EntityGetTransform( entity_id )
 
-local theta = math.rad(Random(1,360))
+SetRandomSeed( GameGetFrameNum(), pos_x + pos_y + entity_id )
+
+local theta = math.rad( Random( 1,360 ) )
 local length = 5000
 
 local vel_x = math.cos( theta ) * length

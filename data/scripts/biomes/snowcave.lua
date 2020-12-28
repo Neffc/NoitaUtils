@@ -1,13 +1,17 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 -- The level of action ids that are spawned from the chests
 CHEST_LEVEL = 2
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
-dofile("data/scripts/lib/utilities.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/lib/utilities.lua")
+dofile_once("data/scripts/biome_modifiers.lua")
 dofile( "data/scripts/items/generate_shop_item.lua" )
 
+RegisterSpawnFunction( 0xffffeedd, "init" )
 RegisterSpawnFunction( 0xff00AC33, "load_pixel_scene3" )
 RegisterSpawnFunction( 0xff00AC64, "load_pixel_scene4" )
+RegisterSpawnFunction( 0xff4691c7, "load_puzzle_capsule" )
+RegisterSpawnFunction( 0xff3691d7, "load_puzzle_capsule_b" )
 RegisterSpawnFunction( 0xff55AF4B, "load_altar" )
 RegisterSpawnFunction( 0xff23B9C3, "spawn_altar_torch" ) 
 RegisterSpawnFunction( 0xff55AF8C, "spawn_skulls" ) 
@@ -21,6 +25,10 @@ RegisterSpawnFunction( 0xff33934c, "spawn_shopitem" )
 RegisterSpawnFunction( 0xff80FF5A, "spawn_vines" )
 RegisterSpawnFunction( 0xff434040, "spawn_burning_barrel" )
 RegisterSpawnFunction( 0xffb4a00a, "spawn_fish" )
+RegisterSpawnFunction( 0xffaa42ff, "spawn_electricity_trap" )
+RegisterSpawnFunction( 0xff366178, "spawn_buried_eye_teleporter" )
+RegisterSpawnFunction( 0xff876543, "spawn_statue_hand" )
+
 
 ------------ SMALL ENEMIES ----------------------------------------------------
 
@@ -186,12 +194,12 @@ g_big_enemies =
 		entities 	= {
 			{
 				min_count	= 1,
-				max_count 	= 3,
+				max_count 	= 2,
 				entity = "data/entities/animals/scavenger_smg.xml",
 			},
 			{
 				min_count	= 1,
-				max_count 	= 3,
+				max_count 	= 2,
 				entity = "data/entities/animals/scavenger_grenade.xml",
 			},
 		}
@@ -209,22 +217,40 @@ g_big_enemies =
 		entity 	= "data/entities/animals/tank_rocket.xml"
 	},
 	{
-		prob   		= 0.07,
+		prob   		= 0.05,
 		min_count	= 1,
 		max_count	= 1,    
 		entities 	= {
 			{
 				min_count	= 1,
-				max_count 	= 4,
+				max_count 	= 3,
 				entity = "data/entities/animals/scavenger_smg.xml",
 			},
 			{
 				min_count	= 1,
-				max_count 	= 4,
+				max_count 	= 3,
 				entity = "data/entities/animals/scavenger_grenade.xml",
 			},
 			"data/entities/animals/scavenger_leader.xml",
 		}
+	},
+	{
+		prob   		= 0.01,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 		= "data/entities/animals/monk.xml"
+	},
+	{
+		prob   		= 0.01,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 		= "data/entities/animals/wizard_neutral.xml"
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/thunderskull.xml"
 	},
 }
 
@@ -242,12 +268,12 @@ g_scavenger_party =
 		entities 	= {
 			{
 				min_count	= 1,
-				max_count 	= 4,
+				max_count 	= 3,
 				entity = "data/entities/animals/scavenger_smg.xml",
 			},
 			{
 				min_count	= 1,
-				max_count 	= 4,
+				max_count 	= 3,
 				entity = "data/entities/animals/scavenger_grenade.xml",
 			},
 			"data/entities/animals/scavenger_leader.xml",
@@ -296,6 +322,12 @@ g_unique_enemy =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/wizard_dark.xml"
+	},
+	{
+		prob   		= 0.07,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wizard_swapper.xml"
 	},
 	{
 		prob   		= 0.1,
@@ -355,45 +387,18 @@ g_items =
 		max_count	= 1,    
 		entity 	= "data/entities/items/wand_level_02.xml"
 	},
-}
-
-g_pixel_scene_01 =
-{
-	total_prob = 0,
+	-- debug tests
 	{
-		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_verticalobservatory.png",
-		visual_file		= "data/biome_impl/snowcave_verticalobservatory_visual.png",
-		background_file	= "data/biome_impl/snowcave_verticalobservatory_background.png",
-		is_unique		= 0
+		prob   		= 5,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/items/wand_level_02_better.xml"
 	},
 	{
-		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_verticalobservatory2.png",
-		visual_file		= "data/biome_impl/snowcave_verticalobservatory2_visual.png",
-		background_file	= "data/biome_impl/snowcave_verticalobservatory2_background.png",
-		is_unique		= 0
-	},
-	{
-		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icebridge2.png",
-		visual_file		= "",
-		background_file	= "",
-		is_unique		= 0
-	},
-	{
-		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_pipe.png",
-		visual_file		= "data/biome_impl/snowcave_pipe_visual.png",
-		background_file	= "",
-		is_unique		= 0
-	},
-	{
-		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icepillar.png",
-		visual_file		= "",
-		background_file	= "",
-		is_unique		= 0
+		prob   		= 5,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/items/wand_unshuffle_02.xml"
 	},
 }
 
@@ -402,29 +407,69 @@ g_pixel_scene_01 =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_verticalobservatory.png",
-		visual_file		= "data/biome_impl/snowcave_verticalobservatory_visual.png",
-		background_file	= "data/biome_impl/snowcave_verticalobservatory_background.png",
+		material_file 	= "data/biome_impl/snowcave/verticalobservatory.png",
+		visual_file		= "data/biome_impl/snowcave/verticalobservatory_visual.png",
+		background_file	= "data/biome_impl/snowcave/verticalobservatory_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_verticalobservatory2.png",
-		visual_file		= "data/biome_impl/snowcave_verticalobservatory2_visual.png",
-		background_file	= "data/biome_impl/snowcave_verticalobservatory2_background.png",
+		material_file 	= "data/biome_impl/snowcave/verticalobservatory2.png",
+		visual_file		= "data/biome_impl/snowcave/verticalobservatory2_visual.png",
+		background_file	= "data/biome_impl/snowcave/verticalobservatory2_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icebridge2.png",
+		material_file 	= "data/biome_impl/snowcave/icebridge2.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_pipe.png",
-		visual_file		= "data/biome_impl/snowcave_pipe_visual.png",
+		material_file 	= "data/biome_impl/snowcave/pipe.png",
+		visual_file		= "data/biome_impl/snowcave/pipe_visual.png",
+		background_file	= "",
+		is_unique		= 0
+	},
+	{
+		prob   			= 0.5,
+		material_file 	= "data/biome_impl/snowcave/icepillar.png",
+		visual_file		= "",
+		background_file	= "",
+		is_unique		= 0
+	},
+}
+
+g_pixel_scene_01 =
+{
+	total_prob = 0,
+	{
+		prob   			= 0.5,
+		material_file 	= "data/biome_impl/snowcave/verticalobservatory.png",
+		visual_file		= "data/biome_impl/snowcave/verticalobservatory_visual.png",
+		background_file	= "data/biome_impl/snowcave/verticalobservatory_background.png",
+		is_unique		= 0
+	},
+	{
+		prob   			= 0.5,
+		material_file 	= "data/biome_impl/snowcave/verticalobservatory2.png",
+		visual_file		= "data/biome_impl/snowcave/verticalobservatory2_visual.png",
+		background_file	= "data/biome_impl/snowcave/verticalobservatory2_background.png",
+		is_unique		= 0
+	},
+	{
+		prob   			= 0.5,
+		material_file 	= "data/biome_impl/snowcave/icebridge2.png",
+		visual_file		= "",
+		background_file	= "",
+		is_unique		= 0
+	},
+	{
+		prob   			= 0.5,
+		material_file 	= "data/biome_impl/snowcave/pipe.png",
+		visual_file		= "data/biome_impl/snowcave/pipe_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
@@ -435,29 +480,29 @@ g_pixel_scene_01_alt =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_verticalobservatory_alt.png",
-		visual_file		= "data/biome_impl/snowcave_verticalobservatory_visual.png",
-		background_file	= "data/biome_impl/snowcave_verticalobservatory_background.png",
+		material_file 	= "data/biome_impl/snowcave/verticalobservatory_alt.png",
+		visual_file		= "data/biome_impl/snowcave/verticalobservatory_visual.png",
+		background_file	= "data/biome_impl/snowcave/verticalobservatory_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_verticalobservatory2_alt.png",
-		visual_file		= "data/biome_impl/snowcave_verticalobservatory2_visual.png",
-		background_file	= "data/biome_impl/snowcave_verticalobservatory2_background.png",
+		material_file 	= "data/biome_impl/snowcave/verticalobservatory2_alt.png",
+		visual_file		= "data/biome_impl/snowcave/verticalobservatory2_visual.png",
+		background_file	= "data/biome_impl/snowcave/verticalobservatory2_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icebridge2_alt.png",
+		material_file 	= "data/biome_impl/snowcave/icebridge2_alt.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_pipe_alt.png",
-		visual_file		= "data/biome_impl/snowcave_pipe_visual.png",
+		material_file 	= "data/biome_impl/snowcave/pipe_alt.png",
+		visual_file		= "data/biome_impl/snowcave/pipe_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
@@ -468,70 +513,70 @@ g_pixel_scene_02 =
 	total_prob = 0,
 	{
 		prob   			= 0.4,
-		material_file 	= "data/biome_impl/snowcave_crater.png",
-		visual_file		= "data/biome_impl/snowcave_crater_visual.png",
+		material_file 	= "data/biome_impl/snowcave/crater.png",
+		visual_file		= "data/biome_impl/snowcave/crater_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_horizontalobservatory.png",
-		visual_file		= "data/biome_impl/snowcave_horizontalobservatory_visual.png",
-		background_file	= "data/biome_impl/snowcave_horizontalobservatory_background.png",
+		material_file 	= "data/biome_impl/snowcave/horizontalobservatory.png",
+		visual_file		= "data/biome_impl/snowcave/horizontalobservatory_visual.png",
+		background_file	= "data/biome_impl/snowcave/horizontalobservatory_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_horizontalobservatory2.png",
-		visual_file		= "data/biome_impl/snowcave_horizontalobservatory2_visual.png",
-		background_file	= "data/biome_impl/snowcave_horizontalobservatory2_background.png",
+		material_file 	= "data/biome_impl/snowcave/horizontalobservatory2.png",
+		visual_file		= "data/biome_impl/snowcave/horizontalobservatory2_visual.png",
+		background_file	= "data/biome_impl/snowcave/horizontalobservatory2_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.3,
-		material_file 	= "data/biome_impl/snowcave_horizontalobservatory3.png",
-		visual_file		= "data/biome_impl/snowcave_horizontalobservatory3_visual.png",
-		background_file	= "data/biome_impl/snowcave_horizontalobservatory3_background.png",
+		material_file 	= "data/biome_impl/snowcave/horizontalobservatory3.png",
+		visual_file		= "data/biome_impl/snowcave/horizontalobservatory3_visual.png",
+		background_file	= "data/biome_impl/snowcave/horizontalobservatory3_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.4,
-		material_file 	= "data/biome_impl/snowcave_icebridge.png",
+		material_file 	= "data/biome_impl/snowcave/icebridge.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.4,
-		material_file 	= "data/biome_impl/snowcave_snowcastle.png",
-		visual_file		= "data/biome_impl/snowcave_snowcastle_visual.png",
-		background_file	= "data/biome_impl/snowcave_snowcastle_background.png",
+		material_file 	= "data/biome_impl/snowcave/snowcastle.png",
+		visual_file		= "data/biome_impl/snowcave/snowcastle_visual.png",
+		background_file	= "data/biome_impl/snowcave/snowcastle_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0,
-		material_file 	= "data/biome_impl/snowcave_symbolroom.png",
+		material_file 	= "data/biome_impl/snowcave/symbolroom.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icepillar.png",
+		material_file 	= "data/biome_impl/snowcave/icepillar.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
-		prob   			= 1,
-		material_file 	= "data/biome_impl/snowcave_shop.png",
-		visual_file		= "data/biome_impl/snowcave_shop_visual.png",
+		prob   			= 1.5,
+		material_file 	= "data/biome_impl/snowcave/shop.png",
+		visual_file		= "data/biome_impl/snowcave/shop_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
-		prob   			= 1,
-		material_file 	= "data/biome_impl/snowcave_camp.png",
+		prob   			= 0.5,
+		material_file 	= "data/biome_impl/snowcave/camp.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
@@ -542,7 +587,7 @@ g_pixel_scene_03 =
 {
 	total_prob = 0,
 	{
-		prob   			= 0.7,
+		prob   			= 0.9,
 		material_file 	= "",
 		visual_file		= "",
 		background_file	= "",
@@ -550,16 +595,23 @@ g_pixel_scene_03 =
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_tinyobservatory.png",
-		visual_file		= "data/biome_impl/snowcave_tinyobservatory_visual.png",
-		background_file	= "data/biome_impl/snowcave_tinyobservatory_background.png",
+		material_file 	= "data/biome_impl/snowcave/tinyobservatory.png",
+		visual_file		= "data/biome_impl/snowcave/tinyobservatory_visual.png",
+		background_file	= "data/biome_impl/snowcave/tinyobservatory_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_tinyobservatory2.png",
-		visual_file		= "data/biome_impl/snowcave_tinyobservatory2_visual.png",
-		background_file	= "data/biome_impl/snowcave_tinyobservatory2_background.png",
+		material_file 	= "data/biome_impl/snowcave/tinyobservatory2.png",
+		visual_file		= "data/biome_impl/snowcave/tinyobservatory2_visual.png",
+		background_file	= "data/biome_impl/snowcave/tinyobservatory2_background.png",
+		is_unique		= 0
+	},
+	{
+		prob   			= 0.2,
+		material_file 	= "data/biome_impl/snowcave/buried_eye.png",
+		visual_file		= "",
+		background_file	= "",
 		is_unique		= 0
 	},
 }
@@ -614,30 +666,68 @@ g_pixel_scene_04 =
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icicles.png",
+		material_file 	= "data/biome_impl/snowcave/icicles.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icicles2.png",
+		material_file 	= "data/biome_impl/snowcave/icicles2.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icicles3.png",
+		material_file 	= "data/biome_impl/snowcave/icicles3.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icicles4.png",
+		material_file 	= "data/biome_impl/snowcave/icicles4.png",
 		visual_file		= "",
 		background_file	= "",
+		is_unique		= 0
+	},
+}
+
+g_puzzle_capsule =
+{
+	total_prob = 0,
+	{
+		prob   			= 9.0,
+		material_file 	= "",
+		visual_file		= "",
+		background_file	= "",
+		is_unique		= 0
+	},
+	{
+		prob   			= 1.0,
+		material_file 	= "data/biome_impl/snowcave/puzzle_capsule.png",
+		visual_file		= "data/biome_impl/snowcave/puzzle_capsule_visual.png",
+		background_file	= "data/biome_impl/snowcave/puzzle_capsule_background.png",
+		is_unique		= 0
+	},
+}
+
+g_puzzle_capsule_b =
+{
+	total_prob = 0,
+	{
+		prob   			= 9.0,
+		material_file 	= "",
+		visual_file		= "",
+		background_file	= "",
+		is_unique		= 0
+	},
+	{
+		prob   			= 1.0,
+		material_file 	= "data/biome_impl/snowcave/puzzle_capsule_b.png",
+		visual_file		= "data/biome_impl/snowcave/puzzle_capsule_b_visual.png",
+		background_file	= "data/biome_impl/snowcave/puzzle_capsule_b_background.png",
 		is_unique		= 0
 	},
 }
@@ -691,6 +781,14 @@ g_props =
 		offset_y 	= 0,
 		entity 	= "data/entities/props/physics_barrel_oil.xml"
 	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		offset_y 	= 0,
+		entity 	= "data/entities/props/physics_trap_electricity_enabled.xml"
+	},
+	
 }
 
 g_skulls =
@@ -897,26 +995,68 @@ g_fish =
 	},
 }
 
+function safe( x, y )
+	local result = true
+	
+	if ( x >= 125 ) and ( x <= 249 ) and ( y >= 3070 ) and ( y <= 3187 ) then
+		result = false
+	end
+	
+	return result
+end
+
 -- actual functions that get called from the wang generator
 
+function init(x, y, w, h)
+	-- figure out positions for 8 statues within the biome
+	-- and spawn them if a position is within the bounds of this function call
+	-- NOTE: only 3 statues need to be destroyed to complete sequence
+	for i=1,8 do
+		local biome_x_min = -2350
+		local biome_x_max = 2350
+		local biome_y_min = 3140
+		local biome_y_max = 4500
+
+		local pos_x = ProceduralRandomi(109,i*53,biome_x_min,biome_x_max)
+		local pos_y = ProceduralRandomi(111,i*2.9,biome_y_min,biome_y_max)
+
+		if pos_x >= x and pos_x <= x+w
+		and pos_y >= y and pos_y <= y+h then
+			-- spawn
+			--print("spawned statue " .. i .. " at " .. pos_x .. ", " .. pos_y)
+			LoadPixelScene( "data/biome_impl/snowcave/statue_hand.png", "", pos_x-22, pos_y-22, "", true )
+		end	
+	end
+end
+
 function spawn_small_enemies(x, y)
-	spawn(g_small_enemies,x,y)
+	if safe( x, y ) then
+		spawn(g_small_enemies,x,y)
+	end
 end
 
 function spawn_big_enemies(x, y)
-	spawn(g_big_enemies,x,y)
+	if safe( x, y ) then
+		spawn(g_big_enemies,x,y)
+	end
 end
 
 function spawn_unique_enemy(x, y)
-	spawn(g_unique_enemy,x,y)
+	if safe( x, y ) then
+		spawn(g_unique_enemy,x,y)
+	end
 end
 
 function spawn_unique_enemy2(x, y)
-	spawn(g_unique_enemy2,x,y)
+	if safe( x, y ) then
+		spawn(g_unique_enemy2,x,y)
+	end
 end
 
 function spawn_scavenger_party(x,y)
-	spawn(g_scavenger_party, x, y)
+	if safe( x, y ) then
+		spawn(g_scavenger_party, x, y)
+	end
 end
 
 function spawn_items(x, y)
@@ -928,16 +1068,20 @@ function spawn_items(x, y)
 end
 
 function spawn_lamp(x, y)
-	spawn(g_lamp,x+5,y+10,0,0)
+	if safe( x, y ) then
+		spawn(g_lamp,x+5,y+10,0,0)
+	end
 end
 
 function spawn_props(x, y)
-	local r = ProceduralRandom( x-11.231, y+10.2157 )
-	
-	if (r < 0.9) then
-		spawn(g_props,x,y-3,0,0)
-	else
-		LoadPixelScene( "data/biome_impl/snowperson.png", "data/biome_impl/snowperson_visual.png", x-12, y-38, "", true )
+	if safe( x, y ) then
+		local r = ProceduralRandom( x-11.231, y+10.2157 )
+		
+		if (r < 0.9) then
+			spawn(g_props,x,y-3,0,0)
+		else
+			LoadPixelScene( "data/biome_impl/snowperson.png", "data/biome_impl/snowperson_visual.png", x-12, y-38, "", true )
+		end
 	end
 end
 
@@ -969,12 +1113,24 @@ function load_pixel_scene4( x, y )
 	load_random_pixel_scene( g_pixel_scene_04, x, y )
 end
 
+function load_puzzle_capsule( x, y )
+	--print("puzzle capsule spawned at " .. x .. ", " .. y)
+	load_random_pixel_scene( g_puzzle_capsule, x, y )
+end
+
+function load_puzzle_capsule_b( x, y )
+	--print("puzzle capsule spawned at " .. x .. ", " .. y)
+	load_random_pixel_scene( g_puzzle_capsule_b, x-50, y-230 )
+end
+
 function spawn_altar_torch(x, y)
 	EntityLoad( "data/entities/props/altar_torch.xml", x-7, y-36 )
 end
 
 function spawn_acid(x, y)
-	EntityLoad( "data/entities/props/dripping_acid_gas.xml", x, y )
+	if safe( x, y ) then
+		EntityLoad( "data/entities/props/dripping_acid_gas.xml", x, y )
+	end
 end
 
 function load_altar( x, y )
@@ -983,11 +1139,15 @@ function load_altar( x, y )
 end
 
 function load_acidtank_right( x, y )
-	load_random_pixel_scene( g_acidtank_right, x-12, y-12 )
+	if safe( x, y ) then
+		load_random_pixel_scene( g_acidtank_right, x-12, y-12 )
+	end
 end
 
 function load_acidtank_left( x, y )
-	load_random_pixel_scene( g_acidtank_left, x-252, y-12 )
+	if safe( x, y ) then
+		load_random_pixel_scene( g_acidtank_left, x-252, y-12 )
+	end
 end
 
 function spawn_shopitem( x, y )
@@ -998,10 +1158,24 @@ function spawn_vines(x, y)
 	spawn(g_vines,x+5,y+5)
 end
 
+function spawn_electricity_trap(x, y)
+	EntityLoad("data/entities/props/physics_trap_electricity_enabled.xml", x, y)
+end
+
 function spawn_burning_barrel(x, y)
-	EntityLoad( "data/entities/props/physics_barrel_burning.xml", x, y )
+	if safe( x, y ) then
+		EntityLoad( "data/entities/props/physics_barrel_burning.xml", x, y )
+	end
 end
 
 function spawn_fish(x, y)
 	spawn(g_fish,x,y)
+end
+
+function spawn_buried_eye_teleporter(x, y)
+	EntityLoad("data/entities/buildings/teleport_snowcave_buried_eye.xml", x, y)
+end
+
+function spawn_statue_hand(x, y)
+	EntityLoad("data/entities/buildings/statue_hand_1.xml", x, y)
 end

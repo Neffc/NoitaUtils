@@ -1,4 +1,4 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 --[[function Component_SetTimeOut( entity_id, frames, script_file )
 	local lua_comp = EntityAddComponent( entity_id, "LuaComponent" )

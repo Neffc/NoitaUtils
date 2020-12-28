@@ -1,5 +1,5 @@
 -- constants (color format is ARGB)
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 local snowcave			= 0xff1775d5
 local excavation_site	= 0xff124445

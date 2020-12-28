@@ -1,4 +1,4 @@
-<Entity tags="mortal,human,hittable,prey,player_unit" >
+<Entity tags="mortal,human,hittable,prey" >
 
   <GenomeDataComponent 
     herd_id="player"

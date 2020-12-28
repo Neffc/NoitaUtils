@@ -1,4 +1,4 @@
-<Entity name="$projectile_default">
+<Entity name="$projectile_default" tags="projectile_player" >
 
 	<Base file="data/entities/base_projectile.xml" >
 	</Base>
@@ -18,7 +18,7 @@
     explosion_dont_damage_shooter="1" 
     on_collision_die="1"
     lifetime="1"
-    damage="0.5"
+    damage="0.0"
     velocity_sets_scale="1"
     lifetime_randomness="0"
     ragdoll_force_multiplier="0.01"
@@ -64,7 +64,7 @@
       is_digger="1"
       audio_enabled="0" >
     </config_explosion>
-    <damage_by_type drill="0.01" >
+    <damage_by_type slice="0.51" >
     </damage_by_type>
   </ProjectileComponent>
   
@@ -92,5 +92,17 @@
     emission_interval_max_frames="2"
     is_emitting="1" >
   </ParticleEmitterComponent>
+  
+  <AudioLoopComponent
+		file="data/audio/Desktop/projectiles.bank"
+		event_name="player_projectiles/chainsaw/loop"
+		auto_play="1">
+	</AudioLoopComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/chainsaw.xml"
+		>
+	</VariableStorageComponent>
 </Entity>
 

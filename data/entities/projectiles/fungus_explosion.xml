@@ -86,6 +86,12 @@
     emission_interval_max_frames="2"
     is_emitting="1" >
   </ParticleEmitterComponent>
+  
+  <VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/fungus_explosion.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

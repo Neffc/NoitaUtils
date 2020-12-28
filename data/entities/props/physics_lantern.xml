@@ -5,7 +5,7 @@
   <Base file="data/entities/base_item_physics.xml" >
     <PhysicsImageShapeComponent
       image_file="data/props_gfx/lantern.png"
-      material="wood_prop" >
+      material="glass_box2d" >
     </PhysicsImageShapeComponent>
 
     <PhysicsBodyComponent allow_sleep="1" angular_damping="0.01" gridworld_box2d="0" linear_damping="0.1" >
@@ -51,7 +51,9 @@
     materials_create_messages="0" 
     materials_damage="0" 
     ragdoll_filenames_file="" 
-    ragdoll_material="" >
+    ragdoll_material="" 
+	ui_report_damage="0"
+	>
   </DamageModelComponent>
 
   <ExplodeOnDamageComponent
@@ -116,7 +118,7 @@
   <LuaComponent script_death="data/scripts/props/lantern_death.lua" />	
 
   <AudioComponent
-    file="data/audio/Desktop/materials.snd"
+    file="data/audio/Desktop/materials.bank"
     event_root="collision/lantern" >
   </AudioComponent>
 

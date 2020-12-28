@@ -18,7 +18,7 @@
 
 	<SpriteComponent
 		_tags="enabled_in_hand,not_enabled_in_wand"
-		_enabled="false"
+		_enabled="0"
 		offset_x="1.5"
 		offset_y="8"
     	image_file="data/items_gfx/in_hand/knife_in_hand.png" >

@@ -3,8 +3,6 @@
   		radius="28" >
 	</GameAreaEffectComponent>
 
-
-
   	<ParticleEmitterComponent 
 		emitted_material_name="spark_green"
 		gravity.y="0.0"
@@ -71,6 +69,12 @@
 				explosion_sprite="data/particles/blast_out_regeneration.xml" >
 			</config_explosion>
 		</ProjectileComponent>
+		
+		<AudioLoopComponent
+			file="data/audio/Desktop/projectiles.bank"
+			event_name="player_projectiles/field_regeneration/loop"
+			auto_play="1">
+		</AudioLoopComponent>
 	</Base>
 </Entity>
 

@@ -1,8 +1,8 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 -- The level of action ids that are spawned from the chests
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 
 RegisterSpawnFunction( 0xffC8C800, "spawn_lamp2" )
 RegisterSpawnFunction( 0xffDC0060, "spawn_props4" )
@@ -81,6 +81,12 @@ g_small_enemies =
 		max_count	= 1,    
 		entity 	= "data/entities/animals/scavenger_leader.xml"
 	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/scavenger_invis.xml"
+	},
 }
 
 ------------ BIG ENEMIES ------------------------------------------------------
@@ -154,6 +160,12 @@ g_big_enemies =
 		min_count	= 1,
 		max_count	= 2,    
 		entity 	= "data/entities/animals/wizard_dark.xml"
+	},
+	{
+		prob   		= 0.07,
+		min_count	= 1,
+		max_count	= 2,    
+		entity 	= "data/entities/animals/wizard_swapper.xml"
 	},
 	{
 		prob   		= 0.02,
@@ -324,7 +336,7 @@ g_props =
 		prob   		= 0.5,
 		min_count	= 1,
 		max_count	= 1,    
-		offset_y 	= 0,
+		offset_y 	= -8,
 		entity 	= "data/entities/props/physics_seamine.xml"
 	},
 }
@@ -426,14 +438,14 @@ g_pixel_scene_01 =
 	total_prob = 0,
 	{
 		prob   			= 0.6,
-		material_file 	= "data/biome_impl/snowcastle_shaft.png",
-		visual_file		= "data/biome_impl/snowcastle_shaft_visual.png",
+		material_file 	= "data/biome_impl/snowcastle/shaft.png",
+		visual_file		= "data/biome_impl/snowcastle/shaft_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 		{
 		prob   			= 0.4,
-		material_file 	= "data/biome_impl/snowcastle_bridge.png",
+		material_file 	= "data/biome_impl/snowcastle/bridge.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
@@ -445,23 +457,23 @@ g_pixel_scene_02 =
 	total_prob = 0,
 	{
 		prob   			= 0.4,
-		material_file 	= "data/biome_impl/snowcastle_cargobay.png",
+		material_file 	= "data/biome_impl/snowcastle/cargobay.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.4,
-		material_file 	= "data/biome_impl/snowcastle_bar.png",
+		material_file 	= "data/biome_impl/snowcastle/bar.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/snowcastle_bar_background.png",
+		background_file	= "data/biome_impl/snowcastle/bar_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.4,
-		material_file 	= "data/biome_impl/snowcastle_bedroom.png",
+		material_file 	= "data/biome_impl/snowcastle/bedroom.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/snowcastle_bedroom_background.png",
+		background_file	= "data/biome_impl/snowcastle/bedroom_background.png",
 		is_unique		= 0
 	},
 }

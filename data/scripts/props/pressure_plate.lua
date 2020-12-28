@@ -1,4 +1,4 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 function Component_SetTimeOut( entity_id, frames, script_file )
 	local lua_comp = EntityAddComponent( entity_id, "LuaComponent" )
@@ -23,6 +23,7 @@ function pressure_plate_change( new_state )
 				vars.delta_y = -1
 			else
 				vars.delta_y = -1
+			end
 		end)
 
 		Component_SetTimeOut( entity_temple_door, 5*60, "data/scripts/props/physics_stopmousejoint.lua" )

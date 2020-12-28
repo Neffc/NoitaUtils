@@ -11,10 +11,6 @@
     wang_map_height="256"
     limit_background_image="0"
     coarse_map_force_terrain="1"
-    color_correction_r="1.0"
-    color_correction_g="0.65"
-    color_correction_b="0.45"
-    color_correction_lerp="0.75"
     audio_ambience="cave"
     noise_biome_edges="0"
     skip_edge_textures="1"
@@ -158,23 +154,6 @@
       visual_offset_y="0" 
       is_ceiling_plant="1"
       >
-    </VegetationComponent>
-	
-	<VegetationComponent 
-      _enabled="1" 
-      is_visual="0" 
-      rand_seed="833676.86" 
-      tree_extra_y="9" 
-      tree_image_file="data/vegetation/skull_$[1-6].png" 
-      tree_image_visual="" 
-      tree_material="bone_static" 
-      tree_probability="0.128571" 
-      tree_radius_high="0.314286" 
-      tree_radius_low="0.088571" 
-      tree_width="48.1143" 
-      visual_color="0x00FFFF" 
-      visual_offset_x="0" 
-      visual_offset_y="1" >
     </VegetationComponent>
   </Materials>
 

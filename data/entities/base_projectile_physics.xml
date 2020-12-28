@@ -1,4 +1,4 @@
-<Entity tags="hittable">
+<Entity tags="hittable,projectile">
 
   <!-- physical presence -->
 
@@ -17,12 +17,18 @@
   
   <PhysicsImageShapeComponent 
     body_id="1"
-    centered="1" >
+    centered="1" 
+	material="fuse"
+	>
   </PhysicsImageShapeComponent>
   
   <PhysicsThrowableComponent
     throw_force_coeff="1" >
   </PhysicsThrowableComponent>
+
+  <VelocityComponent
+    affect_physics_bodies="1">
+  </VelocityComponent>
 
   <!-- bomb logic -->
 
@@ -49,6 +55,7 @@
     on_death_explode="1"
     lifetime="60" 
     on_death_gfx_leave_sprite="1"
+    do_moveto_update="0"
     ><config_explosion
       never_cache="0" 
       damage="2"

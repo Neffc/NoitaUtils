@@ -111,13 +111,19 @@
         ragdoll_filenames_file=""
         blood_material="radioactive_liquid_fading"
         blood_multiplier="0"
-        create_ragdoll="false" >
+        create_ragdoll="0" >
     </DamageModelComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="projectiles/slime">
   </AudioComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/radioactive_blob_trail.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

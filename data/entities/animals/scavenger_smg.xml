@@ -22,11 +22,11 @@
 			attack_ranged_enabled="1"
 			attack_ranged_action_frame="1"
 			attack_ranged_min_distance="0"
-			attack_ranged_max_distance="220"
+			attack_ranged_max_distance="195"
 			attack_ranged_entity_file="data/entities/projectiles/machinegun_bullet_slower.xml"
 			attack_ranged_entity_count_min="1"
 			attack_ranged_entity_count_max="1"
-			attack_ranged_frames_between="20"
+			attack_ranged_frames_between="24"
 			attack_ranged_offset_x="8"
 			attack_ranged_offset_y="-6"
 			aggressiveness_min="1"
@@ -112,9 +112,15 @@
 	</ItemPickUpperComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals/scavenger" >
 	</AudioComponent>
-
+	<Entity>
+	    <GameEffectComponent 
+	        effect="ALLERGY_RADIOACTIVE"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
 </Entity>
 

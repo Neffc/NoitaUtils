@@ -111,9 +111,15 @@
     </ItemPickUpperComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals/scavenger" >
 	</AudioComponent>
-
+	<Entity>
+	    <GameEffectComponent 
+	        effect="ALLERGY_RADIOACTIVE"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
 </Entity>
 

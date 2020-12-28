@@ -12,7 +12,7 @@
 		</AnimalAIComponent>
 
 		<DamageModelComponent
-            hp="0.7"
+            hp="5.7"
             ragdoll_filenames_file="data/ragdolls/slimeshooter/filenames_boss_limbs.txt" 
 			ragdoll_material="meat_slime_green"
 			blood_material="radioactive_liquid_fading">

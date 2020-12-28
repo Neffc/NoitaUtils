@@ -10,9 +10,8 @@
     wang_map_height="256"
     coarse_map_not_terrain="1"
     coarse_map_cell_count_always_zero="1"
-
-    audio_music_2="wandcave"
-    audio_ambience="snowcave">
+    audio_ambience="snowcave"
+    audio_music_2="the_end">
 	<BitmapCaves 
       size_x="512"
       size_y="256"

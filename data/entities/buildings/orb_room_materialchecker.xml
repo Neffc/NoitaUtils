@@ -4,7 +4,7 @@
 		area_aabb.min_x="-25" 
 		area_aabb.min_y="-7"		
 		area_aabb.max_x="25" 
-		area_aabb.max_y="7"		
+		area_aabb.max_y="6"		
 		material="blood"
 		material2="blood"
 		kill_after_message="1"

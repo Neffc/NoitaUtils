@@ -3,7 +3,7 @@ function spawn_wand()
 	-- check that we only have less than N minions
 	local existing_wand_count = 0
 	local existing_wands = EntityGetWithTag( "wand_ghost" )
-	if existing_wands ~= nil then
+	if ( #existing_wands > 0 ) then
 		existing_wand_count = #existing_wands
 	end
 
@@ -12,8 +12,11 @@ function spawn_wand()
 	end
 
 	-- spawn
-	local x, y = EntityGetTransform( GetUpdatedEntityID() )
+	local entity_id = GetUpdatedEntityID()
+	local x, y = EntityGetTransform( entity_id )
 	x = x + 50
+	
+	SetRandomSeed( GameGetFrameNum(), x + y + GetUpdatedEntityID() )
 	
 	local slime = EntityLoad( "data/entities/animals/wand_ghost.xml", x, y )
 	edit_component( slime, "VelocityComponent", function(comp,vars)
@@ -21,8 +24,6 @@ function spawn_wand()
 		local vel_y = Random(-150,25)
 		ComponentSetValueVector2( comp, "mVelocity", vel_x, vel_y )
 	end)
-
-
 end
 
 spawn_wand()

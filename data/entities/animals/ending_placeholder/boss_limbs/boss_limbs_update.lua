@@ -143,7 +143,7 @@ function spawn_minion()
 	-- check that we only have less than N minions
 	local existing_minion_count = 0
 	local existing_minions = EntityGetWithTag( "slimeshooter_boss_limbs" )
-	if existing_minions ~= nil then
+	if ( #existing_minions > 0 ) then
 		existing_minion_count = #existing_minions
 	end
 
@@ -153,6 +153,8 @@ function spawn_minion()
 
 	-- spawn
 	local x, y = EntityGetTransform( GetUpdatedEntityID() )
+	
+	SetRandomSeed( GameGetFrameNum(), x + y )
 	
 	local slime = EntityLoad( "data/entities/animals/boss_limbs/slimeshooter_boss_limbs.xml", x, y )
 	edit_component( slime, "VelocityComponent", function(comp,vars)
@@ -275,6 +277,8 @@ function check_death()
 					EntityKill( child )
 				end
 			end
+			
+			SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
 
 			-- run death sequence
 			set_hitboxes_weak( false )

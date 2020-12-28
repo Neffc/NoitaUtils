@@ -1,4 +1,4 @@
-<Entity tags="hittable,teleportable_NOT" name="$animal_mine_scavenger">
+<Entity tags="hittable,teleportable_NOT" name="$projectile_default" >
 	<DamageModelComponent 
         hp="0.5"
         materials_create_messages="1"
@@ -38,14 +38,14 @@
 	
 	<LuaComponent
 	    execute_on_removed="0"
-	    execute_every_n_frame="99999999"
+	    execute_every_n_frame="-1"
 		script_collision_trigger_hit="data/scripts/projectiles/mine_animate.lua"
 	    remove_after_executed="1">
   	</LuaComponent>
 	
 	<LuaComponent
 		execute_on_removed="0"
-	    execute_every_n_frame="99999999"
+	    execute_every_n_frame="-1"
 		script_damage_received="data/scripts/projectiles/mine_animate.lua"
 		remove_after_executed="1">
 	</LuaComponent>
@@ -85,7 +85,7 @@
 		  camera_shake="25.0" 
 		  explosion_radius="30" 
 		  explosion_sprite="data/particles/explosion_040_poof.xml"
-		  load_this_entity="data/entities/particles/particle_explosion/main.xml"
+		  load_this_entity="data/entities/particles/particle_explosion/main_gunpowder_small.xml"
 		  explosion_sprite_lifetime="0" 
 		  create_cell_probability="80" 
 		  create_cell_material="fire" 

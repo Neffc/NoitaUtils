@@ -1,6 +1,12 @@
-<Entity tags="mortal,hittable,homing_target,teleportable_NOT" name="$animal_lukki">	
+<Entity tags="enemy,mortal,hittable,homing_target,teleportable_NOT,music_energy_100,lukki" name="$animal_lukki" >	
 	<ItemChestComponent level="4" enemy_drop="1" > </ItemChestComponent>
 
+	<LuaComponent
+	    execute_every_n_frame="-1"
+	    script_death="data/scripts/items/drop_money.lua"
+	    remove_after_executed="1" >
+	</LuaComponent>
+	
 	<!-- art - main body ---------------------- -->
 
 	<LightComponent 
@@ -14,7 +20,7 @@
 	</LightComponent>
 
 	<SpriteComponent 
-		image_file="data/entities/animals/lukki/lukki_feet/lukki_sprite.xml"
+		image_file="data/entities/animals/lukki/lukki_feet/lukki_sprite_b.xml"
 		offset_x="0"
 		offset_y="0"
 		>
@@ -28,7 +34,7 @@
 	</SpriteComponent>
 	
 	<SpriteComponent 
-		image_file="data/entities/animals/lukki/lukki_feet/lukki_sprite_emissive.xml"
+		image_file="data/entities/animals/lukki/lukki_feet/lukki_sprite_emissive_b.xml"
 		offset_x="0"
 		offset_y="0"
 		additive="1"
@@ -72,6 +78,8 @@
 		marker_work_flag="16" >
 	</PathFindingGridMarkerComponent>
 
+	<IKLimbsAnimatorComponent>
+	</IKLimbsAnimatorComponent>
 
 	<!-- physics ---------------------- -->
 
@@ -129,6 +137,8 @@
         ragdoll_material="meat_slime_green"
 		ragdoll_offset_y="-6"
 		ragdollify_child_entity_sprites="1"
+		ragdollify_root_angular_damping="2"
+		ragdollify_disintegrate_nonroot="1"
 		blood_sprite_directional="data/particles/bloodsplatters/bloodsplatter_directional_green_$[1-3].xml"
 		blood_sprite_large="data/particles/bloodsplatters/bloodsplatter_green_$[1-3].xml"
 		>
@@ -162,8 +172,13 @@
 	<!-- etc ---------------------- -->
 
 	<AudioComponent 
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals" >
+	</AudioComponent>
+
+	<AudioComponent 
+		file="data/audio/Desktop/animals.bank"
+		event_root="animals/lukki" >
 	</AudioComponent>
 
 	<SpriteAnimatorComponent 
@@ -197,13 +212,13 @@
 
 	<!-- limbs ---------------------- -->
 
-	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb.xml" />  </Entity>
-	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb.xml" />  </Entity>
-	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb.xml" />  </Entity>
-	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb.xml" />  </Entity>
-	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb.xml" />  </Entity>
-	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb.xml" />  </Entity>
-	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb.xml" />  </Entity>
+	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb_animated.xml" />  </Entity>
+	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb_animated.xml" />  </Entity>
+	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb_animated.xml" />  </Entity>
+	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb_animated.xml" />  </Entity>
+	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb_animated.xml" />  </Entity>
+	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb_animated.xml" />  </Entity>
+	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb_animated.xml" />  </Entity>
 
 	<Entity name="limb_attacker">  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb_attacker.xml" />  </Entity>
 </Entity>

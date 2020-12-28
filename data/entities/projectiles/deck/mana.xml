@@ -1,4 +1,4 @@
-<Entity name="$projectile_default">
+<Entity name="$projectile_default" tags="projectile_player" >
 
   <ProjectileComponent 
     _enabled="1" 
@@ -100,5 +100,11 @@
 	</ParticleEmitterComponent>
   
   <VelocityComponent />
+  
+  <VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/mana.xml"
+		>
+	</VariableStorageComponent>
 </Entity>
 

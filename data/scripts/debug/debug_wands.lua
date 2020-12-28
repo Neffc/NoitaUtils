@@ -62,7 +62,8 @@ function GetWandDebug( fire_rate_wait, actions_per_round, shuffle_deck_when_empt
 	gun_in_wand_space.deck_capacity = deck_capacity
 	gun_in_wand_space.spread_degrees = spread_degrees
 	gun_in_wand_space.reload_time = reload_time
-
+	
+	SetRandomSeed( GameGetFrameNum(), fire_rate_wait )
 
 	for k,wand in pairs(wands) do
 		local score = WandDiff( gun_in_wand_space, wand )

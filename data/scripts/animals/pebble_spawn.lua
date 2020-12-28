@@ -1,4 +1,4 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 local entity_id    = GetUpdatedEntityID()
 local x, y = EntityGetTransform( GetUpdatedEntityID() )
@@ -13,4 +13,4 @@ if normalfound then
 	offsety = offsety + normaly * (0 - math.abs(normaldist))
 end
 
-EntityLoad( "data/entities/projectiles/pebble_physics.xml", offsetx, offsety )
+EntityLoad( "data/entities/animals/pebble_physics.xml", offsetx, offsety )

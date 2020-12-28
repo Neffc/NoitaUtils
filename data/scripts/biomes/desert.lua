@@ -1,7 +1,7 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 0
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 
 RegisterSpawnFunction( 0xff30D14E, "spawn_secret_checker" )
 
@@ -195,10 +195,8 @@ end
 ------------------------------------------------------------------------
 
 function material_area_checker_success( x, y )
-
-	print("loading bosses")
 	GameScreenshake( 100 )
-	local boss1 = EntityLoad( "data/entities/animals/boss_limbs/boss_limbs.xml", x - 150, y - 350 )
-	local boss2 = EntityLoad( "data/entities/animals/boss_limbs/boss_limbs.xml", x + 150, y + 350 )
-
+	EntityLoad( "data/entities/buildings/teleport_lake.xml", x, y - 200 )
+	
+	GamePrintImportant( "$log_fasttravel", "$logdesc_fasttravel" )
 end

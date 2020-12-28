@@ -108,9 +108,15 @@
   </LightComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="projectiles/bullet_fire_small" >
   </AudioComponent>
+  
+  <VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/fireball_bigfirebug.xml"
+		>
+	</VariableStorageComponent>
   
 </Entity>
 

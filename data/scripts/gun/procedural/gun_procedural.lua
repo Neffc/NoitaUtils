@@ -1,7 +1,7 @@
-dofile("data/scripts/lib/utilities.lua")
-dofile( "data/scripts/gun/gun_enums.lua")
-dofile("data/scripts/gun/procedural/wands.lua")
-dofile("data/scripts/gun/procedural/gun_action_utils.lua")
+dofile_once("data/scripts/lib/utilities.lua")
+dofile_once( "data/scripts/gun/gun_enums.lua")
+dofile_once("data/scripts/gun/procedural/wands.lua")
+dofile_once("data/scripts/gun/procedural/gun_action_utils.lua")
 
 -- TODO - Move this to its own file
 -- deck_capacity
@@ -363,29 +363,29 @@ end
 
 
 function clamp(val, lower, upper)
-    assert(val and lower and upper, "not very useful error message here")
-    if lower > upper then lower, upper = upper, lower end -- swap if boundaries supplied the wrong way
-    return math.max(lower, math.min(upper, val))
+	assert(val and lower and upper, "not very useful error message here")
+	if lower > upper then lower, upper = upper, lower end -- swap if boundaries supplied the wrong way
+	return math.max(lower, math.min(upper, val))
 end
 
 local function shuffleTable( t )
-    assert( t, "shuffleTable() expected a table, got nil" )
-    local iterations = #t
-    local j
-    
-    for i = iterations, 2, -1 do
-        j = Random(i)
-        t[i], t[j] = t[j], t[i]
-    end
+	assert( t, "shuffleTable() expected a table, got nil" )
+	local iterations = #t
+	local j
+	
+	for i = iterations, 2, -1 do
+		j = Random(1,i)
+		t[i], t[j] = t[j], t[i]
+	end
 end
 
 function init_total_prob( value )
 	value.total_prob = 0
-    for i,v in ipairs(value) do
-        if( v.prob ~= nil ) then
-            value.total_prob = value.total_prob + v.prob
-        end
-    end
+	for i,v in ipairs(value) do
+		if( v.prob ~= nil ) then
+			value.total_prob = value.total_prob + v.prob
+		end
+	end
 end
 
 function init_gun_probs()
@@ -398,12 +398,12 @@ end
 function get_gun_probs( what )
 	-- if( what == nil ) then print( "ERROR - director_helpers - spawn() ... what = nil") end
     if( gun_probs[what] == nil ) then
-    	return nil
+		return nil
     end
 
-    if ( gun_probs[what].total_prob == 0 ) then
-        init_total_prob( gun_probs[what] )
-    end
+	if ( gun_probs[what].total_prob == 0 ) then
+		init_total_prob( gun_probs[what] )
+	end
 
 	local r = Random() * gun_probs[what].total_prob
 	for i,v in pairs(gun_probs[what]) do
@@ -426,7 +426,7 @@ function apply_random_variable( t_gun, variable )
 	local cost = t_gun["cost"]
 	local probs = get_gun_probs( variable )
 
- 	-- deck_capacity = [10-240]
+	-- deck_capacity = [10-240]
 	-- cost: (60-L2)/5
 	if( variable == "reload_time") then
 		local min = clamp( 60-(cost*5), 1, 240 )
@@ -528,8 +528,11 @@ function apply_random_variable( t_gun, variable )
 		end
 		max = clamp( max, 1, deck_capacity )
 
-		t_gun[variable] = clamp( RandomDistribution( probs.min, probs.max, probs.mean, probs.sharpness ), min, max )
-		t_gun["cost"] = t_gun["cost"] - ( action_costs[ t_gun[variable] ] )
+		t_gun[variable] = math.floor( clamp( RandomDistribution( probs.min, probs.max, probs.mean, probs.sharpness ), min, max ) )
+		local temp_cost = action_costs[ clamp( t_gun[variable] , 1, #action_costs ) ]
+		-- print( "t_gun: ", t_gun[variable] )
+		-- print( "temp_cost: ", temp_cost )
+		t_gun["cost"] = t_gun["cost"] - temp_cost
 		return
 	end
 end
@@ -598,128 +601,118 @@ end
 
 ---------------------------------------------------------------------------------
 
-
-function generate_gun( cost, level, force_unshuffle )
-	local entity_id = GetUpdatedEntityID()
-	local x, y = EntityGetTransform( entity_id )
-	SetRandomSeed( x, y )
-
-	local ability_comp = EntityGetFirstComponent( entity_id, "AbilityComponent" )
-	--[[
-	local capacity = ComponentObjectGetValue( ability_comp, "gun_config", 			"deck_capacity" )
-	local actions = ComponentObjectGetValue( ability_comp, "gun_config", 			"actions_per_round" )
-	local reload = ComponentObjectGetValue( ability_comp, "gun_config", 			"reload_time" )
-	local shuffle = ComponentObjectGetValue( ability_comp, "gun_config", 			"shuffle_deck_when_empty" )
-	local firerate = ComponentObjectGetValue( ability_comp, "gunaction_config", 	"fire_rate_wait" )
-	local spread = ComponentObjectGetValue( ability_comp, "gunaction_config", 		"spread_degrees" )
-	local bullet_speed = ComponentObjectGetValue( ability_comp, "gunaction_config", "speed_multiplier" )
-	]]--
-
+function get_gun_data( cost, level, force_unshuffle )
 	-- Algorithm overview
 	-- We do the generation of these in random order. Each variable, looks at the cost and tries to figure out what's
 	-- the maximum random value it can do for that cost
 	-- The random order is first the shuffled variables_01, then variables_02, then variables_03
+	local gun = { }
 
 	if( level == 1 ) then
 		if( Random(0,100) < 50 ) then
 			cost = cost + 5
 		end
 	end
+
 	cost = cost + Random(-3, 3)
-	-- for temp_i=1,25 do
-		local gun = { }
-		gun["cost"]	= cost
-		gun["deck_capacity"] = 0
-		gun["actions_per_round"] = 0
-		gun["reload_time"] = 0
-		gun["shuffle_deck_when_empty"] = 1
-		gun["fire_rate_wait"] = 0
-		gun["spread_degrees"] = 0
-	 	gun["speed_multiplier"] = 0
-	 	gun["prob_unshuffle"] = 0.1
-	 	gun["prob_draw_many"] = 0.15
-	 	gun["mana_charge_speed"] = 50*level + Random(-5,5*level)
-	 	gun["mana_max"] = 50 + (150 * level) + (Random(-5,5)*10)
-	 	gun["force_unshuffle"] = 0
+	gun["cost"]	= cost
+	gun["deck_capacity"] = 0
+	gun["actions_per_round"] = 0
+	gun["reload_time"] = 0
+	gun["shuffle_deck_when_empty"] = 1
+	gun["fire_rate_wait"] = 0
+	gun["spread_degrees"] = 0
+	gun["speed_multiplier"] = 0
+	gun["prob_unshuffle"] = 0.1
+	gun["prob_draw_many"] = 0.15
+	gun["mana_charge_speed"] = 50*level + Random(-5,5*level)
+	gun["mana_max"] = 50 + (150 * level) + (Random(-5,5)*10)
+	gun["force_unshuffle"] = 0
+	gun["is_rare"] = 0
 
-	 	local p = Random(0,100)
-	 	-- slow mana charger
-	 	if( p < 20 ) then
-		 	gun["mana_charge_speed"] = ( 50*level + Random(-5,5*level) ) / 5
-		 	gun["mana_max"] = ( 50 + (150 * level) + (Random(-5,5)*10) ) * 3
+	-- slow mana charger
+	p = Random(0,100)
+	if( p < 20 ) then
+		gun["mana_charge_speed"] = ( 50*level + Random(-5,5*level) ) / 5
+		gun["mana_max"] = ( 50 + (150 * level) + (Random(-5,5)*10) ) * 3
+	end
 
-		 	if( gun["mana_charge_speed"] < 10 ) then
-		 		gun["mana_charge_speed"] = 10
-		 	end
-	 	end
+	-- really fast mana chargers
+	p = Random(0,100)
+	if( p < 15 ) then 
+		gun["mana_charge_speed"] = ( 50*level + Random(-5,5*level) ) * 5
+		gun["mana_max"] = ( 50 + (150 * level) + (Random(-5,5)*10) ) / 3
+	end
 
-	 	p = Random(0,100)
-	 	if( p < 15 + level*6 ) then
-	 		gun["force_unshuffle"] = 1
-	 		-- print( "force_unshuffle" ) 
-	 	end
 
-	 	local is_rare = 0
-		p = Random(0,100)
-		if( p < 5 ) then
-			is_rare = 1
-			-- gun["cost"] = gun["cost"] * 2.5
-			gun["cost"] = gun["cost"] + 65
-			local light_comp = EntityGetFirstComponent( entity_id, "LightComponent" )
-			if( light_comp ~= nil ) then
-				ComponentSetValue( light_comp, "update_properties", 1)
-				ComponentSetValue( light_comp, "r", 128 )
-				ComponentSetValue( light_comp, "g", 0 )
-				ComponentSetValue( light_comp, "b", 255 )
-			end
+	if( gun["mana_max"] < 50 ) then
+		gun["mana_max"] = 50
+	end
+
+	if( gun["mana_charge_speed"] < 10 ) then
+		gun["mana_charge_speed"] = 10
+	end
+
+	p = Random(0,100)
+	if( p < 15 + level*6 ) then
+		gun["force_unshuffle"] = 1
+		-- print( "force_unshuffle" ) 
+	end
+
+	local is_rare = 0
+	p = Random(0,100)
+	if( p < 5 ) then
+		is_rare = 1
+		gun["is_rare"] = 1
+		-- gun["cost"] = gun["cost"] * 2.5
+		gun["cost"] = gun["cost"] + 65
+	end
+	-- based on capacity:
+	-- deck_capacity, shuffle_deck_when_empty, actions_per_round,
+	-- reload_time, fire_rate_wait, spread_degrees, speed_multiplier
+
+	local variables_01 = { "reload_time", "fire_rate_wait", "spread_degrees", "speed_multiplier" }
+	local variables_02 = { "deck_capacity" }
+	local variables_03 = { "shuffle_deck_when_empty", "actions_per_round" }
+
+	shuffleTable( variables_01 );
+	if( gun["force_unshuffle"]~= 1 ) then shuffleTable( variables_03 ); end
+
+	for k,v in pairs(variables_01) do
+		apply_random_variable( gun, v )
+	end
+
+	for k,v in pairs(variables_02) do
+		apply_random_variable( gun, v )
+	end
+
+	for k,v in pairs(variables_03) do
+		apply_random_variable( gun, v )
+	end
+
+	-- Do this in 99% of the cases
+	if( gun["cost"] > 5 and Random(0,1000) < 995 ) then
+		if( gun["shuffle_deck_when_empty"] == 1 ) then
+			gun["deck_capacity"] = gun["deck_capacity"] + ( gun["cost"] / 5 )
+			gun["cost"] = 0
+		else
+			-- I don't know if this is correct or not...?
+			gun["deck_capacity"] = gun["deck_capacity"] + ( gun["cost"] / 10 )
+			gun["cost"] = 0
 		end
-		-- based on capacity:
-		-- deck_capacity, shuffle_deck_when_empty, actions_per_round,
-		-- reload_time, fire_rate_wait, spread_degrees, speed_multiplier
+	end
 
-		local variables_01 = { "reload_time", "fire_rate_wait", "spread_degrees", "speed_multiplier" }
-		local variables_02 = { "deck_capacity" }
-		local variables_03 = { "shuffle_deck_when_empty", "actions_per_round" }
+	--[[
+	for k,v in pairs(gun) do
+		print(k, tostring( v ))
+	end
+	]]--
 
-		shuffleTable( variables_01 );
-		if( gun["force_unshuffle"]~= 1 ) then shuffleTable( variables_03 ); end
-
-		for k,v in pairs(variables_01) do
-			apply_random_variable( gun, v )
-		end
-
-		for k,v in pairs(variables_02) do
-			apply_random_variable( gun, v )
-		end
-
-		for k,v in pairs(variables_03) do
-			apply_random_variable( gun, v )
-		end
-
-		-- Do this in 99% of the cases
-		if( gun["cost"] > 5 and Random(0,1000) < 995 ) then
-			if( gun["shuffle_deck_when_empty"] == 1 ) then
-				gun["deck_capacity"] = gun["deck_capacity"] + ( gun["cost"] / 5 )
-				gun["cost"] = 0
-			else
-				-- I don't know if this is correct or not...?
-				gun["deck_capacity"] = gun["deck_capacity"] + ( gun["cost"] / 10 )
-				gun["cost"] = 0
-			end
-		end
-
-		--[[
-		for k,v in pairs(gun) do
-			print(k, tostring( v ))
-		end
-		]]--
-
-		local name = ComponentGetValue( ability_comp, "ui_name" )
-		if( gun_names ~= nil ) then name = gun_names[Random(1, #gun_names)] .. ' ' .. name end
-	-- end
+	-- local name = ComponentGetValue( ability_comp, "ui_name" )
+	-- if( gun_names ~= nil ) then name = gun_names[Random(1, #gun_names)] .. ' ' .. name end
 	
 	-- debug
-	if( force_unshuffle ) then
+	if( force_unshuffle or GlobalsGetValue( "PERK_NO_MORE_SHUFFLE_WANDS", "0" ) == "1" ) then
 		gun["shuffle_deck_when_empty"] = 0
 	end
 
@@ -728,26 +721,52 @@ function generate_gun( cost, level, force_unshuffle )
 	
 	-- HAX HAX HAX HAX HAX
 	-- OLLI REQUIRED A MAX CLAMP FOR UI
-	gun["deck_capacity"] = clamp( gun["deck_capacity"], 2, 26 )
+	-- this is so boring
+	if( Random( 0, 10000 ) <= 9999 ) then
+		gun["deck_capacity"] = clamp( gun["deck_capacity"], 2, 26 )
+	end
 
 	if( gun["deck_capacity"] <= 1 ) then
 		gun["deck_capacity"] = 2
 	end
 
-	-- SetItemSprite( entity_id, ability_comp, "data/items_gfx/gungen_guns/submachinegun_", Random( 0, 7 ) )
-	ComponentSetValue( ability_comp, "ui_name", name )
-	ComponentObjectSetValue( ability_comp, "gun_config", "actions_per_round", gun["actions_per_round"] )
-	ComponentObjectSetValue( ability_comp, "gun_config", "reload_time", gun["reload_time"] )
-	ComponentObjectSetValue( ability_comp, "gun_config", "deck_capacity", gun["deck_capacity"] )
-	ComponentObjectSetValue( ability_comp, "gun_config", "shuffle_deck_when_empty", gun["shuffle_deck_when_empty"] )
-	ComponentObjectSetValue( ability_comp, "gunaction_config", "fire_rate_wait", gun["fire_rate_wait"] )
-	ComponentObjectSetValue( ability_comp, "gunaction_config", "spread_degrees", gun["spread_degrees"] )
-	ComponentObjectSetValue( ability_comp, "gunaction_config", "speed_multiplier", gun["speed_multiplier"] )
-	ComponentSetValue( ability_comp, "mana_charge_speed", gun["mana_charge_speed"])
-	ComponentSetValue( ability_comp, "mana_max", gun["mana_max"])
-	ComponentSetValue( ability_comp, "mana", gun["mana_max"])
+	if( gun["reload_time"] >= 60 ) then
+		
+		function random_add_actions_per_round()
+			gun["actions_per_round"] = gun["actions_per_round"] + 1
+			if( Random( 0, 100 ) < 70 ) then 
+				random_add_actions_per_round()
+			end
+		end
 
-	ComponentSetValue( ability_comp, "item_recoil_recovery_speed", 15.0 ) -- TODO: implement logic for setting this
+		random_add_actions_per_round()
+
+		if( Random( 0, 100 ) < 50 ) then 
+			-- gun["actions_per_round"] = Random( gun["actions_per_round"], gun["deck_capacity"] )
+			local new_actions_per_round = gun["deck_capacity"]
+			for i=1,6 do
+				local temp_actions_per_round = Random( gun["actions_per_round"], gun["deck_capacity"] )
+				if( temp_actions_per_round < new_actions_per_round ) then
+					new_actions_per_round = temp_actions_per_round
+				end
+			end
+			gun["actions_per_round"] = new_actions_per_round
+
+		end
+		
+	end
+
+	gun["actions_per_round"] = clamp( gun["actions_per_round"], 1, gun["deck_capacity"] )
+
+	return gun
+end
+
+-------------------------------------------------------------------------------
+
+function wand_add_random_cards( gun, entity_id, level )
+
+	local is_rare = gun["is_rare"]
+	local x, y = EntityGetTransform( entity_id )
 
 	-- stuff in the gun
 	local good_cards = 5
@@ -757,12 +776,16 @@ function generate_gun( cost, level, force_unshuffle )
 		good_cards = good_cards * 2
 	end
 
+	if( level == nil ) then level = 1 end
+	level = tonumber( level )
+
 	local orig_level = level
 	level = level - 1
 	local deck_capacity = gun["deck_capacity"]
 	local actions_per_round = gun["actions_per_round"]
 	local card_count = Random( 1, 3 ) 
 	local bullet_card = GetRandomActionWithType( x, y, level, ACTION_TYPE_PROJECTILE, 0 )
+	local card = ""
 	local random_bullets = 0 
 	local good_card_count = 0
 
@@ -783,7 +806,6 @@ function generate_gun( cost, level, force_unshuffle )
 	end
 
 	if( Random( 0, 100 ) < 4 or is_rare == 1 ) then
-		local card = 0
 		local p = Random(0,100) 
 		if( p < 77 ) then
 			card = GetRandomActionWithType( x, y, level+1, ACTION_TYPE_MODIFIER, 666 )
@@ -796,30 +818,116 @@ function generate_gun( cost, level, force_unshuffle )
 		AddGunActionPermanent( entity_id, card )
 	end
 
+	-- --------------- CARDS -------------------------
+	-- TODO: tweak the % 
+	if( Random( 0, 100 ) < 50 ) then
 
-	for i=1,card_count do
-		if( Random(0,100) < good_cards ) then
-			-- if actions_per_round == 1 and the first good card, then make sure it's a draw x
-			local card = 0
-			if( good_card_count == 0 and actions_per_round == 1 ) then
-				card = GetRandomActionWithType( x, y, level, ACTION_TYPE_DRAW_MANY, i )
-				good_card_count = good_card_count + 1
-			else
-				if( Random(0,100) < 83 ) then
-					card = GetRandomActionWithType( x, y, level, ACTION_TYPE_MODIFIER, i )
-				else
-					card = GetRandomActionWithType( x, y, level, ACTION_TYPE_DRAW_MANY, i )
-				end
+		-- more structured placement
+		-- DRAW_MANY + MOD + BULLET
+
+		-- local bullet_card = GetRandomActionWithType( x, y, level, ACTION_TYPE_PROJECTILE, 0 )
+		local extra_level = level
+		while( Random( 1, 10 ) == 10 ) do
+			extra_level = extra_level + 1
+			bullet_card = GetRandomActionWithType( x, y, extra_level, ACTION_TYPE_PROJECTILE, 0 )
+		end
+
+		if( card_count < 3 ) then
+			if( card_count > 1 and Random( 0, 100 ) < 20 ) then
+				card = GetRandomActionWithType( x, y, level, ACTION_TYPE_MODIFIER, 2 )
+				AddGunAction( entity_id, card )
+				card_count = card_count - 1
 			end
-		
-			AddGunAction( entity_id, card )
+
+			for i=1,card_count do
+				AddGunAction( entity_id, bullet_card )
+			end
 		else
-			AddGunAction( entity_id, bullet_card )
-			if( random_bullets == 1 ) then
-				bullet_card = GetRandomActionWithType( x, y, level, ACTION_TYPE_PROJECTILE, i )
+			-- DRAW_MANY + MOD
+			if( Random( 0, 100 ) < 40 ) then
+				card = GetRandomActionWithType( x, y, level, ACTION_TYPE_DRAW_MANY, 1 )
+				AddGunAction( entity_id, card )
+				card_count = card_count - 1
+			end
+
+			-- add another DRAW_MANY
+			if( card_count > 3 and Random( 0, 100 ) < 40 ) then
+				card = GetRandomActionWithType( x, y, level, ACTION_TYPE_DRAW_MANY, 1 )
+				AddGunAction( entity_id, card )
+				card_count = card_count - 1
+			end
+
+			if( Random( 0, 100 ) < 80 ) then
+				card = GetRandomActionWithType( x, y, level, ACTION_TYPE_MODIFIER, 2 )
+				AddGunAction( entity_id, card )
+				card_count = card_count - 1
+			end
+
+
+			for i=1,card_count do
+				AddGunAction( entity_id, bullet_card )
+			end
+		end
+	else
+		for i=1,card_count do
+			if( Random(0,100) < good_cards and card_count > 2 ) then
+				-- if actions_per_round == 1 and the first good card, then make sure it's a draw x
+				if( good_card_count == 0 and actions_per_round == 1 ) then
+					card = GetRandomActionWithType( x, y, level, ACTION_TYPE_DRAW_MANY, i )
+					good_card_count = good_card_count + 1
+				else
+					if( Random(0,100) < 83 ) then
+						card = GetRandomActionWithType( x, y, level, ACTION_TYPE_MODIFIER, i )
+					else
+						card = GetRandomActionWithType( x, y, level, ACTION_TYPE_DRAW_MANY, i )
+					end
+				end
+			
+				AddGunAction( entity_id, card )
+			else
+				AddGunAction( entity_id, bullet_card )
+				if( random_bullets == 1 ) then
+					bullet_card = GetRandomActionWithType( x, y, level, ACTION_TYPE_PROJECTILE, i )
+				end
 			end
 		end
 	end
+end
+
+-------------------------------------------------------------------------------
+
+function make_wand_from_gun_data( gun, entity_id, level )
+	local is_rare = gun["is_rare"]
+	local x, y = EntityGetTransform( entity_id )
+	
+	local ability_comp = EntityGetFirstComponent( entity_id, "AbilityComponent" )
+	
+	-- SetItemSprite( entity_id, ability_comp, "data/items_gfx/gungen_guns/submachinegun_", Random( 0, 7 ) )
+	-- ComponentSetValue( ability_comp, "ui_name", name )
+	ComponentObjectSetValue( ability_comp, "gun_config", "actions_per_round", gun["actions_per_round"] )
+	ComponentObjectSetValue( ability_comp, "gun_config", "reload_time", gun["reload_time"] )
+	ComponentObjectSetValue( ability_comp, "gun_config", "deck_capacity", gun["deck_capacity"] )
+	ComponentObjectSetValue( ability_comp, "gun_config", "shuffle_deck_when_empty", gun["shuffle_deck_when_empty"] )
+	ComponentObjectSetValue( ability_comp, "gunaction_config", "fire_rate_wait", gun["fire_rate_wait"] )
+	ComponentObjectSetValue( ability_comp, "gunaction_config", "spread_degrees", gun["spread_degrees"] )
+	ComponentObjectSetValue( ability_comp, "gunaction_config", "speed_multiplier", gun["speed_multiplier"] )
+	ComponentSetValue( ability_comp, "mana_charge_speed", gun["mana_charge_speed"])
+	ComponentSetValue( ability_comp, "mana_max", gun["mana_max"])
+	ComponentSetValue( ability_comp, "mana", gun["mana_max"])
+
+	ComponentSetValue( ability_comp, "item_recoil_recovery_speed", 15.0 ) -- TODO: implement logic for setting this
+
+	if( is_rare == 1 ) then
+		local light_comp = EntityGetFirstComponent( entity_id, "LightComponent" )
+		if( light_comp ~= nil ) then
+			ComponentSetValue( light_comp, "update_properties", 1)
+			ComponentSetValue( light_comp, "r", 128 )
+			ComponentSetValue( light_comp, "g", 0 )
+			ComponentSetValue( light_comp, "b", 255 )
+		end
+	end
+
+	
 
 
 	-- Set wand sprite
@@ -841,6 +949,18 @@ function generate_gun( cost, level, force_unshuffle )
 
 	-- this way:
 	-- AddGunActionPermanent( entity_id, "ELECTRIC_CHARGE" )
+end
+
+function generate_gun( cost, level, force_unshuffle )
+	local entity_id = GetUpdatedEntityID()
+	local x, y = EntityGetTransform( entity_id )
+	SetRandomSeed( x, y )
+
+
+	local gun = get_gun_data( cost, level, force_unshuffle )
+	make_wand_from_gun_data( gun, entity_id, level )
+	wand_add_random_cards( gun, entity_id, level )
+	
 end
 
 

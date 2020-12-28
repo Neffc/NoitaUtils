@@ -1,4 +1,4 @@
-<Entity tags="hittable" name="$projectile_default">
+<Entity tags="hittable,projectile_player" name="$projectile_default">
   
 	<Base file="data/entities/base_projectile.xml" >
 	</Base>
@@ -30,7 +30,8 @@
     shoot_light_flash_g="210"
     shoot_light_flash_b="40"
     shoot_light_flash_radius="64"
-    >
+    damage_every_x_frames="15"
+    physics_impulse_coeff="8000">
     <config_explosion
       never_cache="1" 
       camera_shake="25.0" 
@@ -40,7 +41,7 @@
       explosion_sprite_lifetime="0" 
       create_cell_probability="80" 
       create_cell_material="fire" 
-      ray_energy="170000"
+      ray_energy="280000"
       hole_destroy_liquid="0" 
       damage="4"
       hole_enabled="1" 
@@ -56,7 +57,8 @@
       sparks_count_min="10"
       light_fade_time="0.8" 
       stains_enabled="1" 
-      stains_image="data/temp/explosion_stain.png" >
+      stains_image="data/temp/explosion_stain.png" 
+      audio_event_name="explosions/magic_grenade_small" >
     </config_explosion>
   </ProjectileComponent>
 
@@ -97,21 +99,21 @@
 	
 	<LuaComponent
     execute_on_removed="0"
-    execute_every_n_frame="99999999"
+    execute_every_n_frame="-1"
 	  script_collision_trigger_hit="data/scripts/projectiles/mine_animate.lua"
     remove_after_executed="1">
 	</LuaComponent>
 
 	<LuaComponent
 		execute_on_removed="0"
-		execute_every_n_frame="99999999"
+		execute_every_n_frame="-1"
 		script_damage_received="data/scripts/projectiles/mine_animate.lua"
 		remove_after_executed="1">
 	</LuaComponent>
 	
 	<LuaComponent
 		execute_on_removed="0"
-	    execute_every_n_frame="1000"
+    execute_every_n_frame="1000"
 		script_source_file="data/scripts/projectiles/mine_animate.lua"
 		remove_after_executed="1">
 	</LuaComponent>
@@ -140,7 +142,7 @@
 	</CameraBoundComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="player_projectiles/bullet_launcher">
   </AudioComponent>
   
@@ -186,7 +188,7 @@
 	</ExplosionComponent>
 
   <AudioComponent
-    file="data/audio/Desktop/animals.snd"
+    file="data/audio/Desktop/animals.bank"
     event_root="animals/mine" >
   </AudioComponent>
 

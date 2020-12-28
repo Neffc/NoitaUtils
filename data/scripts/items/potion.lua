@@ -1,6 +1,9 @@
- dofile( "data/scripts/lib/utilities.lua" )
+ dofile_once("data/scripts/lib/utilities.lua")
 
-local materials_standard = 
+-- NOTE( Petri ): 
+-- There is a mods/nightmare potion.lua which overwrites this one.
+
+materials_standard = 
 {
 	{
 		material="lava",
@@ -48,10 +51,10 @@ local materials_standard =
 	}
 }
 
-local materials_magic = 
+materials_magic = 
 {
 	{
-		material="magic_liquid_teleportation",
+		material="magic_liquid_unstable_teleportation",
 		cost=500,
 	},
 	{
@@ -73,30 +76,71 @@ local materials_magic =
 	{
 		material="magic_liquid_invisibility",
 		cost=800,
-	}
+	},
+	{
+		material="material_confusion",
+		cost=800,
+	},
+	{
+		material="magic_liquid_movement_faster",
+		cost=800,
+	},
+	{
+		material="magic_liquid_faster_levitation",
+		cost=800,
+	},
+	{
+		material="magic_liquid_worm_attractor",
+		cost=800,
+	},
+	{
+		material="magic_liquid_protection_all",
+		cost=800,
+	},
+	{
+		material="magic_liquid_mana_regeneration",
+		cost=500,
+	},
 }
 
+function init( entity_id )
+	local x,y = EntityGetTransform( entity_id )
+	SetRandomSeed( x, y ) -- so that all the potions will be the same in every position with the same seed
+	local potion_material = "water"
 
-local entity_id = GetUpdatedEntityID()
-local x,y = EntityGetTransform( entity_id )
-SetRandomSeed( x, y )
--- so that all the potions will be the same in every position with the same seed
--- local potion = random_from_array( potions )
-local potion_material = "water"
-
-if( Random( 0, 100 ) <= 75 ) then
-	-- 0.05% chance of magic_liquid_
-	if( Random( 0, 100000 ) <= 50 ) then
-		potion_material = "magic_liquid_hp_regeneration"
+	if( Random( 0, 100 ) <= 75 ) then
+		-- 0.05% chance of magic_liquid_
+		if( Random( 0, 100000 ) <= 50 ) then
+			potion_material = "magic_liquid_hp_regeneration"
+		elseif( Random( 200, 100000 ) <= 250 ) then
+			potion_material = "purifying_powder"
+		else
+			potion_material = random_from_array( materials_magic )
+			potion_material = potion_material.material
+		end
 	else
-		potion_material = random_from_array( materials_magic )
+		potion_material = random_from_array( materials_standard )
 		potion_material = potion_material.material
 	end
-else
-	potion_material = random_from_array( materials_standard )
-	potion_material = potion_material.material
+
+	-- load the material from VariableStorageComponent
+	local components = EntityGetComponent( entity_id, "VariableStorageComponent" )
+
+	if( components ~= nil ) then
+		for key,comp_id in pairs(components) do 
+			local var_name = ComponentGetValue( comp_id, "name" )
+			if( var_name == "potion_material") then
+				potion_material = ComponentGetValue( comp_id, "value_string" )
+			end
+		end
+	end
+
+	
+	local year,month,day = GameGetDateAndTimeLocal()
+	
+	if ((( month == 5 ) and ( day == 1 )) or (( month == 4 ) and ( day == 30 ))) and (Random( 0, 100 ) <= 20) then
+		potion_material = "sima"
+	end
+
+	AddMaterialInventoryMaterial( entity_id, potion_material, 1000 )
 end
-
-
--- AddMaterialInventoryMaterial( entity_id, potion.material, 1000 )
-AddMaterialInventoryMaterial( entity_id, potion_material, 1000 )

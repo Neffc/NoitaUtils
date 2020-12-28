@@ -3,8 +3,14 @@
     name="$biome_lava"
     type="BIOME_PROCEDURAL"
     background_image="data/weather_gfx/background_cave_01.png" 
-    background_use_neighbor="1"
-	lua_script="data/scripts/biomes/hills.lua"
+    background_edge_left="data/weather_gfx/edges/background_cave_01_left.png"
+    background_edge_right="data/weather_gfx/edges/background_cave_01_right.png"
+    background_edge_top="data/weather_gfx/edges/background_cave_01_top.png"
+    background_edge_bottom="data/weather_gfx/edges/background_cave_01_bottom.png"
+    background_edge_priority="10"     
+    background_use_neighbor="0"
+    
+    lua_script="data/scripts/biomes/hills.lua"
     noise_biome_edges="0"
     skip_edge_textures="1"
 >

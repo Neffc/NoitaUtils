@@ -1,5 +1,5 @@
 <Entity 
-  name="$projectile_default" 
+  name="$projectile_default" tags="projectile_player"
    >
 
 	<Base file="data/entities/base_projectile.xml" >
@@ -50,9 +50,17 @@
 	  sparks_enabled="1"
       light_fade_time="0.8" 
       stains_enabled="1" 
-      stains_image="data/temp/explosion_stain.png" >
+      stains_image="data/temp/explosion_stain.png" 
+	  audio_event_name="explosions/fire"
+	  >
     </config_explosion>
   </ProjectileComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/fireblast.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

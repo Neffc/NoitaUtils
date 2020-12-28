@@ -1,30 +1,29 @@
-dofile( "data/scripts/lib/coroutines.lua" )
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once( "data/scripts/lib/coroutines.lua" )
+dofile_once( "data/scripts/lib/utilities.lua" )
 
--- animate eyes and skull randomly -----------------
+-- animate randomly -----------------
 
 local limb_positions = {}
-
-
+local player_nearby_prev = false
 
 async_loop(function()
-	local x,y = EntityGetTransform( GetUpdatedEntityID() )
+	local entity_id =  GetUpdatedEntityID()
+	local x,y = EntityGetTransform( entity_id )
 	
 	local player_nearby = false
 	
 	local players = EntityGetWithTag( "player_unit" )
-	if players ~= nil then
+	if ( #players > 0 ) then
 		local player_id = players[1]
 		local px,py = EntityGetTransform( player_id )
 		local distance = math.abs(py - y) * 0.5 + math.abs(px - x)
-		--local direction = 0 - math.atan2(py - y, px - x)
 		
 		if (distance < 128) then
 			player_nearby = true
 		end
 	end
 
-	local children = EntityGetAllChildren( GetUpdatedEntityID() )
+	local children = EntityGetAllChildren( entity_id )
 
 	if children ~= nil then
 
@@ -85,5 +84,19 @@ async_loop(function()
 		end
 	end
 
+	-- audio
+	if player_nearby ~= player_nearby_prev then
+		if player_nearby then
+			GameEntityPlaySound( entity_id, "prebattle_leave_work" )
+		else
+			GameEntityPlaySound( entity_id, "prebattle_return_to_work" )
+		end
+	end
+
+	if not player_nearby then
+		GameEntityPlaySoundLoop( entity_id, "sound_prebattle_tinkering", 1.0 )
+	end
+
+	player_nearby_prev = player_nearby
 	wait(0)
 end)

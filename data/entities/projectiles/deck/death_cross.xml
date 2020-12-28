@@ -1,5 +1,5 @@
 <Entity 
-  name="$projectile_default" 
+  name="$projectile_default" tags="projectile_player,death_cross"
    >
 
 	<Base file="data/entities/base_projectile.xml" >
@@ -39,6 +39,7 @@
     shoot_light_flash_b="255"
     shoot_light_flash_radius="90"
 	knockback_force="1.6"
+	damage_every_x_frames="15"
 	>
     <config_explosion
       never_cache="1" 
@@ -69,7 +70,9 @@
 	  light_g="180"
       light_b="250"
       stains_enabled="1" 
-      stains_image="data/temp/explosion_stain.png" >
+      stains_image="data/temp/explosion_stain.png" 
+      audio_event_name="explosions/magic_rocket_mid" >
+	  >
     </config_explosion>
   </ProjectileComponent>
   
@@ -143,4 +146,15 @@
     emission_interval_max_frames="1"
     is_emitting="1" >
   </ParticleEmitterComponent>
+  
+  <AudioComponent
+      file="data/audio/Desktop/projectiles.bank"
+      event_root="player_projectiles/death_cross">
+  </AudioComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/death_cross.xml"
+		>
+	</VariableStorageComponent>
 </Entity>

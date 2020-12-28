@@ -1,6 +1,6 @@
 <Entity 
   name="$animal_darkghost" 
-  tags="mortal,hittable" 
+  tags="mortal,hittable,enemy" 
   serialize="0" >
 
   <_Transform 
@@ -54,13 +54,15 @@
 	blood_sprite_large=""
 	>
     <damage_multipliers 
-      drill="1" 
-      electricity="1" 
-      explosion="1" 
-      fire="1" 
-      melee="1" 
-      projectile="1" >
-
+      drill="0" 
+      electricity="0" 
+      explosion="0" 
+      fire="0" 
+      melee="0" 
+      projectile="0"
+	  ice="0"
+	  slice="0"
+	  >
     </damage_multipliers>
 
   </DamageModelComponent>

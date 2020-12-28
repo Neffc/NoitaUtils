@@ -1,7 +1,7 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 RegisterSpawnFunction( 0xff8a24d4, "spawn_bridge" )
@@ -30,5 +30,6 @@ function spawn_wands()
 end
 
 function spawn_bridge( x, y )
-	EntityLoad( "data/entities/props/physics_spawners/physics_suspension_bridge_spawner.xml", x, y )
+	-- bridge is spawned via _pixel_scenes.xml
+	--EntityLoad( "data/entities/props/physics_spawners/physics_suspension_bridge_spawner.xml", x, y )
 end

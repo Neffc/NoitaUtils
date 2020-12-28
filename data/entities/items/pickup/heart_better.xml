@@ -6,7 +6,7 @@
 	</SimplePhysicsComponent>
 	
 	<UIInfoComponent
-		name="Large health pickup"
+		name="$item_heart_better"
 		>
 	</UIInfoComponent>
 
@@ -22,8 +22,9 @@
 	</HitboxComponent>
 
 	<ItemComponent
-		item_name="Extra max health"
+		item_name="$item_heart_better"
 		play_spinning_animation="0"
+		stats_count_as_item_pick_up="0"
    		play_pick_sound="0"
 		auto_pickup="1" >
 	</ItemComponent>

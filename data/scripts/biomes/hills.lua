@@ -1,7 +1,12 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 0
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
+
+RegisterSpawnFunction( 0xff33934c, "spawn_shopitem" )
+RegisterSpawnFunction( 0xffd0d0b4, "spawn_treasure" )
+RegisterSpawnFunction( 0xff41704d, "spawn_specialshop" )
+RegisterSpawnFunction( 0xffffeedd, "init" )
 
 ------------ SMALL ENEMIES ----------------------------------------------------
 
@@ -52,42 +57,6 @@ g_items =
 		entity 	= ""
 	},
 	-- add skullflys after this step
-	{
-		prob   		= 0.01,
-		min_count	= 1,
-		max_count	= 1,    
-		entity 	= "data/entities/items/grenadelauncher.xml"
-	},
-	{
-		prob   		= 0.1,
-		min_count	= 1,
-		max_count	= 1,    
-		entity 	= "data/entities/items/machinegun.xml"
-	},
-	{
-		prob   		= 0.001,
-		min_count	= 1,
-		max_count	= 1,    
-		entity 	= "data/entities/items/opgun.xml"
-	},
-	{
-		prob   		= 0.0001,
-		min_count	= 1,
-		max_count	= 1,    
-		entity 	= "data/entities/items/lightninggun.xml"
-	},
-	{
-		prob   		= 0.02,
-		min_count	= 1,
-		max_count	= 1,    
-		entity 	= "data/entities/items/rocketlauncher.xml"
-	},
-	{
-		prob   		= 0.1,
-		min_count	= 1,
-		max_count	= 1,    
-		entity 	= "data/entities/items/shotgun.xml"
-	},
 }
 
 g_unique_enemy =
@@ -129,7 +98,7 @@ g_ghostlamp =
 		prob   		= 1.0,
 		min_count	= 1,
 		max_count	= 1,    
-		entity 	= "data/entities/props/physics_chain_torch_ghostly.xml"
+		entity 	= "data/entities/props/physics/chain_torch_ghostly.xml"
 	},
 }
 
@@ -183,23 +152,69 @@ g_lamp =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/props/physics_mining_lamp.xml"
-	},
-	{
-		prob   		= 0.3,
-		min_count	= 1,
-		max_count	= 1,    
-		entity 	= "data/entities/props/physics_mining_lamp_broken.xml"
-	},
-	{
-		prob   		= 0.05,
-		min_count	= 1,
-		max_count	= 1,    
-		entity 	= "data/entities/props/physics_mining_lamp_gas.xml"
-	},
+	}
 }
+
+g_pumpkins =
+{
+	total_prob = 0,
+	{
+		prob   		= 5.0,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= ""
+	},
+	{
+		prob   		= 1.0,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/pumpkin_01.xml"
+	},
+	{
+		prob   		= 1.0,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/pumpkin_02.xml"
+	},
+	{
+		prob   		= 1.0,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/pumpkin_03.xml"
+	},
+	{
+		prob   		= 1.0,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/pumpkin_04.xml"
+	},
+	{
+		prob   		= 1.0,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/pumpkin_05.xml"
+	}
+}
+
 ------------ MISC --------------------------------------
 
 -- actual functions that get called from the wang generator
+
+function init(x, y, w, h)
+	-- halloween
+	local year, month, day = GameGetDateAndTimeLocal()		
+	if y > -1000 and y < 0 and month == 10 and day == 31 then
+		-- limit spawn inside this biome pixel
+		w = w * 0.5
+		x = x + w
+		spawn(g_pumpkins, x,y,w)
+		spawn(g_pumpkins, x+1,y,w)
+		spawn(g_pumpkins, x+2,y,w)
+		spawn(g_pumpkins, x+3,y,w)
+		spawn(g_pumpkins, x+4,y,w)
+		spawn(g_pumpkins, x+5,y,w)
+	end
+end
 
 function spawn_small_enemies(x, y)
 	-- print("spawn_small_enemies")
@@ -230,3 +245,27 @@ function spawn_props(x, y)
 end
 
 function spawn_potions( x, y ) end
+
+function spawn_shopitem( x, y )
+	if ( y > -3000 ) and ( y < 1000 ) then
+		generate_shop_item( x, y, false, 0 )
+	else
+		SetRandomSeed( x, y )
+		
+		if ( Random( 1, 30 ) == 1 ) then
+			generate_shop_item( x, y, false, 10 )
+		end
+	end
+end
+
+function spawn_specialshop( x, y )
+	if ( y > -3000 ) and ( y < 1000 ) then
+		generate_shop_item( x, y, false, 0 )
+	else
+		generate_shop_item( x, y, false, 10 )
+	end
+end
+
+function spawn_treasure( x, y )
+	EntityLoad( "data/entities/misc/towercheck.xml", x, y )
+end

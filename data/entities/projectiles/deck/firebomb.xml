@@ -1,4 +1,4 @@
-<Entity name="$projectile_default">
+<Entity name="$projectile_default" tags="projectile_player" >
 
 	<Base file="data/entities/base_projectile.xml" >
     <VelocityComponent
@@ -34,6 +34,7 @@
     shoot_light_flash_b="10"
     shoot_light_flash_radius="60"
     knockback_force="0.6"
+	physics_impulse_coeff="10000"
     >
 	<damage_by_type
 		fire="0.4"
@@ -110,9 +111,15 @@
   </LightComponent>
   
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="player_projectiles/bullet_fire_small">
   </AudioComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/firebomb.xml"
+		>
+	</VariableStorageComponent>
   
 </Entity>
 

@@ -105,8 +105,8 @@
 	</ItemPickUpperComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
-		event_root="animals_voc/miner" >
+		file="data/audio/Desktop/animals.bank"
+		event_root="animals/miner" >
 	</AudioComponent>
 	
 	<HitboxComponent 
@@ -118,5 +118,11 @@
 		damage_multiplier="0.9"
 		>
 	</HitboxComponent>
-
+	<Entity>
+	    <GameEffectComponent 
+	        effect="ALLERGY_RADIOACTIVE"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
 </Entity>

@@ -1,9 +1,9 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 -- The level of action ids that are spawned from the chests
 CHEST_LEVEL = 2
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
-dofile("data/scripts/lib/utilities.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/lib/utilities.lua")
 
 RegisterSpawnFunction( 0xff00AC33, "load_pixel_scene3" )
 RegisterSpawnFunction( 0xff00AC64, "load_pixel_scene4" )
@@ -349,35 +349,35 @@ g_pixel_scene_01 =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_verticalobservatory.png",
-		visual_file		= "data/biome_impl/snowcave_verticalobservatory_visual.png",
-		background_file	= "data/biome_impl/snowcave_verticalobservatory_background.png",
+		material_file 	= "data/biome_impl/snowcave/verticalobservatory.png",
+		visual_file		= "data/biome_impl/snowcave/verticalobservatory_visual.png",
+		background_file	= "data/biome_impl/snowcave/verticalobservatory_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_verticalobservatory2.png",
-		visual_file		= "data/biome_impl/snowcave_verticalobservatory2_visual.png",
-		background_file	= "data/biome_impl/snowcave_verticalobservatory2_background.png",
+		material_file 	= "data/biome_impl/snowcave/verticalobservatory2.png",
+		visual_file		= "data/biome_impl/snowcave/verticalobservatory2_visual.png",
+		background_file	= "data/biome_impl/snowcave/verticalobservatory2_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icebridge2.png",
+		material_file 	= "data/biome_impl/snowcave/icebridge2.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_pipe.png",
-		visual_file		= "data/biome_impl/snowcave_pipe_visual.png",
+		material_file 	= "data/biome_impl/snowcave/pipe.png",
+		visual_file		= "data/biome_impl/snowcave/pipe_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icepillar.png",
+		material_file 	= "data/biome_impl/snowcave/icepillar.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
@@ -389,49 +389,49 @@ g_pixel_scene_02 =
 	total_prob = 0,
 	{
 		prob   			= 0.4,
-		material_file 	= "data/biome_impl/snowcave_crater.png",
-		visual_file		= "data/biome_impl/snowcave_crater_visual.png",
+		material_file 	= "data/biome_impl/snowcave/crater.png",
+		visual_file		= "data/biome_impl/snowcave/crater_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_horizontalobservatory.png",
-		visual_file		= "data/biome_impl/snowcave_horizontalobservatory_visual.png",
-		background_file	= "data/biome_impl/snowcave_horizontalobservatory_background.png",
+		material_file 	= "data/biome_impl/snowcave/horizontalobservatory.png",
+		visual_file		= "data/biome_impl/snowcave/horizontalobservatory_visual.png",
+		background_file	= "data/biome_impl/snowcave/horizontalobservatory_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_horizontalobservatory2.png",
-		visual_file		= "data/biome_impl/snowcave_horizontalobservatory2_visual.png",
-		background_file	= "data/biome_impl/snowcave_horizontalobservatory2_background.png",
+		material_file 	= "data/biome_impl/snowcave/horizontalobservatory2.png",
+		visual_file		= "data/biome_impl/snowcave/horizontalobservatory2_visual.png",
+		background_file	= "data/biome_impl/snowcave/horizontalobservatory2_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.3,
-		material_file 	= "data/biome_impl/snowcave_horizontalobservatory3.png",
-		visual_file		= "data/biome_impl/snowcave_horizontalobservatory3_visual.png",
-		background_file	= "data/biome_impl/snowcave_horizontalobservatory3_background.png",
+		material_file 	= "data/biome_impl/snowcave/horizontalobservatory3.png",
+		visual_file		= "data/biome_impl/snowcave/horizontalobservatory3_visual.png",
+		background_file	= "data/biome_impl/snowcave/horizontalobservatory3_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.4,
-		material_file 	= "data/biome_impl/snowcave_icebridge.png",
+		material_file 	= "data/biome_impl/snowcave/icebridge.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.4,
-		material_file 	= "data/biome_impl/snowcave_snowcastle.png",
-		visual_file		= "data/biome_impl/snowcave_snowcastle_visual.png",
-		background_file	= "data/biome_impl/snowcave_snowcastle_background.png",
+		material_file 	= "data/biome_impl/snowcave/snowcastle.png",
+		visual_file		= "data/biome_impl/snowcave/snowcastle_visual.png",
+		background_file	= "data/biome_impl/snowcave/snowcastle_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0,
-		material_file 	= "data/biome_impl/snowcave_symbolroom.png",
+		material_file 	= "data/biome_impl/snowcave/symbolroom.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
@@ -450,16 +450,16 @@ g_pixel_scene_03 =
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_tinyobservatory.png",
-		visual_file		= "data/biome_impl/snowcave_tinyobservatory_visual.png",
-		background_file	= "data/biome_impl/snowcave_tinyobservatory_background.png",
+		material_file 	= "data/biome_impl/snowcave/tinyobservatory.png",
+		visual_file		= "data/biome_impl/snowcave/tinyobservatory_visual.png",
+		background_file	= "data/biome_impl/snowcave/tinyobservatory_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_tinyobservatory2.png",
-		visual_file		= "data/biome_impl/snowcave_tinyobservatory2_visual.png",
-		background_file	= "data/biome_impl/snowcave_tinyobservatory2_background.png",
+		material_file 	= "data/biome_impl/snowcave/tinyobservatory2.png",
+		visual_file		= "data/biome_impl/snowcave/tinyobservatory2_visual.png",
+		background_file	= "data/biome_impl/snowcave/tinyobservatory2_background.png",
 		is_unique		= 0
 	},
 }
@@ -514,28 +514,28 @@ g_pixel_scene_04 =
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icicles.png",
+		material_file 	= "data/biome_impl/snowcave/icicles.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icicles2.png",
+		material_file 	= "data/biome_impl/snowcave/icicles2.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icicles3.png",
+		material_file 	= "data/biome_impl/snowcave/icicles3.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave_icicles4.png",
+		material_file 	= "data/biome_impl/snowcave/icicles4.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0

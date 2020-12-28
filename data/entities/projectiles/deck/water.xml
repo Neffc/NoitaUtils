@@ -39,6 +39,12 @@
     alpha="1" 
     image_file="data/projectiles_gfx/dirt.xml" >
   </SpriteComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/water.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

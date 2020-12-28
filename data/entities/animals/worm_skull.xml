@@ -1,5 +1,5 @@
 <Entity 
-  tags="mortal,hittable,teleportable_NOT,homing_target" 
+  tags="mortal,hittable,teleportable_NOT,homing_target,enemy,worm,music_energy_000" 
   name="$animal_worm_skull"
   >
   <_Transform 
@@ -25,6 +25,14 @@
     jump_cam_shake="2" >
   </WormComponent>
   
+  <DamageNearbyEntitiesComponent
+    radius="16"
+    time_between_damaging="4"
+    target_tag="player_unit"
+    damage_type="DAMAGE_CURSE"
+    ragdoll_fx="NONE">
+	</DamageNearbyEntitiesComponent>
+  
   <WormAIComponent
     speed="5"
     speed_hunt="8"
@@ -38,6 +46,12 @@
     give_up_time_frames="250"
      >
   </WormAIComponent>
+  
+  <CellEaterComponent
+		_tags="cell_eater"
+		_enabled="0"
+		radius="9" >
+	</CellEaterComponent>
   
   <DamageModelComponent 
     _enabled="1" 
@@ -323,8 +337,16 @@
   </MusicEnergyAffectorComponent>
   
   <AudioComponent
-    file="data/audio/Desktop/animals.snd"
+    file="data/audio/Desktop/animals.bank"
     event_root="animals/ghost" >
   </AudioComponent>
+  
+  <Entity>
+	    <GameEffectComponent 
+	        effect="PROTECTION_FREEZE"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
 
 </Entity>

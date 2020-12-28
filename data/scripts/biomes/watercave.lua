@@ -1,9 +1,10 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
+RegisterSpawnFunction( 0xffffb539, "random_layout" )
 
 g_small_enemies =
 {
@@ -58,10 +59,11 @@ function spawn_unique_enemy3( x, y ) end
 function spawn_ghostlamp( x, y ) end
 function spawn_candles( x, y ) end
 function spawn_potions( x, y ) end
+function init( x, y, w, h ) end
 
-function init( x, y, w, h )
-	-- Note( Petri ): Moved this to spliced pixel scene
-	-- LoadPixelScene( "data/biome_impl/watercave.png", "", x, y, "", true )
+function random_layout( x, y )
+	local r = math.floor(ProceduralRandom(x, y, 1, 6))
+	LoadPixelScene( "data/biome_impl/watercave_layout_"..r..".png", "", x, y, "", true )
 end
 
 function spawn_items(x, y)
@@ -69,6 +71,6 @@ function spawn_items(x, y)
 end
 
 function spawn_props( x, y )
-	EntityLoad( "data/entities/items/pickup/heart.xml", x+10, y )
-	EntityLoad( "data/entities/items/pickup/heart_fullhp.xml", x-10, y )
+	--EntityLoad( "data/entities/items/pickup/heart.xml", x+10, y )
+	EntityLoad( "data/entities/items/pickup/heart_fullhp.xml", x, y )
 end

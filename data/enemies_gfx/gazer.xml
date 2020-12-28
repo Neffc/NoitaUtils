@@ -2,7 +2,9 @@
   default_animation="stand" 
   filename="data/enemies_gfx/gazer.png" 
   offset_x="16" 
-  offset_y="22" >
+  offset_y="22"
+  default_animation="stand" >
+
   <RectAnimation 
     frame_count="4" 
     frame_height="32" 
@@ -11,8 +13,10 @@
     frames_per_row="4" 
     name="stand" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="4" 
     frame_height="32" 
@@ -21,8 +25,10 @@
     frames_per_row="4" 
     name="fly" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="4" 
     frame_height="32" 
@@ -31,8 +37,10 @@
     frames_per_row="4" 
     name="fly_idle" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="5" 
     frame_height="33" 
@@ -43,14 +51,27 @@
     name="attack_ranged" 
     pos_x="0" 
     pos_y="34" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="1" 
       max_distance="500" 
       name="shoot_fire" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
-</Sprite>
+      probability="1" >
+    </Event>
+	
+	<Event 
+      check_physics_material="0" 
+      frame="1" 
+      max_distance="500" 
+      name="attack_shoot" 
+      on_finished="0" 
+      probability="1" >
+    </Event>
+
+  </RectAnimation>
+
+</Sprite>
+

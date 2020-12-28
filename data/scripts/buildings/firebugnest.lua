@@ -1,8 +1,10 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
-function spawn_if_player_close()
-	local entity_id    = GetUpdatedEntityID()
-	local pos_x, pos_y = EntityGetTransform( entity_id )
+local entity_id    = GetUpdatedEntityID()
+local pos_x, pos_y = EntityGetTransform( entity_id )
+SetRandomSeed( GameGetFrameNum(), pos_x + pos_y + entity_id )
+
+if( Random(0,100) < 75 ) then
 	local spawn_distance = 200
 	local e_id = EntityGetClosestWithTag( pos_x, pos_y, "player_unit")
 	
@@ -35,9 +37,5 @@ function spawn_if_player_close()
 			end
 		end
 	end
-end
-
-if( Random(0,100) < 75 ) then
-	spawn_if_player_close()
 end
 

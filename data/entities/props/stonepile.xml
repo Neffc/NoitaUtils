@@ -1,4 +1,4 @@
-<Entity name="unknown" >
+<Entity name="unknown" tags="prop_physics" >
 
 	<Entity>
 		<InheritTransformComponent>

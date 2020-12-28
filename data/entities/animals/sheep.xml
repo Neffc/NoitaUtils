@@ -1,4 +1,4 @@
-<Entity tags="mortal,prey" name="$animal_sheep">
+<Entity tags="mortal,prey,sheep" name="$animal_sheep">
   
 	<Base file="data/entities/base_helpless_animal.xml" >
 
@@ -17,7 +17,7 @@
             >
         </AnimalAIComponent >
 		
-		<DamageModelComponent 
+		<DamageModelComponent
 			ragdoll_offset_y="0"
 			ragdoll_filenames_file="data/ragdolls/sheep/filenames.txt" 
 			hp="0.1"
@@ -84,8 +84,8 @@
 	</Base>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
-		event_root="animals_voc/sheep" >
+		file="data/audio/Desktop/animals.bank"
+		event_root="animals/sheep" >
 	</AudioComponent>
 
 </Entity>

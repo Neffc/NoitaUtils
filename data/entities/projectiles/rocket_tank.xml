@@ -1,5 +1,6 @@
 <Entity 
   name="$projectile_default" 
+  tags="teleportable_NOT,projectile"
    >
 
 	<VelocityComponent 
@@ -52,7 +53,7 @@
       explosion_sprite_lifetime="0" 
       create_cell_probability="5" 
       hole_destroy_liquid="0"
-	  load_this_entity="data/entities/particles/particle_explosion/main_small.xml"
+	  load_this_entity="data/entities/particles/particle_explosion/main_gunpowder_tiny.xml"
 	  explosion_sprite_emissive="1"
 	  explosion_sprite_additive="1"
       hole_enabled="1" 
@@ -68,7 +69,8 @@
       sparks_count_min="7" 
       sparks_enabled="1" 
       stains_enabled="1" 
-      stains_radius="15" >
+      stains_radius="15"
+      audio_event_name="explosions/tnt" >
     </config_explosion>
   </ProjectileComponent>
   
@@ -165,15 +167,21 @@
   </SpriteParticleEmitterComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="projectiles/rocket">
   </AudioComponent>
 
   <AudioLoopComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_name="projectiles/rocket_passby"
       auto_play="1">
   </AudioLoopComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/rocket_tank.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

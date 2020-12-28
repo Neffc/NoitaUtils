@@ -1,4 +1,4 @@
-<Entity tags="mortal,human,hittable,homing_target,teleportable_NOT" name="$animal_boss_limbs">
+<Entity tags="mortal,human,hittable,homing_target,teleportable_NOT,enemy" name="$animal_boss_limbs">
 	
 	<!-- art - main body ---------------------- -->
 
@@ -200,7 +200,7 @@
 	<!-- etc ---------------------- -->
 
 	<AudioComponent 
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals" >
 	</AudioComponent>
 
@@ -233,6 +233,7 @@
 		update_transform="1" 
 		visible="1" 
 		emissive="1"
+		never_ragdollify_on_death="1"
 		z_index="-9000" >
 	</SpriteComponent>
 
@@ -253,6 +254,7 @@
 		update_transform="1" 
 		visible="1" 
 		emissive="1"
+		never_ragdollify_on_death="1"
 		z_index="-9000" >
 	</SpriteComponent>
 		
@@ -296,7 +298,7 @@
 	
 	<LuaComponent
 		execute_on_removed="1"
-		execute_every_n_frame="99999999"
+		execute_every_n_frame="-1"
 		script_source_file="data/scripts/buildings/endcrystal_victory.lua"
 		remove_after_executed="0">
 	</LuaComponent>

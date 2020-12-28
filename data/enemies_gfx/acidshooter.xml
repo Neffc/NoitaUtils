@@ -1,7 +1,9 @@
 <Sprite
  filename="data/enemies_gfx/acidshooter.png"
  offset_x="8"
- offset_y="12" >
+ offset_y="12"
+ default_animation="stand"  
+ >
 
  <!-- stand -->
  <RectAnimation

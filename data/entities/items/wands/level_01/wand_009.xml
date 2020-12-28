@@ -116,7 +116,7 @@
     _enabled="1" 
     _tags="enabled_in_world,enabled_in_hand,sound_digger" 
     event_name="items/digger" 
-    file="data/audio/Desktop/items.snd"
+    file="data/audio/Desktop/items.bank"
     volume_autofade_speed="0.25" >
 
   </AudioLoopComponent>
@@ -125,7 +125,7 @@
     _enabled="1" 
     _tags="enabled_in_world,enabled_in_hand,sound_digger" 
     event_name="items/digger" 
-    file="data/audio/Desktop/items.snd" >
+    file="data/audio/Desktop/items.bank" >
 
   </AudioLoopComponent>
 

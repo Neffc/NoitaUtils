@@ -18,7 +18,7 @@
 
 	<SpriteComponent
 		_tags="enabled_in_hand,not_enabled_in_wand"
-		_enabled="false"
+		_enabled="0"
 		offset_x="3.5"
 		offset_y="6"
     	image_file="data/items_gfx/in_hand/bomb_in_hand.png" >
@@ -26,7 +26,7 @@
 
 	<AbilityComponent
 		_tags="enabled_in_hand"
-		ui_name="Bomb"
+		ui_name="$action_bomb"
 		entity_file="data/entities/projectiles/bomb.xml"
 		rotate_hand_amount="0.05"
 		throw_as_item="1" 

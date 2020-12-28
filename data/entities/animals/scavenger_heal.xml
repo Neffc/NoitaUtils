@@ -6,6 +6,8 @@
 			_enabled="1" 
 			preferred_job="JobDefault"
 			escape_if_damaged_probability="100"
+			attack_if_damaged_probability="0"
+			tries_to_ranged_attack_friends="1"
 			attack_melee_damage_min="0.4" 
 			attack_melee_damage_max="0.7"
 			creature_detection_range_x="400"
@@ -35,7 +37,7 @@
 		</AnimalAIComponent>
 		
 		<DamageModelComponent 
-            hp="1"
+            hp="0.7"
             materials_create_messages="1"
 			ragdoll_filenames_file="data/ragdolls/scavenger_heal/filenames.txt" 
 			fire_probability_of_ignition="5"
@@ -63,7 +65,7 @@
 		</PathFindingGridMarkerComponent>
 		
 		<GenomeDataComponent 
-			herd_id="healer_orc"
+			herd_id="healer"
 			food_chain_rank="9"
 			is_predator="1" >
 		</GenomeDataComponent>
@@ -113,7 +115,7 @@
     </ItemPickUpperComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals/scavenger" >
 	</AudioComponent>
 

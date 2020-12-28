@@ -1,7 +1,7 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 
@@ -25,6 +25,7 @@ function spawn_persistent_teleport( x, y ) end
 function spawn_candles( x, y ) end
 
 function init( x, y, w, h )
-	LoadPixelScene( "data/biome_impl/pyramid_right_bottom.png", "", x+512-61, y + 512, "", true )
-	LoadPixelScene( "data/biome_impl/pyramid_right.png", "", x, y, "data/biome_impl/pyramid_right_background.png", true )
+	LoadPixelScene( "data/biome_impl/pyramid/right_bottom.png", "", x+512-61, y + 512, "", true )
+	LoadPixelScene( "data/biome_impl/pyramid/right.png", "", x, y, "", true )
+	LoadBackgroundSprite( "data/biome_impl/pyramid/right_background.png", x, y, 99.9 )
 end

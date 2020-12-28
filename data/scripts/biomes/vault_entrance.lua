@@ -1,13 +1,13 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 RegisterSpawnFunction( 0xffC8C800, "spawn_lamp2" )
 
 function init( x, y, w, h )
-	LoadPixelScene( "data/biome_impl/vault_entrance.png", "data/biome_impl/vault_entrance_visual.png", x, y-200, "", true )
+	LoadPixelScene( "data/biome_impl/vault/entrance.png", "data/biome_impl/vault/entrance_visual.png", x, y-200, "", true )
 end
 
 g_small_enemies =
@@ -172,7 +172,7 @@ g_lamp =
 		prob   		= 0.7,
 		min_count	= 1,
 		max_count	= 1,    
-		entity 	= "data/entities/props/physics_lantern_small.xml"
+		entity 	= "data/entities/props/physics/lantern_small.xml"
 	},
 }
 

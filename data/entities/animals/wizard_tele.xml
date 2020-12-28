@@ -19,14 +19,15 @@
 			attack_ranged_frames_between="180"
 			attack_ranged_offset_y="0"
 			attack_ranged_min_distance="0"
-			attack_ranged_min_distance="300"
+			attack_ranged_max_distance="300"
 			>
 		</AnimalAIComponent>
 		
 		<DamageModelComponent 
             hp="4"
-            ragdoll_material="meat"
+            ragdoll_material="meat_teleport"
 			ragdoll_filenames_file="data/ragdolls/wizard_tele/filenames.txt" 
+			blood_material="magic_liquid_teleportation"
 			>
 		</DamageModelComponent>
 
@@ -142,15 +143,15 @@
     </HotspotComponent>
 	
 	<AudioLoopComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/wizard/movement_loop"
 		set_speed_parameter="1"
 		auto_play="1">
 	</AudioLoopComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
-		event_root="animals_voc/wizard" >
+		file="data/audio/Desktop/animals.bank"
+		event_root="animals/wizard" >
 	</AudioComponent>
 
 	<Entity name="cape">  

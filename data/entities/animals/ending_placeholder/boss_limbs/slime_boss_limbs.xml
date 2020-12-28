@@ -110,7 +110,7 @@
         ragdoll_filenames_file=""
         blood_material="radioactive_liquid_fading"
         blood_multiplier="0"
-        create_ragdoll="false" >
+        create_ragdoll="0" >
     </DamageModelComponent>
 
 </Entity>

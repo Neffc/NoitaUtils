@@ -1,8 +1,8 @@
 <Entity >
   <Base file="data/entities/animals/scavenger_smg.xml">
     <DamageModelComponent 
-      hp="4"
-      max_hp="4"
+      hp="1"
+      max_hp="1"
      ></DamageModelComponent >
   </Base>
 </Entity>

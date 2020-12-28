@@ -1,6 +1,9 @@
 <Entity tags="hittable" >
 	
-	<Base file="data/entities/base_item_physics.xml" >
+	<Base file="data/entities/base_item_physics2.xml" >
+    <PhysicsBody2Component
+      kill_entity_after_initialized="0" >
+    </PhysicsBody2Component>
     <PhysicsImageShapeComponent 
       image_file="data/props_gfx/physics_candle_3.png"
       material="wax_b2" >

@@ -1,13 +1,121 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 local entity_id = GetUpdatedEntityID()
 local x, y = EntityGetTransform( entity_id )
 
-local tablets = EntityGetWithTag( "tablet" )
+SetRandomSeed( x, y )
 
-if ( tablets ~= nil ) then
+local tablets = EntityGetWithTag( "tablet" )
+local worm_crystals = EntityGetWithTag( "worm_crystal" )
+
+-- chest rain is done only once
+if( GlobalsGetValue("MISC_CHEST_RAIN") ~= "1" ) then
+
+	local chests = EntityGetWithTag( "chest" )
+	if ( #chests > 0 ) then
+		local collected = false
+		local players = EntityGetWithTag( "player_unit" )
+		
+		if ( #players > 0 ) then
+			local player_id = players[1]
+			local px, py = EntityGetTransform( player_id )
+			
+			for i,chest_id in ipairs(chests) do
+				local cx, cy = EntityGetTransform( chest_id )
+				
+				local distance = math.abs( x - cx ) + math.abs( y - cy )
+			
+				if ( distance < 48 ) then
+					local eid = EntityLoad("data/entities/misc/chest_rain.xml", px, py)
+					EntityAddChild( player_id, eid )
+					EntityLoad("data/entities/particles/image_emitters/chest_effect.xml", cx, cy)
+					collected = true
+					EntityKill( chest_id )
+				end
+			end
+		end
+		
+		if collected then
+			GlobalsSetValue("MISC_CHEST_RAIN", "1" )			
+			GamePrintImportant( "$log_altar_magic", "" )
+			
+			AddFlagPersistent( "misc_chest_rain" )
+		end
+	end
+end
+
+local greed_crystals = EntityGetWithTag( "greed_crystal" )
+if ( #greed_crystals > 0 ) then
+	local collected = false
+	local players = EntityGetWithTag( "player_unit" )
+	
+	if ( #players > 0 ) then
+		local player_id = players[1]
+		local px, py = EntityGetTransform( player_id )
+		
+		for i,crystal_id in ipairs( greed_crystals ) do
+			local cx, cy = EntityGetTransform( crystal_id )
+			
+			local distance = math.abs( x - cx ) + math.abs( y - cy )
+		
+			if ( distance < 48 ) then
+				if( GlobalsGetValue("MISC_GREED_RAIN") ~= "1" ) then
+					local eid = EntityLoad("data/entities/misc/greed_curse/greed_rain.xml", px, py)
+					EntityAddChild( player_id, eid )
+				else
+					local eid = EntityLoad("data/entities/misc/greed_curse/greed_rain_simple.xml", px, py)
+					EntityAddChild( player_id, eid )
+				end
+				
+				EntityLoad("data/entities/particles/image_emitters/chest_effect.xml", cx, cy)
+				collected = true
+				EntityKill( crystal_id )
+			end
+		end
+	end
+	
+	if collected then
+		GlobalsSetValue("MISC_GREED_RAIN", "1" )			
+		GamePrintImportant( "$log_altar_magic", "" )
+		
+		AddFlagPersistent( "misc_greed_rain" )
+	end
+end
+
+if ( #worm_crystals > 0 ) then
+	local collected = false
+	local players = EntityGetWithTag( "player_unit" )
+	
+	if ( #players > 0 ) then
+		local player_id = players[1]
+		local px, py = EntityGetTransform( player_id )
+		
+		for i,crystal_id in ipairs(worm_crystals) do
+			local cx, cy = EntityGetTransform( crystal_id )
+			
+			local distance = math.abs( x - cx ) + math.abs( y - cy )
+		
+			if ( distance < 48 ) then
+				local eid = EntityLoad("data/entities/misc/worm_rain.xml", px, py)
+				EntityAddChild( player_id, eid )
+				collected = true
+				EntityKill( crystal_id )
+			end
+		end
+	end
+	
+	if collected then
+		GamePrintImportant( "$log_altar_magic_worm", "" )
+		
+		AddFlagPersistent( "misc_worm_rain" )
+	end
+end
+
+if ( #tablets > 0 ) then
 	local collected = false
 	
+	local tx = 0
+	local ty = 0
 	for i,tablet_id in ipairs(tablets) do
 		local in_world = false
 		local components = EntityGetComponent( tablet_id, "PhysicsBodyComponent" )
@@ -16,18 +124,17 @@ if ( tablets ~= nil ) then
 			in_world = true
 		end
 		
-		local tx, ty = EntityGetTransform( tablet_id )
+		tx, ty = EntityGetTransform( tablet_id )
 		SetRandomSeed( tx+236, ty-4125 )
 		
 		if in_world then
-			local tx, ty = EntityGetTransform( tablet_id )
-			
 			local distance = math.abs(x - tx) + math.abs(y - ty)
 		
 			if ( distance < 48 ) then
 				EntityLoad("data/entities/particles/image_emitters/chest_effect.xml", tx, ty)
 				EntityConvertToMaterial( tablet_id, "gold")
 				collected = true
+				EntityKill( tablet_id )
 			end
 		end
 	end
@@ -64,6 +171,8 @@ if ( tablets ~= nil ) then
 					EntityLoad( "data/entities/animals/gazer.xml", x + ox, y + oy )
 				end
 			end
+			
+			AddFlagPersistent( "misc_altar_tablet" )
 		end
 		
 		if ( spawn_monster == false ) then

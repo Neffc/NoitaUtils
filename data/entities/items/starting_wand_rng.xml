@@ -49,6 +49,9 @@
 			z_index="-1.5" >
 		</SpriteComponent>
     </Base>
+
+   <Base file="data/entities/base_wand_pickup.xml" > <LuaComponent _enabled="0" script_item_picked_up="" /> </Base>
+
     
     <LuaComponent 
         _enabled="1" 

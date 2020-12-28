@@ -23,7 +23,7 @@
 		
 		<DamageModelComponent 
             hp="6"
-            ragdoll_material="meat_slime_orange"
+            ragdoll_material="meat_slime_cursed"
 			ragdoll_filenames_file="data/ragdolls/spitmonster/filenames.txt" 
 			blood_material="endslime_blood"
 			blood_spray_material="endslime_blood"
@@ -33,6 +33,8 @@
 			blood_sprite_directional="data/particles/bloodsplatters/bloodsplatter_directional_orange_$[1-3].xml"
 			blood_sprite_large="data/particles/bloodsplatters/bloodsplatter_orange_$[1-3].xml"
 			wet_status_effect_damage="0.05"
+			materials_that_damage="acid,poison,blood_cold,blood_cold_vapour,radioactive_gas,radioactive_gas_static,rock_static_radioactive,rock_static_poison,ice_radioactive_static,ice_radioactive_glass,ice_acid_static,ice_acid_glass" 
+			materials_how_much_damage="0.004,0.001,0.0008,0.0007,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001"
 			>
 			<damage_multipliers
 				melee="1.0"
@@ -98,7 +100,12 @@
 			mass="1.6"
 			>
 	    </CharacterDataComponent>
+		
 	</Base>
 
+		<AudioComponent
+			file="data/audio/Desktop/animals.bank"
+			event_root="animals/spitmonster" >
+		</AudioComponent>
 </Entity>
 

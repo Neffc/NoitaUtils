@@ -6,8 +6,6 @@ function collision_trigger()
 	
 	print("Boss buildup music triggered")
 
-	-- this reset the biome stats - see workshop_trigger_check_stats.lua
-	StatsBiomeReset()
-
+	GlobalsSetValue( "BOSS_ARENA_BUILDUP_TRIGGERED", "1" )
 	GameTriggerMusicEvent( "music/boss_arena/buildup", true,  pos_x, pos_y )
 end

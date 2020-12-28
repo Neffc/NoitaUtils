@@ -1,4 +1,4 @@
-<Entity name="$projectile_default">
+<Entity name="$projectile_default" tags="projectile_player" >
 
 	<Base file="data/entities/base_projectile.xml" >
     <VelocityComponent
@@ -180,9 +180,16 @@
   </LightComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
-      event_root="player_projectiles/bullet_light">
+      file="data/audio/Desktop/projectiles.bank"
+      event_root="player_projectiles/bullet_light"
+	  >
   </AudioComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/light_bullet_blue.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

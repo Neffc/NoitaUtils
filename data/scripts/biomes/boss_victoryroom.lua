@@ -1,11 +1,10 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 -- The level of action ids that are spawned from the chests
 CHEST_LEVEL = 4
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/director_helpers_design.lua")
-dofile("data/scripts/biome_scripts.lua")
-
-dofile("data/entities/animals/boss_centipede/rewards/spawn_rewards.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/director_helpers_design.lua")
+dofile_once("data/scripts/biome_scripts.lua")
+dofile_once("data/entities/animals/boss_centipede/rewards/spawn_rewards.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 RegisterSpawnFunction( 0xffffd1a1, "spawn_sampo_spot" )
@@ -37,6 +36,7 @@ end
 function spawn_sampo_spot(x, y)
 	EntityLoad( "data/entities/animals/boss_centipede/ending/ending_sampo_spot_underground.xml", x, y )
 	EntityLoad( "data/entities/animals/boss_centipede/boss_victoryroom_mechanism.xml", x, y-30 )
+	EntityLoad( "data/entities/animals/boss_centipede/boss_victoryroom_ambience.xml", x, y-30 )
 end
 
 function spawn_items(x, y)

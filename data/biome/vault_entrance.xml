@@ -2,7 +2,7 @@
   <Topology 
     name="_EMPTY_"
     background_image="data/weather_gfx/background_cave_02.png"
-    background_use_neighbor="1"
+    background_use_neighbor="0"
 
     background_image_height="95"
     
@@ -25,6 +25,10 @@
     mInsidePerlinSquared="0" 
 
     mMultiplierGradient="0.871429"
+    audio_music_2="vault"
+    audio_music_energy_coeff="1"
+    audio_music_forced_quietness_duration_seconds="4"
+    audio_ambience="vault"
     >
     <BitmapCaves 
       size_x="32"

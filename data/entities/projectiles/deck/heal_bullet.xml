@@ -1,4 +1,4 @@
-<Entity name="$projectile_default">
+<Entity name="$projectile_default" tags="projectile_player" >
 
 	<Base file="data/entities/base_projectile.xml" >
 		<VelocityComponent
@@ -69,7 +69,9 @@
       light_b="80"
 	  light_fade_time="2"
       stains_enabled="1"
-      stains_radius="3" >
+      stains_radius="3" 
+	  audio_enabled="0"
+	  >
     </config_explosion>
   </ProjectileComponent>
   
@@ -131,8 +133,8 @@
   </SpriteParticleEmitterComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
-      event_root="player_projectiles/bullet">
+      file="data/audio/Desktop/projectiles.bank"
+      event_root="player_projectiles/bullet_heal">
   </AudioComponent>
   
   <LightComponent 
@@ -142,6 +144,12 @@
 	g="240"
 	b="50">
   </LightComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/heal_bullet.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

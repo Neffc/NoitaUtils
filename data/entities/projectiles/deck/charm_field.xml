@@ -60,5 +60,11 @@
 			</config_explosion>
 		</ProjectileComponent>
 	</Base>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/charm_field.xml"
+		>
+	</VariableStorageComponent>
 </Entity>
 

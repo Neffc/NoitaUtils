@@ -1,7 +1,9 @@
+-- location: lava lake
+
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/lib/utilities.lua")
 dofile( "data/scripts/biomes/orbrooms/orbroom_shared.lua" )
 -- the one after the lavalake
 
@@ -25,7 +27,9 @@ function spawn_potions( x, y ) end
 function spawn_wands( x, y ) end
 
 function init( x, y, w, h )
-	LoadPixelScene( "data/biome_impl/orbroom.png", "", x, y, "data/biome_impl/orbroom_background.png", true )
+	LoadPixelScene( "data/biome_impl/orbroom.png", "data/biome_impl/orbroom_visual.png", x, y, "data/biome_impl/orbroom_background.png", true )
+	
+	EntityLoad( "data/entities/misc/orb_07_pitcheck_b.xml", x - 64, y + 256 )
 end
 
 ------------------------------------------------------------------------
@@ -35,15 +39,16 @@ end
 
 function spawn_orb(x, y)
 	EntityLoad( "data/entities/items/orbs/orb_07.xml", x, y )
+	EntityLoad( "data/entities/misc/orb_07_pitcheck_a.xml", x, y )
 	--EntityLoad( "data/entities/items/pickup/heart_better.xml", x + 30, y - 20 )
 	EntityLoad( "data/entities/items/books/book_07.xml", x - 30, y + 40 )
 	EntityLoad( "data/entities/misc/music_energy_000.xml", x, y - 10 )
-	spawn_material_checker( x - 197, y - 11, "blood", "data/scripts/biomes/orbrooms/orbroom_shared.lua", "data/particles/image_emitters/orbrooms/07_01.xml", x, y - 100 )
-	spawn_material_checker( x + 198, y - 11, "blood", "data/scripts/biomes/orbrooms/orbroom_shared.lua", "data/particles/image_emitters/orbrooms/07_01.xml", x, y - 100 )
 
-	spawn_material_checker( x - 197, y - 11, "snow", "data/scripts/biomes/orbrooms/orbroom_shared.lua", "data/particles/image_emitters/orbrooms/07_02.xml", x, y - 100 )
-	spawn_material_checker( x + 198, y - 11, "sand", "data/scripts/biomes/orbrooms/orbroom_shared.lua", "data/particles/image_emitters/orbrooms/07_03.xml", x, y - 100 )
+	spawn_material_checker( x - 197, y - 11, "slime", "data/scripts/biomes/orbrooms/orbroom_shared.lua", "data/particles/image_emitters/orbrooms/05_02.xml", x, y - 100 )
+	spawn_material_checker( x + 198, y - 11, "slime", "data/scripts/biomes/orbrooms/orbroom_shared.lua", "data/particles/image_emitters/orbrooms/05_02.xml", x, y - 100 )
 
 	-- EntityLoad( "data/entities/buildings/orb_room_materialchecker.xml", x - 197, y - 11 )
 	-- EntityLoad( "data/entities/buildings/orb_room_materialchecker.xml", x + 198, y - 11 )
+
+	EntityLoad( "data/entities/particles/gold_dust.xml", x, y )
 end

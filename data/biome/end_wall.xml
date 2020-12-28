@@ -2,7 +2,7 @@
   <Topology 
     name="$biome_end_wall"
     background_image="data/weather_gfx/background_cave_02.png"
-    background_use_neighbor="1"
+    background_use_neighbor="0"
 
     wang_template_file="" 
     lua_script="data/scripts/biomes/end_wall.lua"

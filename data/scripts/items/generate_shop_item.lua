@@ -1,4 +1,4 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 dofile( "data/scripts/gun/gun_actions.lua" )
 
 
@@ -49,7 +49,11 @@ function generate_shop_item( x, y, cheap_item, biomeid_, is_stealable )
 	local biomepixel = math.floor(y / 512)
 	local biomeid = biomes[biomepixel] or 0
 	
-	if (biomes[biomepixel] == nil) then
+	if (biomepixel > 35) then
+		biomeid = 7
+	end
+	
+	if (biomes[biomepixel] == nil) and (biomeid_ == nil) then
 		print("Unable to find biomeid for chunk at depth " .. tostring(biomepixel))
 	end
 	
@@ -64,51 +68,35 @@ function generate_shop_item( x, y, cheap_item, biomeid_, is_stealable )
 	local item = ""
 	local cardcost = 0
 
-	local validcards = {}
-
 	-- Note( Petri ): Testing how much squaring the biomeid for prices affects things
+	local level = biomeid
 	biomeid = biomeid * biomeid
 
-	for i,thisitem in ipairs(actions) do
-		local spawnids = thisitem.spawn_level
-		local sid_string = ""
-		local sid_value = -99
+	item = GetRandomAction( x, y, level, 0 )
+	cardcost = 0
 
-		--[[
-		for i=1,string.len(spawnids) do
-			local letter = string.sub(spawnids, i, i)
+	for i,thisitem in ipairs( actions ) do
+		if ( string.lower( thisitem.id ) == string.lower( item ) ) then
+			price = math.max(math.floor( ( (thisitem.price * 0.45) + (70 * biomeid) ) / 10 ) * 10, 10)
+			cardcost = price
 			
-			if (letter ~= ",") then
-				sid_string = sid_string .. letter
-			end
-			
-			if (letter == ",") or (i == string.len(spawnids)) then
-				sid_value = tonumber(sid_string)
-				sid_string = ""
-			end
-			
-			if (sid_value == biomeid) then
-				-- 15.1.2018 - Design hax to make the prices a bit more user friendly
-				price = math.floor( ( (thisitem.price * 0.75) + (30 * biomeid) ) / 10 ) * 10
-				table.insert(validcards, {string.lower(thisitem.id), price})
-				break
+			if ( thisitem.spawn_requires_flag ~= nil ) then
+				local flag = thisitem.spawn_requires_flag
+				
+				if ( HasFlagPersistent( flag ) == false ) then
+					print( "Trying to spawn " .. tostring( thisitem.id ) .. " even though flag " .. tostring( flag ) .. " not set!!" )
+				end
 			end
 		end
-		]]--
-		
-		price = math.max(math.floor( ( (thisitem.price * 0.45) + (70 * biomeid) ) / 10 ) * 10, 10)
-		table.insert(validcards, {string.lower(thisitem.id), price})
 	end
-
-	if (#validcards > 0) then
-		local randomcard = Random(1,#validcards)
-		
-		local card = validcards[randomcard]
-		item = card[1]
-		cardcost = card[2]
-		if( cheap_item ) then
-			cardcost = 0.5 * cardcost
-		end
+	
+	if( cheap_item ) then
+		cardcost = 0.5 * cardcost
+	end
+	
+	if ( biomeid >= 10 ) then
+		price = price * 5.0
+		cardcost = cardcost * 5.0
 	end
 
 	local eid = CreateItemActionEntity( item, x, y )
@@ -129,6 +117,7 @@ function generate_shop_item( x, y, cheap_item, biomeid_, is_stealable )
 		update_transform="1" ,
 		update_transform_rotation="0",
 		text="111",
+		z_index="-1",
 		} )
 
 	local stealable_value = "0"
@@ -262,7 +251,8 @@ function generate_shop_wand( x, y, cheap_item, biomeid_ )
 		offset_y="25", 
 		update_transform="1" ,
 		update_transform_rotation="0",
-		text="111"
+		text="111",
+		z_index="-1"
 		} )
 
 	EntityAddComponent( eid, "ItemCostComponent", { 

@@ -41,6 +41,7 @@
         image_file="data/ui_gfx/gun_actions/empty.png" 
         offset_x="8"
         offset_y="17"
+        z_index="-1.51"
     ></SpriteComponent>
 
     <SpriteComponent 
@@ -49,6 +50,16 @@
         image_file="data/ui_gfx/gun_actions/unidentified.png" 
         offset_x="8"
         offset_y="17"
+        z_index="-1.51"
+    ></SpriteComponent>
+
+    <SpriteComponent 
+        _enabled="0"
+        _tags="enabled_in_world,item_bg"
+        image_file="data/ui_gfx/inventory/item_bg_projectile.png" 
+        offset_x="10"
+        offset_y="19"
+        z_index="-1.5"
     ></SpriteComponent>
 
     <ItemActionComponent 

@@ -1,7 +1,7 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 dofile( "data/scripts/items/generate_shop_item.lua" )
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
@@ -47,10 +47,11 @@ function spawn_candles( x, y ) end
 function spawn_potions( x, y ) end
 
 function init( x, y, w, h )
-	LoadPixelScene( "data/biome_impl/temple_wall_top.png", "", x, y-30, "data/biome_impl/temple_wall_top_background.png", true )
+	-- LoadPixelScene( "data/biome_impl/temple/wall_top.png", "", x, y-30, "data/biome_impl/temple/wall_top_background.png", true )
+	LoadBackgroundSprite( "data/biome_impl/temple/wall_background.png", x, y - 30, 35 )
 	
-	LoadPixelScene( "data/biome_impl/temple_altar_top.png", "", x, y-40, "", true )
-	LoadPixelScene( "data/biome_impl/temple_altar.png", "data/biome_impl/temple_altar_visual.png", x, y-40+300, "data/biome_impl/temple_altar_background_secret.png", true )
+	LoadPixelScene( "data/biome_impl/temple/altar_top.png", "", x, y-40, "", true )
+	LoadPixelScene( "data/biome_impl/temple/altar.png", "data/biome_impl/temple/altar_visual.png", x, y-40+300, "data/biome_impl/temple/altar_background_secret.png", true )
 end
 
 function spawn_hp( x, y )

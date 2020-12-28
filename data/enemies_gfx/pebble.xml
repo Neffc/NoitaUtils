@@ -1,7 +1,8 @@
 <Sprite
  filename="data/enemies_gfx/pebble.png"
  offset_x="8"
- offset_y="13" >
+ offset_y="13" 
+  default_animation="stand">
 
  <!-- stand -->
  <RectAnimation

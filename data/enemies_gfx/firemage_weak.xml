@@ -2,7 +2,8 @@
 	filename="data/enemies_gfx/firemage_weak.png"
 	hotspots_filename="data/enemies_gfx/firemage_hotspots.png"
 	offset_x="8"
-	offset_y="20" >
+	offset_y="20"
+  default_animation="stand" >
 
 	<Hotspot
 		color="000011ff"

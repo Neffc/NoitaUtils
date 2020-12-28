@@ -1,5 +1,5 @@
-dofile( "data/scripts/lib/utilities.lua" )
-dofile("data/scripts/lib/coroutines.lua")
+dofile_once("data/scripts/lib/utilities.lua")
+dofile_once("data/scripts/lib/coroutines.lua")
 
 async(function ()
 	local entity_id    = GetUpdatedEntityID()

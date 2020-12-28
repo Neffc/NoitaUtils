@@ -25,7 +25,7 @@
     _enabled="1" 
     _tags="enabled_in_world" 
     action_id="HEAVY_BULLET" 
-    uses_remaining="-1" >
+     >
   </ItemActionComponent>
   <ItemComponent 
     _enabled="1" 
@@ -54,7 +54,7 @@
     spawn_pos.y="0" 
     ui_description="" 
     ui_sprite="" 
-    uses_remaining="-1" >
+    >
   </ItemComponent>
   <SimplePhysicsComponent 
     _enabled="1" 

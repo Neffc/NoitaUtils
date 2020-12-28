@@ -1,4 +1,4 @@
-<Entity name="$projectile_default">
+<Entity name="$projectile_default" tags="projectile_player" >
   
 	<Base file="data/entities/base_projectile.xml" >
 		<VelocityComponent
@@ -39,6 +39,7 @@
 	shoot_light_flash_g="120"
 	shoot_light_flash_b="220"
 	knockback_force="1.0"
+	physics_impulse_coeff="3500"
 	>
     <config_explosion
       never_cache="1" 
@@ -80,7 +81,7 @@
   </SpriteComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="player_projectiles/bullet_smg">
   </AudioComponent>
   
@@ -92,6 +93,12 @@
 	g="10"
 	b="40">
   </LightComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/spitter.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

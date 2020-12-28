@@ -5,7 +5,7 @@
     chunk_probability="1.0"
     chunk_count="1"
     chunk_max_angle="0"
-    collapse_images="data/collapse_masks/lavabridge/small_$[0-4].png"
+    collapse_images="data/procedural_gfx/collapse_lavabridge/small_$[0-4].png"
    >
   </LooseGroundComponent>
 

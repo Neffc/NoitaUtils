@@ -1,9 +1,9 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 -- The level of action ids that are spawned from the chests
 CHEST_LEVEL = 4
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/director_helpers_design.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/director_helpers_design.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 RegisterSpawnFunction( 0xffC8C800, "spawn_lamp2" )
@@ -280,7 +280,8 @@ g_props =
 	{
 		prob   		= 0.2,
 		min_count	= 1,
-		max_count	= 1,    
+		max_count	= 1,
+		offset_y 	= -8,
 		entity 	= "data/entities/props/physics_seamine.xml"
 	},
 }
@@ -332,21 +333,21 @@ g_pixel_scene_01 =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_pit01.png",
+		material_file 	= "data/biome_impl/rainforest/pit01.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_pit02.png",
+		material_file 	= "data/biome_impl/rainforest/pit02.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_pit03.png",
+		material_file 	= "data/biome_impl/rainforest/pit03.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
@@ -358,35 +359,35 @@ g_pixel_scene_02 =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_hut01.png",
+		material_file 	= "data/biome_impl/rainforest/hut01.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/rainforest_hut01_background.png",
+		background_file	= "data/biome_impl/rainforest/hut01_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_hut02.png",
+		material_file 	= "data/biome_impl/rainforest/hut02.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.4,
-		material_file 	= "data/biome_impl/rainforest_base.png",
+		material_file 	= "data/biome_impl/rainforest/base.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_hut03.png",
+		material_file 	= "data/biome_impl/rainforest/hut03.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.2,
-		material_file 	= "data/biome_impl/rainforest_symbolroom.png",
+		material_file 	= "data/biome_impl/rainforest/symbolroom.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
@@ -398,86 +399,86 @@ g_pixel_scene_04 =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_plantlife.png",
+		material_file 	= "data/biome_impl/rainforest/plantlife.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/rainforest_plantlife_background.png",
+		background_file	= "data/biome_impl/rainforest/plantlife_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_plantlife.png",
+		material_file 	= "data/biome_impl/rainforest/plantlife.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/rainforest_plantlife2_background.png",
+		background_file	= "data/biome_impl/rainforest/plantlife2_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_plantlife.png",
+		material_file 	= "data/biome_impl/rainforest/plantlife.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/rainforest_plantlife3_background.png",
+		background_file	= "data/biome_impl/rainforest/plantlife3_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_plantlife.png",
+		material_file 	= "data/biome_impl/rainforest/plantlife.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/rainforest_plantlife4_background.png",
+		background_file	= "data/biome_impl/rainforest/plantlife4_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_plantlife.png",
+		material_file 	= "data/biome_impl/rainforest/plantlife.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/rainforest_plantlife5_background.png",
+		background_file	= "data/biome_impl/rainforest/plantlife5_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_plantlife.png",
+		material_file 	= "data/biome_impl/rainforest/plantlife.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/rainforest_plantlife6_background.png",
+		background_file	= "data/biome_impl/rainforest/plantlife6_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_plantlife.png",
+		material_file 	= "data/biome_impl/rainforest/plantlife.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/rainforest_plantlife7_background.png",
+		background_file	= "data/biome_impl/rainforest/plantlife7_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_plantlife.png",
+		material_file 	= "data/biome_impl/rainforest/plantlife.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/rainforest_plantlife8_background.png",
+		background_file	= "data/biome_impl/rainforest/plantlife8_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_plantlife.png",
+		material_file 	= "data/biome_impl/rainforest/plantlife.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/rainforest_plantlife9_background.png",
+		background_file	= "data/biome_impl/rainforest/plantlife9_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_plantlife.png",
+		material_file 	= "data/biome_impl/rainforest/plantlife.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/rainforest_plantlife10_background.png",
+		background_file	= "data/biome_impl/rainforest/plantlife10_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_plantlife.png",
+		material_file 	= "data/biome_impl/rainforest/plantlife.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/rainforest_plantlife11_background.png",
+		background_file	= "data/biome_impl/rainforest/plantlife11_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/rainforest_plantlife.png",
+		material_file 	= "data/biome_impl/rainforest/plantlife.png",
 		visual_file		= "",
-		background_file	= "data/biome_impl/rainforest_plantlife12_background.png",
+		background_file	= "data/biome_impl/rainforest/plantlife12_background.png",
 		is_unique		= 0
 	},
 }

@@ -1,7 +1,9 @@
 <Sprite 
   filename="data/enemies_gfx/worm_tail.png" 
   offset_x="15" 
-  offset_y="6" >
+  offset_y="6" 
+  default_animation="stand">
+
   <RectAnimation 
     frame_count="1" 
     frame_height="12" 
@@ -11,6 +13,9 @@
     name="stand" 
     pos_x="0" 
     pos_y="0" 
-    >
-  </RectAnimation>
-</Sprite>
+    >
+
+  </RectAnimation>
+
+</Sprite>
+

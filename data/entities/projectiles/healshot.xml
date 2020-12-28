@@ -11,6 +11,7 @@
 
   <ProjectileComponent 
     _enabled="1" 
+    friendly_fire="1"
     lob_min="0.8"
     lob_max="1.1"
     speed_min="200"
@@ -101,9 +102,15 @@
   </SpriteParticleEmitterComponent>
   
 	<AudioComponent
-		file="data/audio/Desktop/projectiles.snd"
-		event_root="projectiles/magic" >
+		file="data/audio/Desktop/projectiles.bank"
+		event_root="projectiles/bullet_heal_robot" >
 	</AudioComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/healshot.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

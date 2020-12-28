@@ -3,6 +3,14 @@
     name="$biome_rainforest"
     type="BIOME_WANG_TILE"
     background_image="data/weather_gfx/background_rainforest.png"
+    background_edge_left="data/weather_gfx/edges/background_rainforest_left.png"
+    background_edge_right="data/weather_gfx/edges/background_rainforest_right.png"
+    background_edge_top="data/weather_gfx/edges/background_rainforest_top.png"
+    background_edge_bottom="data/weather_gfx/edges/background_rainforest_bottom.png"
+    background_edge_priority="10"     
+    limit_background_image="0"
+    
+
     wang_template_file="data/wang_tiles/rainforest_open.png" 
     lua_script="data/scripts/biomes/rainforest.lua"
     wang_map_width="260"
@@ -40,6 +48,10 @@
     mMultiplierPerlin="0.642857" 
     mPerlinScale_x="0" 
     mPerlinScale_y="105" 
+    audio_music_2="rainforest"
+    audio_music_energy_coeff="2"
+    audio_music_forced_quietness_duration_seconds="4"
+    audio_ambience="rainforest"
 	>
 	<BitmapCaves
 	DEBUG_output_image=""
@@ -309,7 +321,7 @@
       is_visual="0" 
       rand_seed="834676.86" 
       tree_extra_y="4" 
-      tree_image_file="data/vegetation/swamp_tree_0$[1-6].png" 
+      tree_image_file="data/vegetation/swamp_cropped_0$[1-6].png" 
       tree_image_visual="" 
       tree_material="wood" 
       tree_probability="0.328571" 

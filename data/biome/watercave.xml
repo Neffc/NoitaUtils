@@ -1,19 +1,25 @@
 <Biome>
   <Topology 
     name="_EMPTY_"
-	type="BIOME_WANG_TILE"
-    background_image="data/weather_gfx/background_cave_02.png"
-    background_use_neighbor="1"
+    type="BIOME_WANG_TILE"
+    background_image="data/weather_gfx/background_cave_04_alt.png"
+    background_edge_left="data/weather_gfx/edges/background_cave_04_alt_left.png"
+    background_edge_right="data/weather_gfx/edges/background_cave_04_alt_right.png"
+    background_edge_top="data/weather_gfx/edges/background_cave_04_alt_top.png"
+    background_edge_bottom="data/weather_gfx/edges/background_cave_04_alt_bottom.png"
+    background_edge_priority="11"     
+    
+    background_use_neighbor="0"
 
     wang_template_file="" 
     lua_script="data/scripts/biomes/watercave.lua"
     wang_map_width="256"
     wang_map_height="256"
-	limit_background_image="0"
+    limit_background_image="0"
     coarse_map_force_terrain="1"
     audio_music_2="wandcave"
     audio_ambience="wandcave"
-	fog_of_war_type="HEAVY_NO_CLEAR"
+    fog_of_war_type="HEAVY_NO_CLEAR"
     >
   </Topology>
 

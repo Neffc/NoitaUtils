@@ -1,7 +1,9 @@
 <Sprite 
   filename="data/enemies_gfx/bigbat.png" 
   offset_x="24" 
-  offset_y="24" >
+  offset_y="24"
+  default_animation="stand" >
+
   <RectAnimation 
     frame_count="7" 
     frame_height="33" 
@@ -11,24 +13,30 @@
     name="stand" 
     pos_x="0" 
     pos_y="1" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="3" 
       max_distance="500" 
       name="flap" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="0" 
       frame="6" 
       max_distance="500" 
       name="flap" 
       on_finished="0" 
-      probability="0.3" >
-    </Event>
-  </RectAnimation>
+      probability="0.3" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="7" 
     frame_height="33" 
@@ -38,24 +46,30 @@
     name="walk" 
     pos_x="0" 
     pos_y="1" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="3" 
       max_distance="500" 
       name="flap" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="0" 
       frame="6" 
       max_distance="500" 
       name="flap" 
       on_finished="0" 
-      probability="0.3" >
-    </Event>
-  </RectAnimation>
+      probability="0.3" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="7" 
     frame_height="33" 
@@ -65,24 +79,30 @@
     name="run" 
     pos_x="0" 
     pos_y="1" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="3" 
       max_distance="500" 
       name="flap" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="0" 
       frame="6" 
       max_distance="500" 
       name="flap" 
       on_finished="0" 
-      probability="0.3" >
-    </Event>
-  </RectAnimation>
+      probability="0.3" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="7" 
     frame_height="33" 
@@ -92,24 +112,30 @@
     name="burn" 
     pos_x="0" 
     pos_y="1" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="3" 
       max_distance="500" 
       name="flap" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="0" 
       frame="6" 
       max_distance="500" 
       name="flap" 
       on_finished="0" 
-      probability="0.3" >
-    </Event>
-  </RectAnimation>
+      probability="0.3" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="7" 
     frame_height="33" 
@@ -119,24 +145,30 @@
     name="fly_idle" 
     pos_x="0" 
     pos_y="1" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="3" 
       max_distance="500" 
       name="flap" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="0" 
       frame="6" 
       max_distance="500" 
       name="flap" 
       on_finished="0" 
-      probability="0.3" >
-    </Event>
-  </RectAnimation>
+      probability="0.3" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="7" 
     frame_height="33" 
@@ -146,23 +178,28 @@
     name="fly_move" 
     pos_x="0" 
     pos_y="1" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="3" 
       max_distance="500" 
       name="flap" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="0" 
       frame="6" 
       max_distance="500" 
       name="flap" 
       on_finished="0" 
-      probability="0.3" >
-    </Event>
+      probability="0.3" >
+
+    </Event>
+
   </RectAnimation>
   
   <RectAnimation 
@@ -207,5 +244,7 @@
 
     </Event>
 
-  </RectAnimation>
-</Sprite>
+  </RectAnimation>
+
+</Sprite>
+

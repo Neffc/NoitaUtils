@@ -103,7 +103,13 @@
   </LightComponent>
   
 	<AudioComponent
-		file="data/audio/Desktop/projectiles.snd"
-		event_root="projectiles/magic" >
+		file="data/audio/Desktop/projectiles.bank"
+		event_root="projectiles/orb_pink_fast" >
 	</AudioComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/orb_pink_fast.xml"
+		>
+	</VariableStorageComponent>
 </Entity>

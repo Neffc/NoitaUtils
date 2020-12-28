@@ -1,7 +1,7 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 -- The level of action ids that are spawned from the chests
 CHEST_LEVEL = 7
-dofile("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/director_helpers.lua")
 
 ------------ small enemies -------------------------------
 
@@ -56,7 +56,7 @@ g_lamp =
 		prob   		= 0.7,
 		min_count	= 1,
 		max_count	= 1,    
-		entity 	= "data/entities/props/physics_lantern_small.xml"
+		entity 	= "data/entities/props/physics/lantern_small.xml"
 	},
 }
 --- barrels ---
@@ -82,8 +82,8 @@ g_props =
 		prob   		= 0.25,
 		min_count	= 1,
 		max_count	= 1,
-		offset_y 	= -5,    
-		entity 	= "data/entities/props/physics_minecart.xml"
+		offset_y 	= -3,
+		entity 	= "data/entities/props/physics/minecart.xml"
 	},
 	{
 		prob   		= 0.2,
@@ -127,7 +127,7 @@ g_ghostlamp =
 		prob   		= 1.0,
 		min_count	= 1,
 		max_count	= 1,    
-		entity 	= "data/entities/props/physics_chain_torch_ghostly.xml"
+		entity 	= "data/entities/props/physics_chain_torch.xml"
 	},
 }
 
@@ -190,7 +190,7 @@ function spawn_chest(x, y)
 end
 
 function spawn_lamp(x, y)
-	spawn(g_lamp,x+5,y+10,0,0)
+	spawn(g_lamp,x,y,0,0)
 end
 
 function spawn_props(x, y)

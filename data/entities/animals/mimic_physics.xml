@@ -191,7 +191,7 @@
   
   <LuaComponent 
 		execute_on_removed="0"
-	    execute_every_n_frame="99999999"
+	    execute_every_n_frame="-1"
 		script_collision_trigger_hit="data/scripts/animals/mimic_wake.lua"
 	    remove_after_executed="1"
 		>

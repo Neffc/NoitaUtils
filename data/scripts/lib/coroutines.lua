@@ -54,7 +54,7 @@ function wait_signal(signalName)
     local co = coroutine.running()
     assert(co ~= nil, "The main thread cannot wait!")
 
-    if WAITING_ON_SIGNAL[signalStr] == nil then
+    if WAITING_ON_SIGNAL[signalName] == nil then
         -- If there wasn't already a list for this signal, start a new one.
         WAITING_ON_SIGNAL[signalName] = { co }
     else
@@ -69,14 +69,14 @@ function wait_signal_callback(signalName, callback)
     local co = coroutine.running()
     assert(co ~= nil, "The main thread cannot wait!")
 
-    if WAITING_ON_SIGNAL[signalStr] == nil then
+    if WAITING_ON_SIGNAL[signalName] == nil then
         -- If there wasn't already a list for this signal, start a new one.
         WAITING_ON_SIGNAL[signalName] = { co }
     else
         table.insert(WAITING_ON_SIGNAL[signalName], co)
     end
 	
-	if WAITING_ON_SIGNAL_CALLBACK[signalStr] == nil then
+	if WAITING_ON_SIGNAL_CALLBACK[signalName] == nil then
         -- If there wasn't already a list for this signal, start a new one.
         WAITING_ON_SIGNAL_CALLBACK[signalName] = { callback }
     else

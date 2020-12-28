@@ -27,7 +27,7 @@
 	</MoveToSurfaceOnCreateComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/materials.snd"
+		file="data/audio/Desktop/materials.bank"
 		event_root="collision/vine" >
 	</AudioComponent>
   

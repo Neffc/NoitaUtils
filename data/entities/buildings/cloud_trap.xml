@@ -54,7 +54,7 @@
 	</ParticleEmitterComponent>
 	
 	<AudioComponent
-		file="data/audio/Desktop/projectiles.snd"
+		file="data/audio/Desktop/projectiles.bank"
 		event_root="player_projectiles/cloud"
 		>
 	</AudioComponent>

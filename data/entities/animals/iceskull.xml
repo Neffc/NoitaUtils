@@ -26,6 +26,10 @@
 			blood_sprite_directional=""
 			blood_sprite_large=""
 			>
+			<damage_multipliers
+				ice="0.0"
+				>
+			</damage_multipliers>
 		</DamageModelComponent>
 
 		<PathFindingComponent
@@ -135,7 +139,7 @@
 
 	<LuaComponent 
 		_enabled="1" 
-		execute_every_n_frame="99999999"
+		execute_every_n_frame="-1"
 		script_damage_received="data/scripts/animals/iceskull_damage.lua" >
 	</LuaComponent>
 	
@@ -144,14 +148,14 @@
     </MusicEnergyAffectorComponent>
 
 	<AudioLoopComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/iceskull/movement_loop"
 		set_speed_parameter="1"
 		auto_play="1">
 	</AudioLoopComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals/iceskull" >
 	</AudioComponent>
 	

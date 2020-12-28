@@ -8,7 +8,8 @@ Escape         = 2
 DontMove       = 3
 
 local details_hidden = false
-local is_dead        = false
+local is_dead = false
+local did_wait = false
 
 
 -- gather some data we're gonna reuse --------------
@@ -113,9 +114,9 @@ function circleshot()
 	local pos_x, pos_y = EntityGetTransform( this )
 
 	local angle  = 0
-	local amount = 16
+	local amount = 8
 	local space  = math.floor(360 / amount)
-	local speed  = 130
+	local speed  = 230
 	
 	for i=1,amount do
 		local vel_x = math.cos( math.rad(angle) ) * speed
@@ -136,14 +137,14 @@ function homingshot()
 	local vel_x = 0
 	local vel_y = -30
 
-	shoot_projectile( this, "data/entities/projectiles/orb_pink_big.xml", pos_x, pos_y, vel_x, vel_y )
+	shoot_projectile( this, "data/entities/animals/boss_limbs/orb_pink_big.xml", pos_x, pos_y, vel_x, vel_y )
 end
 
 function spawn_minion()
 	-- check that we only have less than N minions
 	local existing_minion_count = 0
 	local existing_minions = EntityGetWithTag( "slimeshooter_boss_limbs" )
-	if existing_minions ~= nil then
+	if ( #existing_minions > 0 ) then
 		existing_minion_count = #existing_minions
 	end
 
@@ -153,6 +154,7 @@ function spawn_minion()
 
 	-- spawn
 	local x, y = EntityGetTransform( GetUpdatedEntityID() )
+	SetRandomSeed( GameGetFrameNum(), x + y )
 	
 	local slime = EntityLoad( "data/entities/animals/boss_limbs/slimeshooter_boss_limbs.xml", x, y )
 	edit_component( slime, "VelocityComponent", function(comp,vars)
@@ -283,6 +285,8 @@ function check_death()
 			set_details_hidden( true )
 			set_logic_state( DontMove )
 			set_main_animation( "death1", "death2" )
+			
+			SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
 
 			local rand = function() return Random( -10, 10 ) end
 
@@ -301,8 +305,10 @@ function check_death()
 			if( comp ~= nil ) then
 				ComponentSetValue( comp, "kill_now", "1" )
 			end
-
+			
+			StatsLogPlayerKill()
 			is_dead = true
+			AddFlagPersistent( "miniboss_limbs" )
 
 			return
 		end
@@ -313,6 +319,7 @@ function boss_wait( frames )
 	check_death()
 	wait( frames )
 	check_death()
+	did_wait = true
 end
 
 
@@ -333,7 +340,11 @@ async_loop(function()
 	if is_dead then
 		wait(60 * 10)
 	else
+		did_wait = false
 		state()
+		if did_wait == false then -- ensure the coroutine doesn't get stuck in an infinite loop if the states never wait
+		    wait(1)
+		end
 	end
 
 end)

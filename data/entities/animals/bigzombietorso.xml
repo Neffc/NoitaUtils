@@ -28,7 +28,7 @@
 		<DamageModelComponent 
             hp="6"
             materials_create_messages="1"
-            ragdoll_material="meat"
+            ragdoll_material="meat_cursed"
             ragdoll_filenames_file="data/ragdolls/bigzombie/filenames_torso.txt" >
 		</DamageModelComponent>
 

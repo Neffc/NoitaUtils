@@ -180,13 +180,16 @@
 		>
 	</AIAttackComponent>
 
+
+
+
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals/tank" >
 	</AudioComponent>
 
 	<AudioLoopComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/tank/movement_loop"
 		set_speed_parameter_only_based_on_x_movement="1"
 		set_speed_parameter="1"
@@ -195,10 +198,18 @@
 
 	<AudioLoopComponent
 		_tags="turret_rotate_sound"
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/tank/turret_rotate_loop"
 		volume_autofade_speed="0.1" >
 	</AudioLoopComponent>
 
+	<!-- protection from FREEZING -->
+	<Entity>
+	    <GameEffectComponent 
+	        effect="PROTECTION_FREEZE"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
 </Entity>
 

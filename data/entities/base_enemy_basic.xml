@@ -1,4 +1,4 @@
-<Entity tags="teleportable_NOT" >
+<Entity tags="teleportable_NOT,enemy" >
 	<Base file="data/entities/base_humanoid.xml" >
 		<AnimalAIComponent 
 			preferred_job="JobDefault"

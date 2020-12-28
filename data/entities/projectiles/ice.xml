@@ -129,9 +129,15 @@
 	</LightComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="projectiles/icethrower">
   </AudioComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/ice.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

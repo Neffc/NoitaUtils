@@ -105,7 +105,13 @@
   </LightComponent>
   
 	<AudioComponent
-		file="data/audio/Desktop/projectiles.snd"
+		file="data/audio/Desktop/projectiles.bank"
 		event_root="projectiles/orb_b" >
 	</AudioComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/orb_pink_big_slow.xml"
+		>
+	</VariableStorageComponent>
 </Entity>

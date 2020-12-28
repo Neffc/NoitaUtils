@@ -1,4 +1,4 @@
-<Entity _tags="freeze">
+<Entity _tags="freeze_if_wet_shooter">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 
@@ -8,7 +8,7 @@
 		
 		<ItemActionComponent 
 			_tags="enabled_in_world"
-			action_id="FREEZE" >
+			action_id="FREEZE_IF_WET_SHOOTER" >
 		</ItemActionComponent>
 	</Base>
 

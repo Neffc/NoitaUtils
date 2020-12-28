@@ -1,4 +1,4 @@
-7dofile("data/scripts/lib/utilities.lua")
+dofile_once("data/scripts/lib/utilities.lua")
 dofile( "data/scripts/gun/gun_enums.lua")
 dofile("data/scripts/gun/procedural/wands.lua")
 
@@ -385,29 +385,29 @@ end
 
 
 function clamp(val, lower, upper)
-    assert(val and lower and upper, "not very useful error message here")
-    if lower > upper then lower, upper = upper, lower end -- swap if boundaries supplied the wrong way
-    return math.max(lower, math.min(upper, val))
+	assert(val and lower and upper, "not very useful error message here")
+	if lower > upper then lower, upper = upper, lower end -- swap if boundaries supplied the wrong way
+	return math.max(lower, math.min(upper, val))
 end
 
 local function shuffleTable( t )
-    assert( t, "shuffleTable() expected a table, got nil" )
-    local iterations = #t
-    local j
-    
-    for i = iterations, 2, -1 do
-        j = Random(i)
-        t[i], t[j] = t[j], t[i]
-    end
+	assert( t, "shuffleTable() expected a table, got nil" )
+	local iterations = #t
+	local j
+	
+	for i = iterations, 2, -1 do
+		j = Random(i)
+		t[i], t[j] = t[j], t[i]
+	end
 end
 
 function init_total_prob( value )
 	value.total_prob = 0
-    for i,v in ipairs(value) do
-        if( v.prob ~= nil ) then
-            value.total_prob = value.total_prob + v.prob
-        end
-    end
+	for i,v in ipairs(value) do
+		if( v.prob ~= nil ) then
+			value.total_prob = value.total_prob + v.prob
+		end
+	end
 end
 
 function init_gun_probs()
@@ -420,12 +420,12 @@ end
 function get_gun_probs( what )
 	-- if( what == nil ) then print( "ERROR - director_helpers - spawn() ... what = nil") end
     if( gun_probs[what] == nil ) then
-    	return nil
+		return nil
     end
 
-    if ( gun_probs[what].total_prob == 0 ) then
-        init_total_prob( gun_probs[what] )
-    end
+	if ( gun_probs[what].total_prob == 0 ) then
+		init_total_prob( gun_probs[what] )
+	end
 
 	local r = Random() * gun_probs[what].total_prob
 	for i,v in pairs(gun_probs[what]) do
@@ -448,7 +448,7 @@ function apply_random_variable( t_gun, variable )
 	local cost = t_gun["cost"]
 	local probs = get_gun_probs( variable )
 
- 	-- deck_capacity = [10-240]
+	-- deck_capacity = [10-240]
 	-- cost: (60-L2)/5
 	if( variable == "reload_time") then
 		local min = clamp( 60-(cost*5), 1, 240 )
@@ -658,20 +658,20 @@ function generate_gun( cost, level, force_unshuffle )
 		gun["shuffle_deck_when_empty"] = 1
 		gun["fire_rate_wait"] = 0
 		gun["spread_degrees"] = 0
-	 	gun["speed_multiplier"] = 0
-	 	gun["prob_unshuffle"] = 0.1
-	 	gun["prob_draw_many"] = 0.15
-	 	gun["mana_charge_speed"] = 50*level + Random(-5,5*level)
-	 	gun["mana_max"] = 50 + (150 * level) + (Random(-5,5)*10)
-	 	gun["force_unshuffle"] = 0
+		gun["speed_multiplier"] = 0
+		gun["prob_unshuffle"] = 0.1
+		gun["prob_draw_many"] = 0.15
+		gun["mana_charge_speed"] = 50*level + Random(-5,5*level)
+		gun["mana_max"] = 50 + (150 * level) + (Random(-5,5)*10)
+		gun["force_unshuffle"] = 0
 
-	 	local p = Random(0,100)
-	 	if( p < 15 + level*6 ) then
-	 		gun["force_unshuffle"] = 1
-	 		-- print( "force_unshuffle" ) 
-	 	end
+		local p = Random(0,100)
+		if( p < 15 + level*6 ) then
+			gun["force_unshuffle"] = 1
+			-- print( "force_unshuffle" ) 
+		end
 
-	 	local is_rare = 0
+		local is_rare = 0
 		p = Random(0,100)
 		if( p < 5 ) then
 			is_rare = 1
@@ -785,7 +785,7 @@ function generate_gun( cost, level, force_unshuffle )
 
 	if( add_permanent ) then
 		local card = 0
-		local p = Random(0,100) 
+		p = Random(0,100) 
 		if( p < 60 ) then
 			card = GetRandomActionWithType( x, y, level+1, ACTION_TYPE_MODIFIER, 666 )
 		elseif( p < 85 ) then

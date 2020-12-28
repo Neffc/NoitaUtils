@@ -12,6 +12,7 @@
 	  limit_background_image="0"
     coarse_map_force_terrain="1"
     pixel_scene="1"
+    noise_biome_edges="0"
     audio_ambience="temple">
   </Topology>
 

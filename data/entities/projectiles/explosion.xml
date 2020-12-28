@@ -61,6 +61,12 @@
      
      >
   </SpriteComponent>
+  
+  <VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/explosion.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

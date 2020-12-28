@@ -2,8 +2,8 @@
   <Topology 
     name="_EMPTY_"
 	  type="BIOME_WANG_TILE"
-    background_image="data/weather_gfx/background_cave_02.png"
-    background_use_neighbor="1"
+    background_image=""
+    background_use_neighbor="0"
 
     wang_template_file="" 
     lua_script="data/scripts/biomes/mountain/mountain_hall.lua"

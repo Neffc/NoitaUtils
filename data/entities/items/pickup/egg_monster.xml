@@ -1,4 +1,4 @@
-<Entity tags="hittable,teleportable_NOT" >
+<Entity tags="hittable,teleportable_NOT,item_physics" >
 
   <!-- physical presence -->
   
@@ -29,7 +29,7 @@
 
   <ProjectileComponent
     _tags="enabled_in_world"
-    lifetime="100000"
+    lifetime="-1"
     penetrate_entities="1"
   ></ProjectileComponent>
 
@@ -98,7 +98,7 @@
 
   <SpriteComponent
     _tags="enabled_in_hand"
-    _enabled="false"
+    _enabled="0"
     offset_x="4"
     offset_y="4"
     image_file="data/items_gfx/egg.png"
@@ -157,5 +157,11 @@
 		randomize_velocity.max_y="30"
 		velocity_always_away_from_center="1">
 	</SpriteParticleEmitterComponent>
+	
+	<AudioComponent
+		file="data/audio/Desktop/projectiles.bank"
+		event_root="player_projectiles/throwable"
+		>
+	</AudioComponent>
 
 </Entity>

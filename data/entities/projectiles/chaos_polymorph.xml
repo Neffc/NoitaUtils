@@ -129,6 +129,12 @@
 		_enabled="0"
 		>
 	</AreaDamageComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/chaos_polymorph.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

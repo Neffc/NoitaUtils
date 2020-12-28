@@ -50,6 +50,12 @@
       audio_enabled="0" >
     </config_explosion>
   </LightningComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/lightning.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

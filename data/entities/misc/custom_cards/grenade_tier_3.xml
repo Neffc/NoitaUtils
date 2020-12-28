@@ -1,14 +1,14 @@
-<Entity _tags="grenade">
+<Entity _tags="grenade_tier_3">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 
-			image_file="data/ui_gfx/gun_actions/grenade.png" 
+			image_file="data/ui_gfx/gun_actions/grenade_tier_3.png" 
 			>
 		</SpriteComponent>
 		
 		<ItemActionComponent 
 			_tags="enabled_in_world"
-			action_id="GRENADE" >
+			action_id="GRENADE_TIER_3" >
 		</ItemActionComponent>
 	</Base>
 

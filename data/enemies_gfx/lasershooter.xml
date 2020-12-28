@@ -1,7 +1,9 @@
 <Sprite 
   filename="data/enemies_gfx/lasershooter.png" 
   offset_x="8" 
-  offset_y="12" >
+  offset_y="12"
+  default_animation="stand" >
+
   <RectAnimation 
     frame_count="4" 
     frame_height="24" 
@@ -10,8 +12,10 @@
     frames_per_row="6" 
     name="stand" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="4" 
     frame_height="24" 
@@ -20,8 +24,10 @@
     frames_per_row="6" 
     name="walk" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="4" 
     frame_height="24" 
@@ -30,8 +36,10 @@
     frames_per_row="6" 
     name="run" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="4" 
     frame_height="24" 
@@ -40,8 +48,10 @@
     frames_per_row="6" 
     name="burn" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="12" 
     frame_height="25" 
@@ -52,14 +62,29 @@
     name="attack_ranged" 
     pos_x="0" 
     pos_y="26" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+	
+	<Event 
+      check_physics_material="0" 
+      frame="1" 
+      max_distance="300" 
+      name="voc_shoot" 
+      on_finished="0" 
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="0" 
       frame="8" 
       max_distance="500" 
       name="shoot_laser" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
-</Sprite>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
+</Sprite>
+

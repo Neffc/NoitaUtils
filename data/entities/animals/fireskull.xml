@@ -15,9 +15,10 @@
 		</AnimalAIComponent>
 
 		<DamageModelComponent
-            hp="1.0"
-			materials_that_damage="acid,water,poison,blood_cold,blood_cold_vapour" 
-			materials_how_much_damage="0.004,0.001,0.001,0.0008,0.0007"
+            hp="1.4"
+
+            materials_that_damage="acid,water,poison,blood_cold,blood_cold_vapour,mud,water_swamp,water_salt,swamp,snow,water_ice" 
+		    materials_how_much_damage="0.004,0.001,0.001,0.0008,0.0007,0.001,0.001,0.001,0.001,0.001,0.001"
             ragdoll_filenames_file="data/ragdolls/skull/filenames.txt" 
 			ragdoll_material="bone_box2d"
 			blood_material="gunpowder_unstable"
@@ -135,10 +136,15 @@
 	</MusicEnergyAffectorComponent>
 
 	<AudioLoopComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/fireskull/movement_loop"
 		set_speed_parameter="1"
 		auto_play="1">
 	</AudioLoopComponent>
+	
+	<AudioComponent
+		file="data/audio/Desktop/animals.bank"
+		event_root="animals/fireskull" >
+	</AudioComponent>
 
 </Entity>

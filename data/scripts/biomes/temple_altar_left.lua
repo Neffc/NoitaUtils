@@ -1,9 +1,10 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 dofile( "data/scripts/items/generate_shop_item.lua" )
 dofile( "data/scripts/biomes/temple_shared.lua" )
+dofile_once("data/scripts/biomes/temple_altar_top_shared.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 RegisterSpawnFunction( 0xff6d934c, "spawn_hp" )
@@ -16,22 +17,26 @@ RegisterSpawnFunction( 0xffFAABBB, "spawn_pressureplate" )
 RegisterSpawnFunction( 0xffFF5A0A, "spawn_music_trigger" )
 RegisterSpawnFunction( 0xff667e0a, "spawn_duplicator" )
 RegisterSpawnFunction( 0xff03DEAD, "spawn_areachecks" )
+RegisterSpawnFunction( 0xffc128ff, "spawn_rubble" )
+RegisterSpawnFunction( 0xffa7a707, "spawn_lamp_long" )
+RegisterSpawnFunction( 0xff80FF5A, "spawn_vines" )
+RegisterSpawnFunction( 0xff9f2a00, "spawn_statue" )
+
 
 g_lamp =
 {
 	total_prob = 0,
-	-- add skullflys after this step
 	{
-		prob   		= 0.1,
+		prob   		= 1.0,
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= ""
 	},
 	{
-		prob   		= 0.7,
+		prob   		= 1.0,
 		min_count	= 1,
 		max_count	= 1,    
-		entity 	= "data/entities/props/physics_lantern_small.xml"
+		entity 	= "data/entities/props/physics/temple_lantern.xml"
 	},
 }
 
@@ -53,6 +58,89 @@ g_fish =
 	},
 }
 
+g_rubble =
+{
+	total_prob = 0,
+	-- add skullflys after this step
+	{
+		prob   		= 2.0,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= ""
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/physics_temple_rubble_01.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/physics_temple_rubble_02.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/physics_temple_rubble_03.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/physics_temple_rubble_04.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/physics_temple_rubble_05.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/physics_temple_rubble_06.xml"
+	},
+}
+
+g_vines =
+{
+	total_prob = 0,
+	{
+		prob   		= 0.5,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= ""
+	},
+	{
+		prob   		= 0.4,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/verlet_chains/vines/verlet_vine.xml"
+	},
+	{
+		prob   		= 0.3,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/verlet_chains/vines/verlet_vine_long.xml"
+	},
+	{
+		prob   		= 0.2,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/verlet_chains/vines/verlet_vine_short.xml"
+	},
+	{
+		prob   		= 0.2,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/verlet_chains/vines/verlet_vine_shorter.xml"
+	},
+}
+
 function spawn_small_enemies( x, y ) end
 function spawn_big_enemies( x, y ) end
 function spawn_items( x, y ) end
@@ -69,12 +157,9 @@ function spawn_candles( x, y ) end
 function spawn_potions( x, y ) end
 
 function init( x, y, w, h )
-	temple_random( x, y )
-	
-	LoadPixelScene( "data/biome_impl/temple_wall_top.png", "", x, y-30, "data/biome_impl/temple_wall_top_background.png", true )
-	
-	LoadPixelScene( "data/biome_impl/temple_altar_top.png", "", x, y-40, "", true )
-	LoadPixelScene( "data/biome_impl/temple_altar_left.png", "data/biome_impl/temple_altar_left_visual.png", x, y-40+300, "data/biome_impl/temple_altar_left_background.png", true )
+	spawn_altar_top(x, y, false)
+
+	LoadPixelScene( "data/biome_impl/temple/altar_left.png", "data/biome_impl/temple/altar_left_visual.png", x, y-40+300, "data/biome_impl/temple/altar_left_background.png", true )
 end
 
 function spawn_hp( x, y )
@@ -109,7 +194,11 @@ function spawn_pressureplate( x, y )
 end
 
 function spawn_lamp(x, y)
-	spawn(g_lamp,x-5,y+1,0,0)
+	spawn(g_lamp,x,y,0,10)
+end
+
+function spawn_lamp_long(x, y)
+	spawn(g_lamp,x,y,0,15)
 end
 
 function spawn_music_trigger( x, y )
@@ -121,9 +210,37 @@ function spawn_duplicator( x, y )
 end
 
 function spawn_areachecks( x, y )
-	if( temple_should_we_spawn_checkers() ) then
-		EntityLoad( "data/entities/buildings/temple_areacheck_horizontal.xml", x, y - 80 )
+	if( temple_should_we_spawn_checkers( x, y ) ) then
+		EntityLoad( "data/entities/buildings/temple_areacheck_horizontal.xml", x+5, y - 65 - 16 )
 		EntityLoad( "data/entities/buildings/temple_areacheck_horizontal.xml", x, y + 140 )
 		EntityLoad( "data/entities/buildings/temple_areacheck_vertical.xml", x - 120, y )
+	end
+end
+
+function spawn_rubble(x, y)
+	spawn(g_rubble,x,y,5,0)
+end
+
+function spawn_vines(x, y)
+	spawn(g_vines,x+5,y+5)
+end
+
+function spawn_statue( x, y )
+	local curse = GameHasFlagRun( "greed_curse" )
+	local cursegone = GameHasFlagRun( "greed_curse_gone" )
+	
+	if curse and ( cursegone == false ) then
+		EntityLoad( "data/entities/misc/greed_curse/greed_crystal.xml", x, y - 48 )
+		EntityLoad( "data/entities/props/temple_statue_01_green.xml", x, y )
+	else
+		EntityLoad( "data/entities/props/temple_statue_01.xml", x, y )
+	end
+end
+
+function spawn_fish(x, y)
+	local f = GameGetOrbCountAllTime()
+	
+	for i=1,f do
+		EntityLoad( "data/entities/animals/fish.xml", x, y )
 	end
 end

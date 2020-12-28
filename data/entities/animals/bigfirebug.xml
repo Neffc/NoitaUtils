@@ -20,8 +20,9 @@
 
 		<DamageModelComponent
             hp="1"
-			materials_that_damage="acid,water,poison,blood_cold,blood_cold_vapour" 
-			materials_how_much_damage="0.004,0.005,0.001,0.0008,0.0007"
+			materials_that_damage="acid,water,poison,blood_cold,blood_cold_vapour,mud,water_swamp,water_salt,swamp,snow,water_ice" 
+			materials_how_much_damage="0.004,0.005,0.001,0.0008,0.0007,0.005,0.005,0.005,0.005,0.005,0.005"
+
 			fire_probability_of_ignition="0"
             ragdoll_filenames_file="data/ragdolls/bigfirebug/filenames.txt" 
 			ragdoll_material="lavarock_static"
@@ -30,6 +31,7 @@
 			blood_sprite_directional="data/particles/bloodsplatters/bloodsplatter_directional_orange_$[1-3].xml"
 			blood_sprite_large="data/particles/bloodsplatters/bloodsplatter_orange_$[1-3].xml"
 			wet_status_effect_damage="0.05"
+			blood_multiplier="0.8"
 			>
 		</DamageModelComponent>
 
@@ -122,12 +124,12 @@
 	</SpriteComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals/bigfirebug" >
 	</AudioComponent>
 
 	<AudioLoopComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/wing_flap_insect/movement_loop"
 		set_speed_parameter="1"
 		auto_play="1">

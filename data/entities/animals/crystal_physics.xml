@@ -139,6 +139,12 @@
 			_enabled="0"
 			>
 		</SpriteStainsComponent>
+
+		<AudioComponent
+			file="data/audio/Desktop/animals.bank"
+			event_root="animals/crystal" >
+		</AudioComponent>
+
 	</Base>
 		
 	<SpriteParticleEmitterComponent

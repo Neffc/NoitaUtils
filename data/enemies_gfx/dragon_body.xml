@@ -1,7 +1,9 @@
 <Sprite 
   filename="data/enemies_gfx/dragon_body.png" 
   offset_x="17" 
-  offset_y="15" >
+  offset_y="15"
+  default_animation="stand" >
+
   <RectAnimation 
     frame_count="4" 
     frame_height="33" 
@@ -11,6 +13,9 @@
     name="eat" 
     pos_x="0" 
     pos_y="1" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
-</Sprite>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
+</Sprite>
+

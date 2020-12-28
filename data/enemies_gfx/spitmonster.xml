@@ -1,7 +1,9 @@
 <Sprite 
   filename="data/enemies_gfx/spitmonster.png" 
   offset_x="12" 
-  offset_y="20" >
+  offset_y="20"
+  default_animation="stand" >
+
   <RectAnimation 
     frame_count="6" 
     frame_height="25" 
@@ -11,8 +13,10 @@
     name="stand" 
     pos_x="0" 
     pos_y="1" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="25" 
@@ -22,24 +26,30 @@
     name="walk" 
     pos_x="0" 
     pos_y="26" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="1" 
       frame="0" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="3" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="25" 
@@ -49,24 +59,30 @@
     name="run" 
     pos_x="0" 
     pos_y="26" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="1" 
       frame="0" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="3" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="25" 
@@ -76,24 +92,30 @@
     name="burn" 
     pos_x="0" 
     pos_y="26" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="1" 
       frame="0" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="3" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="1" 
     frame_height="24" 
@@ -103,16 +125,19 @@
     loop="0" 
     name="jump_up" 
     pos_x="0" 
-    pos_y="51" >
+    pos_y="51" >
+
     <Event 
       check_physics_material="1" 
       frame="0" 
       max_distance="500" 
       name="jump" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="1" 
     frame_height="24" 
@@ -122,8 +147,10 @@
     loop="0" 
     name="jump_fall" 
     pos_x="0" 
-    pos_y="76" >
-  </RectAnimation>
+    pos_y="76" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="7" 
     frame_height="25" 
@@ -134,16 +161,37 @@
     name="attack" 
     pos_x="0" 
     pos_y="101" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="3" 
       max_distance="500" 
       name="shoot_magic" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+    </Event>
+	
+	<Event 
+      check_physics_material="0" 
+      frame="3" 
+      max_distance="500" 
+      name="attack_shoot" 
+      on_finished="0" 
+      probability="1" >
+    </Event>
+	
+	<Event 
+      check_physics_material="0" 
+      frame="3" 
+      max_distance="500" 
+      name="voc_attack" 
+      on_finished="0" 
+      probability="1" >
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="7" 
     frame_height="25" 
@@ -154,14 +202,27 @@
     name="attack_ranged" 
     pos_x="0" 
     pos_y="101" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="3" 
       max_distance="500" 
       name="shoot_magic" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
-</Sprite>
+      probability="1" >
+    </Event>
+	
+	<Event 
+      check_physics_material="0" 
+      frame="3" 
+      max_distance="500" 
+      name="attack_shoot" 
+      on_finished="0" 
+      probability="1" >
+    </Event>
+
+  </RectAnimation>
+
+</Sprite>
+

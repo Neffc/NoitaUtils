@@ -8,11 +8,13 @@ function ConfigGunActionInfo_Init( value )
     value.action_spawn_level = ""
     value.action_spawn_probability = ""
     value.action_spawn_requires_flag = ""
+    value.action_spawn_manual_unlock = false
     value.action_max_uses = -1
     value.custom_xml_file = ""
     value.action_mana_drain = 10
     value.action_is_dangerous_blast = false
     value.action_draw_many_count = 0
+    value.action_ai_never_uses = false
     value.state_shuffled = false
     value.state_cards_drawn = 0
     value.state_discarded_action = false
@@ -49,6 +51,7 @@ function ConfigGunActionInfo_Init( value )
     value.ragdoll_fx = 0
     value.friendly_fire = false
     value.physics_impulse_coeff = 0
+    value.lifetime_add = 0
     value.sprite = ""
     value.extra_entities = ""
     value.game_effect_entities = ""
@@ -67,11 +70,13 @@ function ConfigGunActionInfo_PassToGame( value )
         value.action_spawn_level, 
         value.action_spawn_probability, 
         value.action_spawn_requires_flag, 
+        value.action_spawn_manual_unlock, 
         value.action_max_uses, 
         value.custom_xml_file, 
         value.action_mana_drain, 
         value.action_is_dangerous_blast, 
         value.action_draw_many_count, 
+        value.action_ai_never_uses, 
         value.state_shuffled, 
         value.state_cards_drawn, 
         value.state_discarded_action, 
@@ -108,6 +113,7 @@ function ConfigGunActionInfo_PassToGame( value )
         value.ragdoll_fx, 
         value.friendly_fire, 
         value.physics_impulse_coeff, 
+        value.lifetime_add, 
         value.sprite, 
         value.extra_entities, 
         value.game_effect_entities, 
@@ -115,7 +121,7 @@ function ConfigGunActionInfo_PassToGame( value )
         value.projectile_file
   )
 end
-function ConfigGunActionInfo_ReadToLua( action_id, action_name, action_description, action_sprite_filename, action_unidentified_sprite_filename, action_type, action_spawn_level, action_spawn_probability, action_spawn_requires_flag, action_max_uses, custom_xml_file, action_mana_drain, action_is_dangerous_blast, action_draw_many_count, state_shuffled, state_cards_drawn, state_discarded_action, state_destroyed_action, fire_rate_wait, speed_multiplier, child_speed_multiplier, dampening, explosion_radius, spread_degrees, pattern_degrees, screenshake, recoil, damage_melee_add, damage_projectile_add, damage_electricity_add, damage_fire_add, damage_explosion_add, damage_critical_chance, damage_critical_multiplier, explosion_damage_to_materials, knockback_force, reload_time, lightning_count, material, material_amount, trail_material, trail_material_amount, bounces, gravity, light, blood_count_multiplier, gore_particles, ragdoll_fx, friendly_fire, physics_impulse_coeff, sprite, extra_entities, game_effect_entities, sound_loop_tag, projectile_file )
+function ConfigGunActionInfo_ReadToLua( action_id, action_name, action_description, action_sprite_filename, action_unidentified_sprite_filename, action_type, action_spawn_level, action_spawn_probability, action_spawn_requires_flag, action_spawn_manual_unlock, action_max_uses, custom_xml_file, action_mana_drain, action_is_dangerous_blast, action_draw_many_count, action_ai_never_uses, state_shuffled, state_cards_drawn, state_discarded_action, state_destroyed_action, fire_rate_wait, speed_multiplier, child_speed_multiplier, dampening, explosion_radius, spread_degrees, pattern_degrees, screenshake, recoil, damage_melee_add, damage_projectile_add, damage_electricity_add, damage_fire_add, damage_explosion_add, damage_critical_chance, damage_critical_multiplier, explosion_damage_to_materials, knockback_force, reload_time, lightning_count, material, material_amount, trail_material, trail_material_amount, bounces, gravity, light, blood_count_multiplier, gore_particles, ragdoll_fx, friendly_fire, physics_impulse_coeff, lifetime_add, sprite, extra_entities, game_effect_entities, sound_loop_tag, projectile_file )
     __globaldata = {}
     __globaldata.action_id = action_id
     __globaldata.action_name = action_name
@@ -126,11 +132,13 @@ function ConfigGunActionInfo_ReadToLua( action_id, action_name, action_descripti
     __globaldata.action_spawn_level = action_spawn_level
     __globaldata.action_spawn_probability = action_spawn_probability
     __globaldata.action_spawn_requires_flag = action_spawn_requires_flag
+    __globaldata.action_spawn_manual_unlock = action_spawn_manual_unlock
     __globaldata.action_max_uses = action_max_uses
     __globaldata.custom_xml_file = custom_xml_file
     __globaldata.action_mana_drain = action_mana_drain
     __globaldata.action_is_dangerous_blast = action_is_dangerous_blast
     __globaldata.action_draw_many_count = action_draw_many_count
+    __globaldata.action_ai_never_uses = action_ai_never_uses
     __globaldata.state_shuffled = state_shuffled
     __globaldata.state_cards_drawn = state_cards_drawn
     __globaldata.state_discarded_action = state_discarded_action
@@ -167,6 +175,7 @@ function ConfigGunActionInfo_ReadToLua( action_id, action_name, action_descripti
     __globaldata.ragdoll_fx = ragdoll_fx
     __globaldata.friendly_fire = friendly_fire
     __globaldata.physics_impulse_coeff = physics_impulse_coeff
+    __globaldata.lifetime_add = lifetime_add
     __globaldata.sprite = sprite
     __globaldata.extra_entities = extra_entities
     __globaldata.game_effect_entities = game_effect_entities
@@ -183,11 +192,13 @@ function ConfigGunActionInfo_Copy( source, dest )
     dest.action_spawn_level = source.action_spawn_level
     dest.action_spawn_probability = source.action_spawn_probability
     dest.action_spawn_requires_flag = source.action_spawn_requires_flag
+    dest.action_spawn_manual_unlock = source.action_spawn_manual_unlock
     dest.action_max_uses = source.action_max_uses
     dest.custom_xml_file = source.custom_xml_file
     dest.action_mana_drain = source.action_mana_drain
     dest.action_is_dangerous_blast = source.action_is_dangerous_blast
     dest.action_draw_many_count = source.action_draw_many_count
+    dest.action_ai_never_uses = source.action_ai_never_uses
     dest.state_shuffled = source.state_shuffled
     dest.state_cards_drawn = source.state_cards_drawn
     dest.state_discarded_action = source.state_discarded_action
@@ -224,6 +235,7 @@ function ConfigGunActionInfo_Copy( source, dest )
     dest.ragdoll_fx = source.ragdoll_fx
     dest.friendly_fire = source.friendly_fire
     dest.physics_impulse_coeff = source.physics_impulse_coeff
+    dest.lifetime_add = source.lifetime_add
     dest.sprite = source.sprite
     dest.extra_entities = source.extra_entities
     dest.game_effect_entities = source.game_effect_entities

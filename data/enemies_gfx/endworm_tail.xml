@@ -1,7 +1,9 @@
 <Sprite 
 	filename="data/enemies_gfx/endworm_tail.png" 
 	offset_x="16" 
-	offset_y="16" >
+	offset_y="16"
+  default_animation="stand"
+	>
 	
 	<RectAnimation 
 		name="stand" 

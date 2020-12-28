@@ -2,24 +2,26 @@ dofile( "data/scripts/lib/utilities.lua" )
 
 function item_pickup( entity_item, entity_who_picked, name )
 
-	GameTriggerMusicFadeOutAndDequeueAll( 10.0 )
-	GamePlaySound( "data/audio/Desktop/event_cues.snd", "event_cues/sampo_pick/create", pos_x, pos_y )
-	GameTriggerMusicEvent( "music/boss_arena/battle", false,  pos_x, pos_y )
-
 	local x,y = EntityGetTransform( entity_item )
+
+	GameTriggerMusicFadeOutAndDequeueAll( 10.0 )
+	GamePlaySound( "data/audio/Desktop/event_cues.bank", "event_cues/sampo_pick/create", x, y )
+	GameTriggerMusicEvent( "music/boss_arena/battle", false, x, y )
 	SetRandomSeed( x, y )
+	GlobalsSetValue( "FINAL_BOSS_ACTIVE", "1" )
+
 	EntityLoad("data/entities/particles/image_emitters/chest_effect.xml", x, y)
 	print("Sampo pickup: " .. tostring(x) .. ", " .. tostring(y))
 
 	local entities = EntityGetWithTag( "sampo_or_boss" )
-	if( entities == nil ) then
+	if ( #entities == 0 ) then
 		print_error("boss - couldn't find sampo")
 		return
 	end
 
 	local reference = EntityGetWithTag( "reference" )
 		
-	if( reference == nil ) then
+	if( #reference == 0 ) then
 		print_error("boss - couldn't find reference")
 		return
 	end
@@ -54,17 +56,31 @@ function item_pickup( entity_item, entity_who_picked, name )
 
 			if EntityHasTag( entity_id, "boss_centipede" ) then
 				EntityAddTag( entity_id, "boss_centipede_active" )
+				
+				local child_entities = EntityGetAllChildren( entity_id )
+				local child_to_remove = 0
+				
+				if ( child_entities ~= nil ) then
+					for i,child_id in ipairs( child_entities ) do
+						EntityHasTag( child_id, "protection" )
+						child_to_remove = child_id
+					end
+				end
+				
+				if ( child_to_remove ~= 0 ) then
+					EntityKill( child_to_remove )
+				end
 			end
 		end
 		
-		EntityLoad("data/entities/animals/boss_centipede/loose_lavaceiling.xml", x-235, y-124)
-		EntityLoad("data/entities/animals/boss_centipede/loose_lavaceiling.xml", x+264, y-120)
-		EntityLoad("data/entities/animals/boss_centipede/loose_lavabridge.xml", x-235, y+110)
-		EntityLoad("data/entities/animals/boss_centipede/loose_lavabridge.xml", x+257, y+110)
+		EntityLoad("data/entities/animals/boss_centipede/loose_lavaceiling.xml", x-235, y-73)
+		EntityLoad("data/entities/animals/boss_centipede/loose_lavaceiling.xml", x+264, y-50)
+		EntityLoad("data/entities/animals/boss_centipede/loose_lavabridge.xml", x-235, y+282)
+		EntityLoad("data/entities/animals/boss_centipede/loose_lavabridge.xml", x+257, y+262)
 		
 		local player = EntityGetWithTag( "player_unit" )
 		
-		if( player == nil ) then
+		if( #player == 0 ) then
 			print_error("boss - couldn't find player_unit")
 			return
 		end

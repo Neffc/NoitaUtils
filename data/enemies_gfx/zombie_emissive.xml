@@ -1,7 +1,9 @@
 <Sprite 
   filename="data/enemies_gfx/zombie_emissive.png" 
   offset_x="8.5" 
-  offset_y="15" >
+  offset_y="15"
+  default_animation="stand" >
+
   <RectAnimation 
     frame_count="6" 
     frame_height="19" 
@@ -10,8 +12,10 @@
     frames_per_row="8" 
     name="stand" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="20" 
@@ -21,8 +25,10 @@
     name="walk" 
     pos_x="0" 
     pos_y="21" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="20" 
@@ -32,8 +38,10 @@
     name="run" 
     pos_x="0" 
     pos_y="41" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="20" 
@@ -43,8 +51,10 @@
     name="burn" 
     pos_x="0" 
     pos_y="41" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="3" 
     frame_height="20" 
@@ -55,8 +65,10 @@
     name="jump_up" 
     pos_x="0" 
     pos_y="61" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="2" 
     frame_height="20" 
@@ -67,8 +79,10 @@
     name="jump_fall" 
     pos_x="0" 
     pos_y="81" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="3" 
     frame_height="20" 
@@ -79,8 +93,10 @@
     name="land" 
     pos_x="0" 
     pos_y="101" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="4" 
     frame_height="20" 
@@ -91,8 +107,10 @@
     name="attack" 
     pos_x="0" 
     pos_y="121" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="4" 
     frame_height="20" 
@@ -103,8 +121,10 @@
     name="hurt" 
     pos_x="0" 
     pos_y="141" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="1" 
     frame_height="19" 
@@ -113,8 +133,10 @@
     frames_per_row="8" 
     name="knockback" 
     pos_x="0" 
-    pos_y="161" >
-  </RectAnimation>
+    pos_y="161" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="3" 
     frame_height="19" 
@@ -124,8 +146,10 @@
     loop="0" 
     name="lower_head" 
     pos_x="0" 
-    pos_y="181" >
-  </RectAnimation>
+    pos_y="181" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="4" 
     frame_height="19" 
@@ -134,8 +158,10 @@
     frames_per_row="8" 
     name="eat" 
     pos_x="0" 
-    pos_y="201" >
-  </RectAnimation>
+    pos_y="201" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="3" 
     frame_height="19" 
@@ -145,8 +171,10 @@
     loop="0" 
     name="raise_head" 
     pos_x="0" 
-    pos_y="221" >
-  </RectAnimation>
+    pos_y="221" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="5" 
     frame_height="19" 
@@ -156,8 +184,10 @@
     loop="0" 
     name="alert" 
     pos_x="0" 
-    pos_y="241" >
-  </RectAnimation>
+    pos_y="241" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="20" 
@@ -167,8 +197,10 @@
     name="swim_idle" 
     pos_x="0" 
     pos_y="261" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="20" 
@@ -178,8 +210,10 @@
     name="swim_move" 
     pos_x="0" 
     pos_y="261" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="3" 
     frame_height="19" 
@@ -189,14 +223,19 @@
     loop="0" 
     name="jump_prepare" 
     pos_x="0" 
-    pos_y="281" >
+    pos_y="281" >
+
     <Event 
       check_physics_material="0" 
       frame="3" 
       max_distance="500" 
       name="jump_start" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
-</Sprite>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
+</Sprite>
+

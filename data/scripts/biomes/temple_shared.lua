@@ -1,10 +1,70 @@
 
--- return "0", "0" -> shop, perks
-function temple_should_we_spawn_checkers()
+function temple_pos_to_id( pos_x, pos_y )
+	local h = math.floor( pos_y / 512 )
+	local w = math.floor( ( pos_x + (32*512) ) / (64*512) )
+
+	local result = tostring(w) .. "_" .. tostring(h)
+	return result
+end
+
+function temple_set_active_flag( pos_x, pos_y, flag )
+	local workshop_aabb = EntityGetClosestWithTag( pos_x, pos_y, "workshop_aabb")
+	if workshop_aabb ~= 0 then
+		local x,y = EntityGetTransform( workshop_aabb )
+		local key = "TEMPLE_ACTIVE_" .. tostring(math.floor(x)) .. "_" .. tostring(math.floor(y))
+		GlobalsSetValue( key, flag )
+	end
+end
+
+function temple_spawn_guardian( pos_x, pos_y )
+
+	if( GlobalsGetValue( "TEMPLE_PEACE_WITH_GODS" ) == "1" ) then
+		-- peace_with_gods perk
+		return
+	end
+
+	local guard_spawn_id = EntityGetClosestWithTag( pos_x, pos_y, "guardian_spawn_pos" )
+	local guard_x = pos_x
+	local guard_y = pos_y
+
+	-- if distance is too far
+	if( guard_spawn_id ~= 0  ) then
+		guard_x, guard_y = EntityGetTransform( guard_spawn_id )
+		
+		--[[local distance = math.abs( guard_x - spawn_pos_x ) + math.abs( guard_y - spawn_pos_y )
+		if( distance < 640 ) then
+			guard_x = spawn_pos_x
+			guard_y = spawn_pos_y
+		end
+		]]--
+
+		-- kill the spawn target, so that it doesn't come and haunt us in subsequent spawns
+		EntityKill( guard_spawn_id )
+	end
+
+	EntityLoad( "data/entities/misc/spawn_necromancer_shop.xml", guard_x, guard_y )
+	-- this is now handled by game_music.cpp
+	--[[if BiomeMapGetName() == "$biome_holymountain" then
+		GameTriggerMusicFadeOutAndDequeueAll( 4.0 )
+		GameTriggerMusicEvent( "music/temple/necromancer_shop", true, pos_x, pos_y )
+	end]]--
+end
+
+-- return bool
+function temple_should_we_spawn_checkers( pos_x, pos_y )
 	if( MagicNumbersGetValue( "DESIGN_TEMPLE_CHECK_FOR_LEAKS") == "0" ) then
 		return false
 	end
-	if( GlobalsGetValue( "TEMPLE_LEAKED" ) == "1" ) then
+
+	local leak_name = "TEMPLE_LEAKED_" .. temple_pos_to_id( pos_x, pos_y )
+
+	if( GlobalsGetValue( leak_name ) == "1" ) then
+		return false
+	end
+
+	local collapse_name = "TEMPLE_COLLAPSED_" .. temple_pos_to_id( pos_x, pos_y )
+
+	if( GlobalsGetValue( collapse_name ) == "1" ) then
 		return false
 	end
 	return true
@@ -18,51 +78,9 @@ function temple_random( x, y )
 		return "1", "1"
 	end
 
-	if( GlobalsGetValue( "TEMPLE_LEAKED" ) == "1" ) then
-		return "1", "0"
-	end
+	--if( GlobalsGetValue( "TEMPLE_LEAKED" ) == "1" ) then
+	--	return "1", "0"
+	--end
 
 	return "1", "1"
 end
-
---[[
-function temple_random( x, y )
-	if( MagicNumbersGetValue( "DESIGN_RANDOMIZE_TEMPLE_CONTENTS") == "0" ) then
-		return "1", "1"
-	end
-	-- 1 - 6 
-	-- -> 6 = both
-	y = y / 1024
-	y = math.floor(y)
-	x = 1234567
-	x = math.floor(x)
-
-	SetRandomSeed( x, y )
-	local ran = Random(1, 6)
-	local spawn_shop = GlobalsGetValue( "temple_spawn_shop_" .. tostring( y ) )
-	local spawn_perks = GlobalsGetValue( "temple_spawn_perks_" .. tostring( y ) )
-	
-	if( spawn_shop == "" ) then
-		if( ran <= 3 or ran == 6 ) then 
-			spawn_shop = "1"
-		else
-			spawn_shop = "0"
-		end
-		GlobalsSetValue( "temple_spawn_shop_" .. tostring( y ), spawn_shop )
-	end
-
-	if( spawn_perks == "" ) then
-		if( ran > 3 ) then 
-			spawn_perks = "1"
-		else
-			spawn_perks = "0"
-		end
-		GlobalsSetValue( "temple_spawn_perks_" .. tostring( y ), spawn_perks )
-	end
-
-	-- print( "temple_shop_" .. tostring( y ) .. GlobalsGetValue( "temple_spawn_shop_" .. tostring( y ) ) )
- 	-- print( "temple_perks" .. tostring( y ) .. GlobalsGetValue( "temple_spawn_perks_" .. tostring( y ) ) )
-
- 	return GlobalsGetValue( "temple_spawn_shop_" .. tostring( y ) ), GlobalsGetValue( "temple_spawn_perks_" .. tostring( y ) )
-end
-]]--

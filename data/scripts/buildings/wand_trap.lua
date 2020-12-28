@@ -21,7 +21,7 @@ function trigger_wand_pickup_trap( x, y )
 	-- print( x )
 	-- print( y )
 	local entities = EntityGetWithTag( "wand_trap" )
-	if( entities == nil ) then
+	if( #entities == 0 ) then
 		return
 	end
 

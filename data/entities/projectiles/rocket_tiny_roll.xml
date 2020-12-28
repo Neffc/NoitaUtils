@@ -56,9 +56,9 @@
   </SpriteComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
-      event_root="projectiles/rocket">
-  </AudioComponent>
+		file="data/audio/Desktop/projectiles.bank"
+		event_root="projectiles/rocket_tiny_roll" >
+	</AudioComponent>
 
 </Entity>
 

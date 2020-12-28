@@ -20,7 +20,7 @@
 	<!-- gfx -->
 	
 	<UIInfoComponent
-		name="Crystal vault"
+		name="$teleport_end_wall"
 		>
 	</UIInfoComponent>
 

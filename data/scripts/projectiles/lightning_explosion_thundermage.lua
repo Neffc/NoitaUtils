@@ -1,4 +1,4 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 local entity_id    = GetUpdatedEntityID()
 local pos_x, pos_y = EntityGetTransform( entity_id )
@@ -7,9 +7,9 @@ local pos_x, pos_y = EntityGetTransform( entity_id )
 if script_wait_frames( entity_id, 10 ) then  return  end
 
 local how_many = 8
-local angle_inc = ( 2 * 3.14159 ) / how_many + math.rad(math.random(0,30) - math.random(0,30))
+local angle_inc = ( 2 * 3.14159 ) / how_many + math.rad(ProceduralRandomf( pos_x, pos_y, 30) - ProceduralRandomf( pos_x + 2.5532, pos_y + 59.8, 30))
 local theta = 0
-local length = 5000
+local length = 4000
 
 for i=1,how_many do
 	local vel_x = math.cos( theta ) * length

@@ -63,9 +63,9 @@
 		_enabled="1" 
 		radius="96"
 		fade_out_time="1.5" 
-		r=230
-		g=120
-		b=230
+		r="230"
+		g="120"
+		b="230"
 		offset_y="-6"
 		>
 	</LightComponent>

@@ -1,14 +1,14 @@
-<Entity _tags="rocket">
+<Entity _tags="rocket_tier_2">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 
-			image_file="data/ui_gfx/gun_actions/rocket.png" 
+			image_file="data/ui_gfx/gun_actions/rocket_tier_2.png" 
 			>
 		</SpriteComponent>
 		
 		<ItemActionComponent 
 			_tags="enabled_in_world"
-			action_id="ROCKET" >
+			action_id="ROCKET_TIER_2" >
 		</ItemActionComponent>
 	</Base>
 

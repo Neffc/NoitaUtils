@@ -30,4 +30,7 @@
 		<Base file="data/entities/items/orbs/orb_particles_base.xml" />
 	</Entity>
 
+	<LuaComponent 
+		script_item_picked_up="data/scripts/items/orb_07_trap.lua" >
+	</LuaComponent>
 </Entity>

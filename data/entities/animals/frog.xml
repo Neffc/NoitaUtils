@@ -24,7 +24,7 @@
 		<DamageModelComponent 
             hp="0.3"
             materials_create_messages="1"
-            ragdoll_material="meat"
+            ragdoll_material="meat_frog"
             ragdoll_filenames_file="data/ragdolls/frog/filenames.txt" >
 		</DamageModelComponent>
 
@@ -91,7 +91,7 @@
 	</Base>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals/frog" >
 	</AudioComponent>
 

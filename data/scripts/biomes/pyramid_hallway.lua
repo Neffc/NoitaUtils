@@ -1,7 +1,7 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 RegisterSpawnFunction( 0xff808000, "spawn_statues" )
@@ -17,7 +17,10 @@ RegisterSpawnFunction( 0xff00AC33, "load_pixel_scene3" )
 RegisterSpawnFunction( 0xffFFCD2A, "spawn_scorpions" )
 
 function init( x, y, w, h )
-	LoadPixelScene( "data/biome_impl/pyramid_hallway.png", "data/biome_impl/pyramid_hallway_visual.png", x, y, "data/biome_impl/pyramid_hallway_background.png", true )
+	LoadPixelScene( "data/biome_impl/pyramid/hallway.png", "data/biome_impl/pyramid/hallway_visual.png", x, y, "", true )
+	-- Fill in the background
+	LoadBackgroundSprite("data/weather_gfx/background_pyramid.png", x, y)
+	LoadBackgroundSprite("data/weather_gfx/background_pyramid.png", x, y + 256)
 end
 
 g_small_enemies =
@@ -141,7 +144,7 @@ g_pixel_scene_02 =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/crypt_stairs_right.png",
+		material_file 	= "data/biome_impl/crypt/stairs_right.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
@@ -153,7 +156,7 @@ g_pixel_scene_04 =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/crypt_stairs_left.png",
+		material_file 	= "data/biome_impl/crypt/stairs_left.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
@@ -192,7 +195,7 @@ g_lamp2 =
 		prob   		= 1.0,
 		min_count	= 1,
 		max_count	= 1,    
-		entity 	= "data/entities/props/physics_chain_torch_blue.xml"
+		entity 	= "data/entities/props/physics/chain_torch_blue.xml"
 	},
 }
 
@@ -356,22 +359,15 @@ g_pixel_scene_01 =
 	total_prob = 0,
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_plateroom.png",
-		visual_file		= "",
-		background_file	= "data/biome_impl/crypt_plateroom_background.png",
-		is_unique		= 0
-	},
-	{
-		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_cathedral.png",
+		material_file 	= "data/biome_impl/crypt/cathedral.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_mining.png",
-		visual_file		= "data/biome_impl/crypt_mining_visual.png",
+		material_file 	= "data/biome_impl/crypt/mining.png",
+		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
@@ -382,21 +378,21 @@ g_pixel_scene_03 =
 	total_prob = 0,
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_lavaroom.png",
-		visual_file		= "data/biome_impl/crypt_lavaroom_visual.png",
+		material_file 	= "data/biome_impl/crypt/lavaroom.png",
+		visual_file		= "data/biome_impl/crypt/lavaroom_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_pit.png",
-		visual_file		= "data/biome_impl/crypt_pit_visual.png",
+		material_file 	= "data/biome_impl/crypt/pit.png",
+		visual_file		= "data/biome_impl/crypt/pit_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_symbolroom.png",
+		material_file 	= "data/biome_impl/crypt/symbolroom.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
@@ -451,7 +447,7 @@ g_ghostlamp =
 		prob   		= 1.0,
 		min_count	= 1,
 		max_count	= 1,    
-		entity 	= "data/entities/props/physics_chain_torch_ghostly.xml"
+		entity 	= "data/entities/props/physics/chain_torch_ghostly.xml"
 	},
 }
 
@@ -492,7 +488,8 @@ function spawn_lamp(x, y)
 end
 
 function spawn_lamp2(x, y)
-	spawn(g_lamp2,x-1,y+18,0,0)
+	--spawn(g_lamp2,x-1,y+18,0,0)
+	spawn(g_lamp2,x-1,y,0,0)
 end
 
 function spawn_props(x, y)

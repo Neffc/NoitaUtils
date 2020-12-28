@@ -62,7 +62,7 @@
 		</PathFindingComponent>
 
 		<GenomeDataComponent 
-			herd_id="orcs"
+			herd_id="slimes"
 			food_chain_rank="5"
 			is_predator="1" >
 		</GenomeDataComponent>
@@ -111,5 +111,10 @@
 		angular_range_deg="90"
 		>
 	</AIAttackComponent>
+	
+	<AudioComponent
+		file="data/audio/Desktop/animals.bank"
+		event_root="animals/maggot" >
+	</AudioComponent>
 </Entity>
 

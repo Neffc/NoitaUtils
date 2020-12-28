@@ -5,8 +5,9 @@
     <CellEaterComponent
 		eat_probability="90"
         radius="8"
+		ignored_material="rock_static_cursed"
 		>
-    </MagicConvertMaterialComponent>
+    </CellEaterComponent>
 	
 	<LifetimeComponent
 		lifetime="200"

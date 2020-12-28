@@ -109,7 +109,7 @@
 	</SpriteComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals/blob" >
 	</AudioComponent>
 

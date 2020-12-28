@@ -2,8 +2,7 @@
   <Topology 
     name="_EMPTY_"
     background_image="data/weather_gfx/background_cave_02.png"
-    background_use_neighbor="1"
-
+    background_use_neighbor="0"
     lua_script="data/scripts/biomes/mountain/mountain_floating_island.lua"
     noise_type="SIN_CAPPED_SIMPLEX"
     mGradientAddNoise="1" 
@@ -25,10 +24,6 @@
     mMultiplierGradient="0.871429" 
     mMultiplierPerlin="0.413"
     coarse_map_cell_count_always_zero="1"
-    color_correction_r="0.45"
-    color_correction_g="0.65"
-    color_correction_b="1.0"
-    color_correction_lerp="0.8"
     skip_edge_textures="1"
     >
   </Topology>

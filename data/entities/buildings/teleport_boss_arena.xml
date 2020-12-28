@@ -1,14 +1,14 @@
 <Entity>
-	<Base file="data/entities/buildings/teleport.xml">
+	<Base file="data/entities/buildings/teleport_liquid_powered.xml">
 		<UIInfoComponent
-			name="Portal deeper"
+			name="$teleport_deeper"
 			>
 		</UIInfoComponent>
 		
 		<TeleportComponent
 			target_x_is_absolute_position="1"
-			target.x="1911" 
-			target.y="250" 
+			target.x="1891" 
+			target.y="280" 
 		></TeleportComponent>
 	</Base>
 

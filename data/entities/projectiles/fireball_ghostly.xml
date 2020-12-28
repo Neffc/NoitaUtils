@@ -62,7 +62,9 @@
       sparks_count_min="50"
       light_fade_time="0.8" 
       stains_enabled="1" 
-      stains_image="data/temp/explosion_stain.png" >
+      stains_image="data/temp/explosion_stain.png"
+	  audio_event_name="explosions/fireball"
+	  >
     </config_explosion>
   </ProjectileComponent>
   
@@ -192,9 +194,15 @@
   </LightComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
-      event_root="projectiles/rocket">
+      file="data/audio/Desktop/projectiles.bank"
+      event_root="projectiles/fireball">
   </AudioComponent>
+  
+  <VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/fireball_ghostly.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

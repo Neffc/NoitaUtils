@@ -17,6 +17,7 @@
 			sense_creatures="1"
 			attack_ranged_enabled="0"
 			attack_melee_enabled="0"
+			attack_ranged_laser_sight_beam_kind="1"
 			can_fly="0"  
 			aggressiveness_min="1"
 			aggressiveness_max="80"
@@ -185,12 +186,12 @@
 	</AIAttackComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals/tank" >
 	</AudioComponent>
 
 	<AudioLoopComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/tank/movement_loop"
 		set_speed_parameter_only_based_on_x_movement="1"
 		set_speed_parameter="1"
@@ -199,10 +200,18 @@
 
 	<AudioLoopComponent
 		_tags="turret_rotate_sound"
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/tank/turret_rotate_loop"
 		volume_autofade_speed="0.1" >
 	</AudioLoopComponent>
+	
+	<Entity>
+	    <GameEffectComponent 
+	        effect="PROTECTION_FREEZE"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
 
 </Entity>
 

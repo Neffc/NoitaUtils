@@ -1,7 +1,9 @@
 <Sprite 
   filename="data/enemies_gfx/maggot.png" 
   offset_x="14" 
-  offset_y="20" >
+  offset_y="20"
+  default_animation="stand" >
+
   <RectAnimation 
     frame_count="7" 
     frame_height="24" 
@@ -10,8 +12,10 @@
     frames_per_row="8" 
     name="stand" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="25" 
@@ -21,24 +25,30 @@
     name="walk" 
     pos_x="0" 
     pos_y="26" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="1" 
       frame="0" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="3" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="25" 
@@ -48,24 +58,30 @@
     name="run" 
     pos_x="0" 
     pos_y="26" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="1" 
       frame="0" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="3" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="25" 
@@ -75,24 +91,30 @@
     name="burn" 
     pos_x="0" 
     pos_y="26" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="1" 
       frame="0" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="3" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="8" 
     frame_height="25" 
@@ -103,16 +125,20 @@
     name="attack_ranged" 
     pos_x="0" 
     pos_y="51" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="5" 
       max_distance="500" 
       name="spit_slime" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="8" 
     frame_height="25" 
@@ -123,14 +149,19 @@
     name="attack" 
     pos_x="0" 
     pos_y="51" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="5" 
       max_distance="500" 
       name="bite" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
-</Sprite>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
+</Sprite>
+

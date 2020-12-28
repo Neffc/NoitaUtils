@@ -7,7 +7,7 @@
 	</SimplePhysicsComponent>
 	
 	<UIInfoComponent
-		name="Health pickup"
+		name="$item_heart_fullhp"
 		>
 	</UIInfoComponent>
 
@@ -23,8 +23,9 @@
 	</HitboxComponent>
 
 	<ItemComponent
-		item_name="Full health regeneration"
+		item_name="$item_heart_fullhp"
 		play_spinning_animation="0"
+		stats_count_as_item_pick_up="0"
    		play_pick_sound="0"
 		auto_pickup="1" >
 	</ItemComponent>

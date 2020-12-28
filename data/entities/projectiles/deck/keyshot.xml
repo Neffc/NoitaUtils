@@ -1,4 +1,4 @@
-<Entity tags="hittable" >
+<Entity tags="hittable" tags="projectile_player" >
 
 	<Base file="data/entities/base_projectile.xml" >
 		<VelocityComponent
@@ -117,5 +117,11 @@
 	_enabled="1"
 	>
   </SpriteParticleEmitterComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/keyshot.xml"
+		>
+	</VariableStorageComponent>
 </Entity>
 

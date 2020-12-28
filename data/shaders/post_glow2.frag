@@ -31,7 +31,7 @@ void main()
 	vec2 tex_coord_prev_frame = gl_TexCoord[0].zw;
 
 	// get a new sample
-	vec4 new_tap = texture2D( tex_glow_source, tex_coord_source );
+	vec4 new_tap = texture2D( tex_glow_source, tex_coord_source ) * 4.0; // colors are remapped to "HDR" range in cell blitting. gfx_glow in CellData can go up to 1000, 255 represents old default brightness
 	new_tap += texture2D( tex_glow_source_particles, tex_coord_source_inv ) * 2.5;
 
 	// slightly darken accumulated samples near the edge to reduce after image

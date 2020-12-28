@@ -155,13 +155,18 @@
 	
 	<LuaComponent
 	    execute_on_removed="0"
-	    execute_every_n_frame="99999999"
+	    execute_every_n_frame="-1"
 		script_collision_trigger_hit="data/scripts/animals/statue_physics_shot.lua"
 	    remove_after_executed="0">
   	</LuaComponent>
+	
+	<AudioComponent
+		file="data/audio/Desktop/animals.bank"
+		event_root="animals/statue_physics" >
+	</AudioComponent>
 
 	<AudioLoopComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/magical/movement_loop"
 		set_speed_parameter="1"
 		auto_play="1">

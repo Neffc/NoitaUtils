@@ -28,7 +28,7 @@
 	<Base file="data/entities/verlet_chains/vines/vine_parts/vine_verlet_a_6.xml" />
 
 	<AudioComponent
-		file="data/audio/Desktop/materials.snd"
+		file="data/audio/Desktop/materials.bank"
 		event_root="collision/vine" >
 	</AudioComponent>
   

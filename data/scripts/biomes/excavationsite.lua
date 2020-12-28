@@ -1,12 +1,12 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 -- The level of action ids that are spawned from the chests
 CHEST_LEVEL = 1
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/biome_modifiers.lua")
 dofile( "data/scripts/items/generate_shop_item.lua" )
 
 RegisterSpawnFunction( 0xff0000ff, "spawn_nest" )
-RegisterSpawnFunction( 0xff705555, "spawn_ladder" )
 RegisterSpawnFunction( 0xffFF50FF, "spawn_hanger" )
 RegisterSpawnFunction( 0xff00AC64, "load_pixel_scene4" )
 RegisterSpawnFunction( 0xff00ac6e, "load_pixel_scene4_alt" )
@@ -15,12 +15,21 @@ RegisterSpawnFunction( 0xff0150FF, "spawn_wheel_small" )
 RegisterSpawnFunction( 0xff0250FF, "spawn_wheel_tiny" )
 RegisterSpawnFunction( 0xff2d2eac, "spawn_rock" )
 RegisterSpawnFunction( 0xff0A50FF, "spawn_physicsstructure" )
+RegisterSpawnFunction( 0xffc999ff, "spawn_hanging_prop" )
 RegisterSpawnFunction( 0xff7868ff, "load_puzzleroom" )
 RegisterSpawnFunction( 0xff70d79e, "load_gunpowderpool_01" )
 RegisterSpawnFunction( 0xff70d79f, "load_gunpowderpool_02" )
 RegisterSpawnFunction( 0xff70d7a0, "load_gunpowderpool_03" )
 RegisterSpawnFunction( 0xff70d7a1, "load_gunpowderpool_04" )
 RegisterSpawnFunction( 0xff33934c, "spawn_shopitem" )
+RegisterSpawnFunction( 0xffb09016, "spawn_meditation_cube" )
+
+RegisterSpawnFunction( 0xffb1ff99, "spawn_tower_short" )
+RegisterSpawnFunction( 0xff5c8550, "spawn_tower_tall" )
+RegisterSpawnFunction( 0xff227fff, "spawn_beam_low" )
+RegisterSpawnFunction( 0xff8228ff, "spawn_beam_low_flipped" )
+RegisterSpawnFunction( 0xff0098ba, "spawn_beam_steep" )
+RegisterSpawnFunction( 0xff7600a9, "spawn_beam_steep_flipped" )
 
 ------------ small enemies -------------------------------
 
@@ -29,7 +38,7 @@ g_small_enemies =
 	total_prob = 0,
 	-- this is air, so nothing spawns at 0.6
 	{
-		prob   		= 0.5,
+		prob   		= 0.55,
 		min_count	= 0,
 		max_count	= 0,    
 		entity 	= ""
@@ -76,6 +85,12 @@ g_small_enemies =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/bigfirebug.xml"
+	},
+	{
+		prob   		= 0.2,
+		min_count	= 1,
+		max_count	= 2,  
+		entity 	= "data/entities/animals/goblin_bomb.xml"
 	},
 	-- Demo case for Arvi
 	--[[
@@ -162,11 +177,13 @@ g_big_enemies =
 		max_count	= 2,    
 		entity 	= "data/entities/animals/miner_santa.xml",
 		spawn_check = function() 
-			if( os.date("%d%m") == "2412" ) then
-				return true 
-			else 
+			local year, month, day = GameGetDateAndTimeLocal()
+			
+			if ( month == 12 ) and ( day >= 24 ) and ( day <= 26 ) then
+				return true
+			else
 				return false 
-			end 
+			end
 		end
 	},
 	{
@@ -203,7 +220,7 @@ g_lamp =
 		prob   		= 0.7,
 		min_count	= 1,
 		max_count	= 1,    
-		entity 	= "data/entities/props/physics_lantern_small.xml"
+		entity 	= "data/entities/props/physics/lantern_small.xml"
 	},
 }
 
@@ -257,11 +274,13 @@ g_unique_enemy2 =
 		max_count	= 1,    
 		entity 	= "data/entities/animals/miner_santa.xml",
 		spawn_check = function() 
-			if( os.date("%d%m") == "2412" ) then
-				return true 
-			else 
+			local year, month, day = GameGetDateAndTimeLocal()
+			
+			if ( month == 12 ) and ( day >= 24 ) and ( day <= 26 ) then
+				return true
+			else
 				return false 
-			end 
+			end
 		end
 
 	},
@@ -323,7 +342,12 @@ g_items =
 		max_count	= 1,    
 		entity 	= "data/entities/items/wand_level_02.xml"
 	},
-
+	{
+		prob   		= 2,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/items/wand_level_02_better.xml"
+	},
 }
 
 --- barrels ---
@@ -332,7 +356,7 @@ g_props =
 {
 	total_prob = 0,
 	{
-		prob   		= 0.2,
+		prob   		= 1.0,
 		min_count	= 0,
 		max_count	= 0,
 		offset_y 	= 0,    
@@ -349,8 +373,8 @@ g_props =
 		prob   		= 0.25,
 		min_count	= 1,
 		max_count	= 1,
-		offset_y 	= -5,    
-		entity 	= "data/entities/props/physics_minecart.xml"
+		offset_y 	= -3,
+		entity 	= "data/entities/props/physics/minecart.xml"
 	},
 	{
 		prob   		= 0.25,
@@ -377,7 +401,7 @@ g_props =
 		prob   		= 0.03,
 		min_count	= 1,
 		max_count	= 1,
-		offset_y 	= 0,    
+		offset_y 	= -8,    
 		entity 	= "data/entities/props/physics_seamine.xml"
 	},
 }
@@ -396,8 +420,8 @@ g_props2 =
 		prob   		= 0.2,
 		min_count	= 1,
 		max_count	= 1,    
-		offset_y 	= -5,
-		entity 	= "data/entities/props/physics_minecart.xml"
+		offset_y 	= -3,
+		entity 	= "data/entities/props/physics/minecart.xml"
 	},
 	{
 		prob   		= 0.5,
@@ -479,36 +503,23 @@ g_cranes =
 	},
 }
 
-g_pixel_scene_02 =
+g_mechanism_background =
 {
 	total_prob = 0,
 	{
-		prob   			= 0.5,
-		material_file 	= "",
-		visual_file		= "",
-		background_file	= "",
-		is_unique		= 0
+		prob   			= 1.0,
+		sprite_file 	= "data/biome_impl/excavationsite/mechanism_background.png",
+		z_index			= 50,
 	},
 	{
-		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_mechanism.png",
-		visual_file		= "",
-		background_file	= "data/biome_impl/excavationsite_mechanism_background.png",
-		is_unique		= 0
+		prob   			= 1.0,
+		sprite_file 	= "data/biome_impl/excavationsite/mechanism_background2.png",
+		z_index			= 50,
 	},
 	{
-		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_mechanism.png",
-		visual_file		= "",
-		background_file	= "data/biome_impl/excavationsite_mechanism_background2.png",
-		is_unique		= 0
-	},
-	{
-		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_mechanism.png",
-		visual_file		= "",
-		background_file	= "data/biome_impl/excavationsite_mechanism_background3.png",
-		is_unique		= 0
+		prob   			= 1.0,
+		sprite_file 	= "data/biome_impl/excavationsite/mechanism_background3.png",
+		z_index			= 50,
 	},
 }
 
@@ -517,70 +528,70 @@ g_pixel_scene_04 =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_machine_1.png",
-		visual_file		= "data/biome_impl/excavationsite_machine_1_visual.png",
-		background_file	= "data/biome_impl/excavationsite_machine_1_background.png",
+		material_file 	= "data/biome_impl/excavationsite/machine_1.png",
+		visual_file		= "data/biome_impl/excavationsite/machine_1_visual.png",
+		background_file	= "data/biome_impl/excavationsite/machine_1_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_machine_2.png",
-		visual_file		= "data/biome_impl/excavationsite_machine_2_visual.png",
-		background_file	= "data/biome_impl/excavationsite_machine_2_background.png",
+		material_file 	= "data/biome_impl/excavationsite/machine_2.png",
+		visual_file		= "data/biome_impl/excavationsite/machine_2_visual.png",
+		background_file	= "data/biome_impl/excavationsite/machine_2_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_machine_3b.png",
-		visual_file		= "data/biome_impl/excavationsite_machine_3b_visual.png",
-		background_file	= "data/biome_impl/excavationsite_machine_3b_background.png",
+		material_file 	= "data/biome_impl/excavationsite/machine_3b.png",
+		visual_file		= "data/biome_impl/excavationsite/machine_3b_visual.png",
+		background_file	= "data/biome_impl/excavationsite/machine_3b_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_machine_4.png",
-		visual_file		= "data/biome_impl/excavationsite_machine_4_visual.png",
-		background_file	= "data/biome_impl/excavationsite_machine_4_background.png",
+		material_file 	= "data/biome_impl/excavationsite/machine_4.png",
+		visual_file		= "data/biome_impl/excavationsite/machine_4_visual.png",
+		background_file	= "data/biome_impl/excavationsite/machine_4_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_machine_5.png",
-		visual_file		= "data/biome_impl/excavationsite_machine_5_visual.png",
-		background_file	= "data/biome_impl/excavationsite_machine_5_background.png",
+		material_file 	= "data/biome_impl/excavationsite/machine_5.png",
+		visual_file		= "data/biome_impl/excavationsite/machine_5_visual.png",
+		background_file	= "data/biome_impl/excavationsite/machine_5_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_machine_6.png",
-		visual_file		= "data/biome_impl/excavationsite_machine_6_visual.png",
+		material_file 	= "data/biome_impl/excavationsite/machine_6.png",
+		visual_file		= "data/biome_impl/excavationsite/machine_6_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.3,
-		material_file 	= "data/biome_impl/excavationsite_machine_7.png",
-		visual_file		= "data/biome_impl/excavationsite_machine_5_visual.png",
-		background_file	= "data/biome_impl/excavationsite_machine_5_background.png",
+		material_file 	= "data/biome_impl/excavationsite/machine_7.png",
+		visual_file		= "data/biome_impl/excavationsite/machine_5_visual.png",
+		background_file	= "data/biome_impl/excavationsite/machine_5_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 3,
-		material_file 	= "data/biome_impl/excavationsite_shop.png",
-		visual_file		= "data/biome_impl/excavationsite_shop_visual.png",
+		material_file 	= "data/biome_impl/excavationsite/shop.png",
+		visual_file		= "data/biome_impl/excavationsite/shop_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.8,
-		material_file 	= "data/biome_impl/excavationsite_oiltank_1.png",
-		visual_file		= "data/biome_impl/excavationsite_oiltank_1_visual.png",
+		material_file 	= "data/biome_impl/excavationsite/oiltank_1.png",
+		visual_file		= "data/biome_impl/excavationsite/oiltank_1_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.8,
-		material_file 	= "data/biome_impl/excavationsite_lake.png",
+		material_file 	= "data/biome_impl/excavationsite/lake.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
@@ -592,63 +603,63 @@ g_pixel_scene_04_alt =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_machine_1_alt.png",
-		visual_file		= "data/biome_impl/excavationsite_machine_1_visual.png",
-		background_file	= "data/biome_impl/excavationsite_machine_1_background.png",
+		material_file 	= "data/biome_impl/excavationsite/machine_1_alt.png",
+		visual_file		= "data/biome_impl/excavationsite/machine_1_visual.png",
+		background_file	= "data/biome_impl/excavationsite/machine_1_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_machine_2_alt.png",
-		visual_file		= "data/biome_impl/excavationsite_machine_2_visual.png",
-		background_file	= "data/biome_impl/excavationsite_machine_2_background.png",
+		material_file 	= "data/biome_impl/excavationsite/machine_2_alt.png",
+		visual_file		= "data/biome_impl/excavationsite/machine_2_visual.png",
+		background_file	= "data/biome_impl/excavationsite/machine_2_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_machine_3b_alt.png",
-		visual_file		= "data/biome_impl/excavationsite_machine_3b_visual.png",
-		background_file	= "data/biome_impl/excavationsite_machine_3b_background.png",
+		material_file 	= "data/biome_impl/excavationsite/machine_3b_alt.png",
+		visual_file		= "data/biome_impl/excavationsite/machine_3b_visual.png",
+		background_file	= "data/biome_impl/excavationsite/machine_3b_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_machine_4_alt.png",
-		visual_file		= "data/biome_impl/excavationsite_machine_4_visual.png",
-		background_file	= "data/biome_impl/excavationsite_machine_4_background.png",
+		material_file 	= "data/biome_impl/excavationsite/machine_4_alt.png",
+		visual_file		= "data/biome_impl/excavationsite/machine_4_visual.png",
+		background_file	= "data/biome_impl/excavationsite/machine_4_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_machine_5_alt.png",
-		visual_file		= "data/biome_impl/excavationsite_machine_5_visual.png",
-		background_file	= "data/biome_impl/excavationsite_machine_5_background.png",
+		material_file 	= "data/biome_impl/excavationsite/machine_5_alt.png",
+		visual_file		= "data/biome_impl/excavationsite/machine_5_visual.png",
+		background_file	= "data/biome_impl/excavationsite/machine_5_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/excavationsite_machine_6_alt.png",
-		visual_file		= "data/biome_impl/excavationsite_machine_6_visual.png",
+		material_file 	= "data/biome_impl/excavationsite/machine_6_alt.png",
+		visual_file		= "data/biome_impl/excavationsite/machine_6_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.3,
-		material_file 	= "data/biome_impl/excavationsite_machine_7_alt.png",
-		visual_file		= "data/biome_impl/excavationsite_machine_5_visual.png",
-		background_file	= "data/biome_impl/excavationsite_machine_5_background.png",
+		material_file 	= "data/biome_impl/excavationsite/machine_7_alt.png",
+		visual_file		= "data/biome_impl/excavationsite/machine_5_visual.png",
+		background_file	= "data/biome_impl/excavationsite/machine_5_background.png",
 		is_unique		= 0
 	},
 	{
 		prob   			= 3,
-		material_file 	= "data/biome_impl/excavationsite_shop_alt.png",
-		visual_file		= "data/biome_impl/excavationsite_shop_visual.png",
+		material_file 	= "data/biome_impl/excavationsite/shop_alt.png",
+		visual_file		= "data/biome_impl/excavationsite/shop_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.8,
-		material_file 	= "data/biome_impl/excavationsite_lake_alt.png",
+		material_file 	= "data/biome_impl/excavationsite/lake_alt.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
@@ -660,22 +671,22 @@ g_puzzleroom =
 	total_prob = 0,
 	{
 		prob   			= 1.5,
-		material_file 	= "data/biome_impl/excavationsite_puzzleroom_01.png",
+		material_file 	= "data/biome_impl/excavationsite/puzzleroom_01.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.5,
-		material_file 	= "data/biome_impl/excavationsite_puzzleroom_02.png",
-		visual_file		= "data/biome_impl/excavationsite_puzzleroom_02_visual.png",
+		material_file 	= "data/biome_impl/excavationsite/puzzleroom_02.png",
+		visual_file		= "data/biome_impl/excavationsite/puzzleroom_02_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.5,
-		material_file 	= "data/biome_impl/excavationsite_puzzleroom_03.png",
-		visual_file		= "data/biome_impl/excavationsite_puzzleroom_03_visual.png",
+		material_file 	= "data/biome_impl/excavationsite/puzzleroom_03.png",
+		visual_file		= "data/biome_impl/excavationsite/puzzleroom_03_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
@@ -686,8 +697,8 @@ g_gunpowderpool_01 =
 	total_prob = 0,
 	{
 		prob   			= 1.5,
-		material_file 	= "data/biome_impl/excavationsite_gunpowderpool_01.png",
-		visual_file		= "data/biome_impl/excavationsite_gunpowderpool_01_visual.png",
+		material_file 	= "data/biome_impl/excavationsite/gunpowderpool_01.png",
+		visual_file		= "data/biome_impl/excavationsite/gunpowderpool_01_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
@@ -698,8 +709,8 @@ g_gunpowderpool_02 =
 	total_prob = 0,
 	{
 		prob   			= 1.5,
-		material_file 	= "data/biome_impl/excavationsite_gunpowderpool_02.png",
-		visual_file		= "data/biome_impl/excavationsite_gunpowderpool_02_visual.png",
+		material_file 	= "data/biome_impl/excavationsite/gunpowderpool_02.png",
+		visual_file		= "data/biome_impl/excavationsite/gunpowderpool_02_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
@@ -710,8 +721,8 @@ g_gunpowderpool_03 =
 	total_prob = 0,
 	{
 		prob   			= 1.5,
-		material_file 	= "data/biome_impl/excavationsite_gunpowderpool_03.png",
-		visual_file		= "data/biome_impl/excavationsite_gunpowderpool_03_visual.png",
+		material_file 	= "data/biome_impl/excavationsite/gunpowderpool_03.png",
+		visual_file		= "data/biome_impl/excavationsite/gunpowderpool_03_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
@@ -722,8 +733,8 @@ g_gunpowderpool_04 =
 	total_prob = 0,
 	{
 		prob   			= 1.5,
-		material_file 	= "data/biome_impl/excavationsite_gunpowderpool_04.png",
-		visual_file		= "data/biome_impl/excavationsite_gunpowderpool_04_visual.png",
+		material_file 	= "data/biome_impl/excavationsite/gunpowderpool_04.png",
+		visual_file		= "data/biome_impl/excavationsite/gunpowderpool_04_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
@@ -756,18 +767,6 @@ g_ghostlamp =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/props/physics_chain_torch_ghostly.xml"
-	},
-}
-
-g_ladder =
-{
-	total_prob = 0,
-	-- add skullflys after this step
-	{
-		prob   		= 1.0,
-		min_count	= 1,
-		max_count	= 1,  
-		entity 	= "data/entities/props/ladder_long.xml"
 	},
 }
 
@@ -841,6 +840,37 @@ g_rock =
 	},
 }
 
+
+g_hanging_props =
+{
+	total_prob = 0,
+	-- add skullflys after this step
+	{
+		prob   		= 1.0,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= ""
+	},
+	{
+		prob   		= 0.6,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/suspended_container.xml"
+	},
+	{
+		prob   		= 0.4,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/suspended_tank_radioactive.xml"
+	},
+	{
+		prob   		= 0.2,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/suspended_seamine.xml"
+	},
+}
+
 g_candles =
 {
 	total_prob = 0,
@@ -861,6 +891,61 @@ g_candles =
 		min_count	= 1,
 		max_count	= 1, 
 		entity 	= "data/entities/props/physics_candle_3.xml"
+	},
+}
+
+-- backgrounds
+g_tower_mids =
+{
+	total_prob = 0,
+	{
+		prob   			= 1.0,
+		sprite_file 	= "data/biome_impl/excavationsite/tower_mid_1.png",
+		z_index			= 40,
+	},
+	{
+		prob   			= 1.0,
+		sprite_file 	= "data/biome_impl/excavationsite/tower_mid_2.png",
+		z_index			= 40,
+	},
+	{
+		prob   			= 0.5,
+		sprite_file 	= "data/biome_impl/excavationsite/tower_mid_3.png",
+		z_index			= 40,
+	},
+	{
+		prob   			= 0.5,
+		sprite_file 	= "data/biome_impl/excavationsite/tower_mid_4.png",
+		z_index			= 40,
+	},
+}
+g_tower_tops =
+{
+	total_prob = 0,
+	{
+		prob   			= 1.0,
+		sprite_file 	= "data/biome_impl/excavationsite/tower_top_1.png",
+		z_index			= 20,
+	},
+	{
+		prob   			= 1.0,
+		sprite_file 	= "data/biome_impl/excavationsite/tower_top_2.png",
+		z_index			= 20,
+	},
+	{
+		prob   			= 1.0,
+		sprite_file 	= "data/biome_impl/excavationsite/tower_top_3.png",
+		z_index			= 20,
+	},
+	{
+		prob   			= 2.0,
+		sprite_file 	= "data/biome_impl/excavationsite/tower_top_4.png",
+		z_index			= 20,
+	},
+	{
+		prob   			= 1.0,
+		sprite_file 	= "data/biome_impl/excavationsite/tower_top_5.png",
+		z_index			= 20,
 	},
 }
 
@@ -934,7 +1019,7 @@ function load_pixel_scene( x, y )
 end
 
 function load_pixel_scene2( x, y )
-	load_random_pixel_scene( g_pixel_scene_02, x, y )
+	load_random_background_sprite( g_mechanism_background, x, y )
 end
 
 function load_pixel_scene4( x, y )
@@ -989,15 +1074,76 @@ function spawn_rock(x, y)
 	spawn(g_rock,x,y)
 end
 
+function spawn_hanging_prop(x, y)
+	spawn(g_hanging_props,x,y)
+end
+
 function spawn_nest(x, y)
 	spawn(g_nest,x+4,y+8,0,0)
 end
 
 function spawn_ladder(x, y)
-	--LoadPixelScene( "data/biome_impl/excavationsite_ladder_long.png", "data/biome_impl/excavationsite_ladder_long_visual.png", x-5, y-83, "", true )
-	spawn(g_ladder,x,y-80,0,0)
+	--spawn(g_ladder,x,y-80,0,0)
 end
 
 function spawn_shopitem( x, y )
 	generate_shop_item( x, y, false, 2 )
+end
+
+function spawn_meditation_cube( x, y )
+	SetRandomSeed( x, y )
+	local rnd = Random( 1, 100 )
+	if( rnd > 96 ) then
+		LoadPixelScene( "data/biome_impl/excavationsite/meditation_cube.png", "data/biome_impl/excavationsite/meditation_cube_visual.png", x-20, y-29, "", true )
+		EntityLoad( "data/entities/buildings/teleport_meditation_cube.xml", x, y-70 )
+	end
+end
+
+-- Background sprites
+function spawn_tower_short(x,y)
+	generate_tower(x,y,ProceduralRandomi(x-4,y+3,0,2))
+end
+
+function spawn_tower_tall(x,y)
+	generate_tower(x,y,ProceduralRandomi(x+7,y-1,2,3))
+end
+
+function generate_tower( x, y, height )
+	if ProceduralRandom(x,y) > 0.75 then
+		return
+	end
+
+	y = y + 15
+
+	-- bottom
+	LoadBackgroundSprite("data/biome_impl/excavationsite/tower_bottom_1.png", x, y, 40, true )
+	y = y - 60
+	
+	-- middle parts
+	for i=1, height do
+		if y > 1600 then -- build up when not near the top of the biome
+			load_random_background_sprite( g_tower_mids, x, y )
+			y = y - 60
+		end
+	end
+
+	-- top
+	x = x - 50
+	load_random_background_sprite( g_tower_tops, x, y )
+end
+
+function spawn_beam_low(x,y)
+	LoadBackgroundSprite("data/biome_impl/excavationsite/beam_low.png", x-60, y-35, 60, true )
+end
+
+function spawn_beam_low_flipped(x,y)
+	LoadBackgroundSprite("data/biome_impl/excavationsite/beam_low_flipped.png", x-60, y-35, 60, true)
+end
+
+function spawn_beam_steep(x,y)
+	LoadBackgroundSprite("data/biome_impl/excavationsite/beam_steep.png", x-35, y-60, 60, true)
+end
+
+function spawn_beam_steep_flipped(x,y)
+	LoadBackgroundSprite("data/biome_impl/excavationsite/beam_steep_flipped.png", x-35, y-60, 60, true)
 end

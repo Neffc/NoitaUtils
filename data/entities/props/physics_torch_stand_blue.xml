@@ -38,7 +38,9 @@
 		materials_damage="1" 
 		ragdoll_filenames_file="" 
 		ragdoll_offset_y="-10"
-		ragdoll_material="wood_prop" >
+		ragdoll_material="wood_prop" 
+		ui_report_damage="0"
+		>
 	</DamageModelComponent>
 
 	<Entity>

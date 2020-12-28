@@ -1,8 +1,12 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 8
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/director_helpers_design.lua")
---dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/director_helpers_design.lua")
+dofile( "data/scripts/items/generate_shop_item.lua" )
+--dofile_once("data/scripts/biome_scripts.lua")
+
+RegisterSpawnFunction( 0xff33934c, "spawn_shopitem" )
+RegisterSpawnFunction( 0xffbe704d, "spawn_specialshop" )
 
 ------------ small enemies -------------------------------
 
@@ -41,6 +45,24 @@ g_small_enemies =
 		max_count	= 1,    
 		entity 	= "data/entities/animals/the_end/worm_end.xml"
 	},
+	{
+		prob   		= 0.004,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wraith.xml"
+	},
+	{
+		prob   		= 0.001,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wraith_glowing.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 2,    
+		entity 	= "data/entities/animals/thunderskull.xml"
+	},
 }
 
 g_big_enemies =
@@ -54,6 +76,31 @@ g_big_enemies =
 		entity 	= ""
 	},
 }
+
+g_big_enemies_sky =
+{
+	total_prob = 0,
+	-- this is air, so nothing spawns at 0.6
+	{
+		prob   		= 1.8,
+		min_count	= 0,
+		max_count	= 0,    
+		entity 	= ""
+	},
+	{
+		prob   		= 0.03,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wraith.xml"
+	},
+	{
+		prob   		= 0.03,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wraith_glowing.xml"
+	},
+}
+
 
 ------------ items -------------------------------
 
@@ -173,22 +220,15 @@ g_pixel_scene_01 =
 	total_prob = 0,
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_plateroom.png",
-		visual_file		= "",
-		background_file	= "data/biome_impl/crypt_plateroom_background.png",
-		is_unique		= 0
-	},
-	{
-		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_cathedral.png",
+		material_file 	= "data/biome_impl/crypt/cathedral.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_mining.png",
-		visual_file		= "data/biome_impl/crypt_mining_visual.png",
+		material_file 	= "data/biome_impl/crypt/mining.png",
+		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
@@ -214,7 +254,11 @@ function spawn_small_enemies(x, y)
 end
 
 function spawn_big_enemies(x, y)
-	spawn(g_big_enemies,x,y)
+	if ( y > -7000 ) then
+		spawn(g_big_enemies,x,y)
+	else
+		spawn(g_big_enemies_sky,x,y)
+	end
 	-- spawn_hp_mult(g_big_enemies,x,y,0,0,16,"the_end")
 end
 
@@ -252,8 +296,105 @@ function load_pixel_scene( x, y )
 	load_random_pixel_scene( g_pixel_scene_01, x, y )
 end
 
+function load_pixel_scene3( x, y )
+end
+
+function load_pixel_scene4( x, y )
+end
+
 function spawn_apparition() end
 
 function spawn_potions( x, y ) end
 
 function spawn_heart( x, y ) end
+
+function spawn_moon( x, y )
+	EntityLoad( "data/entities/buildings/moon_altar.xml", x, y )
+end
+
+function spawn_wands()
+end
+
+function spawn_potion_altar()
+end
+
+function load_pixel_scene2( x, y )
+end
+
+function spawn_props2(x, y)
+end
+
+function spawn_props3(x, y)
+end
+
+function spawn_unique_enemy2(x, y)
+end
+
+function spawn_unique_enemy3(x, y)
+end
+
+function spawn_shopitem( x, y )
+	if ( y > -3000 ) and ( y < 1000 ) then
+		generate_shop_item( x, y, false, 0 )
+	else
+		SetRandomSeed( x, y )
+		
+		if ( Random( 1, 50 ) == 1 ) then
+			generate_shop_item( x, y, false, 10 )
+		end
+	end
+end
+
+function spawn_specialshop( x, y )
+	if ( y > -3000 ) and ( y < 1000 ) then
+		generate_shop_item( x, y, false, 0 )
+	else
+		generate_shop_item( x, y, false, 10 )
+	end
+end
+
+function spawn_stash(x,y)
+end
+
+function spawn_nest(x, y)
+end
+
+function spawn_altar_torch(x, y)
+end
+
+function spawn_chest(x, y)
+	SetRandomSeed( x, y )
+	local rnd = Random(1,100)
+	
+	if (rnd >= 70) then
+		EntityLoad( "data/entities/items/pickup/chest_random.xml", x, y)
+	elseif (rnd >= 85) then
+		EntityLoad( "data/entities/items/pickup/chest_random.xml", x, y)
+	end
+end
+
+function spawn_skulls(x, y) end
+
+function spawn_trapwand(x, y)
+end
+
+function spawn_bbqbox( x, y )
+end
+
+function load_structures( x, y )
+end
+
+function load_large_structures( x, y )
+end
+
+function load_i_structures( x, y )
+end
+
+function load_oiltank( x, y )
+end
+
+function load_oiltank_alt( x, y )
+end
+
+function load_altar( x, y )
+end

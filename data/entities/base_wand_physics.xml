@@ -39,14 +39,14 @@
 
   <AudioLoopComponent
       _tags="enabled_in_world,enabled_in_hand,sound_digger"
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_name="player_projectiles/digger/loop"
       volume_autofade_speed="0.1" >
   </AudioLoopComponent>
   
   <AudioLoopComponent
       _tags="enabled_in_world,enabled_in_hand,sound_spray"
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_name="player_projectiles/spray/loop"
       volume_autofade_speed="0.1" >
   </AudioLoopComponent>

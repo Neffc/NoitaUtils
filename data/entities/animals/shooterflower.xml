@@ -1,5 +1,12 @@
-<Entity tags="mortal,hittable,homing_target" name="$animal_shooterflower">
+<Entity tags="mortal,hittable,homing_target,enemy" name="$animal_shooterflower">
+
 	<ItemChestComponent level="4" enemy_drop="1" > </ItemChestComponent>
+
+	<LuaComponent
+	    execute_every_n_frame="-1"
+	    script_death="data/scripts/items/drop_money.lua"
+	    remove_after_executed="1" >
+	</LuaComponent>
 
 	<AnimalAIComponent 
 		_enabled="1" 
@@ -12,14 +19,16 @@
 		creature_detection_range_x="350"
 		creature_detection_range_y="350"
 		eye_offset_y="-5"
-		attack_ranged_offset_y="-8"
+		attack_ranged_offset_y="-12"
 		sense_creatures="1"
 		attack_ranged_enabled="1"
 		needs_food="0"
 		can_fly="0"  
-		attack_ranged_entity_file="data/entities/projectiles/orb_pink_big.xml"
+		attack_ranged_entity_file="data/entities/projectiles/orb_tiny.xml"
 		attack_ranged_frames_between="100" 
 		attack_ranged_action_frame="6"
+		attack_ranged_entity_count_min="10"
+		attack_ranged_entity_count_max="10"
 		>
 	</AnimalAIComponent>
   
@@ -80,9 +89,10 @@
 	</SpriteAnimatorComponent>
 		
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals/shooterflower" >
 	</AudioComponent>
+
 
 </Entity>
 

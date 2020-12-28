@@ -82,7 +82,7 @@
 			_enabled="1" 
 			aabb_min_x="-4.5" 
 			aabb_max_x="4.5" 
-			aabb_min_y="-5.5" 
+			aabb_min_y="-6.5" 
 			aabb_max_y="3" 
 			is_enemy="1" 
 			is_item="0" 
@@ -96,7 +96,7 @@
 	</Base>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals/zombie" >
 	</AudioComponent>
 

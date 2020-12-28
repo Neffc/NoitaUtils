@@ -86,7 +86,7 @@
 	</MaterialInventoryComponent>
 
 
-	<Base file="data/entities/base_enemy_robot.xml" >
+	<Base file="data/entities/base_enemy_robot_boss_limbs.xml" >
 		<AnimalAIComponent 
 			_enabled="1" 
 			preferred_job="JobDefault"

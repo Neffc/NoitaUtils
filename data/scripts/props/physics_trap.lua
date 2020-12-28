@@ -8,10 +8,11 @@ function electricity_receiver_switched( on )
 		local x, y = EntityGetTransform( entity_id )
 		local components = EntityGetComponent( entity_id, "VariableStorageComponent" )
 		
+		-- NOTE: currently supports only spawning a single entity from entity_file.
+		-- Move EntityLoad() inside loop if multiple are needed
 		local target_entity = ""
 		local offset_x = 0
 		local offset_y = 0
-		local enable_component = ""
 
 		for key,comp_id in pairs(components) do 
 			local var_name = ComponentGetValue( comp_id, "name" )
@@ -28,28 +29,25 @@ function electricity_receiver_switched( on )
 			end
 			
 			if( var_name == "enable_component") then
-				enable_component = ComponentGetValue( comp_id, "value_string" )
+				local target_component = ComponentGetValue( comp_id, "value_string" )
+				EntitySetComponentsWithTagEnabled( entity_id, target_component, true )
 			end
 		end
 		
 		if (string.len(target_entity) > 0) then
 			EntityLoad( target_entity, x + offset_x, y + offset_y )
 		end
-		
-		if (string.len(enable_component) > 0) then
-			EntitySetComponentsWithTagEnabled( entity_id, enable_component, true )
-		end
 	end
 
 end
 
 function trigger_trap( trap_id, trap_x, trap_y )
-	print( "trap triggered")
+	--print( "trap triggered")
 	local components = EntityGetComponent( trap_id, "VariableStorageComponent" )
 
 
 	for key,comp_id in pairs(components) do 
-		print("VariableStorageComponent")
+		--print("VariableStorageComponent")
 		local var_name = ComponentGetValue( comp_id, "name" )
 		if( var_name == "entity_file") then
 			local load_me = ComponentGetValue( comp_id, "value_string" )
@@ -66,8 +64,9 @@ end
 function trigger_wand_pickup_trap( x, y )
 	-- print( x )
 	-- print( y )
+	--print("pickup triggered")
 	local entities = EntityGetWithTag( "wand_trap" )
-	if( entities == nil ) then
+	if( #entities == 0 ) then
 		return
 	end
 

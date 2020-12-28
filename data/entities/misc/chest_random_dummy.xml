@@ -1,6 +1,6 @@
 <Entity tags="teleportable_NOT">
 	<UIInfoComponent
-		name="Treasure chest"
+		name="$item_chest_treasure"
 		>
 	</UIInfoComponent>
 	

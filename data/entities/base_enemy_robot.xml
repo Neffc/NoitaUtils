@@ -1,4 +1,4 @@
-<Entity tags="teleportable_NOT" > 
+<Entity tags="teleportable_NOT,enemy,robot" > 
 	<Base file="data/entities/base_humanoid.xml" >
 		<AnimalAIComponent 
 			preferred_job="JobDefault"
@@ -25,15 +25,16 @@
 			blood_material="oil"
 			blood_spray_material="oil"
 			fire_probability_of_ignition="0"
-			materials_that_damage="acid,lava"
-			materials_how_much_damage="0.001,0.0007"
+			materials_that_damage="acid,lava,magic_liquid_mana_regeneration"
+			materials_how_much_damage="0.001,0.0007,0.001"
 			blood_sprite_directional="data/particles/bloodsplatters/bloodsplatter_directional_oil_$[1-3].xml"
 			blood_sprite_large="data/particles/bloodsplatters/bloodsplatter_oil_$[1-3].xml"
 			air_needed="0" 
 			>
 			<damage_multipliers
 				fire="0.0" 
-				drill="0.0"
+				drill="0.1"
+				slice="0.1"
 				melee="0.3"
 				projectile="0.5"
 				radioactive="0.0"
@@ -97,13 +98,13 @@
 		</CameraBoundComponent>
 
 		<AudioComponent
-			file="data/audio/Desktop/animals.snd"
-			event_root="robots">
+			file="data/audio/Desktop/animals.bank"
+			event_root="animals/robot">
 		</AudioComponent>
 
  		<!-- gets rid of generic animal sounds (e.g. attack_melee) -->
 		<AudioComponent 
-			file="data/audio/Desktop/animals.snd"
+			file="data/audio/Desktop/animals.bank"
 			event_root=""
 			set_latest_event_position="1" >
 		</AudioComponent>

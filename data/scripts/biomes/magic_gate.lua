@@ -1,6 +1,6 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/director_helpers.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 ------------ small enemies -------------------------------
@@ -150,22 +150,15 @@ g_pixel_scene_01 =
 	total_prob = 0,
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_plateroom.png",
-		visual_file		= "",
-		background_file	= "data/biome_impl/crypt_plateroom_background.png",
-		is_unique		= 0
-	},
-	{
-		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_cathedral.png",
+		material_file 	= "data/biome_impl/crypt/cathedral.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_mining.png",
-		visual_file		= "data/biome_impl/crypt_mining_visual.png",
+		material_file 	= "data/biome_impl/crypt/mining.png",
+		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},

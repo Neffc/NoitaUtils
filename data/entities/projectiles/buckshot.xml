@@ -35,7 +35,8 @@
     shoot_light_flash_radius="100" 
     ragdoll_fx_on_collision="BLOOD_EXPLOSION"
     muzzle_flash_file="data/entities/particles/muzzle_flashes/muzzle_flash_medium.xml"
-	knockback_force="1.0"
+    knockback_force="1.0"
+    physics_impulse_coeff="2000"
 	>
     <config_explosion
       never_cache="1" 
@@ -83,9 +84,15 @@
   </LightComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="projectiles/shotgun">
   </AudioComponent>
+  
+  <VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/buckshot.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

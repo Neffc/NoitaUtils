@@ -49,7 +49,7 @@
   </SpriteComponent>
 
   <AudioComponent
-    file="data/audio/Desktop/animals.snd"
+    file="data/audio/Desktop/animals.bank"
     event_root="animals/mine" >
   </AudioComponent>
 </Entity>

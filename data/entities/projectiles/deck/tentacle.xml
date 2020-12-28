@@ -1,4 +1,4 @@
-<Entity name="$projectile_default">
+<Entity name="$projectile_default" tags="projectile_player" >
 
 	<Base file="data/entities/base_projectile.xml" >
       <VelocityComponent
@@ -28,7 +28,7 @@
 		knockback_force="2.0"
 		>
 		<damage_by_type
-			melee="1.0"
+			melee="0.8"
 			>
 		</damage_by_type>
 		<config_explosion
@@ -62,7 +62,7 @@
 		damage_max="0.5"
 		damage_coeff="0.0002"
 		impulse_coeff="0.5"
-		physics_impulse_coeff="4.5" >
+		physics_impulse_coeff="7.0" >
 	</VerletWeaponComponent>
 
 	<Entity name="$projectile_default">
@@ -97,10 +97,14 @@
 	</Entity>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="player_projectiles/bullet_tentacle">
   </AudioComponent>
-
-
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/tentacle.xml"
+		>
+	</VariableStorageComponent>
 </Entity>
 

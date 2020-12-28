@@ -8,7 +8,7 @@
 	</ElectricChargeComponent>
 	
 	<SpriteParticleEmitterComponent
-		_enabled="false"
+		_enabled="0"
 		_tags="charge_indicator"
 		sprite_file="data/particles/spark_electric.xml" 
 		delay="0"

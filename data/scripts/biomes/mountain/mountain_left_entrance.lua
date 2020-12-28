@@ -1,7 +1,7 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biomes/mountain/mountain.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biomes/mountain/mountain.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 RegisterSpawnFunction( 0xffC4189B, "spawn_trees" )
@@ -175,13 +175,13 @@ g_props =
 }
 
 function init( x, y, w, h )
-	LoadPixelScene( "data/biome_impl/mountain_left_entrance_bottom.png", "", x, y+512, "", true )
-	LoadPixelScene( "data/biome_impl/mountain_left_stub_edge.png", "", x, y + 512, "", true )
+	LoadPixelScene( "data/biome_impl/mountain/left_entrance_bottom.png", "", x, y+512, "", true )
+	LoadPixelScene( "data/biome_impl/mountain/left_stub_edge.png", "", x, y + 512, "", true )
 	
 	if GameGetIsGamepadConnected() then
-		LoadPixelScene( "data/biome_impl/mountain_left_entrance.png", "data/biome_impl/mountain_left_entrance_visual.png", x, y, "data/biome_impl/mountain_left_entrance_background_gamepad.png", true )
+		LoadPixelScene( "data/biome_impl/mountain/left_entrance.png", "data/biome_impl/mountain/left_entrance_visual.png", x, y, "data/biome_impl/mountain/left_entrance_background_gamepad.png", true )
 	else
-		LoadPixelScene( "data/biome_impl/mountain_left_entrance.png", "data/biome_impl/mountain_left_entrance_visual.png", x, y, "data/biome_impl/mountain_left_entrance_background.png", true )
+		LoadPixelScene( "data/biome_impl/mountain/left_entrance.png", "data/biome_impl/mountain/left_entrance_visual.png", x, y, "data/biome_impl/mountain/left_entrance_background.png", true )
 	end
 end
 

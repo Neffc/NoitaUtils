@@ -3,8 +3,14 @@
     name="$biome_excavationsite"
     type="BIOME_WANG_TILE"
     background_image="data/weather_gfx/background_cave_04_alt3.png"
-	limit_background_image="0"
-	noise_biome_edges="1"
+    background_edge_left="data/weather_gfx/edges/background_cave_04_alt3_left.png"
+    background_edge_right="data/weather_gfx/edges/background_cave_04_alt3_right.png"
+    background_edge_top="data/weather_gfx/edges/background_cave_04_alt3_top.png"
+    background_edge_bottom="data/weather_gfx/edges/background_cave_04_alt3_bottom.png"
+    background_edge_priority="10"     
+
+    limit_background_image="0"
+    noise_biome_edges="1"
     wang_template_file="data/wang_tiles/excavationsite.png" 
     lua_script="data/scripts/biomes/excavationsite.lua"
     wang_map_width="256"
@@ -30,7 +36,7 @@
       >
       <structures>
         <CaveStructure
-          image_file="data/biome_impl/coalmine_dangerroom.png"
+          image_file="data/biome_impl/coalmine/dangerroom.png"
           aabb_min_x="5"
           aabb_max_x="507"
           aabb_min_y="0"
@@ -218,6 +224,46 @@
       material_on_top_of="rock_static_grey"
       >
     </VegetationComponent>
+
+    <!-- this is for the FREEZING biome modifier. tree_probability should initially be 0 -->
+    <VegetationComponent 
+      _enabled="1" 
+      is_visual="1" 
+      rand_seed="8376.86" 
+      tree_extra_y="0" 
+      tree_image_file="" 
+      tree_image_visual="" 
+      tree_material="snow" 
+      tree_probability="0" 
+      tree_radius_high="0.414286" 
+      tree_radius_low="0.228571" 
+      tree_width="76.1143" 
+      visual_color="0xffb89f6c" 
+      visual_offset_x="3" 
+      visual_offset_y="7.5" 
+      is_grass="1"
+      grass_requires_neighbors="1"
+      material_on_top_of="coal_static"
+    ></VegetationComponent>
+    <VegetationComponent 
+      _enabled="1" 
+      is_visual="1" 
+      rand_seed="8376.86" 
+      tree_extra_y="0" 
+      tree_image_file="" 
+      tree_image_visual="" 
+      tree_material="snow" 
+      tree_probability="0" 
+      tree_radius_high="0.414286" 
+      tree_radius_low="0.228571" 
+      tree_width="76.1143" 
+      visual_color="0xffb89f6c" 
+      visual_offset_x="3" 
+      visual_offset_y="7.5" 
+      is_grass="1"
+      grass_requires_neighbors="1"
+      material_on_top_of="wood_static"
+    ></VegetationComponent>
 
     <VegetationComponent 
       _enabled="1" 

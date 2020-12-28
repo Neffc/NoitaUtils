@@ -76,8 +76,8 @@
 	</Base>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
-		event_root="animals_voc/slimeshooter" >
+		file="data/audio/Desktop/animals.bank"
+		event_root="animals/slimeshooter" >
 	</AudioComponent>
 
 	<LightComponent 

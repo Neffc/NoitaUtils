@@ -1,7 +1,7 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 RegisterSpawnFunction( 0xfff21df0, "load_building_stash" )
@@ -9,6 +9,7 @@ RegisterSpawnFunction( 0xffb4a00a, "spawn_fish" )
 RegisterSpawnFunction( 0xffb40b76, "spawn_bigfish" )
 RegisterSpawnFunction( 0xff3ae124, "spawn_small_animals" )
 RegisterSpawnFunction( 0xff31d0b4, "spawn_essence" )
+RegisterSpawnFunction( 0xff30D14E, "spawn_secret_checker" )
 
 g_fish =
 {
@@ -132,4 +133,31 @@ end
 
 function spawn_essence(x, y)
 	EntityLoad( "data/entities/items/pickup/essence_fire.xml", x, y )
+end
+
+function spawn_secret_checker( x, y )
+
+	local entity = EntityLoad( "data/entities/buildings/lake_statue_materialchecker.xml", x, y )
+
+	local material1 = CellFactory_GetType( "blood" )
+	local material2 = -1
+	
+	local comp_mat = EntityGetFirstComponent( entity, "MaterialAreaCheckerComponent" )
+	if comp_mat ~= nil then
+		ComponentSetValue( comp_mat, "material", tostring(material1) )
+		ComponentSetValue( comp_mat, "material2", tostring(material2) )
+	end
+
+	local comp_lua = EntityGetFirstComponent( entity, "LuaComponent" )
+	if comp_lua ~= nil then
+		ComponentSetValue( comp_lua, "script_material_area_checker_success", "data/scripts/biomes/lake_statue.lua" )
+	end
+
+end
+
+function material_area_checker_success( x, y )
+	GameScreenshake( 100 )
+	EntityLoad( "data/entities/buildings/teleport_desert.xml", x, y - 300 )
+	
+	GamePrintImportant( "$log_fasttravel", "$logdesc_fasttravel" )
 end

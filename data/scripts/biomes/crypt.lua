@@ -1,12 +1,17 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/director_helpers_design.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/director_helpers_design.lua")
+dofile_once("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/biome_modifiers.lua")
+dofile( "data/scripts/items/generate_shop_item.lua" )
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 RegisterSpawnFunction( 0xff808000, "spawn_statues" )
+RegisterSpawnFunction( 0xff00AC33, "load_pixel_scene3" )
 RegisterSpawnFunction( 0xff00AC64, "load_pixel_scene4" )
+RegisterSpawnFunction( 0xff97ab00, "load_pixel_scene5" )
+RegisterSpawnFunction( 0xffc9d959, "load_pixel_scene5b" )
 RegisterSpawnFunction( 0xffC8C800, "spawn_lamp2" )
 RegisterSpawnFunction( 0xff400080, "spawn_large_enemies" )
 RegisterSpawnFunction( 0xffC8001A, "spawn_ghost_crystal" )
@@ -14,14 +19,15 @@ RegisterSpawnFunction( 0xff82FF5A, "spawn_crawlers" )
 RegisterSpawnFunction( 0xff647D7D, "spawn_pressureplates" )
 RegisterSpawnFunction( 0xff649B7D, "spawn_doors" )
 RegisterSpawnFunction( 0xffA07864, "spawn_scavengers" )
-RegisterSpawnFunction( 0xff00AC33, "load_pixel_scene3" )
 RegisterSpawnFunction( 0xffFFCD2A, "spawn_scorpions" ) 
 RegisterSpawnFunction( 0xff2D1E5A, "spawn_bones" )
 RegisterSpawnFunction( 0xff782060, "load_beam" )
-RegisterSpawnFunction( 0xff783060, "load_pillars" )
+RegisterSpawnFunction( 0xff783060, "load_background_scene" )
+RegisterSpawnFunction( 0xff378ec4, "load_small_background_scene" )
 RegisterSpawnFunction( 0xff786460, "load_cavein" )
 RegisterSpawnFunction( 0xff80FF5A, "spawn_vines" )
 RegisterSpawnFunction( 0xff535988, "spawn_statue_back" )
+RegisterSpawnFunction( 0xff33934c, "spawn_shopitem" )
 
 ------------ small enemies -------------------------------
 
@@ -105,6 +111,12 @@ g_small_enemies =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/crypt/maggot.xml"
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/crypt/failed_alchemist.xml"
 	},
 }
 
@@ -201,10 +213,58 @@ g_big_enemies =
 		entity 	= "data/entities/animals/crypt/wizard_poly.xml"
 	},
 	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/crypt/wizard_returner.xml"
+	},
+	{
+		prob   		= 0.07,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/crypt/wizard_neutral.xml"
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/crypt/wizard_hearty.xml"
+	},
+	{
+		prob   		= 0.07,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wizard_swapper.xml"
+	},
+	{
 		prob   		= 0.07,
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/crypt/barfer.xml"
+	},
+	{
+		prob   		= 0.07,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wraith.xml"
+	},
+	{
+		prob   		= 0.07,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wraith_glowing.xml"
+	},
+	{
+		prob   		= 0.07,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/crypt/enlightened_alchemist.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/failed_alchemist_b.xml"
 	},
 }
 
@@ -228,6 +288,12 @@ g_items =
 		entity 	= "data/entities/items/wand_level_06.xml"
 	},
 	{
+		prob   		= 5,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/items/wand_level_06_better.xml"
+	},
+	{
 		prob   		= 3,
 		min_count	= 1,
 		max_count	= 1,    
@@ -244,12 +310,23 @@ g_items =
 g_statues =
 {
 	total_prob = 0,
-	-- add skullflys after this step
+	{
+		prob   		= 3.0,
+		min_count	= 0,
+		max_count	= 0,    
+		entity 	= ""
+	},
 	{
 		prob   		= 1.0,
 		min_count	= 1,
 		max_count	= 1,    
-		entity 	= "data/entities/buildings/statue.xml"
+		entity 	= "data/entities/props/sarcophagus.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/sarcophagus_evil.xml"
 	},
 }
 
@@ -257,7 +334,7 @@ g_statue_back =
 {
 	total_prob = 0,
 	{
-		prob   		= 0.4,
+		prob   		= 1.0,
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= ""
@@ -293,7 +370,7 @@ g_pixel_scene_02 =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/crypt_stairs_right.png",
+		material_file 	= "data/biome_impl/crypt/stairs_right.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
@@ -305,8 +382,60 @@ g_pixel_scene_04 =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/crypt_stairs_left.png",
+		material_file 	= "data/biome_impl/crypt/stairs_left.png",
 		visual_file		= "",
+		background_file	= "",
+		is_unique		= 0
+	},
+}
+
+g_pixel_scene_05 =
+{
+	total_prob = 0,
+	{
+		prob   			= 1.0,
+		material_file 	= "data/biome_impl/crypt/room_liquid_funnel.png",
+		visual_file		= "data/biome_impl/crypt/room_liquid_funnel_visual.png",
+		background_file	= "",
+		is_unique		= 0
+	},
+	{
+		prob   			= 1.0,
+		material_file 	= "data/biome_impl/crypt/room_gate_drop.png",
+		visual_file		= "data/biome_impl/crypt/room_gate_drop_visual.png",
+		background_file	= "",
+		is_unique		= 0
+	},
+	{
+		prob   			= 1.0,
+		material_file 	= "data/biome_impl/crypt/shop.png",
+		visual_file		= "data/biome_impl/crypt/shop_visual.png",
+		background_file	= "",
+		is_unique		= 0
+	},
+}
+
+g_pixel_scene_05b =
+{
+	total_prob = 0,
+	{
+		prob   			= 1.0,
+		material_file 	= "data/biome_impl/crypt/room_liquid_funnel_b.png",
+		visual_file		= "data/biome_impl/crypt/room_liquid_funnel_visual.png",
+		background_file	= "",
+		is_unique		= 0
+	},
+	{
+		prob   			= 1.0,
+		material_file 	= "data/biome_impl/crypt/room_gate_drop_b.png",
+		visual_file		= "data/biome_impl/crypt/room_gate_drop_visual.png",
+		background_file	= "",
+		is_unique		= 0
+	},
+	{
+		prob   			= 1.0,
+		material_file 	= "data/biome_impl/crypt/shop_b.png",
+		visual_file		= "data/biome_impl/crypt/shop_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
@@ -328,6 +457,24 @@ g_lamp =
 		max_count	= 1,    
 		entity 	= "data/entities/props/physics_torch_stand.xml"
 	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/physics_skull_01.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/physics_skull_02.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/physics_skull_03.xml"
+	},
 }
 
 g_lamp2 =
@@ -344,8 +491,7 @@ g_lamp2 =
 		prob   		= 1.0,
 		min_count	= 1,
 		max_count	= 1,    
-		offset_y	= 10,
-		entity 	= "data/entities/props/physics_chain_torch.xml"
+		entity 	= "data/entities/props/physics/chain_torch.xml"
 	},
 }
 
@@ -380,6 +526,24 @@ g_props =
 		offset_y	= -4,		
 		entity 	= "data/entities/animals/mimic_physics.xml"
 	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/physics_skull_01.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/physics_skull_02.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/props/physics_skull_03.xml"
+	},
 }
 
 g_unique_enemy =
@@ -387,18 +551,39 @@ g_unique_enemy =
 	total_prob = 0,
 	-- this is air, so nothing spawns at 0.6
 	{
-		prob   		= 0.1,
+		prob   		= 0.5,
 		min_count	= 0,
 		max_count	= 0,    
 		entity 	= ""
 	},
 	-- add skullflys after this step
 	{
-		prob   		= 1.0,
+		prob   		= 1.5,
 		min_count	= 1,
 		max_count	= 1,  
 		offset_x	= 2,		
 		entity 	= "data/entities/buildings/arrowtrap_right.xml"
+	},
+	{
+		prob   		= 0.5,
+		min_count	= 1,
+		max_count	= 1,  
+		offset_x	= 2,		
+		entity 	= "data/entities/buildings/firetrap_right.xml"
+	},
+	{
+		prob   		= 0.2,
+		min_count	= 1,
+		max_count	= 1,  
+		offset_x	= 2,		
+		entity 	= "data/entities/buildings/thundertrap_right.xml"
+	},
+	{
+		prob   		= 0.2,
+		min_count	= 1,
+		max_count	= 1,  
+		offset_x	= 2,		
+		entity 	= "data/entities/buildings/spittrap_right.xml"
 	},
 }
 
@@ -407,18 +592,39 @@ g_large_enemies =
 	total_prob = 0,
 	-- this is air, so nothing spawns at 0.6
 	{
-		prob   		= 0.1,
+		prob   		= 0.5,
 		min_count	= 0,
 		max_count	= 0,    
 		entity 	= ""
 	},
 	-- add skullflys after this step
 	{
-		prob   		= 1.0,
+		prob   		= 1.5,
 		min_count	= 1,
 		max_count	= 1,  
 		offset_x	= 1,
 		entity 	= "data/entities/buildings/arrowtrap_left.xml"
+	},
+	{
+		prob   		= 0.5,
+		min_count	= 1,
+		max_count	= 1,  
+		offset_x	= 1,
+		entity 	= "data/entities/buildings/firetrap_left.xml"
+	},
+	{
+		prob   		= 0.2,
+		min_count	= 1,
+		max_count	= 1,  
+		offset_x	= 1,
+		entity 	= "data/entities/buildings/thundertrap_left.xml"
+	},
+	{
+		prob   		= 0.2,
+		min_count	= 1,
+		max_count	= 1,  
+		offset_x	= 1,
+		entity 	= "data/entities/buildings/spittrap_left.xml"
 	},
 }
 
@@ -498,28 +704,21 @@ g_pixel_scene_01 =
 	total_prob = 0,
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_plateroom.png",
-		visual_file		= "",
-		background_file	= "data/biome_impl/crypt_plateroom_background.png",
-		is_unique		= 0
-	},
-	{
-		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_cathedral.png",
+		material_file 	= "data/biome_impl/crypt/cathedral.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_mining.png",
+		material_file 	= "data/biome_impl/crypt/mining.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_polymorphroom.png",
+		material_file 	= "data/biome_impl/crypt/polymorphroom.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
@@ -531,29 +730,29 @@ g_pixel_scene_03 =
 	total_prob = 0,
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_lavaroom.png",
-		visual_file		= "data/biome_impl/crypt_lavaroom_visual.png",
+		material_file 	= "data/biome_impl/crypt/lavaroom.png",
+		visual_file		= "data/biome_impl/crypt/lavaroom_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_pit.png",
-		visual_file		= "data/biome_impl/crypt_pit_visual.png",
+		material_file 	= "data/biome_impl/crypt/pit.png",
+		visual_file		= "data/biome_impl/crypt/pit_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_symbolroom.png",
+		material_file 	= "data/biome_impl/crypt/symbolroom.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_water_lava.png",
-		visual_file		= "data/biome_impl/crypt_water_lava_visual.png",
+		material_file 	= "data/biome_impl/crypt/water_lava.png",
+		visual_file		= "data/biome_impl/crypt/water_lava_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
@@ -571,57 +770,57 @@ g_beam =
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_beam_01.png",
-		visual_file		= "data/biome_impl/crypt_beam_01_visual.png",
+		material_file 	= "data/biome_impl/crypt/beam_01.png",
+		visual_file		= "data/biome_impl/crypt/beam_01_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_beam_02.png",
-		visual_file		= "data/biome_impl/crypt_beam_02_visual.png",
+		material_file 	= "data/biome_impl/crypt/beam_02.png",
+		visual_file		= "data/biome_impl/crypt/beam_02_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_beam_03.png",
-		visual_file		= "data/biome_impl/crypt_beam_03_visual.png",
+		material_file 	= "data/biome_impl/crypt/beam_03.png",
+		visual_file		= "data/biome_impl/crypt/beam_03_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_beam_04.png",
-		visual_file		= "data/biome_impl/crypt_beam_04_visual.png",
+		material_file 	= "data/biome_impl/crypt/beam_04.png",
+		visual_file		= "data/biome_impl/crypt/beam_04_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_beam_05.png",
-		visual_file		= "data/biome_impl/crypt_beam_05_visual.png",
+		material_file 	= "data/biome_impl/crypt/beam_05.png",
+		visual_file		= "data/biome_impl/crypt/beam_05_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_beam_06.png",
-		visual_file		= "data/biome_impl/crypt_beam_06_visual.png",
+		material_file 	= "data/biome_impl/crypt/beam_06.png",
+		visual_file		= "data/biome_impl/crypt/beam_06_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_beam_07.png",
-		visual_file		= "data/biome_impl/crypt_beam_07_visual.png",
+		material_file 	= "data/biome_impl/crypt/beam_07.png",
+		visual_file		= "data/biome_impl/crypt/beam_07_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_beam_08.png",
-		visual_file		= "data/biome_impl/crypt_beam_08_visual.png",
+		material_file 	= "data/biome_impl/crypt/beam_08.png",
+		visual_file		= "data/biome_impl/crypt/beam_08_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
@@ -639,64 +838,113 @@ g_caveins =
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_cavein_01.png",
-		visual_file		= "data/biome_impl/crypt_cavein_01_visual.png",
+		material_file 	= "data/biome_impl/crypt/cavein_01.png",
+		visual_file		= "data/biome_impl/crypt/cavein_01_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_cavein_02.png",
+		material_file 	= "data/biome_impl/crypt/cavein_02.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_cavein_03.png",
-		visual_file		= "data/biome_impl/crypt_cavein_03_visual.png",
+		material_file 	= "data/biome_impl/crypt/cavein_03.png",
+		visual_file		= "data/biome_impl/crypt/cavein_03_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_cavein_04.png",
-		visual_file		= "data/biome_impl/crypt_cavein_04_visual.png",
+		material_file 	= "data/biome_impl/crypt/cavein_04.png",
+		visual_file		= "data/biome_impl/crypt/cavein_04_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 }
 
-g_pillars =
+g_background_scenes =
 {
 	total_prob = 0,
 	{
+		prob   			= 3.0,
+		sprite_file		= "",
+	},
+	{
+		prob   			= 1.0,
+		sprite_file		= "data/biome_impl/crypt/pillars_01_background.png"
+	},		
+	{
+		prob   			= 1.0,
+		sprite_file		= "data/biome_impl/crypt/pillars_02_background.png"
+	},
+	{
+		prob   			= 1.0,
+		sprite_file		= "data/biome_impl/crypt/pillars_03_background.png"
+	},
+	{
+		prob   			= 1.0,
+		sprite_file		= "data/biome_impl/crypt/alcove_01_background.png"
+	},
+	{
 		prob   			= 2.0,
-		material_file 	= "",
-		visual_file		= "",
-		background_file	= "",
-		is_unique		= 0
+		sprite_file		= "data/biome_impl/crypt/alcove_02_background.png"
+	},
+	{
+		prob   			= 2.0,
+		sprite_file		= "data/biome_impl/crypt/alcove_03_background.png"
+	},
+	{
+		prob   			= 1.0,
+		sprite_file		= "data/biome_impl/crypt/alcove_04_background.png"
+	},
+	{
+		prob   			= 1.0,
+		sprite_file		= "data/biome_impl/crypt/alcove_05_background.png"
+	},
+	{
+		prob   			= 1.0,
+		sprite_file		= "data/biome_impl/crypt/alcove_06_background.png"
+	},
+}
+
+g_small_background_scenes =
+{
+	total_prob = 0,
+	{
+		prob   			= 4.0,
+		visual_file		= ""
+	},
+	{
+		prob   			= 1.0,
+		sprite_file		= "data/biome_impl/crypt/slab_01_background.png"
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/crypt_pillars_01.png",
-		visual_file		= "",
-		background_file	= "data/biome_impl/crypt_pillars_01_background.png",
-		is_unique		= 0
+		sprite_file		= "data/biome_impl/crypt/slab_02_background.png"
+	},
+	{
+		prob   			= 0.5,
+		sprite_file		= "data/biome_impl/crypt/slab_03_background.png"
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_pillars_01.png",
-		visual_file		= "",
-		background_file	= "data/biome_impl/crypt_pillars_02_background.png",
-		is_unique		= 0
+		sprite_file		= "data/biome_impl/crypt/slab_04_background.png"
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/crypt_pillars_01.png",
-		visual_file		= "",
-		background_file	= "data/biome_impl/crypt_pillars_03_background.png",
-		is_unique		= 0
+		sprite_file		= "data/biome_impl/crypt/slab_05_background.png"
+	},
+	{
+		prob   			= 1.0,
+		sprite_file		= "data/biome_impl/crypt/slab_06_background.png"
+	},
+	{
+		prob   			= 1.0,
+		sprite_file		= "data/biome_impl/crypt/slab_07_background.png"
 	},
 }
 
@@ -749,7 +997,7 @@ g_ghostlamp =
 		min_count	= 1,
 		max_count	= 1,    
 		offset_y	= 10,
-		entity 	= "data/entities/props/physics_chain_torch_ghostly.xml"
+		entity 	= "data/entities/props/physics/chain_torch_ghostly.xml"
 	},
 }
 
@@ -876,7 +1124,7 @@ function spawn_lamp(x, y)
 end
 
 function spawn_lamp2(x, y)
-	spawn(g_lamp2,x-1,y+16,0,0)
+	spawn(g_lamp2,x-1,y,0,0)
 end
 
 function spawn_props(x, y)
@@ -918,6 +1166,18 @@ function load_pixel_scene3( x, y )
 	load_random_pixel_scene( g_pixel_scene_03, x, y )
 end
 
+function load_pixel_scene4( x, y )
+	load_random_pixel_scene( g_pixel_scene_04, x, y )
+end
+
+function load_pixel_scene5( x, y )
+	load_random_pixel_scene( g_pixel_scene_05, x, y )
+end
+
+function load_pixel_scene5b( x, y )
+	load_random_pixel_scene( g_pixel_scene_05b, x, y )
+end
+
 function spawn_scavengers(x, y)
 	spawn(g_scavengers,x,y,0,0)
 	-- spawn_hp_mult(g_scavengers,x,y,0,0,8,"crypt")
@@ -939,12 +1199,21 @@ function load_cavein( x, y )
 	load_random_pixel_scene( g_caveins, x-60, y-10 )
 end
 
-function load_pillars( x, y )
-	load_random_pixel_scene( g_pillars, x, y )
+function load_background_scene( x, y )
+	load_random_background_sprite( g_background_scenes, x+5, y )
+end
+
+function load_small_background_scene( x, y )
+	load_random_background_sprite( g_small_background_scenes, x, y )
 end
 
 function spawn_vines(x, y)
 	spawn(g_vines,x+5,y+5)
+end
+
+function spawn_shopitem( x, y )
+	generate_shop_item( x, y, false, nil )
+	--print("shop item spawned at " .. x .. ", " .. y)
 end
 
 function init( x, y ) end

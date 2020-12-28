@@ -1,7 +1,6 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
-local entity_id    = GetUpdatedEntityID()
-local pos_x, pos_y = EntityGetTransform( entity_id )
+local pos_x, pos_y = EntityGetTransform( GetUpdatedEntityID() )
 
 local vel_x = 200
 local vel_y = 200

@@ -1,4 +1,4 @@
-<Entity >
+<Entity tags="temple_areachecker">
 
 	<MaterialAreaCheckerComponent
 		area_aabb.min_x="0"		

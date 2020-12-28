@@ -78,7 +78,7 @@
 
   <AudioLoopComponent
     _tags="sound_spray"
-    file="data/audio/Desktop/materials.snd"
+    file="data/audio/Desktop/materials.bank"
     event_name="materials/spray"
     volume_autofade_speed="0.25" >
   </AudioLoopComponent>

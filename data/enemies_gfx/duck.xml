@@ -2,7 +2,9 @@
   default_animation="jump_fall" 
   filename="data/enemies_gfx/duck.png" 
   offset_x="6" 
-  offset_y="9" >
+  offset_y="9"
+  default_animation="stand" >
+
   <RectAnimation 
     frame_count="5" 
     frame_height="13" 
@@ -12,8 +14,10 @@
     name="stand" 
     pos_x="0" 
     pos_y="1" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="13" 
@@ -23,24 +27,30 @@
     name="walk" 
     pos_x="0" 
     pos_y="14" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="1" 
       frame="1" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="4" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="13" 
@@ -50,24 +60,30 @@
     name="run" 
     pos_x="0" 
     pos_y="27" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="1" 
       frame="1" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="4" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="13" 
@@ -77,24 +93,30 @@
     name="burn" 
     pos_x="0" 
     pos_y="27" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="1" 
       frame="1" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="4" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="4" 
     frame_height="13" 
@@ -104,8 +126,10 @@
     name="swim_idle" 
     pos_x="0" 
     pos_y="40" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="4" 
     frame_height="13" 
@@ -115,8 +139,10 @@
     name="swim_move" 
     pos_x="0" 
     pos_y="40" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="2" 
     frame_height="13" 
@@ -126,8 +152,10 @@
     name="jump_up" 
     pos_x="0" 
     pos_y="53" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="2" 
     frame_height="13" 
@@ -137,16 +165,20 @@
     name="jump_fall" 
     pos_x="0" 
     pos_y="53" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="0" 
       max_distance="500" 
       name="flap" 
       on_finished="0" 
-      probability="0.7" >
-    </Event>
-  </RectAnimation>
+      probability="0.7" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="2" 
     frame_height="13" 
@@ -156,6 +188,9 @@
     name="attack_dash" 
     pos_x="0" 
     pos_y="53" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
-</Sprite>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
+</Sprite>
+

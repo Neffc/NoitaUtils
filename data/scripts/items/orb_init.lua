@@ -1,20 +1,15 @@
 dofile( "data/scripts/game_helpers.lua" )
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 local entity_id = GetUpdatedEntityID()
 local pos_x, pos_y = EntityGetTransform( entity_id )
 
-local components = EntityGetComponent( entity_id, "VariableStorageComponent" )
 local orbcomp = EntityGetComponent( entity_id, "OrbComponent" )
 local orb_id = -1
-
 
 for key,comp_id in pairs(orbcomp) do 
 	orb_id = ComponentGetValueInt( comp_id, "orb_id" )
 end
-
-
-print( "orb_id: " .. tostring(orb_id) )
 
 if (orb_id >= 100) then
 
@@ -29,7 +24,7 @@ if (orb_id >= 100) then
 
 
 	-- set the sprite to red
-	local components = EntityGetComponent( entity_id, "SpriteComponent" )
+	components = EntityGetComponent( entity_id, "SpriteComponent" )
 	for key,comp_id in pairs(components) do 
 		ComponentSetValue( comp_id, "image_file", "data/items_gfx/orbs/orb_red_evil.xml" )
 	end

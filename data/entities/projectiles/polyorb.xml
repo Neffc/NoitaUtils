@@ -141,7 +141,7 @@
 	
 	<LuaComponent
 		execute_on_removed="1"
-		execute_every_n_frame="99999999"
+		execute_every_n_frame="-1"
 		script_source_file="data/scripts/projectiles/polyorb_death.lua"
 		remove_after_executed="0">
 	</LuaComponent>
@@ -181,8 +181,14 @@
 	</VariableStorageComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/projectiles.snd"
+		file="data/audio/Desktop/projectiles.bank"
 		event_root="projectiles/polymorph_bubble">
 	</AudioComponent>
+	
+	<AudioLoopComponent
+		file="data/audio/Desktop/projectiles.bank"
+		event_name="projectiles/magic_orb/loop"
+		auto_play="1">
+	</AudioLoopComponent>
     
 </Entity>

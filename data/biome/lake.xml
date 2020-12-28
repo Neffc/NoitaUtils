@@ -2,7 +2,7 @@
   <Topology 
     name="$biome_lake"
     background_image="data/weather_gfx/background_cave_02.png"
-    background_use_neighbor="1"
+    background_use_neighbor="0"
 
     lua_script="data/scripts/biomes/lake.lua"
     noise_type="SIN_CAPPED_SIMPLEX"
@@ -30,6 +30,7 @@
     mMultiplierGradient="0.871429" 
     bitmap_noise_file="data/biome_impl/topology_lake.png"
     audio_ambience="hills"
+    audio_music_enter="music/oneshot/02"
     >
   </Topology>
 

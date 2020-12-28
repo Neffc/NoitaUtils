@@ -1,4 +1,4 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 dofile( "data/scripts/gun/gun_actions.lua" )
 
 local entity_id    = GetUpdatedEntityID()
@@ -10,7 +10,7 @@ EntityLoad( "data/entities/buildings/teleport_ending_victory.xml", x, y-72 )
 
 local validcards = {}
 
-for i,thisitem in ipairs(actions) do
+for j,thisitem in ipairs(actions) do
 	local spawnids = thisitem.spawn_level
 	local biomeid = 6
 	
@@ -37,11 +37,14 @@ for i,thisitem in ipairs(actions) do
 end
 
 if (#validcards > 0) then
+
+	SetRandomSeed( GameGetFrameNum(), x + y + entity_id )
+	
 	for i=1,5 do
-		local randomcard = Random(1,#validcards)
+		local randomcard = Random( 1, #validcards )
 		
 		local card = validcards[randomcard]
-		local eid = CreateItemActionEntity( card, x - 24 * 2.5 + i * 24, y + 64 + Random(-20,20) )
+		local eid = CreateItemActionEntity( card, x - 24 * 2.5 + i * 24, y + 64 + Random( -20, 20 ) )
 		table.remove(validcards, randomcard)
 	end
 end

@@ -6,6 +6,7 @@
     offset_x="0"
     offset_y="0"
     image_file="data/debug/box_10x10.png" 
+    z_index="-2.5"
      >
   </SpriteComponent>
   

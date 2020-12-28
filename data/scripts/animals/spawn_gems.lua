@@ -1,7 +1,9 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 local entity_id    = GetUpdatedEntityID()
 local pos_x, pos_y = EntityGetTransform( entity_id )
+
+SetRandomSeed( GameGetFrameNum(), pos_x + pos_y + entity_id )
 
 local count = Random(0,3) * Random(0,1)
 local prefixes = {{name = "physics_smallgem", count = 5}, {name = "physics_bone", count = 5}}

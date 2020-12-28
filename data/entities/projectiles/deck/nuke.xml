@@ -1,5 +1,5 @@
 <Entity 
-  name="$projectile_default" 
+  name="$projectile_default" tags="projectile_player,nuke"
    >
 
 	<Base file="data/entities/base_projectile.xml" >
@@ -62,7 +62,7 @@
       stains_radius="35"
       background_lightning_count="5" 
 	  max_durability_to_destroy="12"
-    audio_event_name="explosion_nuke"
+    audio_event_name="explosions/nuke"
 	  >
     </config_explosion>
   </ProjectileComponent>
@@ -156,15 +156,21 @@
   </ParticleEmitterComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="projectiles/rocket">
   </AudioComponent>
 
   <AudioLoopComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_name="projectiles/rocket_passby"
       auto_play="1">
   </AudioLoopComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/nuke.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

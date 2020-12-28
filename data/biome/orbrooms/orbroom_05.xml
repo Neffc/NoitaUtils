@@ -1,10 +1,16 @@
 <Biome>
   <Topology 
-    name="Orb Room"
+    name="$biome_orbroom"
     type="BIOME_WANG_TILE"
-    background_use_neighbor="1"
-    background_image="data/weather_gfx/background_crypt.png"
-    wang_template_file="" 
+    background_use_neighbor="0"
+    background_image="data/weather_gfx/background_wandcave.png"
+    background_edge_right="data/biome_impl/wandcave/right_edge.png"
+    background_edge_left="data/weather_gfx/edges/background_wandcave_left.png"
+    background_edge_top="data/weather_gfx/edges/background_wandcave_top.png"
+    background_edge_bottom="data/weather_gfx/edges/background_wandcave_bottom.png"
+    background_edge_priority="12"     
+
+   wang_template_file="" 
     lua_script="data/scripts/biomes/orbrooms/orbroom_05.lua"
     wang_map_width="256"
     wang_map_height="256"

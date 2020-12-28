@@ -1,5 +1,5 @@
 <Entity 
-  name="$projectile_default" 
+  name="$projectile_default" tags="projectile_player"
    >
 
 	<Base file="data/entities/base_projectile.xml" >
@@ -41,6 +41,12 @@
     image_file="data/projectiles_gfx/dirt.xml"
      >
   </SpriteComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/material_blood.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

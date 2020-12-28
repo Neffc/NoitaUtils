@@ -18,6 +18,8 @@
         air_in_lungs_max="5" 
         air_lack_of_damage="0.2" 
         air_needed="0" 
+        materials_that_damage="acid,lava,poison,blood_cold,blood_cold_vapour,magic_liquid_mana_regeneration" 
+        materials_how_much_damage="0.004,0.004,0.001,0.0008,0.0007,0.004"
         falling_damage_damage_max="1.2" 
         falling_damage_damage_min="0.1" 
         falling_damage_height_max="450" 
@@ -38,6 +40,7 @@
         mLastCheckY="0" 
         materials_damage="1" 
         ragdoll_filenames_file=""
+        ragdoll_material="meat_helpless"
         ragdoll_offset_y="0"
         >
     </DamageModelComponent>

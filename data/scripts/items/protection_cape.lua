@@ -1,5 +1,5 @@
 dofile( "data/scripts/game_helpers.lua" )
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 
 function item_pickup( entity_item, entity_who_picked, item_name )

@@ -139,6 +139,12 @@
 	<ItemPickUpperComponent
     	is_in_npc="1">
     </ItemPickUpperComponent>
-
+	<Entity>
+	    <GameEffectComponent 
+	        effect="ALLERGY_RADIOACTIVE"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
 </Entity>
 

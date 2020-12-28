@@ -1,8 +1,8 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 -- The level of action ids that are spawned from the chests
 CHEST_LEVEL = 1
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 
 RegisterSpawnFunction( 0xff0000ff, "spawn_nest" )
 
@@ -85,7 +85,15 @@ g_big_enemies =
 		min_count	= 1,
 		max_count	= 2,    
 		entity 	= "data/entities/animals/miner_santa.xml",
-		spawn_check = function() return false end
+		spawn_check = function()
+			local year, month, day = GameGetDateAndTimeLocal()
+			
+			if ( month == 12 ) and ( day >= 24 ) and ( day <= 26 ) then
+				return true
+			else
+				return false 
+			end
+		end
 	},
 	{
 		prob   		= 0.2,
@@ -117,11 +125,13 @@ g_big_enemies =
 		max_count	= 2,    
 		entity 	= "data/entities/animals/miner_santa.xml",
 		spawn_check = function() 
-			if( os.date("%d%m") == "2412" ) then
-				return true 
-			else 
+			local year, month, day = GameGetDateAndTimeLocal()
+			
+			if ( month == 12 ) and ( day >= 24 ) and ( day <= 26 ) then
+				return true
+			else
 				return false 
-			end 
+			end
 		end
 	},
 }
@@ -193,11 +203,13 @@ g_unique_enemy2 =
 		max_count	= 1,    
 		entity 	= "data/entities/animals/miner_santa.xml",
 		spawn_check = function() 
-			if( os.date("%d%m") == "2412" ) then
-				return true 
-			else 
+			local year, month, day = GameGetDateAndTimeLocal()
+			
+			if ( month == 12 ) and ( day >= 24 ) and ( day <= 26 ) then
+				return true
+			else
 				return false 
-			end 
+			end
 		end
 
 	},

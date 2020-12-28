@@ -1,5 +1,5 @@
-dofile("data/scripts/lib/utilities.lua")
-dofile("data/scripts/gun/procedural/gun_action_utils.lua")
+dofile_once("data/scripts/lib/utilities.lua")
+dofile_once("data/scripts/gun/procedural/gun_action_utils.lua")
 
 function get_random_from( target )
 	local rnd = Random(1, #target)
@@ -30,7 +30,7 @@ end
 
 local entity_id = GetUpdatedEntityID()
 local x, y = EntityGetTransform( entity_id )
-SetRandomSeed( x, y )
+SetRandomSeed( x-1, y )
 
 local ability_comp = EntityGetFirstComponent( entity_id, "AbilityComponent" )
 
@@ -45,7 +45,7 @@ gun.spread_degrees = 0
 gun.speed_multiplier = 1
 gun.mana_charge_speed = {5,20}
 gun.mana_max = {80,110}
-gun.actions = {"BOMB","DYNAMITE","CLOUD_WATER","ROCKET","GRENADE"}
+gun.actions = {"BOMB","DYNAMITE","MINE","ROCKET","GRENADE"}
 
 local mana_max = get_random_between_range( gun.mana_max )
 local deck_capacity = gun.deck_capacity
@@ -66,7 +66,16 @@ ComponentSetValue( ability_comp, "mana_max", mana_max )
 ComponentSetValue( ability_comp, "mana", mana_max )
 
 local action_count = 1
-local gun_action = get_random_from( gun.actions )
+
+local gun_action = "BOMB"
+local n_of_deaths = tonumber( StatsGlobalGetValue("death_count") )
+
+if( n_of_deaths >= 1 ) then
+	if( Random(1,100) < 50 ) then
+		gun_action = get_random_from( gun.actions )
+	end
+end
+
 
 for i=1,action_count do
 	--AddGunActionPermanent( entity_id, gun_action )

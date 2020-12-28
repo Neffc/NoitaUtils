@@ -1,5 +1,5 @@
-dofile( "data/scripts/lib/utilities.lua" )
-dofile( "data/scripts/buildings/wand_trap.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
+dofile_once( "data/scripts/buildings/wand_trap.lua" )
 
 function item_pickup( entity_item, entity_who_picked, name )
 	local entity_id    = GetUpdatedEntityID()

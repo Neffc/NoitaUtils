@@ -1,10 +1,10 @@
-<Entity name="$projectile_default">
+<Entity name="$projectile_default" >
 
   <Base file="data/entities/base_projectile_physics.xml">
 
     <PhysicsImageShapeComponent 
       image_file="data/items_gfx/bomb.png"
-      material="fuse_bright" >
+      material="fuse" >
     </PhysicsImageShapeComponent>
   
     <ProjectileComponent
@@ -126,14 +126,20 @@
   </ParticleEmitterComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="player_projectiles/bomb">
   </AudioComponent>
 
   <AudioLoopComponent
-    file="data/audio/Desktop/projectiles.snd"
+    file="data/audio/Desktop/projectiles.bank"
     event_name="projectiles/fuse_burn_slow"
     auto_play="1">
   </AudioLoopComponent>
+  
+  <VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/bomb_small.xml"
+		>
+	</VariableStorageComponent>
   
 </Entity>

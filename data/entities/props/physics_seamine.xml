@@ -2,7 +2,10 @@
 
   <!-- mortal is required so it can explode -->
 
-  <Base file="data/entities/base_item_physics.xml" >
+  <Base file="data/entities/base_item_physics2.xml" >
+    <PhysicsBody2Component
+      kill_entity_after_initialized="0" >
+    </PhysicsBody2Component>
     <PhysicsImageShapeComponent
       image_file="data/props_gfx/seamine.png"
       material="metal_rust" >
@@ -63,7 +66,7 @@
       explosion_sprite_lifetime="10" 
       create_cell_probability="80" 
       hole_destroy_liquid="0" 
-      load_this_entity="data/entities/particles/particle_explosion/main.xml"
+      load_this_entity="data/entities/particles/particle_explosion/main_gunpowder_large.xml"
       hole_enabled="1" 
       ray_energy="700000"
       particle_effect="1" 
@@ -86,7 +89,7 @@
 
   <AudioLoopComponent
     _tags="sound_spray"
-    file="data/audio/Desktop/materials.snd"
+    file="data/audio/Desktop/materials.bank"
     event_name="materials/spray" 
     volume_autofade_speed="0.25" >
   </AudioLoopComponent>

@@ -2,7 +2,10 @@
 
   <!-- mortal is required so it can explode -->
 
-  <Base file="data/entities/base_item_physics.xml" >
+  <Base file="data/entities/base_item_physics2.xml" >
+    <PhysicsBody2Component
+      kill_entity_after_initialized="0" >
+    </PhysicsBody2Component>
     <PhysicsImageShapeComponent
       centered="1" 
       image_file="data/props_gfx/tnt.png"
@@ -55,7 +58,7 @@
       hole_enabled="1" 
       ray_energy="4000000"
       particle_effect="0" 
-      load_this_entity="data/entities/particles/particle_explosion/main.xml"
+      load_this_entity="data/entities/particles/particle_explosion/main_gunpowder_medium.xml"
       damage_mortals="1" 
       physics_explosion_power.min="1.5" 
       physics_explosion_power.max="2.2" 
@@ -69,7 +72,7 @@
       delay.min="1"
       delay.max="4"
       explosion_delay_id="1"
-      >
+      audio_event_name="explosions/box" >
     </config_explosion>
   </ExplodeOnDamageComponent>
 </Entity>

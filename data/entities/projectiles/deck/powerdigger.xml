@@ -1,4 +1,4 @@
-<Entity name="$projectile_default">
+<Entity name="$projectile_default" tags="projectile_player" >
 
 	<Base file="data/entities/base_projectile.xml" >
 	</Base>
@@ -33,6 +33,10 @@
     shoot_light_flash_b="145"
     shoot_light_flash_radius="90" 
     >
+	<damage_by_type 
+		drill="0.1"
+		>
+    </damage_by_type>
     <config_explosion
       never_cache="1" 
       camera_shake="1.5" 
@@ -128,5 +132,11 @@
     emission_interval_max_frames="2"
     is_emitting="1" >
   </ParticleEmitterComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/powerdigger.xml"
+		>
+	</VariableStorageComponent>
 </Entity>
 

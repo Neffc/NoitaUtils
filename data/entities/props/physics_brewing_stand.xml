@@ -1,20 +1,14 @@
 <Entity>
 
-  <Base file="data/entities/base_item_physics.xml" >
-    <PhysicsBodyComponent 
-      on_death_leave_physics_body="0" >
-    </PhysicsBodyComponent>
-
+  <Base file="data/entities/base_item_physics2.xml" >
+    <PhysicsBody2Component
+      kill_entity_after_initialized="0" >
+    </PhysicsBody2Component>
     <PhysicsImageShapeComponent 
       image_file="data/props_gfx/brewing_stand.png"
       material="wood_prop" >
     </PhysicsImageShapeComponent>
   </Base>
-  
-  <CameraBoundComponent
-    max_count="50"
-    distance="500">
-  </CameraBoundComponent>
 	
   <MaterialInventoryComponent 
     _enabled="1" 
@@ -44,13 +38,15 @@
     materials_create_messages="0" 
     materials_damage="0" 
     ragdoll_filenames_file="" 
-    ragdoll_material="" >
+    ragdoll_material="" 
+	ui_report_damage="0"
+	>
   </DamageModelComponent>
 
   <ParticleEmitterComponent 
     emitted_material_name="steam"
     offset.x="2"
-    offset.y="-12"
+    offset.y="-18"
     x_pos_offset_min="-1"
     x_pos_offset_max="0"
     y_pos_offset_min="1"
@@ -72,7 +68,7 @@
 
   <ParticleEmitterComponent 
     emitted_material_name="alcohol"
-    offset.x="9"
+    offset.x="10"
     offset.y="13"
     x_pos_offset_min="0"
     x_pos_offset_max="2"
@@ -95,7 +91,7 @@
 
   <AudioLoopComponent
     _tags="sound_spray"
-    file="data/audio/Desktop/materials.snd"
+    file="data/audio/Desktop/materials.bank"
     event_name="materials/spray"
     volume_autofade_speed="0.25" >
   </AudioLoopComponent>

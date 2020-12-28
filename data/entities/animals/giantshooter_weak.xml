@@ -1,4 +1,4 @@
-<Entity name="$animal_giantshooter">
+<Entity name="$animal_giantshooter_weak">
   
 	<Base file="data/entities/animals/giantshooter.xml" >
 		<DamageModelComponent

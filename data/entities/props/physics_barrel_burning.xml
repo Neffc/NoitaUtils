@@ -2,7 +2,10 @@
 
   <!-- mortal is required so it can explode -->
 
-  <Base file="data/entities/base_item_physics.xml" >
+  <Base file="data/entities/base_item_physics2.xml" >
+    <PhysicsBody2Component
+      kill_entity_after_initialized="0" >
+    </PhysicsBody2Component>
     <PhysicsImageShapeComponent
       image_file="data/props_gfx/barrel_burning.png"
       material="metal_rust_barrel" >
@@ -87,13 +90,13 @@
 
   <AudioLoopComponent
     _tags="sound_spray"
-    file="data/audio/Desktop/materials.snd"
+    file="data/audio/Desktop/materials.bank"
     event_name="materials/spray" 
     volume_autofade_speed="0.25" >
   </AudioLoopComponent>
   
   <AudioComponent
-    file="data/audio/Desktop/materials.snd"
+    file="data/audio/Desktop/materials.bank"
     event_root="collision/metalhollow"
     set_latest_event_position="1" >
   </AudioComponent>

@@ -8,6 +8,6 @@
 		limited_materials="1"
 		materials="sand,soil,bone,fungisoil,mud,sandstone,snow,snow_sticky,sand_herb,wax,coal,sulphur,salt,gunpowder,gunpowder_unstable,gunpowder_explosive,gunpowder_tnt,poo,glass_broken"
 		>
-    </MagicConvertMaterialComponent>
+    </CellEaterComponent>
   
 </Entity>

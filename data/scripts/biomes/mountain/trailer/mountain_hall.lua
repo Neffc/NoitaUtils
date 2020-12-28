@@ -1,8 +1,8 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 8
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biomes/mountain/mountain.lua")
-dofile("data/scripts/lib/utilities.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biomes/mountain/mountain.lua")
+dofile_once("data/scripts/lib/utilities.lua")
 
 function spawn_wands( x, y ) end
 
@@ -63,9 +63,9 @@ g_small_enemies_helpless =
 function init( x, y, w, h )
 	LoadPixelScene( "data/biome_impl/trailer/mountain_hall.png", "data/biome_impl/trailer/mountain_hall_visual.png", x, y, "data/biome_impl/trailer/mountain_hall_background.png", true )
 	LoadPixelScene( "data/biome_impl/trailer/mountain_hall_text.png", "data/biome_impl/trailer/mountain_hall_text_visual.png", x, y, "", true )
-	LoadPixelScene( "data/biome_impl/mountain_hall_b.png", "data/biome_impl/mountain_hall_b_visual.png", x, y+512, "", true )
-	LoadPixelScene( "data/biome_impl/mountain_hall_br.png", "data/biome_impl/mountain_hall_br_visual.png", x+512, y+512, "", true )
-	LoadPixelScene( "data/biome_impl/mountain_hall_r.png", "data/biome_impl/mountain_hall_r_visual.png", x+512, y, "", true )
+	LoadPixelScene( "data/biome_impl/mountain/hall_b.png", "data/biome_impl/mountain/hall_b_visual.png", x, y+512, "", true )
+	LoadPixelScene( "data/biome_impl/mountain/hall_br.png", "data/biome_impl/mountain/hall_br_visual.png", x+512, y+512, "", true )
+	LoadPixelScene( "data/biome_impl/mountain/hall_r.png", "data/biome_impl/mountain/hall_r_visual.png", x+512, y, "", true )
 	
 	-- move upwards
 	y = y - 26

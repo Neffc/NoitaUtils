@@ -20,7 +20,7 @@
   
   <LuaComponent
     execute_on_removed="0"
-    execute_every_n_frame="99999999"
+    execute_every_n_frame="-1"
     script_death="data/scripts/props/coalmine_structure_death.lua"
     remove_after_executed="0">
   </LuaComponent>

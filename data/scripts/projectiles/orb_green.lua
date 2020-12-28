@@ -14,7 +14,7 @@ local length = 100
 
 for i=1,how_many do
 	GameEntityPlaySound( entity_id, "duplicate" )
-	local entity_id = EntityLoad( "data/entities/projectiles/orb_green.xml", pos_x, pos_y)
+	entity_id = EntityLoad( "data/entities/projectiles/orb_green.xml", pos_x, pos_y)
 
 	comp_ids = EntityGetComponent( entity_id, "ProjectileComponent" )
 	if( comp_ids ~= nil ) then

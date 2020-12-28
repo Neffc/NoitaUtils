@@ -1,4 +1,4 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 function damage_received( damage, desc, entity_who_caused, is_fatal )
 	local entity_id    = GetUpdatedEntityID()

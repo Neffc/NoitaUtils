@@ -1,4 +1,4 @@
-dofile("data/scripts/lib/utilities.lua")
+dofile_once("data/scripts/lib/utilities.lua")
 
 
 function convert_material( x, y, from_material, to_material, clean_stains )

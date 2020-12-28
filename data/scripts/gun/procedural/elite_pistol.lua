@@ -29,10 +29,10 @@ function generate_gun()
 			name = gun_names[ Random( 1, #gun_names ) ] .. ' ' .. name 
 		end
 
-  		AddGunAction( entity_id, "LIGHT_BULLET_TIMER" )
-  		AddGunAction( entity_id, "Y_SHAPE" )
-  		AddGunAction( entity_id, "BULLET" )
-  		AddGunAction( entity_id, "BULLET" )
+		AddGunAction( entity_id, "LIGHT_BULLET_TIMER" )
+		AddGunAction( entity_id, "Y_SHAPE" )
+		AddGunAction( entity_id, "BULLET" )
+		AddGunAction( entity_id, "BULLET" )
 
 		-- change the bullets
 		-- SetItemSprite( entity_id, ability_comp, "data/items_gfx/gungen_guns/handgun_", Random( 0, 7 )  )

@@ -1,7 +1,8 @@
 <Sprite 
   filename="data/enemies_gfx/bigfirebug.png" 
   offset_x="10" 
-  offset_y="18" >
+  offset_y="18"
+  default_animation="stand" >
 
   <RectAnimation 
     frame_count="10" 

@@ -2,6 +2,7 @@
  filename="data/enemies_gfx/firebug.png"
  offset_x="8"
  offset_y="13"
+ default_animation="stand"
  >
 
  <!-- stand -->

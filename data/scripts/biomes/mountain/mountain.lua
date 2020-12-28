@@ -8,17 +8,16 @@ g_lamp =
 		max_count	= 0,    
 		entity 	= ""
 	},
-	-- add skullflys after this step
 	{
 		prob   		= 1.5,
 		min_count	= 1,
 		max_count	= 1,    
-		entity 	= "data/entities/props/physics_lantern_small.xml"
+		entity 	= "data/entities/props/physics/lantern_small.xml"
 	},
 }
 
 function spawn_lamp( x, y )
-	EntityLoad( "data/entities/props/physics_lantern_small.xml", x+1, y+1 ) 
+	EntityLoad( "data/entities/props/physics/lantern_small.xml", x, y )
 end
 
 function spawn_small_enemies( x, y ) end

@@ -44,7 +44,7 @@
   </SpriteComponent>
 
   <AudioComponent
-		file="data/audio/Desktop/projectiles.snd"
+		file="data/audio/Desktop/projectiles.bank"
 		event_root="projectiles/slimeblob">
 	</AudioComponent>
 </Entity>

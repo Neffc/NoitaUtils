@@ -1,7 +1,9 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 local entity_id    = GetUpdatedEntityID()
 local pos_x, pos_y = EntityGetTransform( entity_id )
+
+SetRandomSeed( GameGetFrameNum(), pos_x + pos_y + entity_id )
 
 local how_many = Random(8,12)
 local angle_inc = (( 2 * 3.14159 ) / how_many)

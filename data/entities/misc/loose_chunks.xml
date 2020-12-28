@@ -3,7 +3,7 @@
   <LooseGroundComponent
     probability="0.2"
     chunk_probability="0.15"
-    collapse_images="data/collapse_masks/big/$[0-14].png"
+    collapse_images="data/procedural_gfx/collapse_big/$[0-14].png"
    >
   </LooseGroundComponent>
 

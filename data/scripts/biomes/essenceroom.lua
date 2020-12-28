@@ -1,7 +1,7 @@
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/lib/utilities.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 RegisterSpawnFunction( 0xff31d0b4, "spawn_essence" )
@@ -24,7 +24,7 @@ function spawn_potions( x, y ) end
 function spawn_wands( x, y ) end
 
 function init( x, y, w, h )
-	LoadPixelScene( "data/biome_impl/essenceroom.png", "", x, y, "data/biome_impl/orbroom_background.png", true )
+	LoadPixelScene( "data/biome_impl/essenceroom.png", "", x, y, "data/biome_impl/essenceroom_background.png", true )
 end
 
 function spawn_orb(x, y)

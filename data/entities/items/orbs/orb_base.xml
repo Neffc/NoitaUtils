@@ -22,7 +22,7 @@
 	</UIInfoComponent>
 
 	<ItemComponent
-		item_name="Orb"
+		item_name="$item_orb"
 		play_spinning_animation="0"
 		auto_pickup="0"
     	play_pick_sound="0"
@@ -98,7 +98,7 @@
 		_tags="sound_jetpack" 
 		auto_play="1" 
 		calculate_material_lowpass="0" 
-		file="data/audio/Desktop/event_cues.snd" 
+		file="data/audio/Desktop/event_cues.bank" 
 		event_name="event_cues/orb/loop" >
 	</AudioLoopComponent>
 	

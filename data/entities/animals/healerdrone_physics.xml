@@ -85,6 +85,9 @@
 		
 		<AnimalAIComponent 
 			_enabled="1" 
+			escape_if_damaged_probability="100"
+			attack_if_damaged_probability="0"
+			tries_to_ranged_attack_friends="1"
 			preferred_job="JobDefault"
 			creature_detection_range_x="250"
 			creature_detection_range_y="250"
@@ -137,7 +140,7 @@
 		</PathFindingGridMarkerComponent>
 		
 		<GenomeDataComponent 
-			herd_id="healer_robot"
+			herd_id="healer"
 			food_chain_rank="5"
 			is_predator="1" >
 		</GenomeDataComponent>
@@ -175,5 +178,13 @@
 			>
 		</CharacterDataComponent>
 	</Base>
+	
+	<Entity>
+	    <GameEffectComponent 
+	        effect="PROTECTION_FREEZE"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
 </Entity>
 

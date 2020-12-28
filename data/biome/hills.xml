@@ -1,10 +1,14 @@
 <Biome>
   <Topology 
     name="_EMPTY_"
-    background_image="data/weather_gfx/background_cave_02.png"
-    background_use_neighbor="1"
+    background_image="data/weather_gfx/background_cave_04_alt.png"
+    background_edge_left="data/weather_gfx/edges/background_cave_04_alt_left.png"
+    background_edge_right="data/weather_gfx/edges/background_cave_04_alt_right.png"
+    background_edge_top="data/weather_gfx/edges/background_cave_04_alt_top.png"
+    background_edge_bottom="data/weather_gfx/edges/background_cave_04_alt_bottom.png"
+    background_edge_priority="9"     
 
-    background_use_neighbor="1"
+    background_use_neighbor="0"
     lua_script="data/scripts/biomes/hills.lua"
     noise_type="SIN_CAPPED_SIMPLEX"
     mGradientAddNoise="1" 
@@ -88,6 +92,18 @@
           >
         </CaveStructure>
         <CaveStructure
+          image_file="data/biome_impl/caves/eye_0$[1-4].png"
+          aabb_min_x="5"
+          aabb_max_x="507"
+          aabb_min_y="0"
+          aabb_max_y="5"
+          count_min="3"
+          count_max="3"
+          strength_min="1.45"
+          strength_max="1.55"
+          >
+        </CaveStructure>
+        <CaveStructure
           image_file="data/biome_impl/caves/pit.png"
           aabb_min_x="5"
           aabb_max_x="507"
@@ -99,7 +115,7 @@
           strength_max="0.65"
           >
         </CaveStructure>
-		<CaveStructure
+		    <CaveStructure
           image_file="data/biome_impl/caves/deep_pit.png"
           aabb_min_x="5"
           aabb_max_x="507"
@@ -464,6 +480,29 @@
 	  >
     </VegetationComponent>
 	
+  <!-- example entity load through VegetationComponent -->
+
+  <!--
+  <VegetationComponent 
+      _enabled="1" 
+      is_visual="1" 
+      rand_seed="12376.86" 
+      tree_extra_y="14" 
+      load_this_xml_instead="data/entities/_debug/debug_marker.xml" 
+      tree_image_visual="" 
+      tree_material="fungus_loose" 
+      tree_probability="0.38571" 
+      tree_radius_high="0.5286" 
+      tree_radius_low="0.228571" 
+      tree_width="76.1143" 
+      visual_color="0xffb89f6c" 
+      visual_offset_x="3" 
+      visual_offset_y="7.5" 
+    >
+    </VegetationComponent>
+
+  -->
+
 	<VegetationComponent 
       _enabled="1" 
       is_visual="0" 

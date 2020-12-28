@@ -135,15 +135,21 @@
 	</ParticleEmitterComponent>
 	
   <AudioLoopComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_name="projectiles/rocket_passby"
       auto_play="1">
   </AudioLoopComponent>
   
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="projectiles/rocket">
   </AudioComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/rocket_drone.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

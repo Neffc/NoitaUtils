@@ -56,7 +56,8 @@
 	  light_g="15"
       light_b="40"
       stains_enabled="0" 
-      stains_image="data/temp/explosion_stain.png" >
+      stains_image="data/temp/explosion_stain.png" 
+      audio_enabled="0" >
     </config_explosion>
   </ProjectileComponent>
   
@@ -98,7 +99,13 @@
   </LightComponent>
   
 	<AudioComponent
-		file="data/audio/Desktop/projectiles.snd"
-		event_root="projectiles/magic" >
+		file="data/audio/Desktop/projectiles.bank"
+		event_root="projectiles/orb_c" >
 	</AudioComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/orb_pink.xml"
+		>
+	</VariableStorageComponent>
 </Entity>

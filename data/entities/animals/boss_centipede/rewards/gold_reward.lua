@@ -34,6 +34,8 @@ function item_pickup( entity_item, entity_who_picked, name )
 	edit_component( entity_who_picked, "WalletComponent", function(comp,vars)
 		vars.money = money
 	end)
+	
+	SetRandomSeed( pos_x, pos_y )
 
 	for i=1,20 do
 		local x = pos_x + Random(-8, 8)

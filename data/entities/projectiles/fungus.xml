@@ -32,7 +32,7 @@
     velocity_sets_scale="0"
     on_collision_die="1"
     on_collision_spawn_entity="1"
-    spawn_entity="data/entities/animals/fungus.xml"
+    spawn_entity="data/entities/misc/fungus_projectile.xml"
     >
   </ProjectileComponent>
 

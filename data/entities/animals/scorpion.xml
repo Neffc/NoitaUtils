@@ -80,6 +80,11 @@
 			>
 		</HitboxComponent>
 	</Base>
+	
+	<AudioComponent
+		file="data/audio/Desktop/animals.bank"
+		event_root="animals/longleg" >
+	</AudioComponent>
 
 </Entity>
 

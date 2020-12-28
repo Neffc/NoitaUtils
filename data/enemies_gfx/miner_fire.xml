@@ -1,7 +1,9 @@
 <Sprite 
   filename="data/enemies_gfx/miner_fire.png" 
   offset_x="7" 
-  offset_y="14" >
+  offset_y="14"
+  default_animation="stand" >
+
   <RectAnimation 
     frame_count="6" 
     frame_height="18" 
@@ -11,8 +13,10 @@
     name="stand" 
     pos_x="0" 
     pos_y="0" 
-    >
-  </RectAnimation>
+    >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="7" 
     frame_height="18" 
@@ -23,24 +27,30 @@
     name="attack" 
     pos_x="0" 
     pos_y="90" 
-    >
+    >
+
     <Event 
       check_physics_material="0" 
       frame="4" 
       max_distance="500" 
       name="hit" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="0" 
       frame="4" 
       max_distance="500" 
       name="voc_attack" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="7" 
     frame_height="18" 
@@ -51,24 +61,30 @@
     name="attack_ranged" 
     pos_x="0" 
     pos_y="90" 
-    >
+    >
+
     <Event 
       check_physics_material="1" 
       frame="4" 
       max_distance="500" 
       name="throw_release" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="0" 
       frame="4" 
       max_distance="500" 
       name="throw" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="18" 
@@ -78,24 +94,30 @@
     name="walk" 
     pos_x="0" 
     pos_y="18" 
-    >
+    >
+
     <Event 
       check_physics_material="1" 
       frame="1" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="4" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="18" 
@@ -105,24 +127,30 @@
     name="run" 
     pos_x="0" 
     pos_y="18" 
-    >
+    >
+
     <Event 
       check_physics_material="1" 
       frame="1" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="4" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="2" 
     frame_height="18" 
@@ -133,16 +161,20 @@
     name="jump_up" 
     pos_x="0" 
     pos_y="36" 
-    >
+    >
+
     <Event 
       check_physics_material="1" 
       frame="0" 
       max_distance="500" 
       name="jump" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="2" 
     frame_height="18" 
@@ -153,8 +185,10 @@
     name="alert" 
     pos_x="0" 
     pos_y="72" 
-    >
-  </RectAnimation>
+    >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="18" 
@@ -164,24 +198,30 @@
     name="burn" 
     pos_x="0" 
     pos_y="18" 
-    >
+    >
+
     <Event 
       check_physics_material="1" 
       frame="1" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="4" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="3" 
     frame_height="18" 
@@ -192,8 +232,10 @@
     name="jump_fall" 
     pos_x="0" 
     pos_y="54" 
-    >
-  </RectAnimation>
+    >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="2" 
     frame_height="18" 
@@ -204,16 +246,20 @@
     name="land" 
     pos_x="0" 
     pos_y="72" 
-    >
+    >
+
     <Event 
       check_physics_material="1" 
       frame="0" 
       max_distance="500" 
       name="land" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="18" 
@@ -223,24 +269,30 @@
     name="swim_idle" 
     pos_x="0" 
     pos_y="18" 
-    >
+    >
+
     <Event 
       check_physics_material="0" 
       frame="1" 
       max_distance="500" 
       name="paddle" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="0" 
       frame="4" 
       max_distance="500" 
       name="paddle" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="18" 
@@ -250,24 +302,30 @@
     name="swim_move" 
     pos_x="0" 
     pos_y="18" 
-    >
+    >
+
     <Event 
       check_physics_material="0" 
       frame="1" 
       max_distance="500" 
       name="paddle" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="0" 
       frame="4" 
       max_distance="500" 
       name="paddle" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="3" 
     frame_height="18" 
@@ -278,22 +336,29 @@
     name="jump_prepare" 
     pos_x="0" 
     pos_y="108" 
-    >
+    >
+
     <Event 
       check_physics_material="0" 
       frame="0" 
       max_distance="500" 
       name="voc_jump" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="0" 
       frame="2" 
       max_distance="500" 
       name="jump_start" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
-</Sprite>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
+</Sprite>
+

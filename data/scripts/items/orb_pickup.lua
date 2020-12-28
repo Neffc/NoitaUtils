@@ -1,5 +1,5 @@
 dofile( "data/scripts/game_helpers.lua" )
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 function item_pickup( entity_item, entity_who_picked, item_name )
 	local pos_x, pos_y = EntityGetTransform( entity_item )
@@ -16,6 +16,7 @@ function item_pickup( entity_item, entity_who_picked, item_name )
 	local message_desc = ""
 	
 	local orb_id_string = string.sub("00" .. tostring(orb_id), -2)
+	AddFlagPersistent( "progress_orb_1" )
 	
 	if (orb_id > -1) then
 		if( orb_id >= 100 ) then
@@ -23,14 +24,19 @@ function item_pickup( entity_item, entity_who_picked, item_name )
 			message_title = "$itempickup_orb_evil"
 			message_desc = "$itempickupdesc_orb_discovered"
 			
-			shoot_projectile( entity_id, "data/entities/items/pickup/heart_evil.xml", pos_x, pos_y, 0, 0 )
+			AddFlagPersistent( "progress_orb_evil" )
+			
+			-- shoot_projectile( entity_id, "data/entities/items/pickup/heart_evil.xml", pos_x, pos_y, 0, 0 )
+			EntityLoad( "data/entities/items/pickup/heart_evil.xml", pos_x, pos_y )
 		else
-			if( GameGetOrbCollectedAllTime(orb_id) or GameIsDailyRun() ) then
+			if( GameGetOrbCollectedAllTime(orb_id) or GameIsDailyRunOrDailyPracticeRun() ) then
 				-- normal orb
 				message_title = "$itempickup_orb_discovered"
 				message_desc = "$itempickupdesc_orb_discovered"
 				
-				shoot_projectile( entity_id, "data/entities/items/pickup/heart.xml", pos_x, pos_y, 0, 0 )
+
+				-- shoot_projectile( entity_id, "data/entities/items/pickup/heart.xml", pos_x, pos_y, 0, 0 )
+				EntityLoad( "data/entities/items/pickup/heart.xml", pos_x, pos_y )
 			else
 				message_title = "$itempickup_orb"
 				message_desc = "$itempickupdesc_orb_" .. orb_id_string
@@ -46,6 +52,11 @@ function item_pickup( entity_item, entity_who_picked, item_name )
 		end
 	end
 	
+	local orbs = GameGetOrbCountAllTime()
+	if ( orbs >= 11 ) then
+		AddFlagPersistent( "progress_orb_all" )
+	end
+	
 	-- todo( Petri ): Only do this if the boss has not been beaten
 	-- GameAddFlagRun( "boss_centipede_is_dead" )
 	if( GameHasFlagRun( "boss_centipede_is_dead" ) == false ) then
@@ -56,6 +67,6 @@ function item_pickup( entity_item, entity_who_picked, item_name )
 	
 	GamePrintImportant( message_title, message_desc )
 	
-	shoot_projectile( entity_id, "data/entities/particles/image_emitters/orb_effect.xml", pos_x, pos_y, 0, 0 )
+	shoot_projectile( entity_who_picked, "data/entities/particles/image_emitters/orb_effect.xml", pos_x, pos_y, 0, 0 )
 	EntityKill( entity_item )
 end

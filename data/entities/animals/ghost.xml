@@ -1,6 +1,6 @@
 <Entity 
   name="$animal_ghost" 
-  tags="mortal,hittable" 
+  tags="mortal,hittable,music_energy_000_near,enemy" 
   serialize="0" >
 
   <_Transform 
@@ -39,12 +39,15 @@
 	blood_sprite_large=""
 	>
     <damage_multipliers 
-      drill="1" 
-      electricity="1" 
-      explosion="1" 
-      fire="1" 
-      melee="1" 
-      projectile="1" >
+      drill="0" 
+      electricity="0" 
+      explosion="0" 
+      fire="0" 
+      melee="0" 
+      projectile="0"
+	  ice="0"
+	  slice="0"
+	  >
     </damage_multipliers>
 
   </DamageModelComponent>
@@ -57,10 +60,11 @@
   </GenomeDataComponent>
 
 	<DamageNearbyEntitiesComponent
-		radius="16"
-		time_between_damaging="3"
-		target_tag="player_unit"
-		ragdoll_fx="NONE">
+    radius="16"
+    time_between_damaging="3"
+    target_tag="player_unit"
+    damage_type="DAMAGE_CURSE"
+    ragdoll_fx="NONE">
 	</DamageNearbyEntitiesComponent>
 
   <GhostComponent 
@@ -101,12 +105,12 @@
   </SpriteComponent>
 
   <AudioComponent
-    file="data/audio/Desktop/animals.snd"
+    file="data/audio/Desktop/animals.bank"
     event_root="animals/ghost" >
   </AudioComponent>
 
   <AudioLoopComponent
-    file="data/audio/Desktop/animals.snd"
+    file="data/audio/Desktop/animals.bank"
     event_name="animals/ghost/movement_loop"
     set_speed_parameter="1"
     auto_play="1">

@@ -1,4 +1,4 @@
-<Entity name="$animal_thundermage" >
+<Entity name="$animal_thundermage" tags="thundermage" >
   
 	<Base file="data/entities/base_enemy_basic.xml" >
 		<ItemChestComponent level="2" > </ItemChestComponent>
@@ -33,6 +33,7 @@
 			air_needed="0"
 			>
 			<damage_multipliers
+			explosion="0.5"
 			electricity="-1">
 			</damage_multipliers>
 		</DamageModelComponent>
@@ -150,7 +151,7 @@
     </MusicEnergyAffectorComponent>
 
 	<AudioLoopComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/thundermage/movement_loop"
 		set_speed_parameter="1"
 		auto_play="1">

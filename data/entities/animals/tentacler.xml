@@ -99,8 +99,8 @@
 	    </CharacterDataComponent>
 	    
 		<AudioComponent
-			file="data/audio/Desktop/animals.snd"
-			event_root="slimes">
+			file="data/audio/Desktop/animals.bank"
+			event_root="animals/slime">
 		</AudioComponent>
 
 	</Base>
@@ -160,7 +160,7 @@
 
 	<AudioLoopComponent
 		_tags="sound_spray"
-		file="data/audio/Desktop/materials.snd"
+		file="data/audio/Desktop/materials.bank"
 		event_name="materials/spray_animal" 
 		volume_autofade_speed="0.25" >
 	</AudioLoopComponent>
@@ -174,7 +174,7 @@
 	<Entity>  <Base file="data/entities/verlet_chains/smalltentacle/tentacler_tentacle_02.xml"> <InheritTransformComponent><Transform position.x="0"  position.y="-1" ></Transform></InheritTransformComponent> </Base>  </Entity>
 
 	<AudioLoopComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/slimy_big/movement_loop"
 		set_speed_parameter="1"
 		auto_play="1">

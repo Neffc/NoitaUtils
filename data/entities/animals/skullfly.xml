@@ -27,7 +27,7 @@
 		
 		<DamageModelComponent 
             hp="4.2"
-            ragdoll_material="meat_slime"
+            ragdoll_material="meat_slime_cursed"
 			ragdoll_filenames_file="data/ragdolls/skullfly/filenames.txt" 
 			blood_material="slime"
 			blood_spray_material="slime"
@@ -93,5 +93,11 @@
 			>
 		</CharacterDataComponent>
 	</Base>
+
+	<AudioComponent
+		file="data/audio/Desktop/animals.bank"
+		event_root="animals/skullfly" >
+	</AudioComponent>
+	
 </Entity>
 

@@ -1,4 +1,4 @@
-<Entity tags="drillable,kickable,teleportable_NOT">
+<Entity tags="drillable,kickable,teleportable_NOT,prop,torch">
   <ItemComponent
     _tags="enabled_in_world">
   </ItemComponent>

@@ -1,14 +1,14 @@
-<Entity _tags="damage">
+<Entity _tags="critical hit">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 
-			image_file="data/ui_gfx/gun_actions/damage.png" 
+			image_file="data/ui_gfx/gun_actions/critical_hit.png" 
 			>
 		</SpriteComponent>
 		
 		<ItemActionComponent 
 			_tags="enabled_in_world"
-			action_id="DAMAGE" >
+			action_id="CRITICAL_HIT" >
 		</ItemActionComponent>
 	</Base>
 

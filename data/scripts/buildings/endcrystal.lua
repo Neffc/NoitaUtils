@@ -1,4 +1,4 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 function item_pickup( entity_item, entity_who_picked, name )
 	GamePrintImportant( "$log_endcrystal", "$logdesc_endcrystal" )
@@ -7,8 +7,6 @@ function item_pickup( entity_item, entity_who_picked, name )
 
 	local max_hp = 0
 	
-	local x, y = EntityGetTransform( entity_item )
-
 	if( damagemodels ~= nil ) then
 		for i,v in ipairs(damagemodels) do
 			max_hp = tonumber( ComponentGetValue( v, "max_hp" ) )
@@ -17,7 +15,7 @@ function item_pickup( entity_item, entity_who_picked, name )
 		end
 	end
 
-	local entity_id    = GetUpdatedEntityID()
+	local entity_id = GetUpdatedEntityID()
 	local x, y = EntityGetTransform( entity_id )
 	--EntityLoad( "data/entities/animals/ending_placeholder/boss_limbs/boss_limbs.xml", x, y - 160 )
 	EntityLoad( "data/entities/animals/ending_placeholder/boss_dragon_endcrystal.xml", x, y - 256 )

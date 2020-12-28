@@ -11,9 +11,10 @@
 		aabb_min.y="-99" 
 		aabb_max.x="63" 
 		aabb_max.y="78" 
-		damage_per_frame="0.8"
-		update_every_n_frame="60"
+		damage_per_frame="0.01333"
+		update_every_n_frame="10"
 		death_cause="$damage_holy_mountains_curse"
+		damage_type="DAMAGE_CURSE"
 		>
 	</AreaDamageComponent>
 	

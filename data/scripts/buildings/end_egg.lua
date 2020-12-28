@@ -15,8 +15,10 @@ local pos_x, pos_y = EntityGetTransform( entity_id )
 local ppos_x = 0
 local ppos_y = 0
 
+SetRandomSeed( GameGetFrameNum(), pos_x + pos_y + entity_id )
+
 local players = EntityGetWithTag( "player_unit" )
-if( players == nil ) then
+if( #players == 0 ) then
 	return
 end
 ppos_x, ppos_y = EntityGetTransform( players[1])
@@ -48,7 +50,7 @@ GlobalsSetValue("boss_dragon_spawned", "1")
 EntityLoad( "data/entities/animals/boss_dragon.xml", ppos_x, ppos_y )
 
 local end_eggs = EntityGetWithTag( "end_egg" )
-if( end_eggs ~= nil ) then
+if( #end_eggs > 0 ) then
 	for i,v in ipairs(end_eggs) do
 		EntityKill(v)
 	end

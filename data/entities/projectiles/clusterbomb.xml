@@ -39,7 +39,7 @@
       camera_shake="20" 
       explosion_radius="20"
       explosion_sprite="data/particles/explosion_032.xml"
-	  load_this_entity="data/entities/particles/particle_explosion/main_small.xml"
+	  load_this_entity="data/entities/particles/particle_explosion/main_gunpowder_small.xml"
       explosion_sprite_lifetime="0" 
       create_cell_probability="60" 
       hole_destroy_liquid="1" 
@@ -57,7 +57,8 @@
       sparks_count_max="40" 
       sparks_enabled="1" 
       stains_enabled="1"
-      stains_radius="12" >
+      stains_radius="12"
+      audio_event_name="explosions/tnt" >
     </config_explosion>
   </ProjectileComponent>
   
@@ -84,9 +85,15 @@
   </SpriteComponent>
   
   <AudioComponent
-    file="data/audio/Desktop/projectiles.snd"
+    file="data/audio/Desktop/projectiles.bank"
     event_root="projectiles/bullet_fire_heavy">
   </AudioComponent>
+  
+  <VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/clusterbomb.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

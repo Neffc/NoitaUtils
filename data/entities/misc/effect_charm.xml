@@ -13,12 +13,12 @@
     
     <GameEffectComponent 
         effect="CHARM"
-        frames="7200"
+        frames="-1"
     >
 	</GameEffectComponent >
 
 	<AudioComponent
-		file="data/audio/Desktop/misc.snd"
+		file="data/audio/Desktop/misc.bank"
 		event_root="game_effect/charm" >
 	</AudioComponent>
 </Entity>

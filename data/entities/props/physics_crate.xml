@@ -39,7 +39,8 @@
     materials_create_messages="0" 
     materials_damage="0" 
     ragdoll_filenames_file="" 
-    ragdoll_material="" >
+    ragdoll_material="" 
+	>
 	<damage_multipliers
 		melee="0.1"
 		>
@@ -60,18 +61,18 @@
       explosion_sprite_lifetime="10" 
       create_cell_probability="70" 
 	    create_cell_material="fire"
-      hole_destroy_liquid="0" 
-      load_this_entity="data/entities/particles/particle_explosion/main.xml"
+      hole_destroy_liquid="1" 
+      load_this_entity="data/entities/particles/particle_explosion/main_gunpowder_large.xml"
       hole_enabled="1" 
-      ray_energy="10000"
+      ray_energy="500000"
       particle_effect="1" 
       damage_mortals="1" 
       physics_explosion_power.min="1.8" 
       physics_explosion_power.max="2.5" 
       physics_throw_enabled="1"
       shake_vegetation="1" 
-      sparks_count_min="15" 
-	    sparks_count_max="20" 
+      sparks_count_min="35" 
+	    sparks_count_max="50" 
       sparks_enabled="1" 
       stains_enabled="1" 
       stains_radius="15" 

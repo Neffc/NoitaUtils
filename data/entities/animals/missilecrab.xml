@@ -25,13 +25,14 @@
 			attack_ranged_aim_rotation_speed="0.1"
 			attack_ranged_aim_rotation_shooting_ok_angle_deg="5"
 			attack_ranged_use_laser_sight="1"
+			attack_ranged_laser_sight_beam_kind="1"
 			aggressiveness_min="1"
 			aggressiveness_max="80"
 			>
 		</AnimalAIComponent>
 		
 		<DamageModelComponent 
-            hp="7.5"
+            hp="12"
             ragdoll_material="steel"
 			ragdoll_filenames_file="data/ragdolls/missilecrab/filenames.txt" 
 			blood_material="oil"
@@ -125,6 +126,14 @@
 		rect_animation="walk" 
 		 >
 	</SpriteComponent>
+	
+	<Entity>
+	    <GameEffectComponent 
+	        effect="PROTECTION_FREEZE"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
 
 </Entity>
 

@@ -1,4 +1,4 @@
-<Entity name="$projectile_default">
+<Entity name="$projectile_default" tags="projectile_player" >
 
     <Base file="data/entities/base_projectile.xml" >
     </Base>
@@ -40,6 +40,12 @@
      
      >
   </SpriteComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/material_cement.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

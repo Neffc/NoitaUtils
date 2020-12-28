@@ -27,6 +27,7 @@
 			attack_ranged_entity_count_max="2"
 			attack_ranged_frames_between="100" 
 			attack_ranged_use_laser_sight="1"
+			attack_ranged_laser_sight_beam_kind="1"
 			attack_ranged_aim_rotation_speed="0.01"
 			attack_ranged_aim_rotation_shooting_ok_angle_deg="2"
 			attack_ranged_offset_y="-6"
@@ -56,8 +57,6 @@
 			image_file="data/enemies_gfx/turret.xml" 
 			offset_x="0"
 			offset_y="0"
-			special_scale_x="1"
-			has_special_scale="1"
 			>
 		</SpriteComponent>
 
@@ -73,8 +72,11 @@
 		
 		<CharacterPlatformingComponent 
 			jump_velocity_y="0" 
-			run_velocity="0"  >
-		</CharacterPlatformingComponent>
+			run_velocity="0"
+			swim_idle_buoyancy_coeff="0.8"
+			swim_up_buoyancy_coeff="0.8"
+			swim_down_buoyancy_coeff="0.8"
+		></CharacterPlatformingComponent>
 		
 		<PathFindingComponent
 			can_jump="0"
@@ -172,6 +174,14 @@
 		rect_animation="stand" 
 		 >
 	</SpriteComponent>
+	
+	<Entity>
+	    <GameEffectComponent 
+	        effect="PROTECTION_FREEZE"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
 
 </Entity>
 

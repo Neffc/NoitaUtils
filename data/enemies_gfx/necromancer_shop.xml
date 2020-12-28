@@ -1,7 +1,9 @@
 <Sprite 
   filename="data/enemies_gfx/necromancer_shop.png" 
   offset_x="13" 
-  offset_y="24" >
+  offset_y="24"
+  default_animation="stand" >
+
   <RectAnimation 
     frame_count="6" 
     frame_height="32" 
@@ -10,8 +12,10 @@
     frames_per_row="6" 
     name="stand" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="32" 
@@ -20,8 +24,10 @@
     frames_per_row="6" 
     name="walk" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="32" 
@@ -30,8 +36,10 @@
     frames_per_row="6" 
     name="run" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="32" 
@@ -40,8 +48,10 @@
     frames_per_row="6" 
     name="burn" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="32" 
@@ -50,8 +60,10 @@
     frames_per_row="15" 
     name="fly_idle" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="32" 
@@ -60,8 +72,10 @@
     frames_per_row="15" 
     name="fly_move" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="8" 
     frame_height="33" 
@@ -72,15 +86,18 @@
     name="attack_ranged" 
     pos_x="0" 
     pos_y="34" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="3" 
       max_distance="500" 
       name="shoot_magic" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
   </RectAnimation>
   
   <RectAnimation 
@@ -105,5 +122,7 @@
 
     </Event>
 
-  </RectAnimation>
-</Sprite>
+  </RectAnimation>
+
+</Sprite>
+

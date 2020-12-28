@@ -44,7 +44,7 @@
 			sparks_enabled="0" 
 			stains_enabled="1" 
 			stains_radius="9"
-      		audio_event_name="explosion_slime" >
+      		audio_event_name="explosions/slime_small" >
 			>
 		</config_explosion>
 	</ProjectileComponent>
@@ -87,9 +87,15 @@
 	</ParticleEmitterComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/projectiles.snd"
-		event_root="projectiles/orb_b">
+		file="data/audio/Desktop/projectiles.bank"
+		event_root="projectiles/bloomshot">
 	</AudioComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/bloomshot.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

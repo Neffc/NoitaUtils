@@ -1,4 +1,4 @@
-<Entity tags="hittable" >
+<Entity tags="hittable,prop" >
 	<HitboxComponent 
 		aabb_min_x="-1" 
 		aabb_max_x="1" 
@@ -31,7 +31,9 @@
 		materials_create_messages="0" 
 		materials_damage="1" 
 		ragdoll_filenames_file="" 
-		ragdoll_material="wood_static" >
+		ragdoll_material="wood_static" 
+		ui_report_damage="0"
+		>
 	</DamageModelComponent>
 
 	<SpriteComponent

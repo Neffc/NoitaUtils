@@ -19,7 +19,7 @@
 	<!-- gfx -->
 	
 	<UIInfoComponent
-		name="The Work"
+		name="$teleport_ending_victory"
 		>
 	</UIInfoComponent>
 

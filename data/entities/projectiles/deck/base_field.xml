@@ -1,4 +1,4 @@
-<Entity name="$projectile_default">
+<Entity name="$projectile_default" tags="projectile_player,projectile" >
 
   <SpriteComponent 
     _enabled="1" 
@@ -72,6 +72,7 @@
       shoot_light_flash_radius="0" 
       damage_game_effect_entities="data/entities/misc/effect_charm.xml,"
       play_damage_sounds="0"
+	  damage_every_x_frames="15"
     >
     <config_explosion
       never_cache="1" 
@@ -92,13 +93,13 @@
   </ProjectileComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="player_projectiles/field"
       set_latest_event_position="1" >
   </AudioComponent>
   
   <AudioLoopComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_name="player_projectiles/field/loop"
       auto_play="1" >
   </AudioLoopComponent>

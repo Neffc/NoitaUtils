@@ -1,7 +1,7 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 RegisterSpawnFunction( 0xffC8C800, "spawn_lamp2" )
@@ -9,8 +9,8 @@ RegisterSpawnFunction( 0xffC8C800, "spawn_lamp2" )
 function init( x, y, w, h )
 	print( "end init called: " .. x .. ", " .. y )
 	LoadPixelScene( "data/biome_impl/secret_entrance.png", "data/biome_impl/secret_entrance_visual.png", x, y, "", true )
-	LoadPixelScene( "data/biome_impl/mountain_hall_bottom.png", "", x, y+512, "", true )
-	LoadPixelScene( "data/biome_impl/mountain_inside_bottom_right.png", "", x, y-512, "", true )
+	LoadPixelScene( "data/biome_impl/mountain/hall_bottom.png", "", x, y+512, "", true )
+	LoadPixelScene( "data/biome_impl/mountain/inside_bottom_right.png", "", x, y-512, "", true )
 end
 
 g_small_enemies =

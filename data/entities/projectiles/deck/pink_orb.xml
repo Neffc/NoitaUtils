@@ -1,5 +1,5 @@
 <Entity 
-  name="$projectile_default" 
+  name="$projectile_default" tags="projectile_player"
    >
 
 	<Base file="data/entities/base_projectile.xml" >
@@ -123,4 +123,10 @@
     g="35"
     b="120">
   </LightComponent>
-  </Entity>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/pink_orb.xml"
+		>
+	</VariableStorageComponent>
+</Entity>

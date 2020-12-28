@@ -3,6 +3,13 @@
     name="$biome_rainforest"
     type="BIOME_WANG_TILE"
     background_image="data/weather_gfx/background_rainforest.png"
+    background_edge_left="data/weather_gfx/edges/background_rainforest_left.png"
+    background_edge_right="data/weather_gfx/edges/background_rainforest_right.png"
+    background_edge_top="data/weather_gfx/edges/background_rainforest_top.png"
+    background_edge_bottom="data/weather_gfx/edges/background_rainforest_bottom.png"
+    background_edge_priority="10"   
+    limit_background_image="0"  
+
     wang_template_file="data/wang_tiles/rainforest.png" 
     lua_script="data/scripts/biomes/rainforest.lua"
     wang_map_width="260"
@@ -40,9 +47,10 @@
     mMultiplierPerlin="0.642857" 
     mPerlinScale_x="0" 
     mPerlinScale_y="105" 
-    
-    audio_music_2="excavationsite"
-    audio_ambience="cave">
+    audio_music_2="rainforest"
+    audio_music_energy_coeff="2"
+    audio_music_forced_quietness_duration_seconds="4"
+    audio_ambience="rainforest"
 	>
 	<BitmapCaves
 	DEBUG_output_image=""
@@ -180,7 +188,28 @@
       grass_requires_neighbors="0"
       material_on_top_of="soil_lush"
       >
-    </VegetationComponent>
+    </VegetationComponent>    
+
+    <!-- this is for the FREEZING biome modifier. tree_probability should initially be 0 -->
+    <VegetationComponent 
+      _enabled="1" 
+      is_visual="1" 
+      rand_seed="8376.86" 
+      tree_extra_y="0" 
+      tree_image_file="" 
+      tree_image_visual="" 
+      tree_material="snow" 
+      tree_probability="0" 
+      tree_radius_high="0.414286" 
+      tree_radius_low="0.228571" 
+      tree_width="76.1143" 
+      visual_color="0xffb89f6c" 
+      visual_offset_x="3" 
+      visual_offset_y="7.5" 
+      is_grass="1"
+      grass_requires_neighbors="1"
+      material_on_top_of="soil"
+    ></VegetationComponent>
 
     <VegetationComponent 
       _enabled="1" 
@@ -331,7 +360,7 @@
       is_visual="0" 
       rand_seed="834676.86" 
       tree_extra_y="4" 
-      tree_image_file="data/vegetation/swamp_tree_0$[1-6].png" 
+      tree_image_file="data/vegetation/swamp_cropped_0$[1-6].png" 
       tree_image_visual="" 
       tree_material="wood_loose" 
       tree_probability="0.328571" 

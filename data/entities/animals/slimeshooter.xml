@@ -68,8 +68,8 @@
 	    </CharacterDataComponent>
 
 		<AudioComponent
-			file="data/audio/Desktop/animals.snd"
-			event_root="slimes">
+			file="data/audio/Desktop/animals.bank"
+			event_root="animals/slime">
 		</AudioComponent>
 
 	</Base>
@@ -95,12 +95,12 @@
 	</MaterialInventoryComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals/slimeshooter" >
 	</AudioComponent>
 
 	<AudioLoopComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/slimy_small/movement_loop"
 		set_speed_parameter="1"
 		auto_play="1">
@@ -108,7 +108,7 @@
 	
 	<AudioLoopComponent
 		_tags="sound_spray"
-		file="data/audio/Desktop/materials.snd"
+		file="data/audio/Desktop/materials.bank"
 		event_name="materials/spray_animal" 
 		volume_autofade_speed="0.25" >
 	</AudioLoopComponent>

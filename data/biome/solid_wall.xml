@@ -2,7 +2,7 @@
   <Topology 
     name="_EMPTY_"
     background_image="data/weather_gfx/background_cave_02.png"
-    background_use_neighbor="1"
+    background_use_neighbor="0"
     lua_script="data/scripts/biomes/hills.lua"
     mBiomeMaterialsFile="data/materials/biome_forest.xml" 
     mExtraPerlinScaleX="0.05" 
@@ -33,6 +33,7 @@
     mWaterLevel="1000"
     limit_background_image="1"
     fat_biome_edges="0"
+    has_rain="0"
      >
 
   </Topology>

@@ -1,4 +1,4 @@
-<Entity tags="vegetation" >
+<Entity tags="prop" >
 
 	<PixelSpriteComponent 
 		_enabled="1" 

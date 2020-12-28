@@ -94,9 +94,15 @@
 	</LightComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
-      event_root="projectiles/slime">
+      file="data/audio/Desktop/projectiles.bank"
+      event_root="projectiles/slime_gas">
   </AudioComponent>
+  
+  <VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/gasblob.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

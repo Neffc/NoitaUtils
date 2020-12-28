@@ -86,7 +86,7 @@
 	</Base>
 
 	<AudioLoopComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/wing_flap_insect/movement_loop"
 		set_speed_parameter="1"
 		auto_play="1">

@@ -174,7 +174,8 @@
 		  sparks_enabled="1" 
 		  stains_enabled="1" 
 		  stains_image="data/temp/explosion_stain.png" 
-		  ray_energy="200000">
+		  ray_energy="200000"
+    	  audio_event_name="explosions/tnt" >
 		</config_explosion>
 	</ExplosionComponent>
 	
@@ -220,7 +221,7 @@
   </CollisionTriggerComponent>
 
 	<AudioLoopComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/pebble/movement_loop"
 		set_speed_parameter="1"
 		auto_play="1">

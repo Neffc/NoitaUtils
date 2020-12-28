@@ -1,4 +1,4 @@
-<Entity tags="hittable,teleportable_NOT" >
+<Entity tags="hittable,teleportable_NOT,item_physics" >
 
   <!-- physical presence -->
   
@@ -29,7 +29,7 @@
 
   <ProjectileComponent
     _tags="enabled_in_world"
-    lifetime="100000"
+    lifetime="-1"
     penetrate_entities="1"
   ></ProjectileComponent>
 
@@ -37,18 +37,32 @@
     _tags="enabled_in_world"
   ></VelocityComponent>
   
-   <ElectricitySourceComponent
+  <ElectricitySourceComponent
 		_tags="enabled_in_world,enabled_in_hand"
-        radius="24"
+    radius="24"
 		emission_interval_frames="64"
 		>
-    </ElectricitySourceComponent>
+  </ElectricitySourceComponent>
+
+  <!-- other -->
+
+  <GameEffectComponent 
+    _tags="enabled_in_hand"
+    effect="PROTECTION_ELECTRICITY"
+    frames="-1"
+  ></GameEffectComponent>
+
+  <GameEffectComponent 
+    _tags="enabled_in_hand"
+    effect="FRIEND_THUNDERMAGE"
+    frames="-1"
+  ></GameEffectComponent>
 
   <!-- item -->
 
   <SpriteComponent
     _tags="enabled_in_hand"
-    _enabled="false"
+    _enabled="0"
     offset_x="4"
     offset_y="4"
     image_file="data/items_gfx/thunderstone.png"
@@ -57,11 +71,11 @@
   <ItemComponent
     _tags="enabled_in_world"
     item_name="$item_thunderstone"
+    ui_description="$item_description_thunderstone"
+    ui_sprite="data/ui_gfx/items/ingredient_1.png"
     max_child_items="0"
     is_pickable="1"
     is_equipable_forced="1"
-    ui_sprite="data/ui_gfx/items/ingredient_1.png"
-    ui_description="$item_thunderstone"
     preferred_inventory="QUICK"
   ></ItemComponent>
 

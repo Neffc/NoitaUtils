@@ -14,7 +14,7 @@
 
 		<DamageModelComponent 
             hp="6" 
-            ragdoll_material="meat_slime_orange"
+            ragdoll_material="meat_slime_cursed"
 			blood_material="lava"
 			blood_spray_material="lava"
 			fire_probability_of_ignition="0" 
@@ -71,6 +71,18 @@
 			>
 		</CharacterDataComponent>
 	</Base>
+	
+	<AudioComponent
+		file="data/audio/Desktop/animals.bank"
+		event_root="animals/gazer" >
+	</AudioComponent>
+
+	<AudioLoopComponent
+		file="data/audio/Desktop/animals.bank"
+		event_name="animals/gazer/movement_loop"
+		set_speed_parameter="1"
+		auto_play="1">
+	</AudioLoopComponent>
 
 	<MaterialInventoryComponent 
 		_enabled="1" 

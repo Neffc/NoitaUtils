@@ -1,4 +1,4 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 function collision_trigger()
 	local entity_id    = GetUpdatedEntityID()
@@ -14,12 +14,23 @@ function collision_trigger()
 	--
 	-- this does the workshop rewards for playing in a certain way
 	-- 1) killed none
+	
+	local reference_id = EntityGetClosestWithTag( x, y, "workshop_reference" )
 
 	local enemies_killed = tonumber( StatsBiomeGetValue("enemies_killed") )
 	print(enemies_killed)
 	if( enemies_killed == 0 ) then
 		print("KILLED NONE")
-		EntityLoad( "data/entities/items/pickup/chest_random.xml", x, y )
+		local sx,sy = x,y
+		
+		if ( reference_id ~= NULL_ENTITY ) then
+			sx,sy = EntityGetTransform( reference_id )
+		else
+			print("No reference point found for workshop no-kill chest")
+		end
+		
+		print("Loading chest_random.xml to " .. tostring(sx) .. ", " .. tostring(sy))
+		EntityLoad( "data/entities/items/pickup/chest_random.xml", sx, sy )
 	else
 		print("KILLED ALL")
 	end

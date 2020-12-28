@@ -2,7 +2,8 @@
   filename="data/enemies_gfx/wizard_tele.png" 
   hotspots_filename="data/enemies_gfx/wizard_hotspots.png" 
   offset_x="8" 
-  offset_y="14" >
+  offset_y="14" 
+  default_animation="stand">
 
   <RectAnimation 
     frame_count="6" 

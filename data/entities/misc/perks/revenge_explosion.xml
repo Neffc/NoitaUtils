@@ -46,9 +46,16 @@
       sparks_enabled="1" 
       stains_enabled="1" 
       stains_image="data/temp/explosion_stain.png" 
+    audio_event_name="explosions/revenge_perk"
 	  ray_energy="20000">
     </config_explosion>
   </ProjectileComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/misc/perks/revenge_explosion.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

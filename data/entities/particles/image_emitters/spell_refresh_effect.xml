@@ -30,7 +30,7 @@
 	</LifetimeComponent>
 
     <AudioComponent
-      file="data/audio/Desktop/event_cues.snd"
+      file="data/audio/Desktop/event_cues.bank"
       event_root="event_cues/spell_refresh">
     </AudioComponent>
 

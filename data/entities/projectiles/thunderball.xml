@@ -67,7 +67,8 @@
 	  light_g="120"
       light_b="150"
       stains_enabled="1" 
-      stains_image="data/temp/explosion_stain.png" >
+      stains_image="data/temp/explosion_stain.png"
+      audio_event_name="explosions/electric" >
     </config_explosion>
   </ProjectileComponent>
   
@@ -120,9 +121,20 @@
     >
   </SpriteParticleEmitterComponent>
 
+  <AudioComponent
+    file="data/audio/Desktop/projectiles.bank"
+    event_root="projectiles/electric">
+  </AudioComponent>
+
   <AudioLoopComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_name="projectiles/electric/loop"
       auto_play="1">
   </AudioLoopComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/thunderball.xml"
+		>
+	</VariableStorageComponent>
  </Entity>

@@ -1,4 +1,4 @@
-<Entity  name="$animal_firemage">
+<Entity name="$animal_firemage" tags="firemage" >
   
 	<Base file="data/entities/base_enemy_basic.xml" >
 		<ItemChestComponent level="1" > </ItemChestComponent>
@@ -27,8 +27,8 @@
             hp="5"
 			ragdoll_filenames_file="data/ragdolls/firemage/filenames.txt" 
 			fire_probability_of_ignition="0" 
-			materials_that_damage="acid,water,poison,blood_cold,blood_cold_vapour" 
-			materials_how_much_damage="0.004,0.0005,0.001,0.0008,0.0007"
+			materials_that_damage="acid,water,poison,blood_cold,blood_cold_vapour,mud,water_swamp,water_salt,swamp,snow,water_ice" 
+			materials_how_much_damage="0.004,0.0005,0.001,0.0008,0.0007,0.0005,0.0005,0.0005,0.0005,0.0005,0.0005"
 			ragdoll_material="lavarock_static"
 			blood_material="lava"
 			blood_spray_material="lava"
@@ -202,12 +202,12 @@
     </MusicEnergyAffectorComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals/firemage" >
 	</AudioComponent>
 
 	<AudioLoopComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/firemage/burning_loop"
 		set_speed_parameter="1"
 		auto_play="1">

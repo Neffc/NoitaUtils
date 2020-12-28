@@ -1,4 +1,4 @@
-<Entity tags="mortal,hittable,teleportable_NOT" name="$animal_boss_dragon_endcrystal">
+<Entity tags="mortal,hittable,teleportable_NOT,enemy" name="$animal_boss_dragon_endcrystal">
 	<_Transform 
 		position.x="0" 
 		position.y="0" 
@@ -221,6 +221,7 @@
 		update_transform="1" 
 		visible="1" 
 		z_index="-9000"
+		never_ragdollify_on_death="1"
 		 >
 	</SpriteComponent>
 
@@ -241,6 +242,7 @@
 		update_transform="1" 
 		visible="1" 
 		z_index="-9000"
+		never_ragdollify_on_death="1"
 		 >
 	</SpriteComponent>
 
@@ -257,7 +259,7 @@
 	
 	<LuaComponent
 		execute_on_removed="1"
-		execute_every_n_frame="99999999"
+		execute_every_n_frame="-1"
 		script_source_file="data/scripts/buildings/endcrystal_victory.lua"
 		remove_after_executed="0">
 	</LuaComponent>
@@ -283,19 +285,6 @@
 			food_chain_rank="20"
 			is_predator="1" >
 		</GenomeDataComponent>
-		
-		<!--
-		<SpriteComponent 
-			alpha="1" 
-			image_file="data/enemies_gfx/angler_head.xml" 
-			rect_animation="eat" 
-			next_rect_animation="eat" 
-			offset_x="15" 
-			offset_y="6" 
-			z_index="-0.45"
-			>
-		</SpriteComponent>
-		-->
 
 	</Entity>
 </Entity>

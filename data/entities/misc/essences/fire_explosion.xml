@@ -28,15 +28,15 @@
     <config_explosion
       never_cache="1" 
       camera_shake="7.5" 
-      explosion_radius="40" 
+      explosion_radius="80" 
       explosion_sprite="data/particles/explosion_040_poof.xml"
-	  load_this_entity="data/entities/particles/particle_explosion/main_medium.xml"
+	  load_this_entity="data/entities/particles/particle_explosion/main_large.xml"
       explosion_sprite_lifetime="0" 
       create_cell_probability="1" 
       create_cell_material="fire" 
       hole_destroy_liquid="0" 
-	  ray_energy="260000"
-      damage="2.75"
+	  ray_energy="2660000"
+      damage="1.75"
       hole_enabled="1" 
       hole_image="data/temp/explosion_hole.png" 
       particle_effect="1" 
@@ -50,7 +50,8 @@
       sparks_count_min="20"
       light_fade_time="0.8" 
       stains_enabled="1" 
-      stains_image="data/temp/explosion_stain.png" >
+      stains_image="data/temp/explosion_stain.png" 
+     audio_event_name="explosions/muffled_small" >
     </config_explosion>
   </ProjectileComponent>
 

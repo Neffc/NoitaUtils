@@ -7,12 +7,12 @@
 		><config_explosion
 		  never_cache="1" 
 		  camera_shake="25.0" 
-		  explosion_radius="8" 
+		  explosion_radius="16" 
 		  explosion_sprite="data/particles/explosion_008.xml"
 		  explosion_sprite_lifetime="0" 
 		  create_cell_probability="80" 
 		  create_cell_material="fire" 
-		  ray_energy="117000"
+		  ray_energy="207000"
 		  hole_destroy_liquid="0" 
 		  damage="1"
 		  hole_enabled="1" 
@@ -28,7 +28,8 @@
 		  sparks_count_min="10"
 		  light_fade_time="0.8" 
 		  stains_enabled="1" 
-		  stains_image="data/temp/explosion_stain.png" >
+		  stains_image="data/temp/explosion_stain.png"
+     	  audio_event_name="explosions/muffled_small" >
 		</config_explosion>
 	</ExplosionComponent>
 	

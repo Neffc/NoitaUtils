@@ -3,12 +3,18 @@
     name="$biome_boss_victoryroom"
     type="BIOME_WANG_TILE"
     background_image="data/weather_gfx/background_the_end.png"
-	limit_background_image="0"
+    background_edge_left="data/weather_gfx/edges/background_the_end_left.png"
+    background_edge_right="data/weather_gfx/edges/background_the_end_right.png"
+    background_edge_top="data/weather_gfx/edges/background_the_end_top.png"
+    background_edge_bottom="data/weather_gfx/edges/background_the_end_bottom.png"
+    background_edge_priority="10"     
+    
+    limit_background_image="0"
     wang_template_file="data/wang_tiles/the_end.png" 
     lua_script="data/scripts/biomes/the_end.lua"
     wang_map_width="256"
     wang_map_height="256"
-    audio_music_2="wandcave"
+    audio_music_2="the_end"
     audio_ambience="snowcave">
 	<BitmapCaves 
       size_x="512"

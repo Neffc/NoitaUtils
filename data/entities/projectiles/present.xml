@@ -85,5 +85,11 @@
 		emission_interval_max_frames="6"
 		is_emitting="1" >
 	</ParticleEmitterComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/present.xml"
+		>
+	</VariableStorageComponent>
 </Entity>
 

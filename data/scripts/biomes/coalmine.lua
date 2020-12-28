@@ -1,9 +1,10 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 -- The level of action ids that are spawned from the chests
 CHEST_LEVEL = 1
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/director_helpers_design.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/director_helpers_design.lua")
+dofile_once("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/biome_modifiers.lua")
 dofile( "data/scripts/items/generate_shop_item.lua" )
 
 RegisterSpawnFunction( 0xff0000ff, "spawn_nest" )
@@ -20,6 +21,7 @@ RegisterSpawnFunction( 0xff55FF8C, "spawn_chest" )
 RegisterSpawnFunction( 0xff4e175e, "load_oiltank_alt" )
 RegisterSpawnFunction( 0xff33934c, "spawn_shopitem" )
 RegisterSpawnFunction( 0xff50fafa, "spawn_trapwand" )
+RegisterSpawnFunction( 0xfff12ab5, "spawn_bbqbox" )
 
 ------------ small enemies -------------------------------
 
@@ -131,10 +133,18 @@ g_big_enemies =
 		min_count	= 1,
 		max_count	= 2,    
 		entity 	= "data/entities/animals/miner_santa.xml",
-		spawn_check = function() return false end
+		spawn_check = function()
+			local year, month, day = GameGetDateAndTimeLocal()
+			
+			if ( month == 12 ) and ( day >= 24 ) and ( day <= 26 ) then
+				return true
+			else
+				return false 
+			end
+		end,
 	},
 	{
-		prob   		= 0.12,
+		prob   		= 0.20,
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/shotgunner_weak.xml"
@@ -155,7 +165,7 @@ g_big_enemies =
 		prob   		= 0.09,
 		min_count	= 1,
 		max_count	= 1,    
-		entity 	= "data/entities/animals/fireskull_weak.xml"
+		entity 	= "data/entities/animals/fireskull.xml"
 	},	
 	{
 		prob   		= 0.3,
@@ -163,12 +173,20 @@ g_big_enemies =
 		max_count	= 2,    
 		entity 	= "data/entities/animals/miner_santa.xml",
 		spawn_check = function() 
-			if( os.date("%d%m") == "2412" ) then
-				return true 
-			else 
+			local year, month, day = GameGetDateAndTimeLocal()
+			
+			if ( month == 12 ) and ( day >= 24 ) and ( day <= 26 ) then
+				return true
+			else
 				return false 
-			end 
-		end
+			end
+		end,
+	},
+	{
+		prob   		= 0.02,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/shaman.xml"
 	},
 }
 
@@ -186,7 +204,7 @@ g_lamp =
 		prob   		= 0.7,
 		min_count	= 1,
 		max_count	= 1,    
-		entity 	= "data/entities/props/physics_lantern_small.xml"
+		entity 	= "data/entities/props/physics/lantern_small.xml"
 	},
 }
 
@@ -240,16 +258,17 @@ g_unique_enemy2 =
 		max_count	= 1,    
 		entity 	= "data/entities/animals/miner_santa.xml",
 		spawn_check = function() 
-			if( os.date("%d%m") == "2412" ) then
-				return true 
-			else 
+			local year, month, day = GameGetDateAndTimeLocal()
+			
+			if ( month == 12 ) and ( day >= 24 ) and ( day <= 26 ) then
+				return true
+			else
 				return false 
-			end 
-		end
-
+			end
+		end,
 	},
 	{
-		prob   		= 0.5,
+		prob   		= 0.85,
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/shotgunner_weak.xml"
@@ -315,6 +334,12 @@ g_fungi =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/fungus.xml"
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/fungus_big.xml"
 	},
 }
 
@@ -389,6 +414,54 @@ g_items =
 		prob   		= 1,
 		min_count	= 1,
 		max_count	= 1,    
+		entity 	= "data/entities/items/wands/level_01/wand_010.xml"
+	},
+	{
+		prob   		= 1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/items/wands/level_01/wand_011.xml"
+	},
+	{
+		prob   		= 1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/items/wands/level_01/wand_012.xml"
+	},
+	{
+		prob   		= 1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/items/wands/level_01/wand_013.xml"
+	},
+	{
+		prob   		= 1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/items/wands/level_01/wand_014.xml"
+	},
+	{
+		prob   		= 1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/items/wands/level_01/wand_015.xml"
+	},
+	{
+		prob   		= 1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/items/wands/level_01/wand_016.xml"
+	},
+	{
+		prob   		= 1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/items/wands/level_01/wand_017.xml"
+	},
+	{
+		prob   		= 1.9,
+		min_count	= 1,
+		max_count	= 1,    
 		entity 	= "data/entities/items/wand_level_01.xml"
 	},
 }
@@ -416,8 +489,8 @@ g_props =
 		prob   		= 0.25,
 		min_count	= 1,
 		max_count	= 1,
-		offset_y 	= -5,    
-		entity 	= "data/entities/props/physics_minecart.xml"
+		offset_y 	= -3,
+		entity 	= "data/entities/props/physics/minecart.xml"
 	},
 	{
 		prob   		= 0.25,
@@ -456,8 +529,8 @@ g_props2 =
 		prob   		= 0.2,
 		min_count	= 1,
 		max_count	= 1,    
-		offset_y 	= -5,
-		entity 	= "data/entities/props/physics_minecart.xml"
+		offset_y 	= -3,
+		entity 	= "data/entities/props/physics/minecart.xml"
 	},
 	{
 		prob   		= 0.5,
@@ -524,43 +597,43 @@ g_pixel_scene_01 =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_coalpit01.png",
-		visual_file		= "data/biome_impl/coalmine_coalpit01_visual.png",
+		material_file 	= "data/biome_impl/coalmine/coalpit01.png",
+		visual_file		= "data/biome_impl/coalmine/coalpit01_visual.png",
 		background_file	= "",
 		is_unique		= 0,
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_coalpit02.png",
-		visual_file		= "data/biome_impl/coalmine_coalpit02_visual.png",
+		material_file 	= "data/biome_impl/coalmine/coalpit02.png",
+		visual_file		= "data/biome_impl/coalmine/coalpit02_visual.png",
 		background_file	= "",
 		is_unique		= 0,
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_carthill.png",
-		visual_file		= "data/biome_impl/coalmine_carthill_visual.png",
+		material_file 	= "data/biome_impl/coalmine/carthill.png",
+		visual_file		= "data/biome_impl/coalmine/carthill_visual.png",
 		background_file	= "",
 		is_unique		= 0,
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_coalpit03.png",
-		visual_file		= "data/biome_impl/coalmine_coalpit03_visual.png",
+		material_file 	= "data/biome_impl/coalmine/coalpit03.png",
+		visual_file		= "data/biome_impl/coalmine/coalpit03_visual.png",
 		background_file	= "",
 		is_unique		= 0,
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_coalpit04.png",
-		visual_file		= "data/biome_impl/coalmine_coalpit04_visual.png",
+		material_file 	= "data/biome_impl/coalmine/coalpit04.png",
+		visual_file		= "data/biome_impl/coalmine/coalpit04_visual.png",
 		background_file	= "",
 		is_unique		= 0,
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_coalpit05.png",
-		visual_file		= "data/biome_impl/coalmine_coalpit05_visual.png",
+		material_file 	= "data/biome_impl/coalmine/coalpit05.png",
+		visual_file		= "data/biome_impl/coalmine/coalpit05_visual.png",
 		background_file	= "",
 		is_unique		= 0,
 	},
@@ -571,108 +644,108 @@ g_pixel_scene_02 =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_shrine01.png",
-		visual_file		= "data/biome_impl/coalmine_shrine01_visual.png",
+		material_file 	= "data/biome_impl/coalmine/shrine01.png",
+		visual_file		= "data/biome_impl/coalmine/shrine01_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_shrine02.png",
-		visual_file		= "data/biome_impl/coalmine_shrine02_visual.png",
+		material_file 	= "data/biome_impl/coalmine/shrine02.png",
+		visual_file		= "data/biome_impl/coalmine/shrine02_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_slimepit.png",
-		visual_file		= "data/biome_impl/coalmine_slimepit_visual.png",
+		material_file 	= "data/biome_impl/coalmine/slimepit.png",
+		visual_file		= "data/biome_impl/coalmine/slimepit_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_laboratory.png",
-		visual_file		= "data/biome_impl/coalmine_laboratory_visual.png",
+		material_file 	= "data/biome_impl/coalmine/laboratory.png",
+		visual_file		= "data/biome_impl/coalmine/laboratory_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_swarm.png",
-		visual_file		= "data/biome_impl/coalmine_swarm_visual.png",
+		material_file 	= "data/biome_impl/coalmine/swarm.png",
+		visual_file		= "data/biome_impl/coalmine/swarm_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_symbolroom.png",
+		material_file 	= "data/biome_impl/coalmine/symbolroom.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
-		prob   			= 1.2,
-		material_file 	= "data/biome_impl/coalmine_physics_01.png",
-		visual_file		= "data/biome_impl/coalmine_physics_01_visual.png",
+		prob   			= 0.5,
+		material_file 	= "data/biome_impl/coalmine/physics_01.png",
+		visual_file		= "data/biome_impl/coalmine/physics_01_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
-		prob   			= 1.2,
-		material_file 	= "data/biome_impl/coalmine_physics_02.png",
-		visual_file		= "data/biome_impl/coalmine_physics_02_visual.png",
+		prob   			= 0.5,
+		material_file 	= "data/biome_impl/coalmine/physics_02.png",
+		visual_file		= "data/biome_impl/coalmine/physics_02_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
-		prob   			= 1.2,
-		material_file 	= "data/biome_impl/coalmine_physics_03.png",
+		prob   			= 0.5,
+		material_file 	= "data/biome_impl/coalmine/physics_03.png",
+		visual_file		= "",
+		background_file	= "",
+		is_unique		= 0
+	},
+	{
+		prob   			= 1.5,
+		material_file 	= "data/biome_impl/coalmine/shop.png",
+		visual_file		= "data/biome_impl/coalmine/shop_visual.png",
+		background_file	= "",
+		is_unique		= 0
+	},
+	{
+		prob   			= 0.5,
+		material_file 	= "data/biome_impl/coalmine/radioactivecave.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.75,
-		material_file 	= "data/biome_impl/coalmine_shop.png",
-		visual_file		= "data/biome_impl/coalmine_shop_visual.png",
+		material_file 	= "data/biome_impl/coalmine/wandtrap_h_02.png",
+		visual_file		= "data/biome_impl/coalmine/wandtrap_h_02_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
-		prob   			= 0.1,
-		material_file 	= "data/biome_impl/coalmine_radioactivecave.png",
-		visual_file		= "",
-		background_file	= "",
-		is_unique		= 0
-	},
-	{
-		prob   			= 1.5,
-		material_file 	= "data/biome_impl/coalmine_wandtrap_h_02.png",
-		visual_file		= "data/biome_impl/coalmine_wandtrap_h_02_visual.png",
-		background_file	= "",
-		is_unique		= 0
-	},
-	{
-		prob   			= 1.5,
-		material_file 	= "data/biome_impl/coalmine_wandtrap_h_04.png",
-		visual_file		= "data/biome_impl/coalmine_wandtrap_h_04_visual.png",
+		prob   			= 0.75,
+		material_file 	= "data/biome_impl/coalmine/wandtrap_h_04.png",
+		visual_file		= "data/biome_impl/coalmine/wandtrap_h_04_visual.png",
 		background_file	= "",
 		is_unique		= 0,
-		color_material = { ["fff0bbee"] = { "oil", "alcohol", "gunpowder_explosive", "oil", "alcohol", "oil", "alcohol" } }
+		color_material = { ["fff0bbee"] = { "oil", "alcohol", "gunpowder_explosive" } }
 	},
 	{
-		prob   			= 1.5,
-		material_file 	= "data/biome_impl/coalmine_wandtrap_h_06.png",
-		visual_file		= "data/biome_impl/coalmine_wandtrap_h_06_visual.png",
+		prob   			= 0.75,
+		material_file 	= "data/biome_impl/coalmine/wandtrap_h_06.png",
+		visual_file		= "data/biome_impl/coalmine/wandtrap_h_06_visual.png",
 		background_file	= "",
 		is_unique		= 0,
 		color_material = { ["fff0bbee"] = { "magic_liquid_teleportation", "magic_liquid_polymorph", "magic_liquid_random_polymorph", "radioactive_liquid" } }
 	},
 	{
-		prob   			= 1.5,
-		material_file 	= "data/biome_impl/coalmine_wandtrap_h_07.png",
-		visual_file		= "data/biome_impl/coalmine_wandtrap_h_06_visual.png",
+		prob   			= 0.75,
+		material_file 	= "data/biome_impl/coalmine/wandtrap_h_07.png",
+		visual_file		= "data/biome_impl/coalmine/wandtrap_h_06_visual.png",
 		background_file	= "",
 		is_unique		= 0,
 		color_material = { ["fff0bbee"] = { "water", "oil", "alcohol", "radioactive_liquid" } }
@@ -681,15 +754,15 @@ g_pixel_scene_02 =
 	-- TODO( Petri ): Disabled the other wand traps for now, to test if this box2d electricty based wand trap is even a good idea
 	{
 		prob   			= 1.5,
-		material_file 	= "data/biome_impl/coalmine_wandtrap_h_01.png",
-		visual_file		= "data/biome_impl/coalmine_wandtrap_h_01_visual.png",
+		material_file 	= "data/biome_impl/coalmine/wandtrap_h_01.png",
+		visual_file		= "data/biome_impl/coalmine/wandtrap_h_01_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.5,
-		material_file 	= "data/biome_impl/coalmine_wandtrap_h_03.png",
-		visual_file		= "data/biome_impl/coalmine_wandtrap_h_03_visual.png",
+		material_file 	= "data/biome_impl/coalmine/wandtrap_h_03.png",
+		visual_file		= "data/biome_impl/coalmine/wandtrap_h_03_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
@@ -701,8 +774,8 @@ g_oiltank =
 	total_prob = 0,
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/coalmine_oiltank_1.png",
-		visual_file		= "data/biome_impl/coalmine_oiltank_1_visual.png",
+		material_file 	= "data/biome_impl/coalmine/oiltank_1.png",
+		visual_file		= "data/biome_impl/coalmine/oiltank_1_visual.png",
 		background_file	= "",
 		is_unique		= 0,
 		color_material = { ["fff0bbee"] = { "water", "oil", "water", "oil", "alcohol", "sand", "coal", "radioactive_liquid" } }
@@ -710,8 +783,8 @@ g_oiltank =
 	-- secret / magic materials tanker
 	{
 		prob   			= 0.0004,
-		material_file 	= "data/biome_impl/coalmine_oiltank_1.png",
-		visual_file		= "data/biome_impl/coalmine_oiltank_1_visual.png",
+		material_file 	= "data/biome_impl/coalmine/oiltank_1.png",
+		visual_file		= "data/biome_impl/coalmine/oiltank_1_visual.png",
 		background_file	= "",
 		is_unique		= 0,
 		color_material = { ["fff0bbee"] = { "magic_liquid_teleportation", "magic_liquid_polymorph", "magic_liquid_random_polymorph", "magic_liquid_berserk", "magic_liquid_charm", "magic_liquid_invisibility", "magic_liquid_hp_regeneration", "salt", "blood", "gold", "honey" } }
@@ -719,8 +792,8 @@ g_oiltank =
 	-- more common, but weirder
 	{
 		prob   			= 0.01,
-		material_file 	= "data/biome_impl/coalmine_oiltank_2.png",
-		visual_file		= "data/biome_impl/coalmine_oiltank_2_visual.png",
+		material_file 	= "data/biome_impl/coalmine/oiltank_2.png",
+		visual_file		= "data/biome_impl/coalmine/oiltank_2_visual.png",
 		background_file	= "",
 		is_unique		= 0,
 		color_material = { ["fff0bbee"] = { "blood_fungi", "blood_cold", "lava", "poison", "slime", "gunpowder_explosive", "soil", "salt", "blood", "cement" } }
@@ -728,31 +801,31 @@ g_oiltank =
 
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/coalmine_oiltank_2.png",
-		visual_file		= "data/biome_impl/coalmine_oiltank_2_visual.png",
+		material_file 	= "data/biome_impl/coalmine/oiltank_2.png",
+		visual_file		= "data/biome_impl/coalmine/oiltank_2_visual.png",
 		background_file	= "",
 		is_unique		= 0,
 		color_material = { ["fff0bbee"] = { "water", "oil", "water", "oil", "alcohol", "oil", "coal", "radioactive_liquid" } }
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/coalmine_oiltank_3.png",
-		visual_file		= "data/biome_impl/coalmine_oiltank_3_visual.png",
+		material_file 	= "data/biome_impl/coalmine/oiltank_3.png",
+		visual_file		= "data/biome_impl/coalmine/oiltank_3_visual.png",
 		background_file	= "",
 		is_unique		= 0,
 		color_material = { ["fff0bbee"] = { "water", "oil", "water", "oil", "alcohol", "water", "coal", "radioactive_liquid", "magic_liquid_teleportation" } }
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/coalmine_oiltank_4.png",
-		visual_file		= "data/biome_impl/coalmine_oiltank_4_visual.png",
+		material_file 	= "data/biome_impl/coalmine/oiltank_4.png",
+		visual_file		= "data/biome_impl/coalmine/oiltank_4_visual.png",
 		background_file	= "",
 		is_unique		= 0,
 		color_material = { ["fff0bbee"] = { "water", "oil", "water", "oil", "alcohol", "sand", "coal", "radioactive_liquid", "magic_liquid_polymorph" } }
 	},
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/coalmine_oiltank_5.png",
+		material_file 	= "data/biome_impl/coalmine/oiltank_5.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0,
@@ -765,8 +838,8 @@ g_oiltank_alt =
 	total_prob = 0,
 	{
 		prob   			= 1.0,
-		material_file 	= "data/biome_impl/coalmine_oiltank_alt.png",
-		visual_file		= "data/biome_impl/coalmine_oiltank_alt_visual.png",
+		material_file 	= "data/biome_impl/coalmine/oiltank_alt.png",
+		visual_file		= "data/biome_impl/coalmine/oiltank_alt_visual.png",
 		background_file	= "",
 		color_material = { ["fff0bbee"] = { "water", "oil", "water", "oil", "alcohol", "sand", "radioactive_liquid", "radioactive_liquid", "magic_liquid_berserk" } }
 	},
@@ -858,8 +931,7 @@ g_ghostlamp =
 		prob   		= 1.0,
 		min_count	= 1,
 		max_count	= 1,  
-		offset_y	= 10,
-		entity 	= "data/entities/props/physics_chain_torch_ghostly.xml"
+		entity 	= "data/entities/props/physics/chain_torch_ghostly.xml"
 	},
 }
 
@@ -968,10 +1040,10 @@ function spawn_small_enemies(x, y, w, h, is_open_path)
 		local spawn_percent = BiomeMapGetVerticalPositionInsideBiome( x, y )
 		spawn_percent = ( 2.1 * spawn_percent ) + 0.2
 		if( r > spawn_percent ) then return end
-		spawn(g_small_enemies,x,y,0,0)
+		spawn_with_limited_random(g_small_enemies,x,y,0,0,{"longleg","fungus"})
 		--spawn_hp(g_small_enemies,x,y,0,0,0.4,"coalmines")
 	else
-		spawn(g_small_enemies,x,y,0,0)
+		spawn_with_limited_random(g_small_enemies,x,y,0,0,{"longleg","fungus"})
 		--spawn_hp(g_small_enemies,x,y,0,0,0.4,"coalmines")
 	end
 end
@@ -982,16 +1054,20 @@ function spawn_big_enemies(x, y, w, h, is_open_path)
 		local spawn_percent = BiomeMapGetVerticalPositionInsideBiome( x, y )
 		spawn_percent = ( 1.75 * spawn_percent ) - 0.1
 		if( r > spawn_percent ) then return end
-		spawn(g_big_enemies,x,y,0,0)
+		spawn_with_limited_random(g_big_enemies,x,y,0,0,{"longleg","fungus"})
 		--spawn_hp(g_big_enemies,x,y,0,0,0.4,"coalmines")
 	else
-		spawn(g_big_enemies,x,y,0,0)
+		spawn_with_limited_random(g_big_enemies,x,y,0,0,{"longleg","fungus"})
 		--spawn_hp(g_big_enemies,x,y,0,0,0.4,"coalmines")
 	end
 end
 
 function spawn_lamp(x, y)
-	spawn(g_lamp,x,y+2,0,0)
+	spawn(g_lamp,x,y,0,0)
+end
+
+function spawn_ghostlamp(x, y)
+	spawn2(g_ghostlamp,x,y,0,0)
 end
 
 function spawn_props(x, y)
@@ -1023,7 +1099,13 @@ function spawn_fungi(x, y)
 end
 
 function load_pixel_scene( x, y )
-	load_random_pixel_scene( g_pixel_scene_01, x, y )
+	-- load_random_pixel_scene( g_pixel_scene_01, x, y )
+	SetRandomSeed( x, y )
+	if( Random( 1, 100 ) > 50 ) then
+		load_random_pixel_scene( g_oiltank, x, y )
+	else
+		load_random_pixel_scene( g_pixel_scene_01, x, y )
+	end
 end
 
 function load_pixel_scene2( x, y )
@@ -1031,7 +1113,13 @@ function load_pixel_scene2( x, y )
 end
 
 function load_oiltank( x, y )
-	load_random_pixel_scene( g_oiltank, x, y )
+	-- load_random_pixel_scene( g_oiltank, x, y )
+	SetRandomSeed( x, y )
+	if( Random( 1, 100 ) <= 50 ) then
+		load_random_pixel_scene( g_oiltank, x, y )
+	else
+		load_random_pixel_scene( g_pixel_scene_01, x, y )
+	end
 end
 
 function load_oiltank_alt( x, y )
@@ -1096,4 +1184,18 @@ function spawn_trapwand(x, y)
 	
 	local wand_id = EntityLoad( wand_to_spawn, x, y)
 	EntityAddTag( wand_id, "trap_wand" )
+end
+
+function spawn_bbqbox( x, y )
+	SetRandomSeed( x, y )
+	local rnd = Random( 1, 100 )
+	if( rnd <= 99 ) then
+		spawn_big_enemies( x, y )
+		spawn_big_enemies( x + 20, y )
+		spawn_big_enemies( x + 20, y + 10 )
+		spawn_heart( x + 10, y + 10 )
+	else
+		EntityLoadCameraBound( "data/entities/items/pickup/jar_of_urine.xml", x, y )
+		EntityLoad( "data/entities/animals/shotgunner_weak.xml", x + 10, y )
+	end
 end

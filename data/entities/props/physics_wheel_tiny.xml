@@ -49,6 +49,8 @@
 		materials_create_messages="0" 
 		materials_damage="1" 
 		ragdoll_filenames_file="" 
-		ragdoll_material="wood" >
+		ragdoll_material="wood" 
+		ui_report_damage="0"
+		>
 	</DamageModelComponent>
 </Entity>

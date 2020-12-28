@@ -35,7 +35,7 @@
 		hole_destroy_liquid="0" 
 		hole_enabled="1" 
 		hole_image="data/temp/explosion_hole.png" 
-		audio_event_name="explosion_tnt"
+		audio_event_name="explosions/tnt"
 		particle_effect="0" 
 		damage_mortals="1" 
 		physics_explosion_power.max="0.2" 
@@ -131,13 +131,20 @@
         ragdoll_filenames_file=""
         blood_material="lava"
         blood_multiplier="0"
-        create_ragdoll="false" >
+        create_ragdoll="0" >
     </DamageModelComponent>
 	
 	<AudioComponent
-		file="data/audio/Desktop/projectiles.snd"
-		event_root="projectiles/bullet_fire_heavy">
+		file="data/audio/Desktop/projectiles.bank"
+		event_root="projectiles/bullet_fire_heavy"
+		>
 	</AudioComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/lavashot.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

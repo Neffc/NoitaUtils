@@ -1,7 +1,9 @@
 <Sprite 
   filename="data/enemies_gfx/bigfirebug_emissive.png" 
   offset_x="10" 
-  offset_y="18" >
+  offset_y="18"
+  default_animation="stand" >
+
   <RectAnimation 
     frame_count="10" 
     frame_height="20" 
@@ -10,8 +12,10 @@
     frames_per_row="10" 
     name="stand" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="10" 
     frame_height="20" 
@@ -20,8 +24,10 @@
     frames_per_row="10" 
     name="walk" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="10" 
     frame_height="20" 
@@ -30,8 +36,10 @@
     frames_per_row="10" 
     name="run" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="10" 
     frame_height="20" 
@@ -40,8 +48,10 @@
     frames_per_row="10" 
     name="burn" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="8" 
     frame_height="20" 
@@ -50,8 +60,10 @@
     frames_per_row="8" 
     name="fly_move" 
     pos_x="0" 
-    pos_y="22" >
-  </RectAnimation>
+    pos_y="22" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="8" 
     frame_height="20" 
@@ -60,8 +72,10 @@
     frames_per_row="8" 
     name="fly_idle" 
     pos_x="0" 
-    pos_y="22" >
-  </RectAnimation>
+    pos_y="22" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="8" 
     frame_height="20" 
@@ -70,8 +84,10 @@
     frames_per_row="8" 
     name="attack_dash" 
     pos_x="0" 
-    pos_y="22" >
-  </RectAnimation>
+    pos_y="22" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="8" 
     frame_height="21" 
@@ -82,6 +98,9 @@
     name="attack_ranged" 
     pos_x="0" 
     pos_y="43" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
-</Sprite>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
+</Sprite>
+

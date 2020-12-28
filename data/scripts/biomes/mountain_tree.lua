@@ -1,10 +1,13 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 0
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 
 RegisterSpawnFunction( 0xff3461C7, "spawn_book" )
 RegisterSpawnFunction( 0xff9393d2, "spawn_egg" )
+RegisterSpawnFunction( 0xff3482c7, "spawn_ocarina" )
+RegisterSpawnFunction( 0xff31d0b4, "spawn_secret" )
+RegisterSpawnFunction( 0xffc2d0b4, "spawn_pillars" )
 
 ------------ SMALL ENEMIES ----------------------------------------------------
 
@@ -186,19 +189,7 @@ g_lamp =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/props/physics_mining_lamp.xml"
-	},
-	{
-		prob   		= 0.3,
-		min_count	= 1,
-		max_count	= 1,    
-		entity 	= "data/entities/props/physics_mining_lamp_broken.xml"
-	},
-	{
-		prob   		= 0.05,
-		min_count	= 1,
-		max_count	= 1,    
-		entity 	= "data/entities/props/physics_mining_lamp_gas.xml"
-	},
+	}
 }
 
 g_egg =
@@ -209,6 +200,12 @@ g_egg =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/items/pickup/egg_worm.xml"
+	},
+	{
+		prob   		= 0.02,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/items/pickup/egg_purple.xml"
 	},
 }
 
@@ -247,10 +244,100 @@ end
 function spawn_potions( x, y ) end
 
 function spawn_book( x, y ) 
-	print("hello hello")
 	EntityLoad( "data/entities/items/books/book_tree.xml", x, y )
 end
 
 function spawn_egg( x, y )
 	spawn( g_egg, x, y )
+end
+
+function spawn_ocarina( x, y )
+	--local ocarina_cards = { "OCARINA_A", "OCARINA_B", "OCARINA_C", "OCARINA_D", "OCARINA_E", "OCARINA_F", "OCARINA_GSHARP", "OCARINA_A2", }
+	local ocarina_cards = { "KANTELE_A", "KANTELE_D", "KANTELE_DIS", "KANTELE_E", "KANTELE_G" }
+	local distance = 20
+	
+	for i,v in ipairs( ocarina_cards ) do
+		local x_ = x - #ocarina_cards * distance * 0.5 + i * distance
+		
+		CreateItemActionEntity( v, x_, y )
+	end
+	
+	for i,v in ipairs( ocarina_cards ) do
+		local x_ = x - #ocarina_cards * distance * 0.5 + i * distance
+		
+		CreateItemActionEntity( v, x_, y + distance )
+	end
+	
+	EntityLoad( "data/entities/items/kantele.xml", x, y - 32 )
+	
+	local year, month, day = GameGetDateAndTimeLocal()
+	
+	if ( month == 12 ) and ( day >= 23 ) and ( day <= 27 ) then
+		EntityLoad( "data/entities/buildings/workshop_tree_holiday.xml", x, y )
+	end
+end
+
+function spawn_secret( x, y )
+	EntityLoad( "data/entities/items/pickup/greed_curse.xml", x, y )
+end
+
+function spawn_pillars( x, y )
+	local count = 6
+	local width = 660
+	local inc = width / count
+	local size = 48
+	
+	local under = 1
+	local above = 3
+	
+	SetRandomSeed( x, y )
+	local flags = 
+	{
+		{ { "misc_chest_rain", "crain" }, { "misc_worm_rain", "wrain" }, { "misc_greed_rain", "grain" }, { "misc_altar_tablet", "train" }, { "secret_tower", "secrett" } },
+		{ { "essence_fire", "essencef" }, { "essence_water", "essencew" }, { "essence_laser", "essencee" }, { "essence_air", "essencea" }, { "essence_alcohol", "essenceal" }, { "secret_moon", "moon" }, { "secret_moon2", "moona" }, { "special_mood", "moong" } },
+		{ { "progress_ending0", "end0" }, { "progress_ending1", "endb" }, { "progress_ending2", "endg" }, { "progress_newgameplusplus3", "endp" }, { "progress_nightmare", "endn" } },
+		{ { "miniboss_dragon", "minid" }, { "miniboss_limbs", "minil" }, { "miniboss_pit", "minip" }, { "miniboss_alchemist", "minia" }, { "boss_centipede", "boss" } },
+		{ { "progress_orb_1", "orbf" }, { "progress_orb_evil", "orbe" }, { "progress_orb_all", "orba" }, { "progress_pacifist", "pacifist" }, { "progress_nogold", "nogold" }, { "progress_clock", "clock" }, { "progress_minit", "minit" }, { "progress_nohit", "nohit" } },
+		{ { "secret_greed", "secretg" }, { "final_secret_orb", "yeah" }, { "secret_chest_dark", "secretcd" }, { "secret_chest_light", "secretcl" }, { "card_unlocked_everything", "secretall" }, { "card_unlocked_divide", "secretten" }, { "secret_fruit", "secretf" }, { "secret_allessences", "secretae" }, { "secret_meditation", "secretme" }, { "secret_buried_eye", "secretbe" }, { "secret_hourglass", "secrethg" } },
+	}
+	
+	for i=1,count do
+		local px = x - (count) * inc * 0.5 + (i-1) * inc
+		local py = y
+		
+		for j=1,under do
+			LoadPixelScene( "data/biome_impl/pillars/pillar_part_material.png", "", px, py, "data/biome_impl/pillars/pillar_part.png", true )
+			py = py + size
+		end
+		
+		LoadPixelScene( "data/biome_impl/pillars/pillar_part_material.png", "", px, py, "data/biome_impl/pillars/pillar_part_fade.png", true )
+		
+		local data = flags[i] or {}
+		
+		local total = above + #data
+		
+		py = y
+		
+		for j=1,above do
+			py = py - size
+			LoadPixelScene( "data/biome_impl/pillars/pillar_part_material.png", "", px, py, "data/biome_impl/pillars/pillar_part.png", true )
+		end
+		
+		for j,v in ipairs(data) do
+			local valid = HasFlagPersistent( v[1] )
+			
+			--print( "Checked for " .. tostring(v[1]) .. ", result: " .. tostring(valid) )
+			
+			if valid then
+				py = py - size
+				LoadPixelScene( "data/biome_impl/pillars/pillar_part_material.png", "", px, py, "data/biome_impl/pillars/pillar_part_" .. v[2] .. ".png", true )
+			end
+		end
+		
+		py = py - size
+		local opts = { "pillar_end_01", "pillar_end_03", "pillar_end_06", "pillar_end_02", "pillar_end_05", "pillar_end_04", }
+		local opt = ((i-1) % #opts) + 1
+		
+		LoadPixelScene( "data/biome_impl/pillars/pillar_part_material.png", "", px, py, "data/biome_impl/pillars/" .. opts[opt] .. ".png", true )
+	end
 end

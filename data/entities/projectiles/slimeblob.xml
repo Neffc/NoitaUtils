@@ -55,9 +55,9 @@
 	  light_g="120"
 	  light_b="30"
 	  light_radius_coeff="2"
-	  stains_enabled="1" 
+	  stains_enabled="0" 
       stains_image="data/temp/explosion_stain.png"
-      audio_event_name="explosion_slime" >
+      audio_event_name="explosions/slime_small" >
     </config_explosion>
   </ProjectileComponent>
   
@@ -84,9 +84,15 @@
 	</LightComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="projectiles/slimeblob">
   </AudioComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/slimeblob.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

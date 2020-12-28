@@ -2,6 +2,12 @@
   <Topology 
     name="_EMPTY_"
     background_image="data/weather_gfx/background_pyramid.png"
+    background_edge_left="data/weather_gfx/edges/background_pyramid_left.png"
+    background_edge_right="data/weather_gfx/edges/background_pyramid_right.png"
+    background_edge_top="data/weather_gfx/edges/background_pyramid_top.png"
+    background_edge_bottom="data/weather_gfx/edges/background_pyramid_bottom.png"
+    background_edge_priority="9"     
+
     lua_script="data/scripts/biomes/pyramid_entrance.lua"
     noise_type="SIN_CAPPED_SIMPLEX"
     mGradientAddNoise="1" 
@@ -23,7 +29,9 @@
     mMultiplierGradient="0.871429" 
     mMultiplierPerlin="0.413"
     audio_ambience="temple"
-    audio_ambience_surface="desert">
+    audio_ambience_surface="desert"
+    
+    has_rain="0">
 
  <BitmapCaves 
       size_x="512"

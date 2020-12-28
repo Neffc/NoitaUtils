@@ -34,7 +34,7 @@
 
   <ProjectileComponent
     _tags="enabled_in_world"
-    lifetime="100000"
+    lifetime="-1"
     penetrate_entities="1"
   ></ProjectileComponent>
 
@@ -137,7 +137,7 @@
 
   <SpriteComponent
     _tags="enabled_in_hand"
-    _enabled="false"
+    _enabled="0"
     offset_x="4"
     offset_y="4"
     image_file="data/items_gfx/minit_watering_can.png"
@@ -199,14 +199,14 @@
 
   <AudioLoopComponent
     _tags="sound_spray,enabled_in_world,enabled_in_hand"
-    file="data/audio/Desktop/materials.snd"
+    file="data/audio/Desktop/materials.bank"
     event_name="materials/spray_potion" 
     volume_autofade_speed="0.1" >
   </AudioLoopComponent>
 
   <AudioComponent
     _tags="enabled_in_world"
-    file="data/audio/Desktop/materials.snd"
+    file="data/audio/Desktop/materials.bank"
     event_root="collision/glass_potion"
     set_latest_event_position="1" >
   </AudioComponent>

@@ -1,7 +1,9 @@
+-- location: wand cave
+
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/lib/utilities.lua")
 dofile( "data/scripts/biomes/orbrooms/orbroom_shared.lua" )
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
@@ -24,7 +26,7 @@ function spawn_potions( x, y ) end
 function spawn_wands( x, y ) end
 
 function init( x, y, w, h )
-	LoadPixelScene( "data/biome_impl/orbroom.png", "", x, y, "data/biome_impl/orbroom_background.png", true )
+	LoadPixelScene( "data/biome_impl/orbroom.png", "data/biome_impl/orbroom_visual.png", x, y, "data/biome_impl/orbroom_background.png", true )
 end
 
 function spawn_orb(x, y)
@@ -33,7 +35,9 @@ function spawn_orb(x, y)
 	EntityLoad( "data/entities/items/books/book_05.xml", x - 30, y + 40 )
 	EntityLoad( "data/entities/misc/music_energy_000.xml", x, y - 10 )
 
-	spawn_material_checker( x - 197, y - 11, "blood_worm", "data/scripts/biomes/orbrooms/orbroom_shared.lua", "data/particles/image_emitters/orbrooms/05_01.xml", x, y - 100 )
-	spawn_material_checker( x + 198, y - 11, "slime", "data/scripts/biomes/orbrooms/orbroom_shared.lua", "data/particles/image_emitters/orbrooms/05_02.xml", x, y - 100 )
+	spawn_material_checker( x - 197, y - 11, "sand", "data/scripts/biomes/orbrooms/orbroom_shared.lua", "data/particles/image_emitters/orbrooms/07_03.xml", x, y - 100 )
+	spawn_material_checker( x + 198, y - 11, "sand", "data/scripts/biomes/orbrooms/orbroom_shared.lua", "data/particles/image_emitters/orbrooms/07_03.xml", x, y - 100 )
 
+
+	EntityLoad( "data/entities/particles/gold_dust.xml", x, y )
 end

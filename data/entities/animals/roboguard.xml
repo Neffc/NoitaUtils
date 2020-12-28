@@ -90,5 +90,14 @@
     	is_in_npc="1">
     </ItemPickUpperComponent>
 
+	<!-- protection from FREEZING -->
+	<Entity>
+	    <GameEffectComponent 
+	        effect="PROTECTION_FREEZE"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
+	
 </Entity>
 

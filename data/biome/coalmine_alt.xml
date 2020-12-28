@@ -2,7 +2,13 @@
   <Topology 
     name="$biome_coalmine_alt"
     type="BIOME_WANG_TILE"
-    background_image="data/weather_gfx/background_cave_04_alt.png"
+    background_image="data/weather_gfx/background_coalmine.png"
+    background_edge_left="data/weather_gfx/edges/background_coalmine_left.png"
+    background_edge_right="data/weather_gfx/edges/background_coalmine_right.png"
+    background_edge_top="data/weather_gfx/edges/background_coalmine_top.png"
+    background_edge_bottom="data/weather_gfx/edges/background_coalmine_bottom.png"
+    background_edge_priority="10"     
+
 	limit_background_image="0"
     wang_template_file="data/wang_tiles/coalmine_alt.png" 
     lua_script="data/scripts/biomes/coalmine_alt.lua"
@@ -29,7 +35,7 @@
       >
       <structures>
         <CaveStructure
-          image_file="data/biome_impl/coalmine_dangerroom.png"
+          image_file="data/biome_impl/coalmine/dangerroom.png"
           aabb_min_x="5"
           aabb_max_x="507"
           aabb_min_y="0"

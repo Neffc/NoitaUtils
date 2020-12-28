@@ -157,10 +157,14 @@
     </MagicConvertMaterialComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="projectiles/freeze_circle">
   </AudioComponent>
 
-
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/freeze_circle.xml"
+		>
+	</VariableStorageComponent>
 </Entity>
 

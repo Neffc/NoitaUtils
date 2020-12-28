@@ -1,4 +1,4 @@
-<Entity tags="tablet">
+<Entity tags="tablet,forgeable">
 	<!-- under the lavalake -->
 
 	<Base file="data/entities/items/books/base_book.xml">

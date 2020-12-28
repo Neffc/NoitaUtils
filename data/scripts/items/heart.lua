@@ -32,7 +32,9 @@ function item_pickup( entity_item, entity_who_picked, name )
 			end
 			
 			-- if( hp > max_hp ) then hp = max_hp end
-			ComponentSetValue( damagemodel, "max_hp", max_hp)
+			ComponentSetValue( damagemodel, "max_hp_old", max_hp_old )
+			ComponentSetValue( damagemodel, "max_hp", max_hp )
+			ComponentSetValue( damagemodel, "mLastMaxHpChangeFrame", GameGetFrameNum() )
 		end
 	end
 

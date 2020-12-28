@@ -19,13 +19,12 @@ gui_frame_fn = function()
 		if GuiButton( gui, 0, 0, perk_list[i].ui_name, hax_btn_id+i ) then
 			GamePrint( "DEBUG - attempting to spawn " .. perk_list[i].id .. " at player location" )
 
-			local player_entity = EntityGetClosestWithTag( pos_x, pos_y, "player_unit")
+			local x, y = GameGetCameraPos()
+			local player_entity = EntityGetClosestWithTag( x, y, "player_unit")
 			if( player_entity ~= 0 ) then
-				local x, y = EntityGetTransform( player_entity )
-				perk_spawn( x, y - 8, perk_list[i].id )
-			else
-				GamePrint( "DEBUG - no player found" )
+				x, y = EntityGetTransform( player_entity )
 			end
+			perk_spawn( x, y - 8, perk_list[i].id )
 		end
 	end
 

@@ -1,7 +1,32 @@
 -- RegisterSpawnFunction( 0xffbf26a9, "spawn_runes" )
 -- RegisterSpawnFunction( 0xff6b26a6, "spawn_bigtorch" )
 
+function runestone_activate( entity_id )
+	local status = 0
+	
+	local variablestorages = EntityGetComponent( entity_id, "VariableStorageComponent" )
+	if ( variablestorages ~= nil ) then
+		for j,storage_id in ipairs(variablestorages) do
+			local var_name = ComponentGetValue( storage_id, "name" )
+			if ( var_name == "active" ) then
+				status = ComponentGetValue( storage_id, "value_int" )
+				
+				status = 1 - status
+				
+				ComponentSetValue2( storage_id, "value_int", status )
+				
+				if ( status == 1 ) then
+					EntitySetComponentsWithTagEnabled( entity_id, "activate", true )
+				else
+					EntitySetComponentsWithTagEnabled( entity_id, "activate", false )
+				end
+			end
+		end
+	end
+end
+
 function spawn_apparition(x, y)
+	SetRandomSeed( x, y )
 	local PlaceItems1 	= 1
 	local PlaceItems2 	= 2
 	local Spawn 		= 3
@@ -14,7 +39,7 @@ function spawn_apparition(x, y)
 
 	local place_items = function()
 		for i=1,4 do
-			local rx = x + Random(-10, 10)
+			local rx = x + Random( -10, 10 )
 				
 			spawn_candles(rx, y)
 		end
@@ -59,25 +84,50 @@ end
 
 function spawn_potions(x, y)
 	SetRandomSeed( x+425, y-243 )
-	local rnd = Random(1,80)
+	local rnd = Random(1,89)
 	
-	if ( rnd >= 78 ) then
+	local flag_status = HasFlagPersistent( "card_unlocked_duplicate" )
+	
+	if ( rnd >= 86 ) then
+		EntityLoad( "data/entities/items/pickup/broken_wand.xml", x, y-2 )
+	elseif ( rnd >= 84 ) then
 		EntityLoad( "data/entities/items/pickup/thunderstone.xml", x, y-2 )
-	elseif ( rnd >= 74 ) then
+	elseif ( rnd >= 80 ) then
+		EntityLoad( "data/entities/items/pickup/brimstone.xml", x, y-2 )
+	elseif ( rnd >= 78 ) then
 		EntityLoad( "data/entities/items/pickup/egg_monster.xml", x, y-2 )
-	elseif ( rnd >= 70 ) then
+	elseif ( rnd >= 74 ) then
 		EntityLoad( "data/entities/items/pickup/egg_slime.xml", x, y-2 )
+	elseif ( rnd >= 72 ) then
+		EntityLoad( "data/entities/items/pickup/egg_fire.xml", x, y-2 )
+	elseif ( rnd >= 71 ) then
+		EntityLoad( "data/entities/items/pickup/egg_purple.xml", x, y-2 )
+	elseif ( rnd >= 70 ) then
+		local opts = { "laser", "fireball", "lava", "slow", "null", "disc" }
+		rnd = Random( 1, #opts )
+		local opt = opts[rnd]
+		
+		local entity_id = EntityLoad( "data/entities/items/pickup/runestones/runestone_" .. opt .. ".xml", x, y-10 )
+		
+		rnd = Random( 1, 10 )
+		
+		if ( rnd == 2 ) then
+			runestone_activate( entity_id )
+		end
+	elseif flag_status and ( rnd >= 69 ) then
+		EntityLoad( "data/entities/items/pickup/physics_die.xml", x, y-12 )
 	else
 		EntityLoad( "data/entities/items/pickup/potion.xml", x, y-2 )
 	end
 end
 
 function spawn_ghostlamp(x, y)
-	spawn(g_ghostlamp,x-1,y+16,0,0)
+	spawn2(g_ghostlamp,x,y,0,0)
 end
 
 function spawn_heart( x, y )
 	local r = ProceduralRandom( x, y )
+	SetRandomSeed( x, y )
 	-- local r=1
 	-- 2018.11.15 - Petri 
 	-- changed this from 0.4 -> 0.7 quite a big upping of heart spawns
@@ -90,9 +140,20 @@ function spawn_heart( x, y )
 		local rnd = Random( 1, 100 )
 		
 		if (rnd <= 90) or (y < 512 * 3) then
-			local entity = EntityLoad( "data/entities/items/pickup/chest_random.xml", x, y)
+			rnd = Random( 1, 1000 )
+			
+			if ( rnd < 1000 ) then
+				local entity = EntityLoad( "data/entities/items/pickup/chest_random.xml", x, y)
+			else
+				local entity = EntityLoad( "data/entities/items/pickup/chest_random_super.xml", x, y)
+			end
 		else
-			local entity = EntityLoad( "data/entities/animals/chest_mimic.xml", x, y)
+			rnd = Random( 1, 100 )
+			if( rnd <= 95 ) then
+				local entity = EntityLoad( "data/entities/animals/chest_mimic.xml", x, y)
+			else
+				local entity = EntityLoad( "data/entities/items/pickup/chest_leggy.xml", x, y)
+			end
 		end
 	end
 end
@@ -111,14 +172,14 @@ end
 
 function spawn_portal( x, y )
 	if( BIOME_NAME == "crypt" ) then
-		EntityLoad( "data/entities/buildings/teleport_boss_arena.xml", x, y )
+		EntityLoad( "data/entities/buildings/teleport_boss_arena.xml", x, y - 4 )
 	else
-		EntityLoad( "data/entities/buildings/teleport.xml", x, y )
+		EntityLoad( "data/entities/buildings/teleport_liquid_powered.xml", x, y - 4 )
 	end
 end
 
 function spawn_end_portal( x, y )
-	EntityLoad( "data/entities/buildings/teleport_boss_arena.xml", x, y )
+	EntityLoad( "data/entities/buildings/teleport_boss_arena.xml", x, y - 4 )
 end
 
 
@@ -146,16 +207,23 @@ function spawn_wand_trap_electricity( x, y )
 	EntityLoad( "data/entities/props/physics_trap_electricity.xml", x, y )
 end
 
-function spawn_wand_trap_ignite_a( x, y )
+function spawn_wand_trap_ignite( x, y )
 	-- EntityLoad( "data/entities/buildings/wand_trap_ignite.xml", x, y )
-	EntityLoad( "data/entities/props/physics_trap_ignite_a.xml", x, y )
-end
-
-function spawn_wand_trap_ignite_b( x, y )
-	-- EntityLoad( "data/entities/buildings/wand_trap_ignite.xml", x, y )
-	EntityLoad( "data/entities/props/physics_trap_ignite_b.xml", x, y )
+	EntityLoad( "data/entities/props/physics_trap_ignite.xml", x, y )
 end
 
 function spawn_bigtorch(x, y)
 	EntityLoad( "data/entities/props/physics_torch_stand.xml", x, y )
+end
+
+function spawn_moon(x, y)
+	EntityLoad( "data/entities/buildings/moon_altar.xml", x, y )
+end
+
+function spawn_collapse( x, y )
+	EntityLoad( "data/entities/misc/loose_chunks.xml", x, y )
+end
+
+function spawn_shopitem( x, y )
+	generate_shop_item( x, y, false, 10 )
 end

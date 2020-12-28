@@ -58,7 +58,8 @@
       sparks_enabled="1" 
       light_enabled="1" 
       stains_enabled="1"
-      stains_radius="1" >
+      stains_radius="1"
+      audio_enabled="0" >
     </config_explosion>
   </ProjectileComponent>
   
@@ -104,8 +105,14 @@
   </ParticleEmitterComponent>
   
   <AudioComponent
-		file="data/audio/Desktop/projectiles.snd"
-		event_root="projectiles/bullet_fire_small">
+		file="data/audio/Desktop/projectiles.bank"
+    event_root="projectiles/flamethrower">
 	</AudioComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/bossdragon.xml"
+		>
+	</VariableStorageComponent>
 </Entity>
 

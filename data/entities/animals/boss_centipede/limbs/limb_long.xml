@@ -1,4 +1,4 @@
-<Entity>
+<Entity tags="foot">
 
 	<InheritTransformComponent>
 	</InheritTransformComponent>

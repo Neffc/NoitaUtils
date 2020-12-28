@@ -33,7 +33,7 @@
 
   <ProjectileComponent
     _tags="enabled_in_world"
-    lifetime="100000"
+    lifetime="-1"
     penetrate_entities="1"
   ></ProjectileComponent>
 
@@ -45,7 +45,7 @@
 
   <SpriteComponent
     _tags="enabled_in_hand"
-    _enabled="false"
+    _enabled="0"
     offset_x="1.5"
     offset_y="8"
     image_file="data/items_gfx/in_hand/knife_in_hand.png"

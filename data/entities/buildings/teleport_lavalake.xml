@@ -1,7 +1,7 @@
 <Entity>
 	<Base file="data/entities/buildings/teleport.xml">
 		<UIInfoComponent
-			name="Portal back"
+			name="$teleport_back"
 			>
 		</UIInfoComponent>
 		

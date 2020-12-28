@@ -1,4 +1,4 @@
-<Entity tags="mortal,human,hittable,homing_target,teleportable_NOT" >
+<Entity tags="mortal,human,hittable,homing_target,teleportable_NOT,destruction_target" >
 	
 	<ItemChestComponent
 		_enabled="0"
@@ -9,7 +9,7 @@
 	</ItemChestComponent>
 
 	<LuaComponent
-	    execute_every_n_frame="99999999"
+	    execute_every_n_frame="-1"
 	    script_death="data/scripts/items/drop_money.lua"
 	    remove_after_executed="1" >
 	</LuaComponent>
@@ -177,8 +177,8 @@
 		hp="1" 
 		is_on_fire="0" 
 		materials_damage="1" 
-		materials_that_damage="acid,lava,poison,blood_cold,blood_cold_vapour,radioactive_gas,radioactive_gas_static,rock_static_radioactive,rock_static_poison,ice_radioactive_static,ice_radioactive_glass,ice_acid_static,ice_acid_glass" 
-		materials_how_much_damage="0.004,0.004,0.001,0.0008,0.0007,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001"
+		materials_that_damage="acid,lava,poison,blood_cold,blood_cold_vapour,radioactive_gas,radioactive_gas_static,rock_static_radioactive,rock_static_poison,ice_radioactive_static,ice_radioactive_glass,ice_acid_static,ice_acid_glass,rock_static_cursed" 
+		materials_how_much_damage="0.004,0.004,0.001,0.0008,0.0007,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.005"
 		ragdoll_filenames_file="data/ragdolls/player/filenames.txt"
 		ragdoll_material="meat"
 		physics_objects_damage="1"
@@ -217,14 +217,14 @@
 	</CameraBoundComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_root="animals"
 		set_latest_event_position="1" >
 	</AudioComponent>
 	
 	<AudioComponent
-		file="data/audio/Desktop/animals.snd"
-		event_root="animals_generic"
+		file="data/audio/Desktop/animals.bank"
+		event_root="animals/generic"
 		set_latest_event_position="1" >
 	</AudioComponent>
 

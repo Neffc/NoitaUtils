@@ -28,7 +28,7 @@
 
   <ProjectileComponent
     _tags="enabled_in_world"
-    lifetime="100000"
+    lifetime="-1"
     penetrate_entities="1"
   ></ProjectileComponent>
 
@@ -95,7 +95,7 @@
       explosion_sprite="data/particles/explosion_032.xml"
 	  load_this_entity="data/entities/particles/particle_explosion/main_small.xml"	  
       explosion_sprite_lifetime="0"
-	  audio_event_name="explosion_tnt"
+	  audio_event_name="explosions/tnt"
       hole_destroy_liquid="0" 
       hole_enabled="0" 
       ray_energy="100"
@@ -107,7 +107,10 @@
       sparks_count_max="20" 
       sparks_enabled="1" 
       stains_enabled="1" 
-      stains_radius="0" >
+      stains_radius="0" 
+	  audio_event_name="explosions/cocktail
+"
+	  >
     </config_explosion>
   </ExplodeOnDamageComponent>
 
@@ -120,7 +123,7 @@
 
   <SpriteComponent
     _tags="enabled_in_hand"
-    _enabled="false"
+    _enabled="0"
     offset_x="4"
     offset_y="4"
     image_file="data/items_gfx/potion.png"

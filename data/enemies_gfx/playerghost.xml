@@ -2,7 +2,9 @@
   filename="data/enemies_gfx/playerghost.png" 
   hotspots_filename="data/enemies_gfx/player_hotspots.png" 
   offset_x="6" 
-  offset_y="6.5" >
+  offset_y="6.5"
+  default_animation="stand">
+
   <RectAnimation 
     frame_count="6" 
     frame_height="20" 
@@ -12,8 +14,10 @@
     name="stand" 
     pos_x="0" 
     pos_y="1" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="20" 
@@ -23,16 +27,20 @@
     name="walk" 
     pos_x="0" 
     pos_y="1" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="2" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="20" 
@@ -42,8 +50,10 @@
     name="run" 
     pos_x="0" 
     pos_y="1" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="20" 
@@ -53,8 +63,10 @@
     name="burn" 
     pos_x="0" 
     pos_y="1" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="4" 
     frame_height="20" 
@@ -64,8 +76,10 @@
     name="fly_move" 
     pos_x="0" 
     pos_y="21" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="4" 
     frame_height="20" 
@@ -75,8 +89,10 @@
     name="fly_idle" 
     pos_x="0" 
     pos_y="41" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="20" 
@@ -87,26 +103,37 @@
     name="attack" 
     pos_x="0" 
     pos_y="61" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="3" 
       max_distance="500" 
       name="kick" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <Hotspot 
     color="ff0000" 
-    name="hand" >
-  </Hotspot>
+    name="hand" >
+
+  </Hotspot>
+
   <Hotspot 
     color="ff00" 
-    name="belt" >
-  </Hotspot>
+    name="belt" >
+
+  </Hotspot>
+
   <Hotspot 
     color="ff" 
-    name="cape" >
-  </Hotspot>
-</Sprite>
+    name="cape" >
+
+  </Hotspot>
+
+</Sprite>
+

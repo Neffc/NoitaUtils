@@ -1,5 +1,6 @@
 <Entity 
   name="$projectile_default" 
+  tags="teleportable_NOT,projectile"
    >
 
 	<VelocityComponent 
@@ -185,10 +186,21 @@
   </ParticleEmitterComponent>
   
   <AudioLoopComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_name="projectiles/rocket_passby"
       auto_play="1">
   </AudioLoopComponent>
+  
+  <AudioComponent
+		file="data/audio/Desktop/projectiles.bank"
+		event_root="projectiles/rocket_tiny" >
+	</AudioComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/rocket_tiny.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

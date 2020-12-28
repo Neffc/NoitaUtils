@@ -1,4 +1,4 @@
-<Entity tags="tablet">
+<Entity tags="tablet,forgeable">
 	<!-- orb room behind the lavalake -->
 	<Base file="data/entities/items/books/base_book.xml">
 		<UIInfoComponent

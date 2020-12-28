@@ -1,5 +1,5 @@
 <Entity 
-  name="$projectile_default" 
+  name="$projectile_default" tags="projectile_player"
    >
   <GameAreaEffectComponent
       radius="28"
@@ -77,6 +77,12 @@
 				>
 			</config_explosion>
 		</ProjectileComponent>
+		
+		<AudioLoopComponent
+		  file="data/audio/Desktop/projectiles.bank"
+		  event_name="player_projectiles/field_electric/loop"
+		  auto_play="1" >
+	  </AudioLoopComponent>
 	</Base>
 	
 	<ParticleEmitterComponent 

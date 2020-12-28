@@ -36,7 +36,7 @@
   </SpriteComponent>
 
   <AudioComponent
-    file="data/audio/Desktop/projectiles.snd"
+    file="data/audio/Desktop/projectiles.bank"
     event_root="projectiles/bullet_laucher"
     >
   </AudioComponent>
@@ -44,7 +44,7 @@
   <LuaComponent
   	script_source_file="data/scripts/animals/pebble_spawn.lua"
   	execute_on_removed="1"
-  	execute_every_n_frame="99999999"
+  	execute_every_n_frame="-1"
   	>
 	</LuaComponent>
 

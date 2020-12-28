@@ -81,7 +81,7 @@
   </SpriteComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="projectiles/laser">
   </AudioComponent>
   
@@ -151,6 +151,12 @@
     _enabled="1" 
     radius="30" >
   </LightComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/machinegun_bullet_tank_super.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

@@ -2,7 +2,8 @@
  filename="data/enemies_gfx/scavenger_grenade.png"
  hotspots_filename="data/enemies_gfx/scavenger_grenade_hotspots.png"
  offset_x="8"
- offset_y="15" >
+ offset_y="15"
+  default_animation="stand" >
  
  <!-- hotspots -->
  

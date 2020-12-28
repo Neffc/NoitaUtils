@@ -1,4 +1,4 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 
 function collision_trigger()
@@ -8,7 +8,7 @@ function collision_trigger()
 
 	local torches = EntityGetWithTag( "altar_torch" )
 
-	if torches ~= nil then
+	if ( #torches > 0 ) then
 		for index,torch in ipairs(torches) do
 			if torch ~= nil then
 				-- TODO: check distance to entity

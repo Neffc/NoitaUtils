@@ -3,7 +3,7 @@
 function init_total_prob( value )
 	value.total_prob = 0
 	for i,v in ipairs(value) do
-		if( v.prob ~= nil ) then
+		if( v.prob ~= nil and ( v.spawn_check == nil or v.spawn_check() ) ) then
 			value.total_prob = value.total_prob + v.prob
 		end
 	end
@@ -16,8 +16,8 @@ function random_from_table( what, x, y )
 
 	local r = ProceduralRandom(x,y) * what.total_prob
 	for i,v in ipairs(what) do
-		if( v.prob ~= nil ) then
-			if( r <= v.prob and ( v.spawn_check == nil or v.spawn_check() ) ) then
+		if( v.prob ~= nil and ( v.spawn_check == nil or v.spawn_check() ) ) then
+			if( r <= v.prob ) then
 				return v
 			end
 			r = r - v.prob
@@ -139,6 +139,16 @@ function spawn(what, x, y, rand_x, rand_y)
 	end
 end
 
+-- use this function to spawn without applying the hacky 5,5 offset
+
+function spawn2(what, x, y, rand_x, rand_y)
+	-- if( what == nil ) then print( "ERROR - director_helpers - spawn() ... what = nil") end
+	local v = random_from_table( what, x, y )
+	if ( v ~= nil ) then
+		entity_load_camera_bound( v, x, y, rand_x, rand_y)
+	end
+end
+
 function DEBUG_spawn_all( what, x, y, width )
 	for i,v in ipairs(what) do
 		if( v.prob ~= nil and v.prob > 0 ) then
@@ -186,7 +196,10 @@ function load_random_pixel_scene( what, x, y )
 					end
 
 					-- Lua_LoadPixelScene( string materials_filename, string colors_filename, x, y, string background_file, skip_biome_checks = false, skip_edge_textures = false, color_to_material_table = {} )";
-					LoadPixelScene( v.material_file, v.visual_file, x, y, v.background_file, false, false, color_material_table )
+					local z_index = 50
+					if( v.z_index ) then z_index = v.z_index end
+
+					LoadPixelScene( v.material_file, v.visual_file, x, y, v.background_file, false, false, color_material_table, z_index )
 					if( v.is_unique == 1 ) then
 						what[i].prob = 0
 						init_total_prob( what )
@@ -208,6 +221,9 @@ function load_random_pixel_scene( what, x, y )
 	if( last_element ~= nil ) then
 		if( is_empty( last_element.material_file ) and is_empty( last_element.visual_file ) and is_empty( last_element.background_file ) ) then
 			LoadPixelScene( last_element.material_file, last_element.visual_file, x, y )
+		else
+			print_error( "ERROR " .. #what )
+			print_error( "ERROR - director_helpers.lua - load_random_pixel_scene() should it be loading a scene? ")
 		end
 	else
 		print_error( "ERROR " .. #what )
@@ -215,12 +231,95 @@ function load_random_pixel_scene( what, x, y )
 	end
 end
 
+function load_random_background_sprite( what, x, y )
+	if( what.total_prob == 0 ) then
+		init_total_prob( what )
+	end
 
--- this is used to avoid spawns killing each other all the time
--- TODO: Is this still used? 
-SECTOR_skullfly = false
-SECTOR_ANIMAL  = true
+	local r = ProceduralRandom(x,y) * what.total_prob
+	for i,v in ipairs(what) do
+		if( v.prob ~= nil ) then
+			if( v.prob ~= 0 and r <= v.prob ) then
+				if( is_empty( v.sprite_file) ) then
+					-- loading empty sprite, don't do anything
+					return
+				else
+					-- LoadBackgroundSprite( string background_file, x, y, int background_z_index = 40 )
+					local z_index = 40
+					if( v.z_index ) then z_index = v.z_index end
 
-function is_sector( x, which_sector )
-	return ( math.sin( x / 512.0 ) >= 0 ) == which_sector
+					LoadBackgroundSprite( v.sprite_file, x, y, z_index, true )
+					return
+				end
+			else
+				r = r - v.prob
+			end
+		end
+	end
+	
+	print_error( "ERROR " .. tostring(#what) .. ", " .. tostring(what[1]["sprite_file"]))
+	print_error( "ERROR - director_helpers.lua - load_random_background_sprite() shouldn't reach here")
+end
+
+-- Special spawn function that only randomizes position of certain enemies
+
+function spawn_with_limited_random(what, x, y, rand_x, rand_y, entities_to_randomize)
+	local x_offset,y_offset = 5,5
+	
+	local v = random_from_table( what, x, y )
+	
+	if ( v ~= nil ) then
+		local entity_files = {}
+		local do_randomization = false
+		
+		if ( entities_to_randomize ~= nil ) then
+			if ( v.entity ~= nil ) then
+				table.insert( entity_files, v.entity )
+			elseif ( v.entities ~= nil ) then
+				for i,entity_data in ipairs(v.entities) do
+					if ( tostring( type( entity_data ) ) == "table" ) then
+						if ( entity_data.entity ~= nil ) then
+							table.insert( entity_files, entity_data.entity )
+						end
+					elseif ( tostring( type( entity_data ) ) == "string" ) then
+						table.insert( entity_files, entity_data )
+					end
+				end
+			end
+			
+			for i,entity_file in ipairs(entity_files) do
+				if ( string.len( entity_file ) > 0 ) then
+					local entity_name = ""
+					
+					for j=1,string.len(entity_file) do
+						local letter = string.sub( entity_file, string.len( entity_file ) - ( j - 1 ), string.len( entity_file ) - ( j - 1 ) )
+						
+						if ( letter ~= "/" ) then
+							entity_name = letter .. entity_name
+						else
+							break
+						end
+					end
+					
+					entity_name = string.sub( entity_name, 1, string.len( entity_name ) - 4 )
+					
+					for j,r_entity in ipairs( entities_to_randomize ) do
+						if ( r_entity == entity_name ) then
+							do_randomization = true
+							break
+						end
+					end
+				end
+			end
+		end
+		
+		local random_x = rand_x or 0
+		local random_y = rand_y or 0
+		
+		if do_randomization then
+			random_x = random_x + 4
+		end
+		
+		entity_load_camera_bound( v, x + x_offset, y + y_offset, random_x, random_y )
+	end
 end

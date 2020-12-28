@@ -1,6 +1,6 @@
 <Sprite
 filename="data/particles/smoke_orange.png"
-offset_x="8"
+offset_x="8.5"
 offset_y="8"
 default_animation="smoke"
  >

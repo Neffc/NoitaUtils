@@ -1,5 +1,5 @@
 <Entity 
-  name="$projectile_default" 
+  name="$projectile_default" tags="projectile_player"
    >
 
 	<Base file="data/entities/base_projectile.xml" >
@@ -51,9 +51,17 @@
       material_sparks_count_min="40"
       light_fade_time="0.8" 
       stains_enabled="1" 
-      stains_image="data/temp/explosion_stain.png" >
+      stains_image="data/temp/explosion_stain.png" 
+	  audio_event_name="explosions/liquid"
+	  >
     </config_explosion>
   </ProjectileComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/alcohol_blast.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

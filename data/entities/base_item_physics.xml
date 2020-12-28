@@ -1,4 +1,4 @@
-<Entity tags="hittable,teleportable_NOT">
+<Entity tags="hittable,teleportable_NOT,prop,prop_physics">
   <PhysicsBodyComponent 
 	allow_sleep="1"
 	angular_damping="0"

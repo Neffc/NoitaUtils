@@ -55,9 +55,15 @@
   </SpriteComponent>
   
   <AudioComponent
-		file="data/audio/Desktop/projectiles.snd"
+		file="data/audio/Desktop/projectiles.bank"
 		event_root="projectiles/bullet_arrow">
 	</AudioComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/arrow.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

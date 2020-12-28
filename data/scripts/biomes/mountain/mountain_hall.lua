@@ -1,8 +1,8 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 8
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biomes/mountain/mountain.lua")
-dofile("data/scripts/lib/utilities.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biomes/mountain/mountain.lua")
+dofile_once("data/scripts/lib/utilities.lua")
 
 function spawn_wands( x, y ) end
 function spawn_potions( x, y ) end
@@ -55,7 +55,7 @@ g_small_enemies_helpless =
 	},
 }
 
-g_crate =
+g_cartlike =
 {
 	total_prob = 0,
 	--[[
@@ -85,8 +85,8 @@ g_crate =
 		prob   		= 0.25,
 		min_count	= 1,
 		max_count	= 1,
-		offset_y 	= -5,    
-		entity 	= "data/entities/props/physics_minecart.xml"
+		offset_y 	= -3,
+		entity 	= "data/entities/props/physics/minecart.xml"
 	},
 	{
 		prob   		= 0.25,
@@ -95,22 +95,29 @@ g_crate =
 		offset_y 	= -5,    
 		entity 	= "data/entities/props/physics_cart.xml"
 	},
+	{
+		prob   		= 0.005,
+		min_count	= 1,
+		max_count	= 1,
+		offset_y 	= -7,    
+		entity 	= "data/entities/props/physics_skateboard.xml"
+	},
 }
 
 function init( x, y, w, h )
 	if GameGetIsGamepadConnected() then
-		LoadPixelScene( "data/biome_impl/mountain_hall.png", "data/biome_impl/mountain_hall_visual.png", x, y, "data/biome_impl/mountain_hall_background_gamepad_updated.png", true )
+		LoadPixelScene( "data/biome_impl/mountain/hall.png", "data/biome_impl/mountain/hall_visual.png", x, y, "data/biome_impl/mountain/hall_background_gamepad_updated.png", true )
 	else
-		LoadPixelScene( "data/biome_impl/mountain_hall.png", "data/biome_impl/mountain_hall_visual.png", x, y, "data/biome_impl/mountain_hall_background.png", true )
+		LoadPixelScene( "data/biome_impl/mountain/hall.png", "data/biome_impl/mountain/hall_visual.png", x, y, "data/biome_impl/mountain/hall_background.png", true )
 	end
 	
-	LoadPixelScene( "data/biome_impl/mountain_hall_instructions.png", "", x, y, "", true )
+	LoadPixelScene( "data/biome_impl/mountain/hall_instructions.png", "", x, y, "", true )
 	
-	LoadPixelScene( "data/biome_impl/mountain_hall_b.png", "data/biome_impl/mountain_hall_b_visual.png", x, y+512, "", true )
-	LoadPixelScene( "data/biome_impl/mountain_hall_br.png", "data/biome_impl/mountain_hall_br_visual.png", x+512, y+512, "", true )
-	LoadPixelScene( "data/biome_impl/mountain_hall_r.png", "data/biome_impl/mountain_hall_r_visual.png", x+512, y, "", true )
-	LoadPixelScene( "data/biome_impl/mountain_hall_bottom.png", "", x-512, y+512, "", true )
-	LoadPixelScene( "data/biome_impl/mountain_hall_bottom_2.png", "", x+552, y+512, "", true )
+	LoadPixelScene( "data/biome_impl/mountain/hall_b.png", "data/biome_impl/mountain/hall_b_visual.png", x, y+512, "", true )
+	LoadPixelScene( "data/biome_impl/mountain/hall_br.png", "data/biome_impl/mountain/hall_br_visual.png", x+512, y+512, "", true )
+	LoadPixelScene( "data/biome_impl/mountain/hall_r.png", "data/biome_impl/mountain/hall_r_visual.png", x+512, y, "", true )
+	LoadPixelScene( "data/biome_impl/mountain/hall_bottom.png", "", x-512, y+512, "", true )
+	LoadPixelScene( "data/biome_impl/mountain/hall_bottom_2.png", "", x+552, y+512, "", true )
 	
 	load_verlet_rope_with_two_joints("data/entities/verlet_chains/vines/verlet_vine_pixelscene.xml", x+139, y+300, x+175, y+281)
 	load_verlet_rope_with_two_joints("data/entities/verlet_chains/vines/verlet_vine_pixelscene.xml", x+302, y+341, x+348, y+345)
@@ -127,7 +134,7 @@ end
 function spawn_small_enemies(x, y) end
 
 function spawn_crate(x, y)
-	spawn(g_crate,x,y)
+	spawn(g_cartlike,x,y)
 end
 
 function spawn_waterspout(x, y)

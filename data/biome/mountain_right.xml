@@ -2,7 +2,7 @@
   <Topology 
     name="_EMPTY_"
     background_image="data/weather_gfx/background_cave_02.png"
-    background_use_neighbor="1"
+    background_use_neighbor="0"
 
     lua_script="data/scripts/biomes/mountain/mountain_right.lua"
     noise_type="SIN_CAPPED_SIMPLEX"

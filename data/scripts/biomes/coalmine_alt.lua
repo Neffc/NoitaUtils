@@ -1,8 +1,9 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 -- The level of action ids that are spawned from the chests
 CHEST_LEVEL = 1
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/biome_modifiers.lua")
 dofile( "data/scripts/items/generate_shop_item.lua" )
 
 RegisterSpawnFunction( 0xff0000ff, "spawn_nest" )
@@ -127,17 +128,42 @@ g_big_enemies =
 		entity 	= "data/entities/animals/frog.xml"
 	},
 	{
+		prob   		= 0.13,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/frog_big.xml"
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entities 	= 
+		{
+			"data/entities/animals/frog.xml",
+			"data/entities/animals/frog.xml",
+			"data/entities/animals/frog_big.xml",
+		}
+	},
+	{
 		prob   		= 0.3,
 		min_count	= 1,
 		max_count	= 2,    
 		entity 	= "data/entities/animals/miner_santa.xml",
 		spawn_check = function() 
-			if( os.date("%d%m") == "2412" ) then
-				return true 
-			else 
+			local year, month, day = GameGetDateAndTimeLocal()
+			
+			if ( month == 12 ) and ( day >= 24 ) and ( day <= 26 ) then
+				return true
+			else
 				return false 
-			end 
+			end
 		end
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/shaman.xml"
 	},
 }
 
@@ -149,7 +175,7 @@ g_lamp =
 		prob   		= 0.7,
 		min_count	= 1,
 		max_count	= 1,    
-		entity 	= "data/entities/props/physics_lantern_small.xml"
+		entity 	= "data/entities/props/physics/lantern_small.xml"
 	},
 	{
 		prob   		= 0.3,
@@ -209,11 +235,13 @@ g_unique_enemy2 =
 		max_count	= 1,    
 		entity 	= "data/entities/animals/miner_santa.xml",
 		spawn_check = function() 
-			if( os.date("%d%m") == "2412" ) then
-				return true 
-			else 
+			local year, month, day = GameGetDateAndTimeLocal()
+			
+			if ( month == 12 ) and ( day >= 24 ) and ( day <= 26 ) then
+				return true
+			else
 				return false 
-			end 
+			end
 		end
 
 	},
@@ -373,8 +401,8 @@ g_props =
 		prob   		= 0.25,
 		min_count	= 1,
 		max_count	= 1,
-		offset_y 	= -5,    
-		entity 	= "data/entities/props/physics_minecart.xml"
+		offset_y 	= -3,
+		entity 	= "data/entities/props/physics/minecart.xml"
 	},
 	{
 		prob   		= 0.2,
@@ -406,8 +434,8 @@ g_props2 =
 		prob   		= 0.2,
 		min_count	= 1,
 		max_count	= 1,    
-		offset_y 	= -5,
-		entity 	= "data/entities/props/physics_minecart.xml"
+		offset_y 	= -3,
+		entity 	= "data/entities/props/physics/minecart.xml"
 	},
 	{
 		prob   		= 0.25,
@@ -531,13 +559,11 @@ g_large_structures =
 g_ghostlamp =
 {
 	total_prob = 0,
-	-- add skullflys after this step
 	{
 		prob   		= 1.0,
 		min_count	= 1,
-		max_count	= 1,    
-		offset_y	= 10,
-		entity 	= "data/entities/props/physics_chain_torch_ghostly.xml"
+		max_count	= 1,  
+		entity 	= "data/entities/props/physics/chain_torch_ghostly.xml"
 	},
 }
 
@@ -589,43 +615,43 @@ g_pixel_scene_01 =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_coalpit01.png",
-		visual_file		= "data/biome_impl/coalmine_coalpit01_visual.png",
+		material_file 	= "data/biome_impl/coalmine/coalpit01.png",
+		visual_file		= "data/biome_impl/coalmine/coalpit01_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_coalpit02.png",
-		visual_file		= "data/biome_impl/coalmine_coalpit02_visual.png",
+		material_file 	= "data/biome_impl/coalmine/coalpit02.png",
+		visual_file		= "data/biome_impl/coalmine/coalpit02_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_carthill.png",
-		visual_file		= "data/biome_impl/coalmine_carthill_visual.png",
+		material_file 	= "data/biome_impl/coalmine/carthill.png",
+		visual_file		= "data/biome_impl/coalmine/carthill_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_coalpit03.png",
-		visual_file		= "data/biome_impl/coalmine_coalpit03_visual.png",
+		material_file 	= "data/biome_impl/coalmine/coalpit03.png",
+		visual_file		= "data/biome_impl/coalmine/coalpit03_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_coalpit04.png",
-		visual_file		= "data/biome_impl/coalmine_coalpit04_visual.png",
+		material_file 	= "data/biome_impl/coalmine/coalpit04.png",
+		visual_file		= "data/biome_impl/coalmine/coalpit04_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_coalpit05.png",
-		visual_file		= "data/biome_impl/coalmine_coalpit05_visual.png",
+		material_file 	= "data/biome_impl/coalmine/coalpit05.png",
+		visual_file		= "data/biome_impl/coalmine/coalpit05_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
@@ -636,63 +662,63 @@ g_pixel_scene_02 =
 	total_prob = 0,
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_shrine01_alt.png",
-		visual_file		= "data/biome_impl/coalmine_shrine01_visual.png",
+		material_file 	= "data/biome_impl/coalmine/shrine01_alt.png",
+		visual_file		= "data/biome_impl/coalmine/shrine01_visual.png",
 		background_file	= "",
 		is_unique		= 1
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_shrine02_alt.png",
-		visual_file		= "data/biome_impl/coalmine_shrine02_visual.png",
+		material_file 	= "data/biome_impl/coalmine/shrine02_alt.png",
+		visual_file		= "data/biome_impl/coalmine/shrine02_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_swarm_alt.png",
-		visual_file		= "data/biome_impl/coalmine_swarm_visual.png",
+		material_file 	= "data/biome_impl/coalmine/swarm_alt.png",
+		visual_file		= "data/biome_impl/coalmine/swarm_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.2,
-		material_file 	= "data/biome_impl/coalmine_symbolroom_alt.png",
+		material_file 	= "data/biome_impl/coalmine/symbolroom_alt.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.2,
-		material_file 	= "data/biome_impl/coalmine_physics_01_alt.png",
-		visual_file		= "data/biome_impl/coalmine_physics_01_visual.png",
+		material_file 	= "data/biome_impl/coalmine/physics_01_alt.png",
+		visual_file		= "data/biome_impl/coalmine/physics_01_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.2,
-		material_file 	= "data/biome_impl/coalmine_physics_02_alt.png",
-		visual_file		= "data/biome_impl/coalmine_physics_02_visual.png",
+		material_file 	= "data/biome_impl/coalmine/physics_02_alt.png",
+		visual_file		= "data/biome_impl/coalmine/physics_02_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 1.2,
-		material_file 	= "data/biome_impl/coalmine_physics_03_alt.png",
+		material_file 	= "data/biome_impl/coalmine/physics_03_alt.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.75,
-		material_file 	= "data/biome_impl/coalmine_shop_alt.png",
-		visual_file		= "data/biome_impl/coalmine_shop_visual.png",
+		material_file 	= "data/biome_impl/coalmine/shop_alt.png",
+		visual_file		= "data/biome_impl/coalmine/shop_visual.png",
 		background_file	= "",
 		is_unique		= 0
 	},
 	{
 		prob   			= 0.5,
-		material_file 	= "data/biome_impl/coalmine_radioactivecave.png",
+		material_file 	= "data/biome_impl/coalmine/radioactivecave.png",
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0
@@ -752,15 +778,19 @@ end
 
 
 function spawn_small_enemies(x, y)
-	spawn(g_small_enemies,x,y)
+	spawn_with_limited_random(g_small_enemies,x,y,0,0,{"fungus","frog"})
 end
 
 function spawn_big_enemies(x, y)
-	spawn(g_big_enemies,x,y)
+	spawn_with_limited_random(g_big_enemies,x,y,0,0,{"fungus","frog"})
 end
 
 function spawn_lamp(x, y)
-	spawn(g_lamp,x,y+2,0,0)
+	spawn(g_lamp,x,y,0,0)
+end
+
+function spawn_ghostlamp(x, y)
+	spawn2(g_ghostlamp,x,y,0,0)
 end
 
 function spawn_props(x, y)

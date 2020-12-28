@@ -100,7 +100,7 @@
   </LightComponent>
   
 	<AudioComponent
-		file="data/audio/Desktop/projectiles.snd"
+		file="data/audio/Desktop/projectiles.bank"
 		event_root="projectiles/magic" >
 	</AudioComponent>
 	
@@ -129,6 +129,12 @@
         ragdoll_filenames_file=""
         blood_material="oil"
         blood_multiplier="0"
-        create_ragdoll="false" >
+        create_ragdoll="0" >
     </DamageModelComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/animals/boss_centipede/orb_mat_oil.xml"
+		>
+	</VariableStorageComponent>
 </Entity>

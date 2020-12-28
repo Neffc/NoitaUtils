@@ -34,8 +34,9 @@
 
 	<ProjectileComponent
 		_tags="enabled_in_world"
-		lifetime="100000"
+		lifetime="-1"
 		penetrate_entities="1"
+		never_hit_player="1"
 	></ProjectileComponent>
 
 	<VelocityComponent
@@ -55,7 +56,7 @@
   
 	<SpriteComponent
 		_tags="enabled_in_hand"
-		_enabled="false"
+		_enabled="0"
 		offset_x="4"
 		offset_y="4"
 		image_file="data/items_gfx/in_hand/emerald_tablet_in_hand.png"

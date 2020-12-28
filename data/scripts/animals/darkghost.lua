@@ -1,8 +1,10 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
 
 local entity_id    = GetUpdatedEntityID()
 
 local rand = Random(1,10)
+
+SetRandomSeed( GameGetFrameNum(), entity_id )
 
 if (rand == 2) then
 	edit_all_components( entity_id, "SpriteComponent", function(comp,vars)

@@ -1,4 +1,4 @@
-<Entity name="$projectile_default">
+<Entity name="$projectile_default" >
 
   <Base file="data/entities/base_projectile_physics.xml">
 
@@ -39,7 +39,7 @@
 		  stains_radius="35"
 		  background_lightning_count="5" 
 		  max_durability_to_destroy="12" 
-      audio_event_name="explosion_nuke" 
+      audio_event_name="explosions/holy" 
       >
       </config_explosion>
     </ProjectileComponent>
@@ -133,14 +133,20 @@
   </ParticleEmitterComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
-      event_root="player_projectiles/bomb">
+      file="data/audio/Desktop/projectiles.bank"
+      event_root="player_projectiles/bomb_holy">
   </AudioComponent>
 
   <AudioLoopComponent
-    file="data/audio/Desktop/projectiles.snd"
-    event_name="projectiles/fuse_burn_slow"
+    file="data/audio/Desktop/projectiles.bank"
+    event_name="projectiles/fuse_burn_magic"
     auto_play="1">
   </AudioLoopComponent>
+  
+  <VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/bomb_holy.xml"
+		>
+	</VariableStorageComponent>
   
 </Entity>

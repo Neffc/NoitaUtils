@@ -3,14 +3,20 @@
     name="$biome_sandcave"
     type="BIOME_WANG_TILE"
     background_image="data/weather_gfx/background_cave_09.png"
+    background_edge_left="data/weather_gfx/edges/background_cave_09_left.png"
+    background_edge_right="data/weather_gfx/edges/background_cave_09_right.png"
+    background_edge_top="data/weather_gfx/edges/background_cave_09_top.png"
+    background_edge_bottom="data/weather_gfx/edges/background_cave_09_bottom.png"
+    background_edge_priority="11"     
+    limit_background_image="0"
+
     wang_template_file="data/wang_tiles/sandcave.png" 
     lua_script="data/scripts/biomes/sandcave.lua"
     wang_map_width="256"
     wang_map_height="256"
-    
-    audio_music_2="coalmine"
-    audio_ambience="cave"
-    audio_ambience_surface="desert">
+    audio_music_2="side_biome_action"
+    audio_ambience="excavationsite"
+    audio_ambience_surface="desert"
   >
   </Topology>
 

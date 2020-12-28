@@ -1,6 +1,6 @@
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/lib/utilities.lua")
 
 function spawn_material_checker( x, y, material1_str, lua_filename, image_emitter, image_emitter_x, image_emitter_y )
 	local entity = EntityLoad( "data/entities/buildings/orb_room_materialchecker.xml", x, y )

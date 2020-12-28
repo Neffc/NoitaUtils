@@ -1,5 +1,5 @@
 <Entity 
-	tags="mortal,hittable,teleportable_NOT" name="$animal_boss_dragon">
+	tags="enemy,mortal,hittable,teleportable_NOT,boss_dragon" name="$animal_boss_dragon">
 
 	<_Transform 
 		position.x="0" 
@@ -48,6 +48,13 @@
 		ragdoll_filenames_file=""
 		ragdoll_offset_y="-6"
 		>
+		<damage_multipliers
+			explosion="0.5"
+			fire="0.5"
+			freeze="0.5"
+			electricity="0.3"
+			>
+		</damage_multipliers>
 	</DamageModelComponent>
 
 	<PathFindingGridMarkerComponent
@@ -212,6 +219,7 @@
 		update_transform="1" 
 		visible="1" 
 		emissive="1"
+		never_ragdollify_on_death="1"
 		z_index="-9000" >
 	</SpriteComponent>
 
@@ -232,6 +240,7 @@
 		update_transform="1" 
 		visible="1" 
 		emissive="1"
+		never_ragdollify_on_death="1"
 		z_index="-9000" >
 	</SpriteComponent>
 		
@@ -249,10 +258,40 @@
     <MusicEnergyAffectorComponent
     	energy_target="1">
     </MusicEnergyAffectorComponent>
+
+	<AudioLoopComponent
+		file="data/audio/Desktop/animals.bank"
+		event_name="animals/worm/movement_loop_big"
+		set_speed_parameter="1"
+		auto_play="1">
+	</AudioLoopComponent>
 	
 	<LuaComponent
 		script_death="data/scripts/animals/boss_dragon_death.lua"
 		>
 	</LuaComponent>
+	
+	<Entity>
+		
+		<InheritTransformComponent
+			parent_sprite_id="10"
+			>
+		</InheritTransformComponent>
+		
+		<LuaComponent
+			script_source_file="data/scripts/projectiles/orb_green_dragon.lua"
+			execute_every_n_frame="80"
+			execute_times="-1"
+			>
+		</LuaComponent>
+		
+		<GenomeDataComponent 
+			_enabled="1"
+			herd_id="boss_dragon"
+			food_chain_rank="20"
+			is_predator="1" >
+		</GenomeDataComponent>
+
+	</Entity>
 
 </Entity>

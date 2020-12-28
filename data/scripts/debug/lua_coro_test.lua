@@ -1,4 +1,4 @@
-dofile("data/scripts/lib/coroutines.lua")
+dofile_once("data/scripts/lib/coroutines.lua")
 
 async(function ()
 		local i = 0

@@ -3,7 +3,13 @@
     name="$biome_town_under"
     type="BIOME_WANG_TILE"
     background_image="data/weather_gfx/background_cave_04_alt.png"
-    background_use_neighbor="1"
+    background_edge_left="data/weather_gfx/edges/background_cave_04_alt_left.png"
+    background_edge_right="data/weather_gfx/edges/background_cave_04_alt_right.png"
+    background_edge_top="data/weather_gfx/edges/background_cave_04_alt_top.png"
+    background_edge_bottom="data/weather_gfx/edges/background_cave_04_alt_bottom.png"
+    background_edge_priority="10"     
+    background_use_neighbor="0"
+    limit_background_image="0"
 
     wang_template_file="data/wang_tiles/town_under.png" 
     lua_script="data/scripts/biomes/town.lua"
@@ -12,8 +18,20 @@
     limit_background_image="0"
     audio_music_2="wandcave"
     audio_ambience="temple"
-    >
-	<BitmapCaves 
+  >
+  
+  <RandomMaterials>
+    <!-- changes the color to random material -->
+    <RandomColor input_color="FF01CFEE" output_colors="FFF86868,FF7FCEEA,FFA3569F,FFC23055" />
+
+    <!-- randomizes blocking and non blocking paths -->
+    <RandomColor input_color="FF12BBEE" output_colors="FF000000,FFFFFFFF" />
+
+    <!-- can be used to randomize scripts as well -->
+
+  </RandomMaterials>
+	
+  <BitmapCaves 
       size_x="512"
       size_y="256"
       blob_caves_count_min="0"

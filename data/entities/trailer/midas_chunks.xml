@@ -16,7 +16,7 @@
 			max_angle="3.1415"
 			chunk_max_angle="1.57"
 			chunk_probability="0.15"
-			collapse_images="data/collapse_masks/big/$[0-14].png"
+			collapse_images="data/procedural_gfx/collapse_big/$[0-14].png"
 			_enabled="1"
 			>
 		</LooseGroundComponent>
@@ -39,7 +39,7 @@
 			max_angle="3.1415"
 			chunk_max_angle="1.57"
 			chunk_probability="0.15"
-			collapse_images="data/collapse_masks/big/$[0-14].png"
+			collapse_images="data/procedural_gfx/collapse_big/$[0-14].png"
 			_enabled="1"
 			>
 		</LooseGroundComponent>

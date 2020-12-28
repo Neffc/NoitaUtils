@@ -195,16 +195,34 @@
         special_scale_y="4" >
     </SpriteComponent>
 
+    <Entity>
+        <MagicConvertMaterialComponent
+	    	_tags="enabled_in_hand"
+            temperature_reaction_temp="10"
+            steps_per_frame="1"
+            loop="1"
+            is_circle="1"
+            radius="7" >
+        </MagicConvertMaterialComponent>
+
+        <InheritTransformComponent
+    		_tags="enabled_in_hand">
+			<Transform 
+				position.y="-3" >
+			</Transform>
+        </InheritTransformComponent>
+    </Entity>
+    
 	<AudioComponent
 	    _tags="enabled_in_hand"
-		file="data/audio/Desktop/projectiles.snd"
+		file="data/audio/Desktop/projectiles.bank"
 		event_root="player_projectiles/torch"
 		set_latest_event_position="1" >
 	</AudioComponent>
 
 	<AudioLoopComponent
 	    _tags="enabled_in_hand"
-		file="data/audio/Desktop/projectiles.snd"
+		file="data/audio/Desktop/projectiles.bank"
 		event_name="player_projectiles/torch/loop"
 		auto_play_if_enabled="1"
 		play_on_component_enable="1" >

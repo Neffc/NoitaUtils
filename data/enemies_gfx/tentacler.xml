@@ -1,7 +1,9 @@
 <Sprite 
   filename="data/enemies_gfx/tentacler.png" 
   offset_x="14" 
-  offset_y="25" >
+  offset_y="25"
+  default_animation="stand" >
+
   <RectAnimation 
     frame_count="6" 
     frame_height="28" 
@@ -13,8 +15,10 @@
     offset_x="14" 
     offset_y="25" 
     pos_x="0" 
-    pos_y="1" >
-  </RectAnimation>
+    pos_y="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="29" 
@@ -27,24 +31,30 @@
     offset_y="25" 
     pos_x="0" 
     pos_y="30" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="1" 
       frame="0" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="3" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="29" 
@@ -57,24 +67,30 @@
     offset_y="25" 
     pos_x="0" 
     pos_y="30" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="1" 
       frame="0" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="3" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="29" 
@@ -87,24 +103,30 @@
     offset_y="25" 
     pos_x="0" 
     pos_y="30" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="1" 
       frame="0" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
+      probability="1" >
+
+    </Event>
+
     <Event 
       check_physics_material="1" 
       frame="3" 
       max_distance="500" 
       name="step" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="29" 
@@ -117,8 +139,10 @@
     offset_y="20" 
     pos_x="0" 
     pos_y="59" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="29" 
@@ -131,8 +155,10 @@
     offset_y="20" 
     pos_x="0" 
     pos_y="59" 
-    shrink_by_one_pixel="1" >
-  </RectAnimation>
+    shrink_by_one_pixel="1" >
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="29" 
@@ -146,16 +172,20 @@
     offset_y="20" 
     pos_x="0" 
     pos_y="88" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="4" 
       max_distance="500" 
       name="shoot_tentacle" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="6" 
     frame_height="29" 
@@ -169,16 +199,20 @@
     offset_y="20" 
     pos_x="0" 
     pos_y="88" 
-    shrink_by_one_pixel="1" >
+    shrink_by_one_pixel="1" >
+
     <Event 
       check_physics_material="0" 
       frame="4" 
       max_distance="500" 
       name="hit" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
   <RectAnimation 
     frame_count="7" 
     frame_height="28" 
@@ -191,14 +225,19 @@
     offset_x="14" 
     offset_y="20" 
     pos_x="0" 
-    pos_y="117" >
+    pos_y="117" >
+
     <Event 
       check_physics_material="0" 
       frame="4" 
       max_distance="500" 
       name="shoot_ice" 
       on_finished="0" 
-      probability="1" >
-    </Event>
-  </RectAnimation>
-</Sprite>
+      probability="1" >
+
+    </Event>
+
+  </RectAnimation>
+
+</Sprite>
+

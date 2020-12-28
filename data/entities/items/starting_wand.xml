@@ -42,12 +42,7 @@
         </ItemComponent>
     </Base>
 
-    <LuaComponent 
-        execute_on_added="1"
-        remove_after_executed="1"
-        script_source_file="data/scripts/gun/procedural/handgun.lua"
-        >
-    </LuaComponent>
+   <Base file="data/entities/base_wand_pickup.xml" > <LuaComponent _enabled="0" script_item_picked_up="" /> </Base>
 
     <ManaReloaderComponent
         _tags="enabled_in_world,enabled_in_hand,enabled_in_inventory" >

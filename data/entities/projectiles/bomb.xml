@@ -22,7 +22,7 @@
         explosion_radius="60" 
         explosion_sprite="data/particles/explosion_128.xml" 
         explosion_sprite_lifetime="0" 
-        load_this_entity="data/entities/particles/particle_explosion/main_large_radius.xml,data/entities/misc/loose_ground.xml"
+        load_this_entity="data/entities/particles/particle_explosion/main_gunpowder_large.xml,data/entities/misc/loose_ground.xml"
         create_cell_probability="40" 
         hole_destroy_liquid="0" 
         hole_enabled="1" 
@@ -127,14 +127,20 @@
   </ParticleEmitterComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="player_projectiles/bomb">
   </AudioComponent>
 
   <AudioLoopComponent
-    file="data/audio/Desktop/projectiles.snd"
+    file="data/audio/Desktop/projectiles.bank"
     event_name="projectiles/fuse_burn_slow"
     auto_play="1">
   </AudioLoopComponent>
+  
+  <VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/bomb.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>

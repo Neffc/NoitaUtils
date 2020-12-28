@@ -1,4 +1,4 @@
-<Entity tags="" name="$projectile_default">
+<Entity tags="" name="$projectile_default" tags="projectile_player,projectile" >
 	<VelocityComponent
 		gravity_y="0"
 		air_friction="0"
@@ -43,6 +43,7 @@
     on_collision_die="0"
     lifetime="500" 
 	knockback_force="0"
+	damage_every_x_frames="25"
 	>
 	<config_explosion
 		never_cache="1" 
@@ -66,7 +67,13 @@
   </ProjectileComponent>
   
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
-      event_root="player_projectiles/cloud">
+      file="data/audio/Desktop/projectiles.bank"
+      event_root="player_projectiles/mist">
   </AudioComponent>
+  
+  <AudioLoopComponent
+		file="data/audio/Desktop/projectiles.bank"
+		event_name="player_projectiles/mist/loop"
+		auto_play="1">
+	</AudioLoopComponent>
 </Entity>

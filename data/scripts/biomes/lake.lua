@@ -1,7 +1,7 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 0
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
 
 ------------ SMALL ENEMIES ----------------------------------------------------
 
@@ -183,19 +183,7 @@ g_lamp =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/props/physics_mining_lamp.xml"
-	},
-	{
-		prob   		= 0.3,
-		min_count	= 1,
-		max_count	= 1,    
-		entity 	= "data/entities/props/physics_mining_lamp_broken.xml"
-	},
-	{
-		prob   		= 0.05,
-		min_count	= 1,
-		max_count	= 1,    
-		entity 	= "data/entities/props/physics_mining_lamp_gas.xml"
-	},
+	}
 }
 ------------ MISC --------------------------------------
 

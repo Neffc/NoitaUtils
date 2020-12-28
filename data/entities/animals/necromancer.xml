@@ -23,7 +23,7 @@
 
 		<DamageModelComponent 
             hp="5"
-            ragdoll_material="bone"
+            ragdoll_material="meat_cursed_dry"
 			blood_material="bone"
 			blood_spray_material="bone"
             ragdoll_filenames_file="data/ragdolls/necromancer/filenames.txt"
@@ -78,8 +78,13 @@
 		b="255">
     </LightComponent>
 
+	<AudioComponent
+		file="data/audio/Desktop/animals.bank"
+		event_root="animals/necromancer" >
+	</AudioComponent>
+
 	<AudioLoopComponent
-		file="data/audio/Desktop/animals.snd"
+		file="data/audio/Desktop/animals.bank"
 		event_name="animals/wizard_slow/movement_loop"
 		set_speed_parameter="1"
 		auto_play="1">

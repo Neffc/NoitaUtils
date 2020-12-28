@@ -17,7 +17,7 @@
         throw_as_item="0" 
         ui_name="Poison wand" 
 		use_gun_script="1"
-		mana_charge_speed="900"
+		mana_charge_speed="90000"
         item_recoil_recovery_speed="15"
 		mana_max="900"
         ><gun_config 

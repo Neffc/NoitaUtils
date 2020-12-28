@@ -1,4 +1,5 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/lib/utilities.lua")
+dofile_once("data/scripts/biomes/temple_shared.lua" )
 
 function collision_trigger()
 	local entity_id    = GetUpdatedEntityID()
@@ -29,8 +30,20 @@ function collision_trigger()
 	EntityKill( workshop_3 );
 	--print("Destroyed workshop hint entity")
 
+	-- kill temple_areacheckers that are on (about) the same horizontal level as we are
+	local temple_areacheckers = EntityGetInRadiusWithTag( pos_x, pos_y, 2048, "temple_areachecker" )
+	for k,areachecker in pairs(temple_areacheckers) do
+		local area_x, area_y = EntityGetTransform( areachecker )
+		if( math.abs( pos_y - area_y ) < 512 ) then
+			EntityKill( areachecker )
+		end
+	end
+
 	GameTriggerMusicFadeOutAndDequeueAll( 2.0 )
-	GamePlaySound( "data/audio/Desktop/misc.snd", "misc/temple_collapse", pos_x-100, pos_y-50 )
+	GamePlaySound( "data/audio/Desktop/misc.bank", "misc/temple_collapse", pos_x-100, pos_y-50 )
 	
+	temple_set_active_flag( pos_x, pos_y, "0" )
+	GlobalsSetValue( "FINAL_BOSS_ARENA_ENTERED", "1" )
+
 	EntityKill( entity_id )
 end

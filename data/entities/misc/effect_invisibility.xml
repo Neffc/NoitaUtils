@@ -10,12 +10,12 @@
 	</GameEffectComponent >
 
 	<AudioComponent
-		file="data/audio/Desktop/misc.snd"
+		file="data/audio/Desktop/misc.bank"
 		event_root="game_effect/invisibility" >
 	</AudioComponent>
 
 	<AudioComponent
-		file="data/audio/Desktop/misc.snd"
+		file="data/audio/Desktop/misc.bank"
 		event_root="game_effect/electrocution" >
 	</AudioComponent>
 

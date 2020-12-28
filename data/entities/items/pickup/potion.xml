@@ -1,4 +1,4 @@
-<Entity tags="hittable,teleportable_NOT" >
+<Entity tags="hittable,teleportable_NOT,item_physics" >
 
   <!-- physical presence -->
   
@@ -29,7 +29,7 @@
 
   <ProjectileComponent
     _tags="enabled_in_world"
-    lifetime="100000"
+    lifetime="-1"
     penetrate_entities="1"
   ></ProjectileComponent>
 
@@ -42,6 +42,7 @@
   <LuaComponent 
     execute_on_added="1"
     remove_after_executed="1"
+    call_init_function="1"
     script_source_file="data/scripts/items/potion.lua" 
   ></LuaComponent>
   
@@ -114,9 +115,10 @@
       damage_mortals="1" 
       physics_explosion_power.max="5" 
       shake_vegetation="1" 
-      sparks_count_min="1" 
-      sparks_count_max="2" 
-      sparks_enabled="0" 
+      sparks_count_min="10" 
+      sparks_count_max="20" 
+      sparks_enabled="1" 
+	  spark_material="glass"
       stains_enabled="1" 
       stains_radius="0" >
     </config_explosion>
@@ -131,7 +133,7 @@
 
   <SpriteComponent
     _tags="enabled_in_hand"
-    _enabled="false"
+    _enabled="0"
     offset_x="4"
     offset_y="4"
     image_file="data/items_gfx/potion.png"
@@ -193,14 +195,14 @@
 
   <AudioLoopComponent
     _tags="sound_spray,enabled_in_world,enabled_in_hand"
-    file="data/audio/Desktop/materials.snd"
+    file="data/audio/Desktop/materials.bank"
     event_name="materials/spray_potion" 
     volume_autofade_speed="0.1" >
   </AudioLoopComponent>
 
   <AudioComponent
     _tags="enabled_in_world"
-    file="data/audio/Desktop/materials.snd"
+    file="data/audio/Desktop/materials.bank"
     event_root="collision/glass_potion"
     set_latest_event_position="1" >
   </AudioComponent>

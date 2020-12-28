@@ -5,4 +5,12 @@
       max_hp="150"
      ></DamageModelComponent >
   </Base>
+  
+  <Entity>
+	    <GameEffectComponent 
+	        effect="PROTECTION_FREEZE"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
 </Entity>

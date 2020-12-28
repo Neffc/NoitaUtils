@@ -55,7 +55,8 @@
 		light_g="60"
 		light_b="10"
 		stains_enabled="0" 
-		stains_image="data/temp/explosion_stain.png" >
+		stains_image="data/temp/explosion_stain.png"
+		audio_enabled="0" >
 	</config_explosion>
   </ProjectileComponent>
   
@@ -145,7 +146,13 @@
    </LuaComponent>
    
 	<AudioComponent
-		file="data/audio/Desktop/projectiles.snd"
+		file="data/audio/Desktop/projectiles.bank"
 		event_root="projectiles/orb_b" >
 	</AudioComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/orb_blue.xml"
+		>
+	</VariableStorageComponent>
  </Entity>

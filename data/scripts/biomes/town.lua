@@ -1,6 +1,6 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 1
-dofile("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/director_helpers.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 RegisterSpawnFunction( 0xffFF3CFF, "spawn_chair" )

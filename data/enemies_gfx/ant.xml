@@ -4,7 +4,7 @@
   color_b="1" 
   color_g="1" 
   color_r="1" 
-  default_animation="" 
+  default_animation="stand" 
   filename="data/enemies_gfx/ant.png" 
   hotspots_filename="" 
   name="" 

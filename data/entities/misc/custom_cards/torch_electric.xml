@@ -101,14 +101,14 @@
 
 	<AudioComponent
 	    _tags="enabled_in_hand"
-		file="data/audio/Desktop/projectiles.snd"
+		file="data/audio/Desktop/projectiles.bank"
 		event_root="player_projectiles/torch_electric"
 		set_latest_event_position="1" >
 	</AudioComponent>
 
 	<AudioLoopComponent
 	    _tags="enabled_in_hand"
-		file="data/audio/Desktop/projectiles.snd"
+		file="data/audio/Desktop/projectiles.bank"
 		event_name="player_projectiles/torch_electric/loop"
 		auto_play_if_enabled="1"
 		play_on_component_enable="1" >

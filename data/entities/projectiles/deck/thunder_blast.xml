@@ -1,4 +1,4 @@
-<Entity name="$projectile_default">
+<Entity name="$projectile_default" tags="projectile_player" >
 
 	<Base file="data/entities/base_projectile.xml" >
     <VelocityComponent>
@@ -68,15 +68,22 @@
 		aabb_max.y="96" 
 		damage_per_frame="0.4"
 		update_every_n_frame="1"
+		damage_type="DAMAGE_ELECTRICITY"
 		>
 	</AreaDamageComponent>
   
   <LuaComponent
     execute_on_removed="1"
-    execute_every_n_frame="99999999"
+    execute_every_n_frame="-1"
     script_source_file="data/scripts/projectiles/lightning_explosion_small.lua"
     remove_after_executed="0">
   </LuaComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/thunder_blast.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

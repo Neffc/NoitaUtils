@@ -1,4 +1,4 @@
-<Entity name="$projectile_default">
+<Entity name="$projectile_default" tags="projectile_player" >
   
 	<Base file="data/entities/base_projectile.xml" >
 		<VelocityComponent
@@ -36,12 +36,14 @@
     shoot_light_flash_g="165"
     shoot_light_flash_b="40"
 	knockback_force="1.0"
+	physics_impulse_coeff="3000"
 	>
     <config_explosion
       never_cache="0" 
       camera_shake="10" 
       explosion_radius="7"
       explosion_sprite="data/particles/explosion_016.xml" 
+      load_this_entity="data/entities/particles/particle_explosion/main_gunpowder_tiny.xml"
       explosion_sprite_lifetime="0" 
       create_cell_probability="30" 
       hole_destroy_liquid="0"
@@ -146,7 +148,7 @@
   </ParticleEmitterComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="player_projectiles/bullet_launcher">
   </AudioComponent>
   
@@ -185,6 +187,12 @@
     is_emitting="1"
 	>
   </ParticleEmitterComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/grenade_anti.xml"
+		>
+	</VariableStorageComponent>
   
 </Entity>
 

@@ -1,4 +1,4 @@
-<Entity tags="hittable">
+<Entity tags="hittable,item,item_shop">
 
     <!-- these two are used to make these shop items -->
     <ItemCostComponent cost="100" />
@@ -12,6 +12,7 @@
         update_transform="1" 
         update_transform_rotation="0"
         text="100"
+        z_index="-1"
          >
     </SpriteComponent>
 

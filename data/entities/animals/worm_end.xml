@@ -1,5 +1,5 @@
 <Entity 
-  tags="mortal,hittable,teleportable_NOT,homing_target" 
+  tags="mortal,hittable,teleportable_NOT,homing_target,enemy,worm" 
   name="$animal_worm_end"
   >
   <_Transform 
@@ -45,7 +45,7 @@
     falling_damages="0" 
     fire_damage_amount="0.2" 
      
-    fire_probability_of_ignition="0.5" 
+    fire_probability_of_ignition="0" 
     hp="25" 
     ragdoll_fx_forced="DISINTEGRATED"
     is_on_fire="0" 
@@ -71,6 +71,7 @@
     >
 	<damage_multipliers
 		drill="0.4"
+		projectile="0.4"
 		>
 	</damage_multipliers>
   </DamageModelComponent>
@@ -88,6 +89,7 @@
   </GenomeDataComponent>
   
 	<CellEaterComponent
+		_tags="cell_eater"
 		radius="9" >
 	</CellEaterComponent>
   
@@ -297,17 +299,17 @@
   </MusicEnergyAffectorComponent>
 
   <AudioComponent
-    file="data/audio/Desktop/animals.snd"
+    file="data/audio/Desktop/animals.bank"
     event_root="animals">
   </AudioComponent>
 
   <AudioComponent
-    file="data/audio/Desktop/animals.snd"
+    file="data/audio/Desktop/animals.bank"
     event_root="animals/worm">
   </AudioComponent>
 
   <AudioLoopComponent
-    file="data/audio/Desktop/animals.snd"
+    file="data/audio/Desktop/animals.bank"
     event_name="animals/worm/movement_loop_big"
     set_speed_parameter="1"
     auto_play="1">

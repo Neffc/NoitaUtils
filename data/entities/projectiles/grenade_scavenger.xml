@@ -37,6 +37,7 @@
       camera_shake="10" 
       explosion_radius="10"
       explosion_sprite="data/particles/explosion_016.xml" 
+      load_this_entity="data/entities/particles/particle_explosion/main_gunpowder_tiny.xml"
       explosion_sprite_lifetime="0" 
       create_cell_probability="0" 
       hole_destroy_liquid="0" 
@@ -52,7 +53,8 @@
       sparks_count_max="10" 
       sparks_enabled="1" 
       stains_enabled="1"
-      stains_radius="12" >
+      stains_radius="12"
+      audio_event_name="explosions/grenade_small" >
     </config_explosion>
   </ProjectileComponent>
   
@@ -94,9 +96,15 @@
   </LightComponent>
 
   <AudioComponent
-    file="data/audio/Desktop/projectiles.snd"
+    file="data/audio/Desktop/projectiles.bank"
     event_root="projectiles/bullet_launcher">
   </AudioComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/grenade_scavenger.xml"
+		>
+	</VariableStorageComponent>
   
 </Entity>
 

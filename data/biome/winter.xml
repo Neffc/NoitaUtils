@@ -1,7 +1,13 @@
 <Biome>
   <Topology 
-    background_image="data/weather_gfx/background_cave_02.png"
-    background_use_neighbor="1"
+    background_image="data/weather_gfx/background_snowcave.png"
+    background_edge_left="data/weather_gfx/edges/background_snowcave_left.png"
+    background_edge_right="data/weather_gfx/edges/background_snowcave_right.png"
+    background_edge_top="data/weather_gfx/edges/background_snowcave_top.png"
+    background_edge_bottom="data/weather_gfx/edges/background_snowcave_bottom.png"
+    background_edge_priority="9"
+    
+    background_use_neighbor="0"
 
     lua_script="data/scripts/biomes/hills.lua"
     name="$biome_winter"

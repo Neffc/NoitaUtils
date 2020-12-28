@@ -33,6 +33,10 @@
 			materials_that_damage="acid,lava,poison" 
 			materials_how_much_damage="0.004,0.004,0.001"
 			>
+			<damage_multipliers
+				ice="0.0"
+				>
+			</damage_multipliers>
 		</DamageModelComponent>
 
 		<SpriteComponent 
@@ -127,7 +131,7 @@
   </LightComponent>
   
   <LuaComponent
-    execute_every_n_frame="99999999"
+    execute_every_n_frame="-1"
     script_death="data/scripts/animals/icer_death.lua"
     remove_after_executed="0">
   </LuaComponent>
@@ -143,21 +147,17 @@
 		attack_ranged_offset_y="-4"
 		>
 	</AIAttackComponent>
-
-  	<AIAttackComponent
-		frames_between="140"
-		frames_between_global="30"
-		animation_name="attack_ranged"
-		attack_ranged_entity_file="data/entities/projectiles/iceskull_explosion.xml" 
-		attack_ranged_action_frame="0"
-		min_distance="10"
-		max_distance="50"
-		attack_ranged_offset_y="-4" 
-		>
-	</AIAttackComponent>
 	
 	<ItemPickUpperComponent
     	is_in_npc="1">
     </ItemPickUpperComponent>
+	
+	<Entity>
+	    <GameEffectComponent 
+	        effect="PROTECTION_FREEZE"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
 </Entity>
 

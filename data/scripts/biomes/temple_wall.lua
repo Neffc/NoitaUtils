@@ -1,8 +1,9 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 CHEST_LEVEL = 3
-dofile("data/scripts/director_helpers.lua")
-dofile("data/scripts/biome_scripts.lua")
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once("data/scripts/director_helpers.lua")
+dofile_once("data/scripts/biome_scripts.lua")
+dofile_once("data/scripts/lib/utilities.lua")
+dofile_once("data/scripts/biomes/temple_altar_top_shared.lua")
 
 RegisterSpawnFunction( 0xffffeedd, "init" )
 
@@ -24,31 +25,5 @@ function spawn_potions( x, y ) end
 function spawn_wands( x, y ) end
 
 function init( x, y, w, h )
-	SetRandomSeed( x, y )
-	local randomtop = Random(1, 50)
-	
-	LoadPixelScene( "data/biome_impl/temple_wall_top.png", "", x, y-30, "data/biome_impl/temple_wall_top_background.png", true )
-
-	if( y > 12000 ) then
-		LoadPixelScene( "data/biome_impl/temple_altar_top_boss_arena.png", "", x, y-40, "", true )
-	else	
-
-	if (randomtop == 5) then
-		LoadPixelScene( "data/biome_impl/temple_altar_top_water.png", "", x, y-40, "", true )
-	elseif (randomtop == 8) then
-		LoadPixelScene( "data/biome_impl/temple_altar_top_blood.png", "", x, y-40, "", true )
-	elseif (randomtop == 11) then
-		LoadPixelScene( "data/biome_impl/temple_altar_top_oil.png", "", x, y-40, "", true )
-	elseif (randomtop == 13) then
-		LoadPixelScene( "data/biome_impl/temple_altar_top_radioactive.png", "", x, y-40, "", true )
-	elseif (randomtop == 15) then
-		LoadPixelScene( "data/biome_impl/temple_altar_top_lava.png", "", x, y-40, "", true )
-	else
-		LoadPixelScene( "data/biome_impl/temple_altar_top.png", "", x, y-40, "", true )
-	end
-
-	end	
-
-	LoadPixelScene( "data/biome_impl/temple_solid.png", "", x, y-40+300, "", true )
-
+	spawn_altar_top(x, y, true)
 end

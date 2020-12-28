@@ -21,6 +21,87 @@ end
 
 ----------------------------------------------------------------------------------------
 
+function random_create( x, y )
+	local result = {}
+	result.x = x
+	result.y = y
+	return result
+end
+
+function random_next( rnd, min, max )
+	local result = ProceduralRandomf( rnd.x, rnd.y, min, max )
+	rnd.y = rnd.y + 1
+	return result
+end
+
+function random_nexti( rnd, min, max )
+	local result = ProceduralRandomi( rnd.x, rnd.y, min, max )
+	rnd.y = rnd.y + 1
+	return result
+end
+
+function pick_random_from_table_backwards( t, rnd )
+	local result = nil
+	local len = #t
+
+	for i=len,1, -1 do
+		if random_next( rnd, 0.0, 1.0 ) <= t[i].chance then
+			result = t[i]
+			break
+		end
+	end
+
+	if result == nil then
+		result = t[1]
+	end
+
+	return result
+end
+
+function pick_random_from_table_weighted( rnd, t )
+	if #t == 0 then return nil end
+	
+	local weight_sum = 0.0
+	for _,it in ipairs(t) do
+		it.weight_min = weight_sum
+		it.weight_max = weight_sum + it.probability
+		weight_sum = it.weight_max
+	end
+
+	local val = random_next( rnd, 0.0, weight_sum )
+	local result = t[1]
+	for _,it in ipairs(t) do
+		if val >= it.weight_min and val <= it.weight_max then
+			result = it
+			break
+		end
+	end
+
+	return result
+end
+
+----------------------------------------------------------------------------------------
+
+function pick_random_from_table_backwards( t, rnd )
+	local result = nil
+	local len = #t
+
+	for i=len,1, -1 do
+		if random_next( rnd, 0.0, 1.0 ) <= t[i].chance then
+			result = t[i]
+			break
+		end
+	end
+
+	if result == nil then
+		result = t[1]
+	end
+
+	return result
+end
+
+----------------------------------------------------------------------------------------
+
 function string_isempty(s)
   return s == nil or s == ''
 end
@@ -188,6 +269,159 @@ function component_get_value_vector2( entity_id, type_name, value_name, default_
 	return default_x, default_y
 end
 
+----------------------------------------------------------------------------------------
+
+function get_variable_storage_component( entity_id, name )
+	if not is_valid_entity( entity_id ) then  
+		return nil
+	end
+
+	local components = EntityGetComponent( entity_id, "VariableStorageComponent" )
+	if( components ~= nil ) then
+		for _,comp_id in pairs(components) do 
+			local var_name = ComponentGetValue( comp_id, "name" )
+			if( var_name == name) then
+				return comp_id
+			end
+		end
+	end
+
+	return nil
+end
+
+-- component API v2 --------------------------------------------------------------------
+
+function edit_component2( entity_id, type_name, do_what )
+	if not is_valid_entity( entity_id ) then
+		return  
+	end
+
+	local comp = EntityGetFirstComponent( entity_id, type_name )
+	if comp ~= nil then
+		local modified_vars = { }
+		do_what( comp, modified_vars )
+		for key,value in pairs( modified_vars ) do 
+			ComponentSetValue2( comp, key, value )
+		end
+	end
+end
+
+-- For example:
+-- component_readwrite( EntityGetFirstComponent( GetUpdatedEntityID(), "DamageModelComponent" ), { hp = 0, max_hp = 0 }, function(comp)
+--   comp.max_hp = comp.max_hp * 1.5
+--   comp.hp = comp.max_hp
+-- end)
+function component_readwrite( comp, component_prototype, do_what )
+	if comp ~= nil then
+		for key,value in pairs( component_prototype ) do 
+			component_prototype[key] = ComponentGetValue2( comp, key )
+		end
+		do_what( component_prototype )
+		for key,value in pairs( component_prototype ) do 
+			ComponentSetValue2( comp, key, value )
+		end
+	end
+end
+
+-- For example:
+-- component_read( EntityGetFirstComponent( GetUpdatedEntityID(), "DamageModelComponent" ), { max_hp = 0 }, function(comp)
+--   print( comp.max_hp )
+--   comp.max_hp = 100 -- this has no effect
+-- end)
+function component_read( comp, component_prototype, do_what )
+	if comp ~= nil then
+		for key,value in pairs( component_prototype ) do 
+			component_prototype[key] = ComponentGetValue2( comp, key )
+		end
+		do_what( component_prototype )
+	end
+end
+
+-- For example:
+-- component_write( EntityGetFirstComponent( GetUpdatedEntityID(), "DamageModelComponent" ), { max_hp = 100 } )
+function component_write( comp, component_keys_and_values )
+	if comp ~= nil then
+		for key,value in pairs( component_keys_and_values ) do 
+			ComponentSetValue2( comp, key, value )
+		end
+	end
+end
+
+----------------------------------------------------------------------------------------
+
+function edit_component_with_tag2( entity_id, type_name, tag, do_what )
+	if not is_valid_entity( entity_id ) then
+		return  
+	end
+
+	local comp = EntityGetFirstComponent( entity_id, type_name, tag )
+	if comp ~= nil then
+		local modified_vars = { }
+		do_what( comp, modified_vars )
+		for key,value in pairs( modified_vars ) do 
+			ComponentSetValue2( comp, key, value )
+		end
+	end
+end
+
+----------------------------------------------------------------------------------------
+
+function edit_all_components2( entity_id, type_name, do_what )
+	if not is_valid_entity( entity_id ) then  
+		return  
+	end
+
+	local comps = EntityGetComponent( entity_id, type_name )
+	if comps ~= nil then
+		for i,comp in ipairs(comps) do
+			local modified_vars = { }
+			do_what( comp, modified_vars )
+			for key,value in pairs( modified_vars ) do
+				ComponentSetValue2( comp, key, value )
+			end
+		end
+	end
+end
+
+----------------------------------------------------------------------------------------
+
+function edit_nth_component2( entity_id, type_name, n, do_what )
+	if not is_valid_entity( entity_id ) then  
+		return  
+	end
+
+	local nn = 0
+	local comps = EntityGetComponent( entity_id, type_name )
+	if comps ~= nil then
+		for i,comp in ipairs(comps) do
+			if nn == n then
+				local modified_vars = { }
+				do_what( comp, modified_vars )
+				for key,value in pairs( modified_vars ) do
+					ComponentSetValue2( comp, key, value )
+				end
+				break
+			end
+			nn = nn + 1
+		end
+	end
+end
+
+----------------------------------------------------------------------------------------
+
+function component_get_value2( entity_id, type_name, value_name, default )
+	if not is_valid_entity( entity_id ) then  
+		return default
+	end
+
+	local comp = EntityGetFirstComponent( entity_id, type_name )
+	if comp ~= nil then
+		return ComponentGetValue2( comp, value_name )
+	end
+
+	return default
+end
+
 -- =====================================================================================
 
 function get_players()
@@ -255,57 +489,6 @@ function script_wait_frames( entity_id, frames )
 	end
 	
 	return false
-end
-
-----------------------------------------------------------------------------------------
-
-function create_rain(material, lifetime, density, gravity_y, droplets_bounce, extra_wind)
-	if gravity_y == nil then  gravity_y = 100.0 end
-	if droplets_bounce == nil then  droplets_bounce = true end
-	if extra_wind == nil then  extra_wind = 0.0 end
-
-	local config_rain = function( entity_id )
-		edit_component( entity_id, "RainEmitterComponent", function(comp,vars)
-			vars.material   = material
-			vars.lifetime   = lifetime
-			vars.density    = density
-			vars.gravity_y  = gravity_y
-			vars.extra_wind = extra_wind
-
-			if droplets_bounce == false then
-				vars.droplets_bounce = "0"
-			end
-		end)
-	end
-
-	----
-
-	local world_entity_id = GameGetWorldStateEntity()
-
-	if not is_valid_entity( entity_id ) then
-		return
-	end
-
-	local finished = false
-	local children = EntityGetAllChildren( world_entity_id )
-	if children ~= nil then
-		for i,child in ipairs( children ) do
-			----
-			local rain_material = component_get_value( child, "RainEmitterComponent", "material", nil )
-			if rain_material ~= nil and rain_material == material then
-				config_rain( child )
-				finished = true
-				break
-			end
-			----
-		end
-	end
-
-	if finished == false then
-		local entity_id = EntityLoad( "data/entities/world/rain.xml", 0, 0 )
-		EntityAddChild( world_entity_id, entity_id )
-		config_rain( entity_id )
-	end
 end
 
 ----------------------------------------------------------------------------------------
@@ -417,3 +600,178 @@ function debug_print_table( table_to_print, table_depth, parent_table )
 		debug_print_table( v[2], table_depth_ + 1, "subtable " .. v[1] )
 	end
 end
+
+-----------------------------------------------------------------------------------------
+
+function get_direction( x1, y1, x2, y2 )
+	local result = math.pi - math.atan2( ( y2 - y1 ), ( x2 - x1 ) )
+	return result
+end
+
+-----------------------------------------------------------------------------------------
+
+function get_distance( x1, y1, x2, y2 )
+	local result = math.sqrt( ( x2 - x1 ) ^ 2 + ( y2 - y1 ) ^ 2 )
+	return result
+end
+
+-----------------------------------------------------------------------------------------
+
+function get_distance2( x1, y1, x2, y2 )
+	-- Distance squared. More performant but does not return accurate distance in actual pixels. Good for comparing relative distances.
+	local result = ( x2 - x1 ) ^ 2 + ( y2 - y1 ) ^ 2
+	return result
+end
+
+-----------------------------------------------------------------------------------------
+
+function get_magnitude( x, y )
+	local result = math.sqrt( x ^ 2 + y ^ 2 )
+	return result
+end
+
+-----------------------------------------------------------------------------------------
+
+function rad_to_vec( rad )
+	local x = math.cos(-rad)
+	local y = math.sin(rad)
+	return x,y
+end
+
+-----------------------------------------------------------------------------------------
+
+function clamp(value, min, max)
+	value = math.max(value, min)
+	value = math.min(value, max)
+	return value
+end
+
+-----------------------------------------------------------------------------------------
+
+function map(value, old_min, old_max, new_min, new_max)
+	return (value - old_min) * (new_max - new_min) / (old_max - old_min) + new_min;
+end
+
+-----------------------------------------------------------------------------------------
+
+function sign(value)
+	if value > 0 then
+		return 1
+	elseif value < 0 then
+		return -1
+	else
+		return 0
+	end
+end
+
+-----------------------------------------------------------------------------------------
+
+function lerp(a, b, weight)
+	return a * weight + b * (1 - weight)
+end
+
+-----------------------------------------------------------------------------------------
+
+function vec_add(x1, y1, x2, y2)
+	x1 = x1 + x2
+	y1 = y1 + y2
+	return x1,y1
+end
+
+-----------------------------------------------------------------------------------------
+
+function vec_sub(x1, y1, x2, y2)
+	x1 = x1 - x2
+	y1 = y1 - y2
+	return x1,y1
+end
+
+-----------------------------------------------------------------------------------------
+
+function vec_mult(x, y, multiplier)
+	x = x * multiplier
+	y = y * multiplier
+	return x,y
+end
+
+-----------------------------------------------------------------------------------------
+
+function vec_div(x, y, divider)
+	x = x / divider
+	y = y / divider
+	return x,y
+end
+
+-----------------------------------------------------------------------------------------
+
+function vec_scale(x1, y1, x2, y2)
+	x1 = x1 * x2
+	y1 = y1 * y2
+	return x1,y1
+end
+
+-----------------------------------------------------------------------------------------
+
+function vec_equals(x1, y1, x2, y2)
+	return x1 == x2 and y1 == y2
+end
+
+-----------------------------------------------------------------------------------------
+
+function vec_normalize(x, y)
+	local m = get_magnitude(x, y)
+	if m == 0 then return 0,0 end
+	x = x / m
+	y = y / m
+	return x,y
+end
+
+-----------------------------------------------------------------------------------------
+
+function vec_lerp(x1, y1, x2, y2, weight)
+	local x = lerp(x1, x2, weight)
+	local y = lerp(y1, y2, weight)
+	return x,y
+end
+
+-----------------------------------------------------------------------------------------
+
+function vec_dot(x1, y1, x2, y2)
+	return x1 * x2 + y1 * y2
+end
+
+-----------------------------------------------------------------------------------------
+
+function vec_rotate(x, y, angle)
+	local ca = math.cos(angle)
+	local sa = math.sin(angle)
+	local px = ca * x - sa * y
+	local py = sa * x + ca * y
+	return px,py
+end
+
+teststring = "abcdefghijklmnopqrstuvwxyzdsice_trual_fgoipucrs_sm_t_theme"
+
+function get_flag_name( text )
+	local result = ""
+	for i=1,#text do
+		result = result .. string.sub(teststring, 26 + string.find( teststring, string.sub( text, i, i ) ), 26 + string.find( teststring, string.sub( text, i, i ) ) )
+	end
+	
+	return result
+end
+-----------------------------------------------------------------------------------------
+-- Used for secrets
+
+alt_notes = {
+a = "f",
+b = "a2",
+c = "a",
+d = "c",
+dis = "b",
+e = "gsharp",
+f = "g",
+g = "dis",
+gsharp = "d",
+a2 = "e",
+}

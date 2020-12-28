@@ -1,4 +1,4 @@
-<Entity tags="teleportable_NOT,sampo_or_boss">
+<Entity tags="teleportable_NOT,sampo_or_boss,this_is_sampo">
 	<UIInfoComponent
 		name="$item_mcguffin"
 		>

@@ -1,4 +1,4 @@
-<Entity tags="mortal,hittable,homing_target" >
+<Entity tags="mortal,hittable" >
   
 	<AnimalAIComponent 
 		_enabled="1" 
@@ -12,18 +12,21 @@
 		food_material="blood"
 		needs_food="1"
 		sense_creatures="1"
-		attack_ranged_enabled="1"
+		attack_ranged_enabled="0"
 		attack_melee_enabled="0"
 		attack_ranged_offset_y="4"
 		can_fly="0"  
 		attack_ranged_entity_file="data/entities/projectiles/arrow.xml"
 		attack_ranged_frames_between="60"
-		is_static_turret="1"
+		is_static_turret="0"
+		eye_offset_x="8"
+		aggressiveness_min="30"
+		aggressiveness_max="50"
 	>
 	</AnimalAIComponent>
 	
 	<DamageModelComponent 
-        hp="0.5"
+        hp="1.5"
         ragdoll_material="plastic"
 		ragdoll_filenames_file="" 
 		blood_material="sand"
@@ -31,6 +34,8 @@
 		air_needed="0" >
 		<damage_multipliers
 			drill="0.4"
+			fire="0.0"
+			explosion="0.3"
 			>
 		</damage_multipliers>
 	</DamageModelComponent>
@@ -55,7 +60,7 @@
 	</PathFindingComponent>
 
 	<GenomeDataComponent 
-		herd_id="flower"
+		herd_id="trap"
 		food_chain_rank="7"
 		is_predator="1" >
 	</GenomeDataComponent>
@@ -68,15 +73,38 @@
 	
 	<HitboxComponent 
 		_enabled="1" 
-		aabb_max_x="4" 
-		aabb_max_y="6" 
-		aabb_min_x="0" 
-		aabb_min_y="-4" >
+		aabb_min_x="0"
+		aabb_max_x="5" 
+		aabb_min_y="-5"
+		aabb_max_y="5" 
+		>
 	</HitboxComponent>
 
 	<CameraBoundComponent
 		max_count="30"
 		distance="160000" >
 	</CameraBoundComponent>
+	
+	<Entity>
+	    <GameEffectComponent 
+	        effect="PROTECTION_FREEZE"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
+	
+	<Entity>
+	    <GameEffectComponent 
+	        effect="PROTECTION_ELECTRICITY"
+	        frames="-1"
+	    >
+		</GameEffectComponent >
+	</Entity>
+	
+	<LuaComponent
+		script_source_file="data/scripts/buildings/crypt_trap_check.lua"
+		execute_every_n_frame="60"
+		>
+	</LuaComponent>
 
 </Entity>

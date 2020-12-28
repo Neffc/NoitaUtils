@@ -1,14 +1,14 @@
-<Entity _tags="teleportation">
+<Entity _tags="blindness">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 
-			image_file="data/ui_gfx/gun_actions/teleportation.png" 
+			image_file="data/ui_gfx/gun_actions/blindness.png" 
 			>
 		</SpriteComponent>
 		
 		<ItemActionComponent 
 			_tags="enabled_in_world"
-			action_id="TELEPORTATION" >
+			action_id="BLINDNESS" >
 		</ItemActionComponent>
 	</Base>
 

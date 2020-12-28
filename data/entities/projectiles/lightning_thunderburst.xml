@@ -51,6 +51,12 @@
       stains_radius="8" >
     </config_explosion>
   </LightningComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/lightning_thunderburst.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

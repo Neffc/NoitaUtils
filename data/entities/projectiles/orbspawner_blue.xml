@@ -52,7 +52,8 @@
       sparks_count_min="0"
       light_fade_time="0.01" 
       stains_enabled="0" 
-      stains_image="data/temp/explosion_stain.png" >
+      stains_image="data/temp/explosion_stain.png" 
+      audio_event_name="explosions/magic_small" >
     </config_explosion>
   </ProjectileComponent>
   
@@ -101,9 +102,15 @@
   </LightComponent>
 
   <AudioComponent
-      file="data/audio/Desktop/projectiles.snd"
+      file="data/audio/Desktop/projectiles.bank"
       event_root="projectiles/orb_a" >
   </AudioComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/orbspawner_blue.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

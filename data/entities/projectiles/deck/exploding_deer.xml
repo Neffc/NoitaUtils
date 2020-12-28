@@ -1,4 +1,4 @@
-<Entity tags="mortal,prey,hittable" name="$projectile_default">
+<Entity tags="mortal,prey,hittable,projectile_player" name="$projectile_default">
   
   	<Base file="data/entities/base_projectile.xml" >
 	</Base>
@@ -98,6 +98,7 @@
 	shoot_light_flash_r="255"
     shoot_light_flash_g="240"
     shoot_light_flash_b="30"
+	damage_every_x_frames="2"
 	>
   </ProjectileComponent>
 
@@ -137,9 +138,16 @@
 		  light_fade_time="0.8" 
 		  stains_enabled="1" 
 		  stains_image="data/temp/explosion_stain.png"
+		  audio_event_name="explosions/deer"
 		  >
 		</config_explosion>
 	</ExplosionComponent>
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/deck/exploding_deer.xml"
+		>
+	</VariableStorageComponent>
 
 </Entity>
 

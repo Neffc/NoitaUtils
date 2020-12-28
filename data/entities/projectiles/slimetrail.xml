@@ -86,5 +86,11 @@
 		script_source_file="data/scripts/projectiles/slimetrail.lua" 
 		execute_every_n_frame="2">
    </LuaComponent>
+   
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="data/entities/projectiles/slimetrail.xml"
+		>
+	</VariableStorageComponent>
 </Entity>
 
