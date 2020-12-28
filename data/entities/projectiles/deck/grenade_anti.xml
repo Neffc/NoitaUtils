@@ -3,7 +3,7 @@
 	<Base file="data/entities/base_projectile.xml" >
 		<VelocityComponent
 			mass="0.065"
-			gravity_y="-400"
+			gravity_y="0"
 			>
 		</VelocityComponent>
 	</Base>
@@ -193,6 +193,12 @@
 		value_string="data/entities/projectiles/deck/grenade_anti.xml"
 		>
 	</VariableStorageComponent>
+	
+	<LuaComponent
+		script_source_file="data/scripts/projectiles/grenade_anti_gravity.lua"
+		execute_every_n_frame="2"
+		>
+	</LuaComponent>
   
 </Entity>
 

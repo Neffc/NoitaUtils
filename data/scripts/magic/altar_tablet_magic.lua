@@ -7,6 +7,7 @@ SetRandomSeed( x, y )
 
 local tablets = EntityGetWithTag( "tablet" )
 local worm_crystals = EntityGetWithTag( "worm_crystal" )
+local hand_statues = EntityGetWithTag( "statue_hand" )
 
 -- chest rain is done only once
 if( GlobalsGetValue("MISC_CHEST_RAIN") ~= "1" ) then
@@ -108,6 +109,37 @@ if ( #worm_crystals > 0 ) then
 		GamePrintImportant( "$log_altar_magic_worm", "" )
 		
 		AddFlagPersistent( "misc_worm_rain" )
+	end
+end
+
+if ( #hand_statues > 0 ) then
+	local collected = false
+	
+	for _,statue_id in ipairs(hand_statues) do
+		local cx, cy = EntityGetTransform( statue_id )
+		
+		if ( get_distance(x, y, cx, cy) < 48 ) then
+			collected = true
+			-- spawn bots with monk arms in a circle formation
+			local count = 12
+			local spawn_x = 400
+			local spawn_y = 0
+			local rot_inc = math.pi * 2 / count
+			for i=1, count do
+				local eid = EntityLoad("data/entities/animals/drone_lasership.xml", x + spawn_x, y + spawn_y)
+				local arms = EntityLoad("data/entities/misc/monk_arms_standalone.xml", x + spawn_x, y + spawn_y)
+				EntityAddChild( eid, arms )
+				spawn_x, spawn_y = vec_rotate(spawn_x, spawn_y, rot_inc)
+			end
+			-- statue disappears
+			EntityKill(statue_id)
+			EntityLoad("data/entities/buildings/statue_hand_fx.xml", cx, cy)
+		end
+	end
+
+	if collected then
+		GamePrintImportant( "$log_altar_magic_monster", "" )
+		AddFlagPersistent( "misc_monk_bots" )
 	end
 end
 

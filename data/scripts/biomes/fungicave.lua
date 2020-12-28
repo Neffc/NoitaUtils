@@ -228,6 +228,13 @@ g_big_enemies =
 			},
 		},
 	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/drone_shield.xml",
+		ngpluslevel = 2,
+	},
 }
 
 ------------ ITEMS ------------------------------------------------------------

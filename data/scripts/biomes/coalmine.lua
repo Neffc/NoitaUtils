@@ -188,6 +188,13 @@ g_big_enemies =
 		max_count	= 1,    
 		entity 	= "data/entities/animals/shaman.xml"
 	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/drone_shield.xml",
+		ngpluslevel = 2,
+	},
 }
 
 g_lamp =
@@ -1162,9 +1169,9 @@ function spawn_chest(x, y)
 	SetRandomSeed( x, y )
 	local rnd = Random(1,100)
 	
-	if (rnd >= 70) then
-		EntityLoad( "data/entities/items/pickup/chest_random.xml", x, y)
-	elseif (rnd >= 85) then
+	if (rnd >= 99) then
+		EntityLoad( "data/entities/items/pickup/chest_random_super.xml", x, y)
+	else
 		EntityLoad( "data/entities/items/pickup/chest_random.xml", x, y)
 	end
 end

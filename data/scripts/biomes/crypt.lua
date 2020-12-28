@@ -118,6 +118,20 @@ g_small_enemies =
 		max_count	= 1,    
 		entity 	= "data/entities/animals/crypt/failed_alchemist.xml"
 	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wizard_wither.xml",
+		ngpluslevel = 1,
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wizard_weaken.xml",
+		ngpluslevel = 1,
+	},
 }
 
 g_big_enemies =
@@ -265,6 +279,20 @@ g_big_enemies =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/failed_alchemist_b.xml"
+	},
+	{
+		prob   		= 0.02,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/necromancer_shop.xml",
+		ngpluslevel = 2,
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 2,
+		max_count	= 3,    
+		entity 	= "data/entities/animals/ghoul.xml",
+		ngpluslevel = 1,
 	},
 }
 
@@ -504,6 +532,27 @@ g_props =
 		max_count	= 0,
 		offset_y 	= 0,    
 		entity 	= ""
+	},
+	{
+		prob   		= 0.3,
+		min_count	= 1,
+		max_count	= 1,
+		offset_y	= -4,
+		entity 	= "data/entities/props/crystal_red.xml"
+	},
+	{
+		prob   		= 0.3,
+		min_count	= 1,
+		max_count	= 1,
+		offset_y	= -4,
+		entity 	= "data/entities/props/crystal_pink.xml"
+	},
+	{
+		prob   		= 0.3,
+		min_count	= 1,
+		max_count	= 1,
+		offset_y	= -4,
+		entity 	= "data/entities/props/crystal_green.xml"
 	},
 	{
 		prob   		= 0.5,

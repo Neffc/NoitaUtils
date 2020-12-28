@@ -20,11 +20,3 @@ function damage_received( damage, desc, entity_who_caused, is_fatal )
 		vars.mTimer = timer
 	end)
 end
-
-set_main_animation( "detonate" )
-local entity_id = GetUpdatedEntityID()
-
-edit_component( entity_id, "CollisionTriggerComponent", function(comp,vars)
-	local timer = ComponentGetValueInt( comp, "timer_for_destruction")
-	vars.mTimer = timer * 5
-end)

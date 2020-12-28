@@ -17,7 +17,7 @@ function perk_get_spawn_order()
 	-- this function should return the same results no matter when or where during a run it is called.
 	-- this function should have no side effects.
 	local MIN_DISTANCE_BETWEEN_DUPLICATE_PERKS = 4
-	local PERK_SPAWN_ORDER_LENGTH = 100
+	local PERK_SPAWN_ORDER_LENGTH = 300
 	local PERK_DUPLICATE_AVOIDANCE_TRIES = 400
 
 	SetRandomSeed( 1, 2 ) 
@@ -153,11 +153,6 @@ function perk_pickup( entity_item, entity_who_picked, item_name, do_cosmetic_fx,
 	
 	local perk_name = "PERK_NAME_NOT_DEFINED"
 	local perk_desc = "PERK_DESCRIPTION_NOT_DEFINED"
-	
-	edit_component( entity_item, "ItemComponent", function(comp,vars)
-		perk_name = ComponentGetValue( comp, "item_name")
-		perk_desc = ComponentGetValue( comp, "ui_description")
-	end)
 
 	local perk_id = ""
 	edit_component( entity_item, "VariableStorageComponent", function(comp,vars)
@@ -190,6 +185,9 @@ function perk_pickup( entity_item, entity_who_picked, item_name, do_cosmetic_fx,
 	if perk_data.func ~= nil then
 		perk_data.func( entity_item, entity_who_picked, item_name )
 	end
+	
+	perk_name = GameTextGetTranslatedOrNot( perk_data.ui_name )
+	perk_desc = GameTextGetTranslatedOrNot( perk_data.ui_description )
 
 	-- add ui icon etc
 	local entity_ui = EntityCreateNew( "" )
@@ -251,7 +249,7 @@ function perk_spawn( x, y, perk_id )
 	if ( entity_id == nil ) then
 		return
 	end
-
+	
 	-- init perk item
 	EntityAddComponent( entity_id, "SpriteComponent", 
 	{ 
@@ -271,6 +269,7 @@ function perk_spawn( x, y, perk_id )
 	{ 
 		item_name = perk_data.ui_name,
 		ui_description = perk_data.ui_description,
+		ui_display_description_on_pick_up_hint = "1",
 		play_spinning_animation = "0",
 		play_hover_animation = "0",
 		play_pick_sound = "0",

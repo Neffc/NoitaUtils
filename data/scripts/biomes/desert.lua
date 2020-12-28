@@ -20,37 +20,6 @@ g_small_enemies =
 	},
 	-- add skullflys after this step
 	{
-		prob   		= 0.3,
-		min_count	= 1,
-		max_count	= 1,    
-		entity 	= "data/entities/animals/zombie.xml"
-	},
-	{
-		prob   		= 0.2,
-		min_count	= 1,
-		max_count	= 1,    
-		entity 	= "data/entities/animals/miner.xml"
-	},
-	{
-		prob   		= 0.2,
-		min_count	= 1,
-		max_count	= 2,    
-		entity 	= "data/entities/animals/rat.xml"
-	},
-}
-
-g_small_enemies =
-{
-	total_prob = 0,
-	-- this is air, so nothing spawns at 0.6
-	{
-		prob   		= 1.5,
-		min_count	= 0,
-		max_count	= 0,    
-		entity 	= ""
-	},
-	-- add skullflys after this step
-	{
 		prob   		= 0.1,
 		min_count	= 1,
 		max_count	= 1,    
@@ -79,6 +48,67 @@ g_small_enemies =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/tank_super.xml"
+	},
+}
+
+g_big_enemies =
+{
+	total_prob = 0,
+	-- this is air, so nothing spawns at 0.6
+	{
+		prob   		= 1.5,
+		min_count	= 0,
+		max_count	= 0,    
+		entity 	= ""
+	},
+	-- add skullflys after this step
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/firemage.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/firemage_weak.xml"
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/thundermage.xml"
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wizard_tele.xml"
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wizard_returner.xml"
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wizard_dark.xml"
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wizard_weaken.xml"
+	},
+	{
+		prob   		= 0.001,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/enlightened_alchemist.xml"
 	},
 }
 
@@ -153,8 +183,11 @@ g_candles =
 -- actual functions that get called from the wang generator
 
 function spawn_small_enemies(x, y)
-	-- print("spawn_small_enemies")
-	spawn(g_small_enemies,x,y)
+	if ( y < 1000 ) then
+		spawn(g_small_enemies,x,y)
+	else
+		spawn(g_big_enemies,x,y)
+	end
 end
 
 function spawn_big_enemies(x, y)

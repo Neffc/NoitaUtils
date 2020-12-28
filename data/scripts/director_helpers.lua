@@ -1,9 +1,15 @@
 -- default biome functions that get called if we can't find a a specific biome that works for us
 
+function check_newgame_plus_level( level )
+	local newgame_n = tonumber( SessionNumbersGetValue("NEW_GAME_PLUS_COUNT") ) or 0
+	
+	return ( newgame_n >= level )
+end
+
 function init_total_prob( value )
 	value.total_prob = 0
 	for i,v in ipairs(value) do
-		if( v.prob ~= nil and ( v.spawn_check == nil or v.spawn_check() ) ) then
+		if ( v.prob ~= nil and ( v.spawn_check == nil or v.spawn_check() ) and ( v.ngpluslevel == nil or check_newgame_plus_level( v.ngpluslevel ) ) ) then
 			value.total_prob = value.total_prob + v.prob
 		end
 	end
@@ -16,7 +22,7 @@ function random_from_table( what, x, y )
 
 	local r = ProceduralRandom(x,y) * what.total_prob
 	for i,v in ipairs(what) do
-		if( v.prob ~= nil and ( v.spawn_check == nil or v.spawn_check() ) ) then
+		if( v.prob ~= nil and ( v.spawn_check == nil or v.spawn_check() ) and ( v.ngpluslevel == nil or check_newgame_plus_level( v.ngpluslevel ) ) ) then
 			if( r <= v.prob ) then
 				return v
 			end

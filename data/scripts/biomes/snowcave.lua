@@ -205,6 +205,29 @@ g_big_enemies =
 		}
 	},
 	{
+		prob   		= 0.02,
+		min_count	= 1,
+		max_count	= 1,
+		ngpluslevel = 1,
+		entities 	= {
+			{
+				min_count	= 1,
+				max_count 	= 1,
+				entity = "data/entities/animals/scavenger_smg.xml",
+			},
+			{
+				min_count	= 1,
+				max_count 	= 2,
+				entity = "data/entities/animals/scavenger_grenade.xml",
+			},
+			{
+				min_count	= 0,
+				max_count 	= 1,
+				entity = "data/entities/animals/coward.xml",
+			},
+		}
+	},
+	{
 		prob   		= 0.1,
 		min_count	= 1,
 		max_count	= 1,    
@@ -252,6 +275,13 @@ g_big_enemies =
 		max_count	= 1,    
 		entity 	= "data/entities/animals/thunderskull.xml"
 	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/drone_shield.xml",
+		ngpluslevel = 2,
+	},
 }
 
 
@@ -275,6 +305,11 @@ g_scavenger_party =
 				min_count	= 1,
 				max_count 	= 3,
 				entity = "data/entities/animals/scavenger_grenade.xml",
+			},
+			{
+				min_count	= 0,
+				max_count 	= 1,
+				entity = "data/entities/animals/coward.xml",
 			},
 			"data/entities/animals/scavenger_leader.xml",
 		}

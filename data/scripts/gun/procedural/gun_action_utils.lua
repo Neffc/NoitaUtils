@@ -38,16 +38,16 @@ end
 
 function find_the_wand_held( entity_id )
 	local children = EntityGetAllChildren( entity_id )
-	if( children == nil ) then return 0 end
+	if ( children == nil ) then return 0 end
 
 	local backup_result = 0
 
 	-- Inventory2Component
 	-- mActiveItem
 	local inventory2_comp = EntityGetFirstComponentIncludingDisabled( entity_id, "Inventory2Component" )
-	if( inventory2_comp ~= nil ) then
+	if ( inventory2_comp ~= nil ) then
 		local active_item = ComponentGetValue( inventory2_comp, "mActiveItem" )
-		if( EntityHasTag( active_item, "wand" ) ) then
+		if ( EntityHasTag( active_item, "wand" ) ) then
 			return active_item
 		end
 	end
@@ -55,16 +55,16 @@ function find_the_wand_held( entity_id )
 	-- if that doesn't work (e.g. player is holding something else than a wand)
 	for i,child in ipairs( children ) do
 		if( EntityHasTag( child, "wand" ) ) then
-			if( ComponentGetIsEnabled( EntityGetFirstComponent( child, "ItemComponent") ) ) then
+			if ( EntityGetFirstComponent( child, "ItemComponent") ~= nil ) then
 				return child
 			end
-			if( ComponentGetIsEnabled( EntityGetFirstComponentIncludingDisabled(child, "ItemComponent") ) ) then
+			if ( ComponentGetIsEnabled( EntityGetFirstComponentIncludingDisabled( child, "ItemComponent") ) ) then
 				backup_result = child
 			end
 		else
 			local temp_result = find_the_wand_held( child )
-			if( temp_result ~= 0 ) then
-				if( ComponentGetIsEnabled( EntityGetFirstComponent( temp_result, "ItemComponent") ) ) then
+			if ( temp_result ~= 0 ) then
+				if ( EntityGetFirstComponent( temp_result, "ItemComponent") ~= nil ) then
 					return temp_result
 				else
 					backup_result = temp_result

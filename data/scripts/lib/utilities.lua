@@ -1,4 +1,5 @@
 NULL_ENTITY = 0
+ORB_COUNT_IN_WORLD = 11
 
 ----------------------------------------------------------------------------------------
 
@@ -469,6 +470,15 @@ function shoot_projectile_from_projectile( who_shot, entity_file, x, y, vel_x, v
 	edit_component( entity_id, "VelocityComponent", function(comp,vars)
 		ComponentSetValueVector2( comp, "mVelocity", vel_x, vel_y)
 	end)
+	
+	if EntityHasTag( who_shot, "friendly_fire_enabled" ) then
+		EntityAddTag( entity_id, "friendly_fire_enabled" )
+		
+		edit_component( entity_id, "ProjectileComponent", function(comp,vars)
+			ComponentSetValue2( comp, "friendly_fire", true )
+			ComponentSetValue2( comp, "collide_with_shooter_frames", 6 )
+		end)
+	end
 
 	return entity_id
 end
@@ -625,6 +635,13 @@ end
 
 -----------------------------------------------------------------------------------------
 
+function get_direction_difference( d1, d2 )
+	local result = math.atan2( math.sin( d2 - d1 ), math.cos( d2 - d1 ) )
+	return result
+end
+
+-----------------------------------------------------------------------------------------
+
 function get_magnitude( x, y )
 	local result = math.sqrt( x ^ 2 + y ^ 2 )
 	return result
@@ -774,4 +791,73 @@ f = "g",
 g = "dis",
 gsharp = "d",
 a2 = "e",
+}
+
+
+-----------------------------------------------------------------------------------------
+-- gui
+
+-- These options are exposed to the modding API due to public demand but are completely unsupported.
+-- They don't work and haven't been tested with all widgets.
+-- We're aware of many bugs that occur when using these in uninteded ways,
+-- but we also probably never have time to fix them (and all the code that has various workarounds to get around the bugs :) ).
+-- You just have to live with the fact that the gui library exists mainly to support the game, and we have limited time to work on it.
+
+-- volatile: must be kept in sync with the ImGuiWidgetOptions enum in imgui.h
+GUI_OPTION = {
+	None = 0,
+
+	IsDraggable = 1, -- you might not want to use this, because there will be various corner cases and bugs, but feel free to try anyway.
+	NonInteractive = 2, -- works with GuiButton
+	AlwaysClickable = 3,
+	ClickCancelsDoubleClick = 4,
+	IgnoreContainer = 5,
+	NoPositionTween = 6,
+	ForceFocusable = 7,
+	HandleDoubleClickAsClick = 8,
+	GamepadDefaultWidget = 9, -- it's recommended you use this to communicate the widget where gamepad input will focus when entering a new menu
+
+	-- these work as intended (mostly)
+	Layout_InsertOutsideLeft = 10,
+	Layout_InsertOutsideRight = 11,
+	Layout_InsertOutsideAbove = 12,
+	Layout_ForceCalculate = 13,
+	Layout_NextSameLine = 14,
+	Layout_NoLayouting = 15,
+
+	-- these work as intended (mostly)
+	Align_HorizontalCenter = 16,
+	Align_Left = 17,
+
+	FocusSnapToRightEdge = 18,
+
+	NoPixelSnapY = 19,
+
+	DrawAlwaysVisible = 20,
+	DrawNoHoverAnimation = 21,
+	DrawWobble = 22,
+	DrawFadeIn = 23,
+	DrawScaleIn = 24,
+	DrawWaveAnimateOpacity = 25,
+	DrawSemiTransparent = 26,
+	DrawActiveWidgetCursorOnBothSides = 27,
+	DrawActiveWidgetCursorOff = 28,
+
+	TextRichRendering = 29,
+
+	NoSound = 47,
+	Hack_ForceClick = 48,
+	Hack_AllowDuplicateIds = 49,
+
+	ScrollContainer_Smooth = 50,
+
+	_SnapToCenter = 62,
+	Disabled = 63,
+}
+
+-- volatile: must be kept in sync with the ImGuiRectAnimationPlaybackType enum in imgui.h
+GUI_RECT_ANIMATION_PLAYBACK = {
+	PlayToEndAndHide = 0,
+	PlayToEndAndPause = 1,
+	Loop = 2,
 }

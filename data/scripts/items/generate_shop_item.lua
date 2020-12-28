@@ -77,7 +77,7 @@ function generate_shop_item( x, y, cheap_item, biomeid_, is_stealable )
 
 	for i,thisitem in ipairs( actions ) do
 		if ( string.lower( thisitem.id ) == string.lower( item ) ) then
-			price = math.max(math.floor( ( (thisitem.price * 0.45) + (70 * biomeid) ) / 10 ) * 10, 10)
+			price = math.max(math.floor( ( (thisitem.price * 0.30) + (70 * biomeid) ) / 10 ) * 10, 10)
 			cardcost = price
 			
 			if ( thisitem.spawn_requires_flag ~= nil ) then
@@ -107,16 +107,32 @@ function generate_shop_item( x, y, cheap_item, biomeid_, is_stealable )
 
 	-- local x, y = EntityGetTransform( entity_id )
 	-- SetRandomSeed( x, y )
+	
+	local offsetx = 6
+	local text = tostring(cardcost)
+	local textwidth = 0
+	
+	for i=1,#text do
+		local l = string.sub( text, i, i )
+		
+		if ( l ~= "1" ) then
+			textwidth = textwidth + 6
+		else
+			textwidth = textwidth + 3
+		end
+	end
+	
+	offsetx = textwidth * 0.5 - 0.5
 
 	EntityAddComponent( eid, "SpriteComponent", { 
 		_tags="shop_cost,enabled_in_world",
 		image_file="data/fonts/font_pixel_white.xml", 
 		is_text_sprite="1", 
-		offset_x="7", 
+		offset_x=tostring(offsetx), 
 		offset_y="25", 
 		update_transform="1" ,
 		update_transform_rotation="0",
-		text="111",
+		text=tostring(cardcost),
 		z_index="-1",
 		} )
 
@@ -238,6 +254,22 @@ function generate_shop_wand( x, y, cheap_item, biomeid_ )
 	if( cheap_item ) then
 		EntityLoad( "data/entities/misc/sale_indicator.xml", x, y )
 	end
+	
+	local offsetx = 6
+	local text = tostring(wandcost)
+	local textwidth = 0
+	
+	for i=1,#text do
+		local l = string.sub( text, i, i )
+		
+		if ( l ~= "1" ) then
+			textwidth = textwidth + 6
+		else
+			textwidth = textwidth + 3
+		end
+	end
+	
+	offsetx = textwidth * 0.5 - 0.5
 
 	-- local x, y = EntityGetTransform( entity_id )
 	-- SetRandomSeed( x, y )
@@ -247,11 +279,11 @@ function generate_shop_wand( x, y, cheap_item, biomeid_ )
 		_tags="shop_cost,enabled_in_world",
 		image_file="data/fonts/font_pixel_white.xml", 
 		is_text_sprite="1", 
-		offset_x="7", 
+		offset_x=tostring(offsetx), 
 		offset_y="25", 
 		update_transform="1" ,
 		update_transform_rotation="0",
-		text="111",
+		text=tostring(wandcost),
 		z_index="-1"
 		} )
 

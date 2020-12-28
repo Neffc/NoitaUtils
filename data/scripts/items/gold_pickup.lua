@@ -51,6 +51,7 @@ function item_pickup( entity_item, entity_who_picked, item_name )
 	end)
 
 	if( hp_value > 0 ) then
+		hp_value = hp_value * 0.5
 		heal_entity( entity_who_picked, hp_value )
 	end
 

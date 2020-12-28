@@ -89,6 +89,17 @@ g_small_enemies =
 		max_count	= 3,    
 		entity 	= "data/entities/animals/wizard_twitchy.xml"
 	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entities 	= 
+		{
+			"data/entities/animals/rainforest/scavenger_smg.xml",
+			"data/entities/animals/rainforest/scavenger_grenade.xml",
+			"data/entities/animals/rainforest/coward.xml",
+		},
+	},
 }
 
 
@@ -179,6 +190,19 @@ g_big_enemies =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/wizard_hearty.xml"
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,
+		ngpluslevel	= 1,
+		entities 	= 
+		{
+			"data/entities/animals/rainforest/scavenger_poison.xml",
+			"data/entities/animals/rainforest/scavenger_clusterbomb.xml",
+			"data/entities/animals/rainforest/scavenger_leader.xml",
+			"data/entities/animals/rainforest/coward.xml",
+		},
 	},
 }
 

@@ -46,6 +46,12 @@
 	</LightComponent>
 	
 	<LuaComponent 
+		remove_after_executed="1"
+		script_source_file="data/scripts/projectiles/spiral_shot_start.lua" 
+		execute_on_added="1">
+	</LuaComponent>
+	
+	<LuaComponent 
 		_enabled="1" 
 		remove_after_executed="0"
 		script_source_file="data/scripts/projectiles/spiral_shot.lua" 

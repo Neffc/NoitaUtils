@@ -25,6 +25,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/breath_underwater.png",
 		perk_icon = "data/items_gfx/perks/breath_underwater.png",
 		game_effect = "BREATH_UNDERWATER",
+		usable_by_enemies = true,
 	},
 	-- gold / money related
 	{
@@ -136,9 +137,9 @@ perk_list =
 		ui_description = "$perkdesc_low_gravity",
 		ui_icon = "data/ui_gfx/perk_icons/low_gravity.png",
 		perk_icon = "data/items_gfx/perks/low_gravity.png",
-		stackable = false,
+		stackable = STACKABLE_DEFAULT,
+		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
-
 			local models = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
 			if( models ~= nil ) then
 				for i,model in ipairs(models) do
@@ -147,14 +148,24 @@ perk_list =
 				end
 			end
 			
-			EntityAddTag( entity_who_picked, "low_gravity" )
-			
-			EntityAddComponent( entity_who_picked, "LuaComponent", 
-			{
-				script_source_file="data/scripts/perks/low_gravity.lua",
-				execute_every_n_frame="80"
-			} )
-
+			if ( EntityHasTag( entity_who_picked, "low_gravity" ) == false ) then
+				EntityAddTag( entity_who_picked, "low_gravity" )
+				
+				EntityAddComponent( entity_who_picked, "LuaComponent", 
+				{
+					script_source_file="data/scripts/perks/low_gravity.lua",
+					execute_every_n_frame="80"
+				} )
+			end
+		end,
+		func_enemy = function( entity_perk_item, entity_who_picked )
+			local models = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
+			if( models ~= nil ) then
+				for i,model in ipairs(models) do
+					local gravity = ComponentGetValue2( model, "pixel_gravity" ) * 0.6
+					ComponentSetValue2( model, "pixel_gravity", gravity )
+				end
+			end
 		end,
 	},
 	{
@@ -163,7 +174,8 @@ perk_list =
 		ui_description = "$perkdesc_high_gravity",
 		ui_icon = "data/ui_gfx/perk_icons/high_gravity.png",
 		perk_icon = "data/items_gfx/perks/high_gravity.png",
-		stackable = false,
+		stackable = STACKABLE_DEFAULT,
+		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 
 			local models = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
@@ -174,14 +186,24 @@ perk_list =
 				end
 			end
 			
-			EntityAddTag( entity_who_picked, "high_gravity" )
-			
-			EntityAddComponent( entity_who_picked, "LuaComponent", 
-			{
-				script_source_file="data/scripts/perks/high_gravity.lua",
-				execute_every_n_frame="80"
-			} )
-
+			if ( EntityHasTag( entity_who_picked, "high_gravity" ) == false ) then
+				EntityAddTag( entity_who_picked, "high_gravity" )
+				
+				EntityAddComponent( entity_who_picked, "LuaComponent", 
+				{
+					script_source_file="data/scripts/perks/high_gravity.lua",
+					execute_every_n_frame="80"
+				} )
+			end
+		end,
+		func_enemy = function( entity_perk_item, entity_who_picked )
+			local models = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
+			if( models ~= nil ) then
+				for i,model in ipairs(models) do
+					local gravity = ComponentGetValue2( model, "pixel_gravity" ) * 1.4
+					ComponentSetValue2( model, "pixel_gravity", gravity )
+				end
+			end
 		end,
 	},
 	{
@@ -376,7 +398,7 @@ perk_list =
 			if( damagemodels ~= nil ) then
 				for i,damagemodel in ipairs(damagemodels) do
 					local hp = tonumber( ComponentGetValue( damagemodel, "hp" ) )
-					local max_hp = tonumber( ComponentGetValue( damagemodel, "max_hp" ) ) / 3 * 2
+					local max_hp = tonumber( ComponentGetValue( damagemodel, "max_hp" ) ) * 0.75
 
 					max_hp = math.ceil( max_hp * 25 ) / 25
 					
@@ -415,7 +437,6 @@ perk_list =
 					ComponentSetValue( damagemodel, "hp", current_hp )
 				end
 			end
-
 		end,
 	},
 	--[[
@@ -765,6 +786,12 @@ perk_list =
 				extra_modifier = "projectile_homing_shooter",
 			} )
 			
+			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
+			{ 
+				extra_modifier = "powerful_shot_placeholder",
+			} )
+			
+			--[[
 			local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
 			if( damagemodels ~= nil ) then
 				for i,damagemodel in ipairs(damagemodels) do
@@ -778,6 +805,7 @@ perk_list =
 					ComponentObjectSetValue( damagemodel, "damage_multipliers", "explosion", tostring(explosion_resistance) )
 				end
 			end
+			]]--
 		end,
 		func_enemy = function( entity_perk_item, entity_who_picked )
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
@@ -897,7 +925,7 @@ perk_list =
 					ComponentSetValue( damagemodel, "blood_sprite_large", "data/particles/bloodsplatters/bloodsplatter_purple_$[1-3].xml" )
 					
 					local projectile_resistance = tonumber(ComponentObjectGetValue( damagemodel, "damage_multipliers", "projectile" ))
-					projectile_resistance = projectile_resistance * 0.6
+					projectile_resistance = projectile_resistance * 0.75
 					ComponentObjectSetValue( damagemodel, "damage_multipliers", "projectile", tostring(projectile_resistance) )
 				end
 			end
@@ -1018,6 +1046,7 @@ perk_list =
 			end
 		end,
 	},
+	-- Pending overhaul.
 	{
 		id = "ATTACK_FOOT",
 		ui_name = "$perk_attack_foot",
@@ -1028,9 +1057,10 @@ perk_list =
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
 			local x,y = EntityGetTransform( entity_who_picked )
+			local child_id = 0
 			
 			for i=1,4 do
-				local child_id = EntityLoad( "data/entities/misc/perks/attack_foot/limb_walker.xml", x, y )
+				child_id = EntityLoad( "data/entities/misc/perks/attack_foot/limb_walker.xml", x, y )
 				EntityAddChild( entity_who_picked, child_id )
 			end
 			
@@ -1064,13 +1094,14 @@ perk_list =
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
 			local x,y = EntityGetTransform( entity_who_picked )
+			local child_id = 0
 			
 			for i=1,2 do
-				local child_id = EntityLoad( "data/entities/misc/perks/attack_leggy/leggy_limb_left.xml", x, y )
+				child_id = EntityLoad( "data/entities/misc/perks/attack_leggy/leggy_limb_left.xml", x, y )
 				EntityAddChild( entity_who_picked, child_id )
 			end
 			for i=3,4 do
-				local child_id = EntityLoad( "data/entities/misc/perks/attack_leggy/leggy_limb_right.xml", x, y )
+				child_id = EntityLoad( "data/entities/misc/perks/attack_leggy/leggy_limb_right.xml", x, y )
 				EntityAddChild( entity_who_picked, child_id )
 			end
 			
@@ -1107,7 +1138,12 @@ perk_list =
 				execute_every_n_frame = "20",
 			} )
 			
-			GenomeSetHerdId( entity_who_picked, "rat" )
+			local world_entity_id = GameGetWorldStateEntity()
+			if ( world_entity_id ~= nil ) then
+				component_write( EntityGetFirstComponent( world_entity_id, "WorldStateComponent" ), { perk_rats_player_friendly = true, } )
+			end
+
+			--GenomeSetHerdId( entity_who_picked, "rat" )
 		end,
 	},
 	{
@@ -1167,6 +1203,43 @@ perk_list =
 					ComponentObjectSetValue( damagemodel, "damage_multipliers", "projectile", tostring(projectile_resistance) )
 				end
 			end
+		end,
+	},
+	{
+		id = "PROJECTILE_SLOW_FIELD",
+		ui_name = "$perk_projectile_slow_field",
+		ui_description = "$perkdesc_projectile_slow_field",
+		ui_icon = "data/ui_gfx/perk_icons/projectile_slow_field.png",
+		perk_icon = "data/items_gfx/perks/projectile_slow_field.png",
+		usable_by_enemies = true,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			local x,y = EntityGetTransform( entity_who_picked )
+			local child_id = EntityLoad( "data/entities/misc/perks/projectile_slow_field.xml", x, y )
+			EntityAddChild( entity_who_picked, child_id )
+		end,
+	},
+	{
+		id = "PROJECTILE_REPULSION_SECTOR",
+		ui_name = "$perk_projectile_repulsion_sector",
+		ui_description = "$perkdesc_projectile_repulsion_sector",
+		ui_icon = "data/ui_gfx/perk_icons/projectile_repulsion_sector.png",
+		perk_icon = "data/items_gfx/perks/projectile_repulsion_sector.png",
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			local x,y = EntityGetTransform( entity_who_picked )
+			local child_id = EntityLoad( "data/entities/misc/perks/projectile_repulsion_sector.xml", x, y )
+			EntityAddChild( entity_who_picked, child_id )
+		end,
+	},
+	{
+		id = "PROJECTILE_EATER_SECTOR",
+		ui_name = "$perk_projectile_eater_sector",
+		ui_description = "$perkdesc_projectile_eater_sector",
+		ui_icon = "data/ui_gfx/perk_icons/projectile_eater_sector.png",
+		perk_icon = "data/items_gfx/perks/projectile_eater_sector.png",
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			local x,y = EntityGetTransform( entity_who_picked )
+			local child_id = EntityLoad( "data/entities/misc/perks/projectile_eater_sector.xml", x, y )
+			EntityAddChild( entity_who_picked, child_id )
 		end,
 	},
 	{
@@ -1296,6 +1369,19 @@ perk_list =
 				script_shot = "data/scripts/perks/lower_spread_enemy.lua",
 				execute_every_n_frame = "-1",
 			} )	
+		end,
+	},
+	{
+		id = "LOW_RECOIL",
+		ui_name = "$perk_low_recoil",
+		ui_description = "$perkdesc_low_recoil",
+		ui_icon = "data/ui_gfx/perk_icons/low_recoil.png",
+		perk_icon = "data/items_gfx/perks/low_recoil.png",
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
+			{ 
+				extra_modifier = "low_recoil",
+			} )
 		end,
 	},
 	{
@@ -1723,6 +1809,19 @@ perk_list =
 			GlobalsSetValue( "TEMPLE_PERK_DESTROY_CHANCE", tostring(perk_destroy_chance) )
 		end,
 	},
+	{
+		id = "EXTRA_SHOP_ITEM",
+		ui_name = "$perk_extra_shop_item",
+		ui_description = "$perkdesc_extra_shop_item",
+		ui_icon = "data/ui_gfx/perk_icons/extra_shop_item.png",
+		perk_icon = "data/items_gfx/perks/extra_shop_item.png",
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			-- TODO: this should work
+			local shop_item_count = tonumber( GlobalsGetValue( "TEMPLE_SHOP_ITEM_COUNT", "5" ) )
+			shop_item_count = math.min( shop_item_count + 1, 10 )
+			GlobalsSetValue( "TEMPLE_SHOP_ITEM_COUNT", tostring(shop_item_count) )
+		end,
+	},
 	-- GENOME RELATIONS
 	{
 		id = "GENOME_MORE_HATRED",
@@ -1782,7 +1881,6 @@ perk_list =
 					GetGameEffectLoadTo( entity_steve, "CHARM", true )
 				end
 			end
-
 			-- give steve charm!
 		end,
 	},
@@ -1793,11 +1891,47 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/mana_from_kills.png",
 		perk_icon = "data/items_gfx/perks/mana_from_kills.png",
 		func = function( entity_perk_item, entity_who_picked, item_name )
-		
+			
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
 			{ 
 				script_source_file = "data/scripts/perks/mana_from_kills.lua",
 				execute_every_n_frame = "20",
+			} )
+		end,
+	},
+	{
+		id = "LASER_AIM",
+		ui_name = "$perk_laser_aim",
+		ui_description = "$perkdesc_laser_aim",
+		ui_icon = "data/ui_gfx/perk_icons/laser_aim.png",
+		perk_icon = "data/items_gfx/perks/laser_aim.png",
+		stackable = false,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			local x,y = EntityGetTransform( entity_who_picked )
+			local child_id = EntityLoad( "data/entities/misc/perks/laser_aim.xml", x, y )
+			EntityAddChild( entity_who_picked, child_id )
+			
+			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
+			{ 
+				extra_modifier = "laser_aim",
+			} )
+		end,
+	},
+	{
+		id = "PERSONAL_LASER",
+		ui_name = "$perk_personal_laser",
+		ui_description = "$perkdesc_personal_laser",
+		ui_icon = "data/ui_gfx/perk_icons/personal_laser.png",
+		perk_icon = "data/items_gfx/perks/personal_laser.png",
+		stackable = false,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			local x,y = EntityGetTransform( entity_who_picked )
+			local child_id = EntityLoad( "data/entities/misc/perks/personal_laser.xml", x, y )
+			EntityAddChild( entity_who_picked, child_id )
+			
+			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
+			{ 
+				extra_modifier = "slow_firing",
 			} )
 		end,
 	},
@@ -1857,19 +1991,6 @@ perk_list =
 		id = "FASTER_SWIMMING",
 		ui_name = "$perk_faster_swimming",
 		ui_description = "$perkdesc_faster_swimming",
-	},
-	{
-		id = "EXTRA_SHOP_ITEM",
-		ui_name = "$perk_extra_shop_item",
-		ui_description = "$perkdesc_extra_shop_item",
-		func = function( entity_perk_item, entity_who_picked, item_name )
-			-- TODO: this should work
-			local shop_item_count = tonumber( GlobalsGetValue( "TEMPLE_SHOP_ITEM_COUNT", "5" ) )
-			shop_item_count = shop_item_count + 1
-			GlobalsSetValue( "TEMPLE_SHOP_ITEM_COUNT", tostring(shop_item_count) )
-		end,
-
-		
 	},
 	{
 		id = "SHOP_IS_FREE",

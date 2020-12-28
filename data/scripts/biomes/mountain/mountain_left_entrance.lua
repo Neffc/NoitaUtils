@@ -175,7 +175,7 @@ g_props =
 }
 
 function init( x, y, w, h )
-	LoadPixelScene( "data/biome_impl/mountain/left_entrance_bottom.png", "", x, y+512, "", true )
+	LoadPixelScene( "data/biome_impl/mountain/left_entrance_bottom.png", "", x, y + 512, "", true )
 	LoadPixelScene( "data/biome_impl/mountain/left_stub_edge.png", "", x, y + 512, "", true )
 	
 	if GameGetIsGamepadConnected() then

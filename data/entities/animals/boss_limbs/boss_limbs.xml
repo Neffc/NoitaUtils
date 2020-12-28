@@ -40,7 +40,9 @@
 
 	<!-- AI ---------------------- -->
 
-	<LimbBossComponent>
+	<LimbBossComponent
+		state="1"
+		>
 	</LimbBossComponent>
 
     <LuaComponent

@@ -174,7 +174,7 @@ g_candles =
 
 -- this is a special function tweaked for spawning things in coal mines
 function spawn_chest(x, y)
-	entity_load_chest(x,y)
+	--entity_load_chest(x,y)
 end
 
 -- actual functions that get called from the wang generator
@@ -185,9 +185,6 @@ function spawn_small_enemies(x, y)
 end
 
 function spawn_big_enemies(x, y) end
-
-function spawn_chest(x, y)
-end
 
 function spawn_lamp(x, y)
 	spawn(g_lamp,x,y,0,0)

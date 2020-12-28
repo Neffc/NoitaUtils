@@ -3,6 +3,18 @@ extra_modifiers =
 	critical_hit_boost = function()
 		c.damage_critical_chance = c.damage_critical_chance + 5
 	end,
+	
+	powerful_shot = function()
+		c.damage_explosion_add = c.damage_explosion_add + 0.1
+		c.damage_projectile_add = c.damage_projectile_add + 0.6
+		c.speed_multiplier = c.speed_multiplier * 2.5
+	end,
+	
+	powerful_shot_placeholder = function()
+		c.damage_explosion_add = c.damage_explosion_add + 1.0
+		c.lifetime_add = c.lifetime_add + 20
+		c.speed_multiplier = c.speed_multiplier * 2.5
+	end,
 
 	damage_projectile_boost = function()
 		c.damage_projectile_mul = c.damage_projectile_mul + 0.5
@@ -18,8 +30,20 @@ extra_modifiers =
 	
 	lower_spread = function()
 		c.spread_degrees = c.spread_degrees - 30
-		c.speed_multiplier = c.speed_multiplier * 1.2
-		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 15.0
+		c.damage_explosion_add = c.damage_explosion_add + 0.2
+		c.damage_projectile_add = c.damage_projectile_add + 0.5
+		c.fire_rate_wait   = c.fire_rate_wait + 12
+		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 10.0
+	end,
+	
+	laser_aim = function()
+		c.spread_degrees = c.spread_degrees - 20
+		c.speed_multiplier = c.speed_multiplier * 1.4
+	end,
+	
+	low_recoil = function()
+		c.speed_multiplier = c.speed_multiplier * 0.8
+		shot_effects.recoil_knockback = shot_effects.recoil_knockback * 0.5 - 16.0
 	end,
 	
 	bounce = function()
@@ -112,5 +136,11 @@ extra_modifiers =
 	
 	fast_projectiles = function()
 		c.speed_multiplier = c.speed_multiplier * 1.75
+	end,
+	
+	slow_firing = function()
+		c.fire_rate_wait   = c.fire_rate_wait + 20
+		current_reload_time = current_reload_time + 5
+		c.speed_multiplier = c.speed_multiplier * 0.8
 	end,
 }

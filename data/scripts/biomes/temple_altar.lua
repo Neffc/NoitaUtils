@@ -168,6 +168,9 @@ function spawn_all_shopitems( x, y )
 			else
 				generate_shop_item( x + (i-1)*item_width, y, false, nil, true )
 			end
+			
+			generate_shop_item( x + (i-1)*item_width, y - 30, false, nil, true )
+			LoadPixelScene( "data/biome_impl/temple/shop_second_row.png", "data/biome_impl/temple/shop_second_row_visual.png", x + (i-1)*item_width - 8, y-22, "", true )
 		end
 	else	
 		for i=1,count do
@@ -206,7 +209,7 @@ end
 
 function spawn_areachecks( x, y )
 	if( temple_should_we_spawn_checkers( x, y ) ) then
-		EntityLoad( "data/entities/buildings/temple_areacheck_horizontal.xml", x + 180, y - 65 - 16 )
+		EntityLoad( "data/entities/buildings/temple_areacheck_horizontal.xml", x + 180, y - 65 - 16 - 20 )
 		EntityLoad( "data/entities/buildings/temple_areacheck_horizontal.xml", x + 180, y + 140 )
 	end
 end

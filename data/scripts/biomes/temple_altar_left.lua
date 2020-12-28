@@ -211,9 +211,10 @@ end
 
 function spawn_areachecks( x, y )
 	if( temple_should_we_spawn_checkers( x, y ) ) then
-		EntityLoad( "data/entities/buildings/temple_areacheck_horizontal.xml", x+5, y - 65 - 16 )
-		EntityLoad( "data/entities/buildings/temple_areacheck_horizontal.xml", x, y + 140 )
-		EntityLoad( "data/entities/buildings/temple_areacheck_vertical.xml", x - 120, y )
+		EntityLoad( "data/entities/buildings/temple_areacheck_horizontal.xml", x+5 - 10, y - 65 - 16 - 20 )
+		EntityLoad( "data/entities/buildings/temple_areacheck_horizontal.xml", x - 10, y + 140 )
+		EntityLoad( "data/entities/buildings/temple_areacheck_vertical.xml", x - 120 - 10, y )
+		EntityLoad( "data/entities/buildings/temple_areacheck_vertical_stub.xml", x - 120 - 10, y - 20 - 80)
 	end
 end
 

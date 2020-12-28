@@ -92,6 +92,13 @@ g_small_enemies =
 		max_count	= 2,  
 		entity 	= "data/entities/animals/goblin_bomb.xml"
 	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wizard_hearty.xml",
+		ngpluslevel = 2,
+	},
 	-- Demo case for Arvi
 	--[[
 	{
@@ -203,6 +210,13 @@ g_big_enemies =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/alchemist.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/tank_super.xml",
+		ngpluslevel = 1,
 	},
 }
 

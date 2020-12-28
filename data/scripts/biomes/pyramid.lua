@@ -85,6 +85,12 @@ g_small_enemies =
 		max_count	= 2,    
 		entity 	= "data/entities/animals/wizard_hearty.xml"
 	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 2,    
+		entity 	= "data/entities/animals/wizard_weaken.xml"
+	},
 }
 
 g_stash =

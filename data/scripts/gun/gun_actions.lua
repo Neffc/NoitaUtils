@@ -649,6 +649,29 @@ actions =
 		end,
 	},
 	{
+		id          = "DISC_BULLET_BIGGER",
+		name 		= "$action_omega_disc_bullet",
+		description = "$actiondesc_omega_disc_bullet",
+		sprite 		= "data/ui_gfx/gun_actions/omega_disc_bullet.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/disc_bullet_unidentified.png",
+		spawn_requires_flag = "card_unlocked_everything",
+		related_projectiles	= {"data/entities/projectiles/deck/disc_bullet_bigger.xml"},
+		type 		= ACTION_TYPE_PROJECTILE,
+		spawn_level                       = "2,3,5,10", -- DISC_BULLET_BIG
+		spawn_probability                 = "0.1,0.6,1.0,0.1", -- DISC_BULLET_BIG
+		price = 270,
+		mana = 70,
+		--max_uses = 40,
+		action 		= function()
+			add_projectile("data/entities/projectiles/deck/disc_bullet_bigger.xml")
+			-- damage = 0.3
+			c.fire_rate_wait = c.fire_rate_wait + 40
+			c.spread_degrees = c.spread_degrees + 6.4
+			shot_effects.recoil_knockback = shot_effects.recoil_knockback + 30.0
+			c.damage_projectile_add = c.damage_projectile_add + 0.2
+		end,
+	},
+	{
 		id          = "BOUNCY_ORB",
 		name 		= "$action_bouncy_orb",
 		description = "$actiondesc_bouncy_orb",
@@ -1144,6 +1167,27 @@ actions =
 		end,
 	},
 	{
+		id          = "BALL_LIGHTNING",
+		name 		= "$action_ball_lightning",
+		description = "$actiondesc_ball_lightning",
+		sprite 		= "data/ui_gfx/gun_actions/ball_lightning.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/lightning_unidentified.png",
+		related_projectiles	= {"data/entities/projectiles/deck/ball_lightning.xml",3},
+		type 		= ACTION_TYPE_PROJECTILE,
+		spawn_level                       = "1,2,4,5", -- LIGHTNING
+		spawn_probability                 = "0.2,0.2,1,1", -- LIGHTNING
+		price = 250,
+		mana = 70,
+		custom_xml_file = "data/entities/misc/custom_cards/electric_charge.xml",
+		action 		= function()
+			add_projectile("data/entities/projectiles/deck/ball_lightning.xml")
+			add_projectile("data/entities/projectiles/deck/ball_lightning.xml")
+			add_projectile("data/entities/projectiles/deck/ball_lightning.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 50
+			shot_effects.recoil_knockback = 120.0
+		end,
+	},
+	{
 		id          = "DIGGER",
 		name 		= "$action_digger",
 		description = "$actiondesc_digger",
@@ -1490,26 +1534,24 @@ actions =
 			c.fire_rate_wait = c.fire_rate_wait + 20
 		end,
 	},
-	--[[
 	{
 		id          = "MISSILE",
 		name 		= "$action_missile",
 		description = "$actiondesc_missile",
 		sprite 		= "data/ui_gfx/gun_actions/missile.png",
 		type 		= ACTION_TYPE_PROJECTILE,
-		spawn_level                       = "", -- MISSILE
-		spawn_probability                        = "", -- MISSILE
+		spawn_level                       = "1,2,3,5", -- MISSILE
+		spawn_probability                        = "0.5,0.5,1,1", -- MISSILE
 		price = 200,
 		mana = 60,
-		max_uses    = 15, 
+		max_uses    = 20, 
 		action 		= function()
 			add_projectile("data/entities/projectiles/deck/rocket_player.xml")
-			current_reload_time = current_reload_time + 60
-			c.spread_degrees = c.spread_degrees + 2.0
+			current_reload_time = current_reload_time + 30
+			c.spread_degrees = c.spread_degrees + 3.0
 			shot_effects.recoil_knockback = shot_effects.recoil_knockback + 60.0
 		end,
 	},
-	]]--
 	{
 		id          = "PEBBLE",
 		name 		= "$action_pebble",
@@ -2209,6 +2251,42 @@ actions =
 		end,
 	},
 	{
+		id          = "TEMPORARY_WALL",
+		name 		= "$action_temporary_wall",
+		description = "$actiondesc_temporary_wall",
+		sprite 		= "data/ui_gfx/gun_actions/temporary_wall.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/teleport_projectile_unidentified.png",
+		related_projectiles	= {"data/entities/projectiles/deck/temporary_wall.xml"},
+		type 		= ACTION_TYPE_UTILITY,
+		spawn_level                       = "0,1,2,4,5,6", -- WALL_SQUARE
+		spawn_probability                 = "0.1,0.1,0.3,0.4,0.2,0.1", -- WALL_SQUARE
+		price = 100,
+		mana = 40,
+		max_uses = 20,
+		action 		= function()
+			add_projectile("data/entities/projectiles/deck/temporary_wall.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 40
+		end,
+	},
+	{
+		id          = "TEMPORARY_PLATFORM",
+		name 		= "$action_temporary_platform",
+		description = "$actiondesc_temporary_platform",
+		sprite 		= "data/ui_gfx/gun_actions/temporary_platform.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/teleport_projectile_unidentified.png",
+		related_projectiles	= {"data/entities/projectiles/deck/temporary_platform.xml"},
+		type 		= ACTION_TYPE_UTILITY,
+		spawn_level                       = "0,1,2,4,5,6", -- WALL_SQUARE
+		spawn_probability                 = "0.1,0.1,0.3,0.4,0.2,0.1", -- WALL_SQUARE
+		price = 90,
+		mana = 30,
+		max_uses = 20,
+		action 		= function()
+			add_projectile("data/entities/projectiles/deck/temporary_platform.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 40
+		end,
+	},
+	{
 		id          = "PURPLE_EXPLOSION_FIELD",
 		name 		= "$action_purple_explosion_field",
 		description = "$actiondesc_purple_explosion_field",
@@ -2870,6 +2948,23 @@ actions =
 			c.damage_critical_chance = c.damage_critical_chance + 5
 		end,
 	},
+	{
+		id          = "TELEPORT_PROJECTILE_CLOSER",
+		name 		= "$action_teleport_closer",
+		description = "$actiondesc_teleport_closer",
+		sprite 		= "data/ui_gfx/gun_actions/teleport_projectile_closer.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/teleport_projectile_unidentified.png",
+		related_projectiles	= {"data/entities/projectiles/deck/teleport_projectile_closer.xml"},
+		type 		= ACTION_TYPE_PROJECTILE,
+		spawn_level                       = "0,1,2,4,5,6", -- TELEPORT_PROJECTILE
+		spawn_probability                 = "0.6,0.6,0.6,0.4,0.4,0.4", -- TELEPORT_PROJECTILE
+		price = 130,
+		mana = 20,
+		action 		= function()
+			add_projectile("data/entities/projectiles/deck/teleport_projectile_closer.xml")
+			c.spread_degrees = c.spread_degrees - 2.0
+		end,
+	},
 	--[[
 	{
 		id          = "TELEPORT_HOME",
@@ -3129,8 +3224,8 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/rocket_unidentified.png",
 		related_projectiles	= {"data/entities/projectiles/deck/wand_ghost_player.xml"},
 		type 		= ACTION_TYPE_UTILITY,
-		spawn_level                       = "1,2,4,5,6", -- SUMMON_WANDGHOST
-		spawn_probability                 = "0.05,0.08,0.1,0.1,0.1", -- SUMMON_WANDGHOST
+		spawn_level                       = "1,2,4,5,6,10", -- SUMMON_WANDGHOST
+		spawn_probability                 = "0.05,0.08,0.1,0.1,0.1,0.1", -- SUMMON_WANDGHOST
 		price = 420,
 		mana = 300,
 		max_uses    = 1, 
@@ -3317,7 +3412,7 @@ actions =
 		description = "$actiondesc_burst_8",
 		sprite 		= "data/ui_gfx/gun_actions/burst_8.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/burst_4_unidentified.png",
-		spawn_requires_flag = "card_unlocked_divide",
+		spawn_requires_flag = "card_unlocked_musicbox",
 		type 		= ACTION_TYPE_DRAW_MANY,
 		spawn_level                       = "5,6,10", -- BURST_4
 		spawn_probability                 = "0.1,0.1,0.5", -- BURST_4
@@ -3326,6 +3421,25 @@ actions =
 		--max_uses = 100,
 		action 		= function()
 			draw_actions( 8, true )
+		end,
+	},
+	{
+		id          = "BURST_X",
+		name 		= "$action_burst_x",
+		description = "$actiondesc_burst_x",
+		sprite 		= "data/ui_gfx/gun_actions/burst_x.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/burst_4_unidentified.png",
+		spawn_requires_flag = "card_unlocked_musicbox",
+		type 		= ACTION_TYPE_DRAW_MANY,
+		spawn_level                       = "5,6,10", -- BURST_4
+		spawn_probability                 = "0.1,0.1,0.5", -- BURST_4
+		price = 500,
+		mana = 50,
+		max_uses = 30,
+		action 		= function()
+			if ( #deck > 0 ) then
+				draw_actions( #deck, true )
+			end
 		end,
 	},
 	{
@@ -3571,6 +3685,25 @@ actions =
 		custom_xml_file = "data/entities/misc/custom_cards/lifetime_down.xml",
 		action 		= function()
 			c.lifetime_add 		= c.lifetime_add - 42
+			c.fire_rate_wait = c.fire_rate_wait - 15
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "NOLLA",
+		name 		= "$action_nolla",
+		description = "$actiondesc_nolla",
+		sprite 		= "data/ui_gfx/gun_actions/nolla.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
+		spawn_requires_flag = "card_unlocked_duplicate",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,4,5,6,10", -- LIFETIME_DOWN
+		spawn_probability                 = "0.2,0.2,0.5,0.5,1", -- LIFETIME_DOWN
+		price = 50,
+		mana = 1,
+		--max_uses = 150,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/nolla.xml,"
 			c.fire_rate_wait = c.fire_rate_wait - 15
 			draw_actions( 1, true )
 		end,
@@ -3905,6 +4038,46 @@ actions =
 		end,
 	},
 	{
+		id          = "ORBIT_SHOT",
+		name 		= "$action_orbit_shot",
+		description = "$actiondesc_orbit_shot",
+		sprite 		= "data/ui_gfx/gun_actions/orbit_shot.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/sinewave_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "1,2,3,4", -- HORIZONTAL_ARC
+		spawn_probability                 = "0.2,0.3,0.4,0.1", -- HORIZONTAL_ARC
+		price = 30,
+		mana = 0,
+		--max_uses = 150,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/spiraling_shot.xml,"
+			draw_actions( 1, true )
+			c.damage_projectile_add = c.damage_projectile_add + 0.1
+			c.fire_rate_wait    = c.fire_rate_wait - 6
+			c.lifetime_add 		= c.lifetime_add + 25
+		end,
+	},
+	{
+		id          = "SPIRALING_SHOT",
+		name 		= "$action_spiraling_shot",
+		description = "$actiondesc_spiraling_shot",
+		sprite 		= "data/ui_gfx/gun_actions/spiraling_shot.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/sinewave_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "1,2,3,4", -- HORIZONTAL_ARC
+		spawn_probability                 = "0.2,0.3,0.4,0.1", -- HORIZONTAL_ARC
+		price = 30,
+		mana = 0,
+		--max_uses = 150,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/orbit_shot.xml,"
+			draw_actions( 1, true )
+			c.damage_projectile_add = c.damage_projectile_add + 0.1
+			c.fire_rate_wait    = c.fire_rate_wait - 6
+			c.lifetime_add 		= c.lifetime_add + 50
+		end,
+	},
+	{
 		id          = "BOUNCE",
 		name 		= "$action_bounce",
 		description = "$actiondesc_bounce",
@@ -3989,6 +4162,23 @@ actions =
 		end,
 	},
 	{
+		id          = "HOMING_ACCELERATING",
+		name 		= "$action_homing_accelerating",
+		description = "$actiondesc_homing_accelerating",
+		sprite 		= "data/ui_gfx/gun_actions/homing_accelerating.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "1,2,3,4", -- HOMING
+		spawn_probability                 = "0.1,0.3,0.3,0.5", -- HOMING
+		price = 180,
+		mana = 60,
+		--max_uses = 100,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/homing_accelerating.xml,data/entities/particles/tinyspark_white_small.xml,"
+			draw_actions( 1, true )
+		end,
+	},
+	{
 		id          = "PIERCING_SHOT",
 		name 		= "$action_piercing_shot",
 		description = "$actiondesc_piercing_shot",
@@ -4053,7 +4243,7 @@ actions =
 		description = "$actiondesc_damage_random",
 		sprite 		= "data/ui_gfx/gun_actions/damage_random.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/damage_unidentified.png",
-		spawn_requires_flag = "card_unlocked_duplicate",
+		spawn_requires_flag = "card_unlocked_pyramid",
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "3,4,5", -- DAMAGE
 		spawn_probability                 = "0.6,0.6,0.6", -- DAMAGE
@@ -4107,6 +4297,42 @@ actions =
 		--max_uses = 100,
 		action 		= function()
 			c.extra_entities = c.extra_entities .. "data/entities/misc/area_damage.xml,"
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "SPELLS_TO_POWER",
+		name 		= "$action_spells_to_power",
+		description = "$actiondesc_spells_to_power",
+		sprite 		= "data/ui_gfx/gun_actions/spells_to_power.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,3,4,5,6,10", -- AREA_DAMAGE
+		spawn_probability                 = "0.5,0.5,0.5,0.5,0.5,0.1", -- AREA_DAMAGE
+		price = 140,
+		mana = 110,
+		-- max_uses = 20,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/spells_to_power.xml,"
+			c.fire_rate_wait    = c.fire_rate_wait + 40
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "ESSENCE_TO_POWER",
+		name 		= "$action_enemies_to_power",
+		description = "$actiondesc_enemies_to_power",
+		sprite 		= "data/ui_gfx/gun_actions/essence_to_power.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "1,2,3,10", -- AREA_DAMAGE
+		spawn_probability                 = "0.2,0.5,0.5,0.1", -- AREA_DAMAGE
+		price = 120,
+		mana = 110,
+		-- max_uses = 20,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/essence_to_power.xml,"
+			c.fire_rate_wait    = c.fire_rate_wait + 20
 			draw_actions( 1, true )
 		end,
 	},
@@ -4518,8 +4744,8 @@ actions =
 		sprite 		= "data/ui_gfx/gun_actions/random_explosion.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/explosive_projectile_unidentified.png",
 		type 		= ACTION_TYPE_PROJECTILE,
-		spawn_level                       = "4,5,6", -- TRANSMUTATION
-		spawn_probability                 = "0.3,0.3,0.3", -- TRANSMUTATION
+		spawn_level                       = "3,5,6", -- TRANSMUTATION
+		spawn_probability                 = "0.3,0.6,1", -- TRANSMUTATION
 		price = 240,
 		mana = 120,
 		max_uses = 30,
@@ -4580,6 +4806,27 @@ actions =
 		is_dangerous_blast = true,
 		action 		= function()
 			add_projectile("data/entities/projectiles/deck/explosion.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 3
+			c.screenshake = c.screenshake + 2.5
+		end,
+	},
+	{
+		id          = "EXPLOSION_LIGHT",
+		name 		= "$action_explosion_light",
+		description = "$actiondesc_explosion_light",
+		sprite 		= "data/ui_gfx/gun_actions/explosion_light.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/explosion_unidentified.png",
+		related_projectiles	= {"data/entities/projectiles/deck/explosion_light.xml"},
+		type 		= ACTION_TYPE_STATIC_PROJECTILE,
+		spawn_level                       = "2,3,5,6", -- EXPLOSION
+		spawn_probability                 = "0.5,1,1,1", -- EXPLOSION
+		price = 160,
+		mana = 80,
+		--max_uses = 30,
+		custom_xml_file = "data/entities/misc/custom_cards/explosion_light.xml",
+		is_dangerous_blast = true,
+		action 		= function()
+			add_projectile("data/entities/projectiles/deck/explosion_light.xml")
 			c.fire_rate_wait = c.fire_rate_wait + 3
 			c.screenshake = c.screenshake + 2.5
 		end,
@@ -5094,9 +5341,9 @@ actions =
 		type 		= ACTION_TYPE_STATIC_PROJECTILE,
 		spawn_level                       = "0,1,2,3,4,5", -- CLOUD_ACID
 		spawn_probability                 = "0.2,0.2,0.2,0.2,0.2,0.2", -- CLOUD_ACID
-		price = 200,
-		mana = 120,
-		max_uses = 4,
+		price = 180,
+		mana = 90,
+		max_uses = 8,
 		action 		= function()
 			add_projectile("data/entities/projectiles/deck/cloud_acid.xml")
 			c.fire_rate_wait = c.fire_rate_wait + 15
@@ -5396,7 +5643,7 @@ actions =
 		mana = 0,
 		--max_uses = 150,
 		action 		= function()
-			c.extra_entities = "data/entities/misc/fizzle.xml,"
+			c.extra_entities = c.extra_entities .. "data/entities/misc/fizzle.xml,"
 			c.speed_multiplier = c.speed_multiplier * 1.2
 			c.fire_rate_wait = c.fire_rate_wait - 10
 			draw_actions( 1, true )
@@ -5410,7 +5657,7 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/sinewave_unidentified.png",
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "2,3,4,5", -- BOUNCE_EXPLOSION
-		spawn_probability                 = "0.2,0.6,0.6,0.6", -- BOUNCE_EXPLOSION
+		spawn_probability                 = "0.2,0.6,0.8,0.8", -- BOUNCE_EXPLOSION
 		price = 180,
 		mana = 20,
 		--max_uses = 150,
@@ -5450,7 +5697,7 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/sinewave_unidentified.png",
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "3,4,5", -- BOUNCE_SPARK
-		spawn_probability                 = "0.4,0.4,0.4", -- BOUNCE_SPARK
+		spawn_probability                 = "0.4,0.8,0.4", -- BOUNCE_SPARK
 		price = 180,
 		mana = 30,
 		--max_uses = 150,
@@ -5470,7 +5717,7 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/sinewave_unidentified.png",
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "4,5,6", -- BOUNCE_SPARK
-		spawn_probability                 = "0.4,0.4,0.4", -- BOUNCE_SPARK
+		spawn_probability                 = "0.4,0.6,0.4", -- BOUNCE_SPARK
 		price = 250,
 		mana = 80,
 		--max_uses = 150,
@@ -5627,8 +5874,8 @@ actions =
 		sprite 		= "data/ui_gfx/gun_actions/chain_shot.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
 		type 		= ACTION_TYPE_MODIFIER,
-		spawn_level                       = "4,5", -- AREA_DAMAGE
-		spawn_probability                 = "0.1,0.2", -- AREA_DAMAGE
+		spawn_level                       = "2,4,5", -- AREA_DAMAGE
+		spawn_probability                 = "0.4,0.6,0.8", -- AREA_DAMAGE
 		price = 240,
 		mana = 70,
 		--max_uses = 100,
@@ -6576,8 +6823,8 @@ actions =
 		spawn_requires_flag = "card_unlocked_duplicate",
 		type 		= ACTION_TYPE_OTHER,
 		recursive	= true,
-		spawn_level                       = "5,6,10", -- MANA_REDUCE
-		spawn_probability                 = "0.1,0.1,0.5", -- MANA_REDUCE
+		spawn_level                       = "3,4,5,6,10", -- MANA_REDUCE
+		spawn_probability                 = "0.2,0.3,0.1,0.1,0.5", -- MANA_REDUCE
 		price = 100,
 		mana = 5,
 		action 		= function( recursion_level, iteration )
@@ -6608,8 +6855,8 @@ actions =
 		spawn_requires_flag = "card_unlocked_duplicate",
 		type 		= ACTION_TYPE_PROJECTILE,
 		recursive	= true,
-		spawn_level                       = "5,6,10", -- MANA_REDUCE
-		spawn_probability                 = "0.1,0.1,0.5", -- MANA_REDUCE
+		spawn_level                       = "2,4,5,6,10", -- MANA_REDUCE
+		spawn_probability                 = "0.2,0.4,0.1,0.1,0.5", -- MANA_REDUCE
 		price = 150,
 		mana = 20,
 		action 		= function( recursion_level, iteration )
@@ -6640,8 +6887,8 @@ actions =
 		spawn_requires_flag = "card_unlocked_duplicate",
 		type 		= ACTION_TYPE_MODIFIER,
 		recursive	= true,
-		spawn_level                       = "5,6,10", -- MANA_REDUCE
-		spawn_probability                 = "0.1,0.1,0.5", -- MANA_REDUCE
+		spawn_level                       = "4,5,6,10", -- MANA_REDUCE
+		spawn_probability                 = "0.3,0.1,0.1,0.5", -- MANA_REDUCE
 		price = 120,
 		mana = 20,
 		action 		= function( recursion_level, iteration )
@@ -6672,8 +6919,8 @@ actions =
 		spawn_requires_flag = "card_unlocked_duplicate",
 		type 		= ACTION_TYPE_STATIC_PROJECTILE,
 		recursive	= true,
-		spawn_level                       = "5,6,10", -- MANA_REDUCE
-		spawn_probability                 = "0.1,0.1,0.5", -- MANA_REDUCE
+		spawn_level                       = "3,5,6,10", -- MANA_REDUCE
+		spawn_probability                 = "0.2,0.1,0.1,0.5", -- MANA_REDUCE
 		price = 160,
 		mana = 20,
 		action 		= function( recursion_level, iteration )
@@ -6704,8 +6951,8 @@ actions =
 		spawn_requires_flag = "card_unlocked_duplicate",
 		type 		= ACTION_TYPE_OTHER,
 		recursive	= true,
-		spawn_level                       = "5,6,10", -- MANA_REDUCE
-		spawn_probability                 = "0.1,0.1,1", -- MANA_REDUCE
+		spawn_level                       = "2,3,4,5,6,10", -- MANA_REDUCE
+		spawn_probability                 = "0.3,0.2,0.2,0.1,0.1,1", -- MANA_REDUCE
 		price = 150,
 		mana = 20,
 		action 		= function( recursion_level, iteration )
@@ -6760,8 +7007,8 @@ actions =
 		spawn_requires_flag = "card_unlocked_duplicate",
 		type 		= ACTION_TYPE_OTHER,
 		recursive	= true,
-		spawn_level                       = "5,6,10", -- MANA_REDUCE
-		spawn_probability                 = "0.1,0.1,1", -- MANA_REDUCE
+		spawn_level                       = "3,4,5,6,10", -- MANA_REDUCE
+		spawn_probability                 = "0.1,0.3,0.1,0.1,1", -- MANA_REDUCE
 		price = 250,
 		mana = 50,
 		action 		= function( recursion_level, iteration )
@@ -6818,8 +7065,8 @@ actions =
 		spawn_requires_flag = "card_unlocked_duplicate",
 		type 		= ACTION_TYPE_OTHER,
 		recursive	= true,
-		spawn_level                       = "5,6,10", -- MANA_REDUCE
-		spawn_probability                 = "0.1,0.1,1", -- MANA_REDUCE
+		spawn_level                       = "2,3,5,6,10", -- MANA_REDUCE
+		spawn_probability                 = "0.1,0.2,0.1,0.1,1", -- MANA_REDUCE
 		price = 200,
 		mana = 40,
 		action 		= function( recursion_level, iteration )
@@ -6877,8 +7124,8 @@ actions =
 		spawn_requires_flag = "card_unlocked_alchemy",
 		never_unlimited		= true,
 		type 		= ACTION_TYPE_UTILITY,
-		spawn_level                       = "10", -- DESTRUCTION
-		spawn_probability                 = "1", -- DESTRUCTION
+		spawn_level                       = "6,10", -- DESTRUCTION
+		spawn_probability                 = "0.1,1", -- DESTRUCTION
 		price = 600,
 		mana = 600,
 		ai_never_uses = true,
@@ -6897,8 +7144,8 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/rocket_unidentified.png",
 		spawn_requires_flag = "card_unlocked_alchemy",
 		type 		= ACTION_TYPE_UTILITY,
-		spawn_level                       = "10", -- DESTRUCTION
-		spawn_probability                 = "1", -- DESTRUCTION
+		spawn_level                       = "0,10", -- DESTRUCTION
+		spawn_probability                 = "0.1,1", -- DESTRUCTION
 		price = 400,
 		mana = 100,
 		--max_uses    = 15, 
@@ -6917,8 +7164,8 @@ actions =
 		spawn_requires_flag = "card_unlocked_alchemy",
 		never_unlimited		= true,
 		type 		= ACTION_TYPE_UTILITY,
-		spawn_level                       = "10", -- DESTRUCTION
-		spawn_probability                 = "1", -- DESTRUCTION
+		spawn_level                       = "1,10", -- DESTRUCTION
+		spawn_probability                 = "0.1,1", -- DESTRUCTION
 		price = 400,
 		mana = 100,
 		max_uses    = 10, 
@@ -6937,8 +7184,8 @@ actions =
 		spawn_requires_flag = "card_unlocked_alchemy",
 		never_unlimited		= true,
 		type 		= ACTION_TYPE_UTILITY,
-		spawn_level                       = "10", -- DESTRUCTION
-		spawn_probability                 = "1", -- DESTRUCTION
+		spawn_level                       = "2,10", -- DESTRUCTION
+		spawn_probability                 = "0.1,1", -- DESTRUCTION
 		price = 350,
 		mana = 80,
 		max_uses    = 15, 
@@ -6957,8 +7204,8 @@ actions =
 		spawn_requires_flag = "card_unlocked_alchemy",
 		never_unlimited		= true,
 		type 		= ACTION_TYPE_UTILITY,
-		spawn_level                       = "10", -- DESTRUCTION
-		spawn_probability                 = "1", -- DESTRUCTION
+		spawn_level                       = "3,10", -- DESTRUCTION
+		spawn_probability                 = "0.1,1", -- DESTRUCTION
 		price = 500,
 		mana = 200,
 		max_uses    = 10, 
@@ -6976,8 +7223,8 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/rocket_unidentified.png",
 		spawn_requires_flag = "card_unlocked_alchemy",
 		type 		= ACTION_TYPE_UTILITY,
-		spawn_level                       = "10", -- DESTRUCTION
-		spawn_probability                 = "1", -- DESTRUCTION
+		spawn_level                       = "4,10", -- DESTRUCTION
+		spawn_probability                 = "0.1,1", -- DESTRUCTION
 		price = 600,
 		mana = 200,
 		--max_uses    = 15, 
@@ -7039,10 +7286,10 @@ actions =
 		description = "$actiondesc_add_trigger",
 		sprite 		= "data/ui_gfx/gun_actions/trigger.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/damage_unidentified.png",
-		spawn_requires_flag = "card_unlocked_duplicate",
+		spawn_requires_flag = "card_unlocked_pyramid",
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "3,4,5,10", -- CRITICAL_HIT
-		spawn_probability                 = "0.6,0.6,0.6,1", -- CRITICAL_HIT
+		spawn_probability                 = "0.3,0.6,0.6,1", -- CRITICAL_HIT
 		price = 100,
 		mana = 10,
 		--max_uses = 50,
@@ -7100,10 +7347,10 @@ actions =
 		description = "$actiondesc_add_timer",
 		sprite 		= "data/ui_gfx/gun_actions/timer.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/damage_unidentified.png",
-		spawn_requires_flag = "card_unlocked_duplicate",
+		spawn_requires_flag = "card_unlocked_pyramid",
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "3,4,5,10", -- CRITICAL_HIT
-		spawn_probability                 = "0.6,0.6,0.6,1", -- CRITICAL_HIT
+		spawn_probability                 = "0.3,0.6,0.6,1", -- CRITICAL_HIT
 		price = 150,
 		mana = 20,
 		--max_uses = 50,
@@ -7162,10 +7409,10 @@ actions =
 		description = "$actiondesc_add_death_trigger",
 		sprite 		= "data/ui_gfx/gun_actions/death_trigger.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/damage_unidentified.png",
-		spawn_requires_flag = "card_unlocked_duplicate",
+		spawn_requires_flag = "card_unlocked_pyramid",
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "3,4,5,10", -- CRITICAL_HIT
-		spawn_probability                 = "0.6,0.6,0.6,1", -- CRITICAL_HIT
+		spawn_probability                 = "0.3,0.6,0.6,1", -- CRITICAL_HIT
 		price = 150,
 		mana = 20,
 		--max_uses = 50,
@@ -7226,7 +7473,7 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/electric_charge_unidentified.png",
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "2,3,4,5,10", -- FIREBALL_RAY
-		spawn_probability                 = "0.1,0.1,0.2,0.2,0.2", -- FIREBALL_RAY
+		spawn_probability                 = "0.1,0.2,0.3,0.4,0.2", -- FIREBALL_RAY
 		price = 260,
 		mana = 100,
 		--max_uses = 20,
@@ -7244,7 +7491,7 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/electric_charge_unidentified.png",
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "2,3,4,5,10", -- FIREBALL_RAY
-		spawn_probability                 = "0.1,0.1,0.2,0.2,0.2", -- FIREBALL_RAY
+		spawn_probability                 = "0.1,0.3,0.2,0.2,0.2", -- FIREBALL_RAY
 		price = 290,
 		mana = 120,
 		--max_uses = 20,
@@ -7262,7 +7509,7 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/electric_charge_unidentified.png",
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "2,3,4,5,10", -- FIREBALL_RAY
-		spawn_probability                 = "0.1,0.1,0.2,0.2,0.2", -- FIREBALL_RAY
+		spawn_probability                 = "0.1,0.1,0.2,0.4,0.2", -- FIREBALL_RAY
 		price = 290,
 		mana = 120,
 		--max_uses = 20,
@@ -7280,8 +7527,8 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/electric_charge_unidentified.png",
 		spawn_requires_flag = "card_unlocked_alchemy",
 		type 		= ACTION_TYPE_MODIFIER,
-		spawn_level                       = "10", -- FIREBALL_RAY
-		spawn_probability                 = "0.1", -- FIREBALL_RAY
+		spawn_level                       = "3,5,10", -- FIREBALL_RAY
+		spawn_probability                 = "0.1,0.4,0.1", -- FIREBALL_RAY
 		price = 300,
 		mana = 150,
 		--max_uses = 20,
@@ -7299,7 +7546,7 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/electric_charge_unidentified.png",
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "2,3,4,5,10", -- FIREBALL_RAY
-		spawn_probability                 = "0.1,0.1,0.2,0.2,0.2", -- FIREBALL_RAY
+		spawn_probability                 = "0.1,0.1,0.3,0.2,0.2", -- FIREBALL_RAY
 		price = 150,
 		mana = 90,
 		max_uses = 30,
@@ -7492,6 +7739,138 @@ actions =
 		end,
 	},
 	{
+		id          = "PHI",
+		name 		= "$action_phi",
+		description = "$actiondesc_phi",
+		sprite 		= "data/ui_gfx/gun_actions/phi.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
+		spawn_requires_flag = "card_unlocked_duplicate",
+		type 		= ACTION_TYPE_OTHER,
+		recursive	= true,
+		spawn_level                       = "5,6,10", -- MANA_REDUCE
+		spawn_probability                 = "0.1,0.1,1", -- MANA_REDUCE
+		price = 500,
+		mana = 120,
+		action 		= function( recursion_level, iteration )
+			c.fire_rate_wait = c.fire_rate_wait + 50
+			
+			local firerate = c.fire_rate_wait
+			local reload = current_reload_time
+			local mana_ = mana
+			
+			if ( discarded ~= nil ) then
+				for i,data in ipairs( discarded ) do
+					local rec = check_recursion( data, recursion_level )
+					if ( data ~= nil ) and ( data.type == 0 ) and ( rec > -1 ) then
+						dont_draw_actions = true
+						data.action( rec )
+						dont_draw_actions = false
+					end
+				end
+			end
+			
+			if ( hand ~= nil ) then
+				for i,data in ipairs( hand ) do
+					local rec = check_recursion( data, recursion_level )
+					if ( data ~= nil ) and ( data.type == 0 ) and ( rec > -1 ) then
+						dont_draw_actions = true
+						data.action( rec )
+						dont_draw_actions = false
+					end
+				end
+			end
+			
+			if ( deck ~= nil ) then
+				for i,data in ipairs( deck ) do
+					local rec = check_recursion( data, recursion_level )
+					if ( data ~= nil ) and ( data.type == 0 ) and ( rec > -1 ) then
+						dont_draw_actions = true
+						data.action( rec )
+						dont_draw_actions = false
+					end
+				end
+			end
+			
+			c.fire_rate_wait = firerate
+			current_reload_time = reload
+			mana = mana_
+		end,
+	},
+	{
+		id          = "ZETA",
+		name 		= "$action_zeta",
+		description = "$actiondesc_zeta",
+		sprite 		= "data/ui_gfx/gun_actions/zeta.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
+		spawn_requires_flag = "card_unlocked_duplicate",
+		type 		= ACTION_TYPE_OTHER,
+		spawn_manual_unlock = true,
+		recursive	= true,
+		spawn_level                       = "5,6,10", -- MANA_REDUCE
+		spawn_probability                 = "0.1,0.1,1", -- MANA_REDUCE
+		price = 200,
+		mana = 20,
+		action 		= function( recursion_level, iteration )
+			local entity_id = GetUpdatedEntityID()
+			local x, y = EntityGetTransform( entity_id )
+			local options = {}
+			
+			local children = EntityGetAllChildren( entity_id )
+			local inventory = EntityGetFirstComponent( entity_id, "Inventory2Component" )
+			
+			if ( children ~= nil ) and ( inventory ~= nil ) then
+				local active_wand = ComponentGetValue2( inventory, "mActiveItem" )
+				
+				for i,child_id in ipairs( children ) do
+					if ( EntityGetName( child_id ) == "inventory_quick" ) then
+						local wands = EntityGetAllChildren( child_id )
+						
+						if ( wands ~= nil ) then
+							for k,wand_id in ipairs( wands ) do
+								if ( wand_id ~= active_wand ) and EntityHasTag( wand_id, "wand" ) then
+									local spells = EntityGetAllChildren( wand_id )
+									
+									if ( spells ~= nil ) then
+										for j,spell_id in ipairs( spells ) do
+											local comp = EntityGetFirstComponentIncludingDisabled( spell_id, "ItemActionComponent" )
+											
+											if ( comp ~= nil ) then
+												local action_id = ComponentGetValue2( comp, "action_id" )
+												
+												table.insert( options, action_id )
+											end
+										end
+									end
+								end
+							end
+						end
+					end
+				end
+			end
+			
+			if ( #options > 0 ) then
+				SetRandomSeed( x + GameGetFrameNum(), y + 251 )
+				
+				local rnd = Random( 1, #options )
+				local action_id = options[rnd]
+				
+				for i,data in ipairs( actions ) do
+					if ( data.id == action_id ) then
+						local rec = check_recursion( data, recursion_level )
+						if ( rec > -1 ) then
+							dont_draw_actions = true
+							data.action( rec )
+							dont_draw_actions = false
+						end
+						break
+					end
+				end
+			end
+			
+			draw_actions( 1, true )
+		end,
+	},
+	{
 		id          = "DIVIDE_2",
 		name 		= "$action_divide_2",
 		description = "$actiondesc_divide_2",
@@ -7499,8 +7878,8 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
 		spawn_requires_flag = "card_unlocked_musicbox",
 		type 		= ACTION_TYPE_OTHER,
-		spawn_level                       = "5,6,10", -- MANA_REDUCE
-		spawn_probability                 = "0.1,0.1,1", -- MANA_REDUCE
+		spawn_level                       = "3,5,6,10", -- MANA_REDUCE
+		spawn_probability                 = "0.2,0.3,0.2,1", -- MANA_REDUCE
 		price = 200,
 		mana = 35,
 		action 		= function( recursion_level, iteration )
@@ -7581,8 +7960,8 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
 		spawn_requires_flag = "card_unlocked_musicbox",
 		type 		= ACTION_TYPE_OTHER,
-		spawn_level                       = "5,6,10", -- MANA_REDUCE
-		spawn_probability                 = "0.1,0.1,1", -- MANA_REDUCE
+		spawn_level                       = "4,5,6,10", -- MANA_REDUCE
+		spawn_probability                 = "0.1,0.1,0.2,1", -- MANA_REDUCE
 		price = 250,
 		mana = 50,
 		action 		= function( recursion_level, iteration )

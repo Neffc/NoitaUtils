@@ -1,4 +1,4 @@
-<Entity tags="essence">
+<Entity tags="essence,essence_effect">
 	<InheritTransformComponent />
 	
 	<LuaComponent 

@@ -10,6 +10,8 @@ RegisterSpawnFunction( 0xff01a1fa, "spawn_turret" )
 RegisterSpawnFunction( 0xff80FF5A, "spawn_vines" )
 RegisterSpawnFunction( 0xffc78f20, "spawn_barricade" )
 RegisterSpawnFunction( 0xffc022f5, "spawn_forcefield_generator" )
+RegisterSpawnFunction( 0xffa3d900, "spawn_brimstone" )
+RegisterSpawnFunction( 0xff00d982, "spawn_vasta_or_vihta" )
 
 RegisterSpawnFunction( 0xff614630, "load_panel_01" )
 RegisterSpawnFunction( 0xff614635, "load_panel_02" )
@@ -38,6 +40,7 @@ RegisterSpawnFunction( 0xffffa659, "load_furniture" )
 RegisterSpawnFunction( 0xfffec390, "load_furniture_bunk" )
 RegisterSpawnFunction( 0xff4c63e0, "spawn_root_grower" )
 RegisterSpawnFunction( 0xff4cacab, "spawn_forge_check" )
+RegisterSpawnFunction( 0xff2a78ff, "spawn_drill_laser" )
 
 ------------ SMALL ENEMIES ----------------------------------------------------
 
@@ -126,6 +129,42 @@ g_small_enemies =
 		max_count	= 1,    
 		entity 	= "data/entities/animals/drone_lasership.xml"
 	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/tank_super.xml",
+		ngpluslevel = 1,
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/scavenger_leader.xml",
+		ngpluslevel = 2,
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entities 	= {
+			{
+				min_count	= 0,
+				max_count	= 1,
+				entity	= "data/entities/animals/scavenger_grenade.xml",
+			},
+			{
+				min_count	= 1,
+				max_count	= 2,
+				entity	= "data/entities/animals/scavenger_smg.xml",
+			},
+			{
+				min_count	= 0,
+				max_count	= 1,
+				entity	= "data/entities/animals/coward.xml",
+			},
+		}
+	},
 }
 
 ------------ BIG ENEMIES ------------------------------------------------------
@@ -156,6 +195,30 @@ g_big_enemies =
 				min_count	= 1,
 				max_count 	= 3,
 				entity = "data/entities/animals/scavenger_smg.xml",
+			},
+		}
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,
+		ngpluslevel	= 1,
+		entities 	=  {
+			"data/entities/animals/scavenger_leader.xml",
+			{
+				min_count	= 1,
+				max_count 	= 2,
+				entity = "data/entities/animals/scavenger_grenade.xml",
+			},
+			{
+				min_count	= 1,
+				max_count 	= 2,
+				entity = "data/entities/animals/scavenger_smg.xml",
+			},
+			{
+				min_count	= 1,
+				max_count 	= 2,
+				entity = "data/entities/animals/coward.xml",
 			},
 		}
 	},
@@ -210,7 +273,32 @@ g_big_enemies =
 		prob   		= 0.1,
 		min_count	= 1,
 		max_count	= 3,    
-		entity 	= "data/entities/animals/drone_lasership.xml"
+		entity 	= "data/entities/animals/drone_lasership.xml",
+	},
+	{
+		prob   		= 0.04,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/drone_shield.xml",
+		ngpluslevel = 1,
+	},
+	{
+		prob   		= 0.04,
+		min_count	= 1,
+		max_count	= 1,    
+		entities 	=  {
+			"data/entities/animals/coward.xml",
+			{
+				min_count	= 1,
+				max_count 	= 2,
+				entity = "data/entities/animals/scavenger_grenade.xml",
+			},
+			{
+				min_count	= 1,
+				max_count 	= 2,
+				entity = "data/entities/animals/scavenger_smg.xml",
+			},
+		}
 	},
 }
 
@@ -531,6 +619,13 @@ g_pixel_scene_02 =
 		material_file 	= "data/biome_impl/snowcastle/teleroom.png",
 		visual_file		= "",
 		background_file	= "",
+		is_unique		= 0
+	},
+	{
+		prob   			= 0.1,
+		material_file 	= "data/biome_impl/snowcastle/sauna.png",
+		visual_file		= "data/biome_impl/snowcastle/sauna_visual.png",
+		background_file	= "data/biome_impl/snowcastle/sauna_background.png",
 		is_unique		= 0
 	},
 }
@@ -931,6 +1026,19 @@ function spawn_forcefield_generator(x, y)
 	spawn(g_forcefield_generator,x,y-2,0,0)
 end
 
+function spawn_brimstone(x, y)
+	EntityLoad("data/entities/items/pickup/brimstone.xml", x, y)
+	EntityLoad("data/entities/buildings/sauna_stove_heat.xml", x, y+10)
+end
+
+function spawn_vasta_or_vihta(x, y)
+	if x > 190 then
+		EntityLoad("data/entities/items/wand_vasta.xml", x, y)
+	else
+		EntityLoad("data/entities/items/wand_vihta.xml", x, y)
+	end
+end
+
 
 -- Chamfer corner pieces. 4 outer corners + 4 inner corners
 -- /\ /\
@@ -1028,4 +1136,8 @@ end
 
 function spawn_forge_check(x, y)
 	EntityLoad( "data/entities/buildings/forge_item_check.xml", x, y )
+end
+
+function spawn_drill_laser(x, y)
+	EntityLoad( "data/entities/buildings/drill_laser.xml", x, y )
 end

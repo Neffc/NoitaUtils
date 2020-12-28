@@ -62,6 +62,13 @@ g_small_enemies =
 		max_count	= 1,    
 		entity 	= "data/entities/animals/shotgunner.xml"
 	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wizard_dark.xml",
+		ngpluslevel = 1,
+	},
 }
 
 g_big_enemies =
@@ -164,6 +171,20 @@ g_big_enemies =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/shaman.xml"
+	},
+	{
+		prob   		= 0.02,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/drone_shield.xml",
+		ngpluslevel = 2,
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/scavenger_clusterbomb.xml",
+		ngpluslevel = 1,
 	},
 }
 

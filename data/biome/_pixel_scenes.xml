@@ -116,16 +116,16 @@
 		<PixelScene pos_x="-21654" pos_y="-110" just_load_an_entity="data/entities/props/music_machines/music_machine_00.xml" />
 		
 		<PixelScene pos_x="-1905" pos_y="-1320" just_load_an_entity="data/entities/props/music_machines/music_machine_01.xml" />
-		<PixelScene pos_x="34447" pos_y="-1320" just_load_an_entity="data/entities/props/music_machines/music_machine_01.xml" />
-		<PixelScene pos_x="-38257" pos_y="-1320" just_load_an_entity="data/entities/props/music_machines/music_machine_01.xml" />
+		<PixelScene pos_x="34447" pos_y="-300" just_load_an_entity="data/entities/props/music_machines/music_machine_01.xml" />
+		<PixelScene pos_x="-38257" pos_y="-300" just_load_an_entity="data/entities/props/music_machines/music_machine_01.xml" />
 		
 		<PixelScene pos_x="-14200" pos_y="185" just_load_an_entity="data/entities/props/music_machines/music_machine_02.xml" />
 		<PixelScene pos_x="22152" pos_y="185" just_load_an_entity="data/entities/props/music_machines/music_machine_02.xml" />
 		<PixelScene pos_x="-50552" pos_y="185" just_load_an_entity="data/entities/props/music_machines/music_machine_02.xml" />
 		
 		<PixelScene pos_x="2800" pos_y="250" just_load_an_entity="data/entities/props/music_machines/music_machine_03.xml" />
-		<PixelScene pos_x="39152" pos_y="250" just_load_an_entity="data/entities/props/music_machines/music_machine_03.xml" />
-		<PixelScene pos_x="-33552" pos_y="250" just_load_an_entity="data/entities/props/music_machines/music_machine_03.xml" />
+		<PixelScene pos_x="39252" pos_y="-150" just_load_an_entity="data/entities/props/music_machines/music_machine_03.xml" />
+		<PixelScene pos_x="-33652" pos_y="-150" just_load_an_entity="data/entities/props/music_machines/music_machine_03.xml" />
 
 		<!-- these need to be spawned with a delay for the attachments to work, because the pixel scenes take their time -->
 		<PixelScene pos_x="-1824" pos_y="-1270" just_load_an_entity="data/entities/props/physics_fungus.xml" />    
@@ -137,6 +137,8 @@
 		<PixelScene pos_x="3608" pos_y="934" just_load_an_entity="data/entities/props/physics/bridge_spawner.xml" />
 		
 		<PixelScene pos_x="-9980" pos_y="-30" just_load_an_entity="data/entities/props/physics/bridge_spawner.xml" />
+		
+		<PixelScene pos_x="-14554" pos_y="146" just_load_an_entity="data/entities/props/physics_protective_armour.xml" />
 
 	</mBufferedPixelScenes>
 </PixelScenes>

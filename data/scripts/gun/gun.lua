@@ -155,8 +155,6 @@ function draw_shot( shot, instant_reload_if_empty )
 
 	c = shot.state
 	
-	dont_draw_actions = false
-	force_stop_draws = false
 	shot_structure = {}
 	draw_actions( shot.num_of_cards_to_draw, instant_reload_if_empty )
 	register_action( shot.state )
@@ -450,6 +448,9 @@ function _start_shot( current_mana )
 		print("'gun.lua' - state_from_game is nil - did we ever initialize this gun?")
 		return
 	end
+	
+	dont_draw_actions = false
+	force_stop_draws = false
 
 	-- create the initial shot
 	root_shot = create_shot( 1 )

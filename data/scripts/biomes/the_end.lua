@@ -77,6 +77,67 @@ g_big_enemies =
 	},
 }
 
+g_small_enemies_sky =
+{
+	total_prob = 0,
+	-- this is air, so nothing spawns at 0.6
+	{
+		prob   		= 0.4,
+		min_count	= 0,
+		max_count	= 0,    
+		entity 	= ""
+	},
+	-- add skullflys after this step
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/the_end/skygazer.xml"
+	},
+	{
+		prob   		= 0.2,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/the_end/spearbot.xml"
+	},
+	{
+		prob   		= 0.2,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/the_end/skycrystal_physics.xml"
+	},
+	{
+		prob   		= 0.01,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/the_end/worm_skull.xml"
+	},
+	{
+		prob   		= 0.004,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wraith_storm.xml"
+	},
+	{
+		prob   		= 0.001,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/wraith_glowing.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 2,    
+		entity 	= "data/entities/animals/thunderskull.xml"
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 2,    
+		entity 	= "data/entities/animals/wizard_tele.xml"
+	},
+}
+
 g_big_enemies_sky =
 {
 	total_prob = 0,
@@ -249,8 +310,11 @@ g_ghostlamp =
 -- actual functions that get called from the wang generator
 
 function spawn_small_enemies(x, y)
-	spawn(g_small_enemies,x,y)
-	-- spawn_hp_mult(g_small_enemies,x,y,0,0,16,"the_end")
+	if ( y > -7000 ) then
+		spawn(g_small_enemies,x,y)
+	else
+		spawn(g_small_enemies_sky,x,y)
+	end
 end
 
 function spawn_big_enemies(x, y)
@@ -366,9 +430,9 @@ function spawn_chest(x, y)
 	SetRandomSeed( x, y )
 	local rnd = Random(1,100)
 	
-	if (rnd >= 70) then
-		EntityLoad( "data/entities/items/pickup/chest_random.xml", x, y)
-	elseif (rnd >= 85) then
+	if (rnd >= 99) then
+		EntityLoad( "data/entities/items/pickup/chest_random_super.xml", x, y)
+	else
 		EntityLoad( "data/entities/items/pickup/chest_random.xml", x, y)
 	end
 end

@@ -149,6 +149,29 @@ g_small_enemies =
 		max_count	= 1,    
 		entity 		= "data/entities/animals/vault/thunderskull.xml"
 	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/drone_shield.xml",
+		ngpluslevel = 1,
+	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/tank_super.xml",
+		ngpluslevel = 2,
+	},
+	{
+		prob   		= 0.08,
+		min_count	= 1,
+		max_count	= 1,    
+		entities 	= {
+			"data/entities/animals/vault/sniper.xml",
+			"data/entities/animals/vault/coward.xml",
+		}
+	},
 }
 
 g_big_enemies =
@@ -277,6 +300,16 @@ g_big_enemies =
 			"data/entities/animals/vault/icer.xml",
 			"data/entities/animals/vault/healerdrone_physics.xml",
 		}
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entities 	= {
+			"data/entities/animals/vault/roboguard.xml",
+			"data/entities/animals/vault/healerdrone_physics.xml",
+			"data/entities/animals/vault/coward.xml",
+		},
 	},
 }
 

@@ -100,7 +100,7 @@
 	<LuaComponent
     execute_on_removed="0"
     execute_every_n_frame="-1"
-	  script_collision_trigger_hit="data/scripts/projectiles/mine_animate.lua"
+	script_collision_trigger_hit="data/scripts/projectiles/mine_animate.lua"
     remove_after_executed="1">
 	</LuaComponent>
 
@@ -113,8 +113,8 @@
 	
 	<LuaComponent
 		execute_on_removed="0"
-    execute_every_n_frame="1000"
-		script_source_file="data/scripts/projectiles/mine_animate.lua"
+		execute_every_n_frame="1000"
+		script_source_file="data/scripts/projectiles/mine_animate_slow.lua"
 		remove_after_executed="1">
 	</LuaComponent>
 
@@ -145,15 +145,6 @@
       file="data/audio/Desktop/projectiles.bank"
       event_root="player_projectiles/bullet_launcher">
   </AudioComponent>
-  
-  <CrawlerAnimalComponent
-		animate="0"
-        give_up_time="999"
-		gravity="0"
-		attack_from_ceiling_check_ray_length="1"
-        speed="0"
-		collision_damage="0">
-    </CrawlerAnimalComponent>
   
   <ExplosionComponent
 		trigger="ON_DEATH"

@@ -8,7 +8,6 @@ function play_animation( entity_id, animation_name )
 end
 
 function heal_entity( entity_id, heal_amount )
-
 	local damagemodels = EntityGetComponent( entity_id, "DamageModelComponent" )
 	if( damagemodels ~= nil ) then
 		for i,damagemodel in ipairs(damagemodels) do

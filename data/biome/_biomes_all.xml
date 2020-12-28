@@ -698,6 +698,18 @@
 	</Biome>
 	
 	<Biome 
+		biome_filename="data/biome/wizardcave.xml" 
+		height_index="13"
+		color="ff726186" >
+	</Biome>
+
+	<Biome 
+		biome_filename="data/biome/wizardcave_entrance.xml" 
+		height_index="13"
+		color="ff804169" >
+	</Biome>
+	
+	<Biome 
 		biome_filename="data/biome/orbrooms/orbroom_00.xml" 
 		height_index="13"
 		color="ffffd100" >

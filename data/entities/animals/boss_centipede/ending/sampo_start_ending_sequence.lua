@@ -1,4 +1,4 @@
-dofile( "data/scripts/lib/utilities.lua" )
+dofile_once( "data/scripts/lib/utilities.lua" )
 dofile( "data/scripts/newgame_plus.lua")
 
 local entity_id = GetUpdatedEntityID()
@@ -48,8 +48,8 @@ end
 local newgame_orbs_required = 5 + newgame_n
 if( orb_count ~= 33 
 	and 
-	( ( orb_count > 12 and newgame_orbs_required >= 12 and orb_count >= newgame_orbs_required ) or 
-	 ( orb_count >= newgame_orbs_required and orb_count < 12 ) ) ) then
+	( ( orb_count > ORB_COUNT_IN_WORLD and newgame_orbs_required >= ORB_COUNT_IN_WORLD and orb_count >= newgame_orbs_required ) or 
+	 ( orb_count >= newgame_orbs_required and orb_count < ORB_COUNT_IN_WORLD ) ) ) then
 	
 	local distance_from_mountain = 1000
 	--local distance_from_bottom = 1000
@@ -122,7 +122,7 @@ if( doing_newgame_plus == false ) then
 			-- GamePrintImportant( "$ending_above_part_a", "$ending_above_part_b" )
 		end
 	--[[
-	elseif ( orb_count >= 11) then
+	elseif ( orb_count >= ORB_COUNT_IN_WORLD) then
 		-- in practice this the 12 orb ending
 		-- ORBS >= 11 ENDINGs
 		-- on top -> new game+
@@ -189,7 +189,7 @@ if( doing_newgame_plus == false ) then
 			
 			-- Note( Petri ): This is what kills the player
 			-- if( enemies_killed > 0 ) then
-			if( orb_count ~= 12 ) then
+			if( orb_count ~= ORB_COUNT_IN_WORLD ) then
 				EntityLoad( "data/entities/animals/boss_centipede/ending/gold_effect.xml", x, y )
 			end
 			-- end
@@ -230,10 +230,12 @@ if( doing_newgame_plus == false ) then
 			if ( #player_id > 0 ) then
 				print(player_id[1])
 				local midas_id = 0
-				if( orb_count == 12 ) then
+				if( orb_count == ORB_COUNT_IN_WORLD ) then
 					midas_id = EntityLoad( "data/entities/animals/boss_centipede/ending/midas.xml", x, y )
+					AddFlagPersistent( "progress_ending1_gold" )
 				else
 					midas_id = EntityLoad( "data/entities/animals/boss_centipede/ending/midas_radioactive.xml", x, y )
+					AddFlagPersistent( "progress_ending1_toxic" )
 				end
 
 				-- turn player extra vurnable to radioactive materials

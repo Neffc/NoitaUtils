@@ -25,6 +25,7 @@ RegisterSpawnFunction( 0xffc128ff, "spawn_rubble" )
 RegisterSpawnFunction( 0xffa7a707, "spawn_lamp_long" )
 RegisterSpawnFunction( 0xff80FF5A, "spawn_vines" )
 RegisterSpawnFunction( 0xff03fade, "spawn_aabb" )
+RegisterSpawnFunction( 0xffffb870, "spawn_spell_visualizer" )
 
 g_lamp =
 {
@@ -189,6 +190,9 @@ function spawn_all_shopitems( x, y )
 			else
 				generate_shop_item( x + (i-1)*item_width, y, false, nil, true )
 			end
+			
+			generate_shop_item( x + (i-1)*item_width, y - 30, false, nil, true )
+			LoadPixelScene( "data/biome_impl/temple/shop_second_row.png", "data/biome_impl/temple/shop_second_row_visual.png", x + (i-1)*item_width - 8, y-22, "", true )
 		end
 	else	
 		for i=1,count do
@@ -314,5 +318,10 @@ function spawn_vines(x, y)
 end
 
 function spawn_aabb( x, y )
+	EntityLoad( "data/entities/buildings/workshop_aabb.xml", x, y )
+end
+
+function spawn_spell_visualizer( x, y )
+	EntityLoad( "data/entities/buildings/workshop_spell_visualizer.xml", x, y )
 	EntityLoad( "data/entities/buildings/workshop_aabb.xml", x, y )
 end

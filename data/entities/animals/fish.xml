@@ -99,7 +99,7 @@
     <SpriteComponent 
         _tags="character" 
         alpha="1" 
-        image_file="data/enemies_gfx/fish_02.xml" 
+        image_file="data/enemies_gfx/fish_01.xml" 
         next_rect_animation="" 
         rect_animation="walk" 
         >
