@@ -1,4 +1,5 @@
 <Entity tags="hittable,teleportable_NOT,item_physics" >
+  <Base file="data/entities/base_item_projectile.xml" />
 
   <!-- physical presence -->
   
@@ -26,12 +27,6 @@
     max_throw_speed="180"
     throw_force_coeff="1.5"
   ></PhysicsThrowableComponent>
-
-  <ProjectileComponent
-    _tags="enabled_in_world"
-    lifetime="-1"
-    penetrate_entities="1"
-  ></ProjectileComponent>
 
   <VelocityComponent
     _tags="enabled_in_world"

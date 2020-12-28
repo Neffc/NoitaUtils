@@ -2,11 +2,11 @@
   <Topology 
     name="$biome_excavationsite"
     type="BIOME_WANG_TILE"
-    background_image="data/weather_gfx/background_cave_04_alt3.png"
-    background_edge_left="data/weather_gfx/edges/background_cave_04_alt3_left.png"
-    background_edge_right="data/weather_gfx/edges/background_cave_04_alt3_right.png"
-    background_edge_top="data/weather_gfx/edges/background_cave_04_alt3_top.png"
-    background_edge_bottom="data/weather_gfx/edges/background_cave_04_alt3_bottom.png"
+    background_image="data/weather_gfx/background_excavationsite.png"
+    background_edge_left="data/weather_gfx/edges/background_excavationsite_left.png"
+    background_edge_right="data/weather_gfx/edges/background_excavationsite_right.png"
+    background_edge_top="data/weather_gfx/edges/background_excavationsite_top.png"
+    background_edge_bottom="data/weather_gfx/edges/background_excavationsite_bottom.png"
     background_edge_priority="10"     
 
     limit_background_image="0"

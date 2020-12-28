@@ -24,6 +24,7 @@ extra_modifiers =
 	
 	bounce = function()
 		c.bounces = c.bounces + 3
+		c.lifetime_add = c.lifetime_add + 60
 	end,
 	
 	projectile_homing_shooter = function()

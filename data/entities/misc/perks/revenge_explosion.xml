@@ -27,11 +27,12 @@
       never_cache="0" 
       camera_shake="13" 
 	  damage="6"
-      explosion_radius="40" 
+      explosion_radius="72" 
       explosion_sprite="data/particles/explosion_040_poof.xml" 
+	  load_this_entity="data/entities/particles/particle_explosion/main_small.xml"
       explosion_sprite_lifetime="0" 
 	  explosion_sprite_random_rotation="0"
-      create_cell_probability="20" 
+      create_cell_probability="0" 
       create_cell_material="spark"
       hole_destroy_liquid="0" 
       hole_enabled="1" 
@@ -41,13 +42,13 @@
       physics_explosion_power.max="1.7" 
       physics_throw_enabled="1" 
       shake_vegetation="1"  
-      sparks_count_min="7" 
-	  sparks_count_max="14"
+      sparks_count_min="70" 
+	  sparks_count_max="80"
       sparks_enabled="1" 
       stains_enabled="1" 
       stains_image="data/temp/explosion_stain.png" 
-    audio_event_name="explosions/revenge_perk"
-	  ray_energy="20000">
+      audio_event_name="explosions/revenge_perk"
+	  ray_energy="300000">
     </config_explosion>
   </ProjectileComponent>
   

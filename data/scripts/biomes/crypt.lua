@@ -228,7 +228,7 @@ g_big_enemies =
 		prob   		= 0.05,
 		min_count	= 1,
 		max_count	= 1,    
-		entity 	= "data/entities/animals/crypt/wizard_hearty.xml"
+		entity 	= "data/entities/animals/wizard_hearty.xml"
 	},
 	{
 		prob   		= 0.07,

@@ -15,6 +15,7 @@ function ConfigGunActionInfo_Init( value )
     value.action_is_dangerous_blast = false
     value.action_draw_many_count = 0
     value.action_ai_never_uses = false
+    value.action_never_unlimited = false
     value.state_shuffled = false
     value.state_cards_drawn = 0
     value.state_discarded_action = false
@@ -77,6 +78,7 @@ function ConfigGunActionInfo_PassToGame( value )
         value.action_is_dangerous_blast, 
         value.action_draw_many_count, 
         value.action_ai_never_uses, 
+        value.action_never_unlimited, 
         value.state_shuffled, 
         value.state_cards_drawn, 
         value.state_discarded_action, 
@@ -121,7 +123,7 @@ function ConfigGunActionInfo_PassToGame( value )
         value.projectile_file
   )
 end
-function ConfigGunActionInfo_ReadToLua( action_id, action_name, action_description, action_sprite_filename, action_unidentified_sprite_filename, action_type, action_spawn_level, action_spawn_probability, action_spawn_requires_flag, action_spawn_manual_unlock, action_max_uses, custom_xml_file, action_mana_drain, action_is_dangerous_blast, action_draw_many_count, action_ai_never_uses, state_shuffled, state_cards_drawn, state_discarded_action, state_destroyed_action, fire_rate_wait, speed_multiplier, child_speed_multiplier, dampening, explosion_radius, spread_degrees, pattern_degrees, screenshake, recoil, damage_melee_add, damage_projectile_add, damage_electricity_add, damage_fire_add, damage_explosion_add, damage_critical_chance, damage_critical_multiplier, explosion_damage_to_materials, knockback_force, reload_time, lightning_count, material, material_amount, trail_material, trail_material_amount, bounces, gravity, light, blood_count_multiplier, gore_particles, ragdoll_fx, friendly_fire, physics_impulse_coeff, lifetime_add, sprite, extra_entities, game_effect_entities, sound_loop_tag, projectile_file )
+function ConfigGunActionInfo_ReadToLua( action_id, action_name, action_description, action_sprite_filename, action_unidentified_sprite_filename, action_type, action_spawn_level, action_spawn_probability, action_spawn_requires_flag, action_spawn_manual_unlock, action_max_uses, custom_xml_file, action_mana_drain, action_is_dangerous_blast, action_draw_many_count, action_ai_never_uses, action_never_unlimited, state_shuffled, state_cards_drawn, state_discarded_action, state_destroyed_action, fire_rate_wait, speed_multiplier, child_speed_multiplier, dampening, explosion_radius, spread_degrees, pattern_degrees, screenshake, recoil, damage_melee_add, damage_projectile_add, damage_electricity_add, damage_fire_add, damage_explosion_add, damage_critical_chance, damage_critical_multiplier, explosion_damage_to_materials, knockback_force, reload_time, lightning_count, material, material_amount, trail_material, trail_material_amount, bounces, gravity, light, blood_count_multiplier, gore_particles, ragdoll_fx, friendly_fire, physics_impulse_coeff, lifetime_add, sprite, extra_entities, game_effect_entities, sound_loop_tag, projectile_file )
     __globaldata = {}
     __globaldata.action_id = action_id
     __globaldata.action_name = action_name
@@ -139,6 +141,7 @@ function ConfigGunActionInfo_ReadToLua( action_id, action_name, action_descripti
     __globaldata.action_is_dangerous_blast = action_is_dangerous_blast
     __globaldata.action_draw_many_count = action_draw_many_count
     __globaldata.action_ai_never_uses = action_ai_never_uses
+    __globaldata.action_never_unlimited = action_never_unlimited
     __globaldata.state_shuffled = state_shuffled
     __globaldata.state_cards_drawn = state_cards_drawn
     __globaldata.state_discarded_action = state_discarded_action
@@ -199,6 +202,7 @@ function ConfigGunActionInfo_Copy( source, dest )
     dest.action_is_dangerous_blast = source.action_is_dangerous_blast
     dest.action_draw_many_count = source.action_draw_many_count
     dest.action_ai_never_uses = source.action_ai_never_uses
+    dest.action_never_unlimited = source.action_never_unlimited
     dest.state_shuffled = source.state_shuffled
     dest.state_cards_drawn = source.state_cards_drawn
     dest.state_discarded_action = source.state_discarded_action

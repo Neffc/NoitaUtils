@@ -109,19 +109,30 @@
 		</PixelScene>
 
 		<!-- just load an entity -->
-		<PixelScene pos_x="-14200" pos_y="185" just_load_an_entity="data/entities/props/music_machines/music_machine_02.xml" />
-
+		
+		<!-- music machines have copies on both directly adjacent parallel worlds -->
+		<PixelScene pos_x="14698" pos_y="-110" just_load_an_entity="data/entities/props/music_machines/music_machine_00.xml" />
+		<PixelScene pos_x="51050" pos_y="-110" just_load_an_entity="data/entities/props/music_machines/music_machine_00.xml" />
+		<PixelScene pos_x="-21654" pos_y="-110" just_load_an_entity="data/entities/props/music_machines/music_machine_00.xml" />
+		
 		<PixelScene pos_x="-1905" pos_y="-1320" just_load_an_entity="data/entities/props/music_machines/music_machine_01.xml" />
+		<PixelScene pos_x="34447" pos_y="-1320" just_load_an_entity="data/entities/props/music_machines/music_machine_01.xml" />
+		<PixelScene pos_x="-38257" pos_y="-1320" just_load_an_entity="data/entities/props/music_machines/music_machine_01.xml" />
+		
+		<PixelScene pos_x="-14200" pos_y="185" just_load_an_entity="data/entities/props/music_machines/music_machine_02.xml" />
+		<PixelScene pos_x="22152" pos_y="185" just_load_an_entity="data/entities/props/music_machines/music_machine_02.xml" />
+		<PixelScene pos_x="-50552" pos_y="185" just_load_an_entity="data/entities/props/music_machines/music_machine_02.xml" />
+		
+		<PixelScene pos_x="2800" pos_y="250" just_load_an_entity="data/entities/props/music_machines/music_machine_03.xml" />
+		<PixelScene pos_x="39152" pos_y="250" just_load_an_entity="data/entities/props/music_machines/music_machine_03.xml" />
+		<PixelScene pos_x="-33552" pos_y="250" just_load_an_entity="data/entities/props/music_machines/music_machine_03.xml" />
+
 		<!-- these need to be spawned with a delay for the attachments to work, because the pixel scenes take their time -->
 		<PixelScene pos_x="-1824" pos_y="-1270" just_load_an_entity="data/entities/props/physics_fungus.xml" />    
 		<PixelScene pos_x="-1809" pos_y="-1260" just_load_an_entity="data/entities/props/physics_fungus_big.xml" />
 		<PixelScene pos_x="-1737" pos_y="-1271" just_load_an_entity="data/entities/props/physics_fungus.xml" />
 		<PixelScene pos_x="-1705" pos_y="-1205" just_load_an_entity="data/entities/props/physics_fungus.xml" />
 		<PixelScene pos_x="-1695" pos_y="-1205" just_load_an_entity="data/entities/props/physics_fungus_small.xml" />
-
-		<PixelScene pos_x="2800" pos_y="250" just_load_an_entity="data/entities/props/music_machines/music_machine_03.xml" />
-
-		<PixelScene pos_x="14698" pos_y="-110" just_load_an_entity="data/entities/props/music_machines/music_machine_00.xml" />
 		
 		<PixelScene pos_x="3608" pos_y="934" just_load_an_entity="data/entities/props/physics/bridge_spawner.xml" />
 		

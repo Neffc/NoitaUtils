@@ -1109,7 +1109,7 @@ function spawn_tower_tall(x,y)
 end
 
 function generate_tower( x, y, height )
-	if ProceduralRandom(x,y) > 0.75 then
+	if ProceduralRandom(x,y) > 0.5 then
 		return
 	end
 

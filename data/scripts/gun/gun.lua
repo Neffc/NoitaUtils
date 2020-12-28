@@ -87,6 +87,7 @@ function set_current_action( action )
 	c.action_max_uses          	 = action.max_uses
 	c.custom_xml_file          	 = action.custom_xml_file
 	c.action_ai_never_uses		 = action.ai_never_uses or false
+	c.action_never_unlimited	 = action.never_unlimited or false
 
 	c.action_is_dangerous_blast  = action.is_dangerous_blast
 

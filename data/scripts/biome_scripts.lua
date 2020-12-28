@@ -1,5 +1,6 @@
 -- RegisterSpawnFunction( 0xffbf26a9, "spawn_runes" )
 -- RegisterSpawnFunction( 0xff6b26a6, "spawn_bigtorch" )
+dofile( "data/scripts/item_spawnlists.lua" )
 
 function runestone_activate( entity_id )
 	local status = 0
@@ -82,43 +83,8 @@ function spawn_wands(x, y)
 	spawn(g_items,x-5,y,0,0)
 end
 
-function spawn_potions(x, y)
-	SetRandomSeed( x+425, y-243 )
-	local rnd = Random(1,89)
-	
-	local flag_status = HasFlagPersistent( "card_unlocked_duplicate" )
-	
-	if ( rnd >= 86 ) then
-		EntityLoad( "data/entities/items/pickup/broken_wand.xml", x, y-2 )
-	elseif ( rnd >= 84 ) then
-		EntityLoad( "data/entities/items/pickup/thunderstone.xml", x, y-2 )
-	elseif ( rnd >= 80 ) then
-		EntityLoad( "data/entities/items/pickup/brimstone.xml", x, y-2 )
-	elseif ( rnd >= 78 ) then
-		EntityLoad( "data/entities/items/pickup/egg_monster.xml", x, y-2 )
-	elseif ( rnd >= 74 ) then
-		EntityLoad( "data/entities/items/pickup/egg_slime.xml", x, y-2 )
-	elseif ( rnd >= 72 ) then
-		EntityLoad( "data/entities/items/pickup/egg_fire.xml", x, y-2 )
-	elseif ( rnd >= 71 ) then
-		EntityLoad( "data/entities/items/pickup/egg_purple.xml", x, y-2 )
-	elseif ( rnd >= 70 ) then
-		local opts = { "laser", "fireball", "lava", "slow", "null", "disc" }
-		rnd = Random( 1, #opts )
-		local opt = opts[rnd]
-		
-		local entity_id = EntityLoad( "data/entities/items/pickup/runestones/runestone_" .. opt .. ".xml", x, y-10 )
-		
-		rnd = Random( 1, 10 )
-		
-		if ( rnd == 2 ) then
-			runestone_activate( entity_id )
-		end
-	elseif flag_status and ( rnd >= 69 ) then
-		EntityLoad( "data/entities/items/pickup/physics_die.xml", x, y-12 )
-	else
-		EntityLoad( "data/entities/items/pickup/potion.xml", x, y-2 )
-	end
+function spawn_potions( x, y )
+	spawn_from_list( "potion_spawnlist", x, y )
 end
 
 function spawn_ghostlamp(x, y)

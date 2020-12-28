@@ -18,7 +18,7 @@ function perk_get_spawn_order()
 	-- this function should have no side effects.
 	local MIN_DISTANCE_BETWEEN_DUPLICATE_PERKS = 4
 	local PERK_SPAWN_ORDER_LENGTH = 100
-	local PERK_DUPLICATE_AVOIDANCE_TRIES = 200
+	local PERK_DUPLICATE_AVOIDANCE_TRIES = 400
 
 	SetRandomSeed( 1, 2 ) 
 
@@ -102,7 +102,7 @@ function perk_get_spawn_order()
 			perk_data = perk_pool[index_in_perk_pool]
 
 			if perk_is_stackable( perk_data ) then --  ensure stackable perks are not spawned too close to each other
-				for ri= #result-MIN_DISTANCE_BETWEEN_DUPLICATE_PERKS,#result do
+				for ri=#result-MIN_DISTANCE_BETWEEN_DUPLICATE_PERKS,#result do
 					if ri >= 1 and result[ri] == perk_data.id then
 						ok = false
 						break

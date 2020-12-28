@@ -136,17 +136,24 @@ perk_list =
 		ui_description = "$perkdesc_low_gravity",
 		ui_icon = "data/ui_gfx/perk_icons/low_gravity.png",
 		perk_icon = "data/items_gfx/perks/low_gravity.png",
-		stackable = STACKABLE_DEFAULT,
-		usable_by_enemies = true,
+		stackable = false,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 
 			local models = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
 			if( models ~= nil ) then
 				for i,model in ipairs(models) do
-					local gravity = tonumber( ComponentGetValue( model, "pixel_gravity" ) ) * 0.4
+					local gravity = tonumber( ComponentGetValue( model, "pixel_gravity" ) ) * 0.6
 					ComponentSetValue( model, "pixel_gravity", gravity )
 				end
 			end
+			
+			EntityAddTag( entity_who_picked, "low_gravity" )
+			
+			EntityAddComponent( entity_who_picked, "LuaComponent", 
+			{
+				script_source_file="data/scripts/perks/low_gravity.lua",
+				execute_every_n_frame="80"
+			} )
 
 		end,
 	},
@@ -156,8 +163,7 @@ perk_list =
 		ui_description = "$perkdesc_high_gravity",
 		ui_icon = "data/ui_gfx/perk_icons/high_gravity.png",
 		perk_icon = "data/items_gfx/perks/high_gravity.png",
-		stackable = STACKABLE_DEFAULT,
-		usable_by_enemies = true,
+		stackable = false,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 
 			local models = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
@@ -167,6 +173,14 @@ perk_list =
 					ComponentSetValue( model, "pixel_gravity", gravity )
 				end
 			end
+			
+			EntityAddTag( entity_who_picked, "high_gravity" )
+			
+			EntityAddComponent( entity_who_picked, "LuaComponent", 
+			{
+				script_source_file="data/scripts/perks/high_gravity.lua",
+				execute_every_n_frame="80"
+			} )
 
 		end,
 	},
@@ -896,6 +910,7 @@ perk_list =
 		ui_description = "$perkdesc_bleed_oil",
 		ui_icon = "data/ui_gfx/perk_icons/oil_blood.png",
 		perk_icon = "data/items_gfx/perks/oil_blood.png",
+		game_effect = "PROTECTION_FIRE",
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
@@ -907,10 +922,6 @@ perk_list =
 					ComponentSetValue( damagemodel, "blood_multiplier", "3.0" )
 					ComponentSetValue( damagemodel, "blood_sprite_directional", "data/particles/bloodsplatters/bloodsplatter_directional_oil_$[1-3].xml" )
 					ComponentSetValue( damagemodel, "blood_sprite_large", "data/particles/bloodsplatters/bloodsplatter_oil_$[1-3].xml" )
-					
-					local explosion_resistance = tonumber(ComponentObjectGetValue( damagemodel, "damage_multipliers", "explosion" ))
-					explosion_resistance = explosion_resistance * 0.6
-					ComponentObjectSetValue( damagemodel, "damage_multipliers", "explosion", tostring(explosion_resistance) )
 				end
 			end
 			
@@ -944,6 +955,14 @@ perk_list =
 				execute_every_n_frame = "-1",
 			} )
 			
+			local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
+			if( damagemodels ~= nil ) then
+				for i,damagemodel in ipairs(damagemodels) do
+					local explosion_resistance = tonumber(ComponentObjectGetValue( damagemodel, "damage_multipliers", "explosion" ))
+					explosion_resistance = explosion_resistance * 0.75
+					ComponentObjectSetValue( damagemodel, "damage_multipliers", "explosion", tostring(explosion_resistance) )
+				end
+			end
 		end,
 	},
 	{
@@ -961,6 +980,14 @@ perk_list =
 				execute_every_n_frame = "-1",
 			} )
 			
+			local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
+			if( damagemodels ~= nil ) then
+				for i,damagemodel in ipairs(damagemodels) do
+					local projectile_resistance = tonumber(ComponentObjectGetValue( damagemodel, "damage_multipliers", "projectile" ))
+					projectile_resistance = projectile_resistance * 0.75
+					ComponentObjectSetValue( damagemodel, "damage_multipliers", "projectile", tostring(projectile_resistance) )
+				end
+			end
 		end,
 	},
 	{
@@ -976,18 +1003,6 @@ perk_list =
 			{ 
 				script_damage_received = "data/scripts/perks/revenge_bullet.lua",
 				execute_every_n_frame = "-1",
-			} )
-			
-			EntityAddComponent( entity_who_picked, "LuaComponent", 
-			{ 
-				script_source_file = "data/scripts/perks/revenge_bullet_memory.lua",
-				execute_every_n_frame = "1",
-			} )
-			
-			EntityAddComponent( entity_who_picked, "VariableStorageComponent", 
-			{ 
-				name = "projectile_memory",
-				value_string = "",
 			} )
 			
 			local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
@@ -1360,7 +1375,20 @@ perk_list =
 			local wand = find_the_wand_held( entity_who_picked )
 			
 			if ( wand ~= NULL_ENTITY ) then
-				AddGunActionPermanent( wand, card )
+				local comp = EntityGetFirstComponentIncludingDisabled( wand, "AbilityComponent" )
+				
+				if ( comp ~= nil ) then
+					local deck_capacity = ComponentObjectGetValue( comp, "gun_config", "deck_capacity" )
+					local deck_capacity2 = EntityGetWandCapacity( wand )
+					
+					local always_casts = deck_capacity - deck_capacity2
+					
+					if ( always_casts < 4 ) then
+						AddGunActionPermanent( wand, card )
+					else
+						GamePrintImportant( "$log_always_cast_failed", "$logdesc_always_cast_failed" )
+					end
+				end
 			end
 		end,
 	},
@@ -1384,24 +1412,27 @@ perk_list =
 					local mana_max = ComponentGetValue2( comp, "mana_max" )
 					local mana_charge_speed = ComponentGetValue2( comp, "mana_charge_speed" )
 					local deck_capacity = ComponentObjectGetValue( comp, "gun_config", "deck_capacity" )
+					local deck_capacity2 = EntityGetWandCapacity( wand )
+					
+					local always_casts = math.max( 0, deck_capacity - deck_capacity2 )
 					
 					mana_max = math.min( mana_max + Random( 10, 20 ) * Random( 10, 30 ), 20000 )
 					mana_charge_speed = math.min( math.min( mana_charge_speed * Random( 200, 350 ) * 0.01, mana_charge_speed + Random( 100, 300 ) ), 20000 )
 					
-					deck_capacity = math.max( 1, math.floor( deck_capacity * 0.5 ) )
+					deck_capacity2 = math.max( 1, math.floor( deck_capacity2 * 0.5 ) )
 					
 					ComponentSetValue2( comp, "mana_max", mana_max )
 					ComponentSetValue2( comp, "mana_charge_speed", mana_charge_speed )
-					ComponentObjectSetValue( comp, "gun_config", "deck_capacity", deck_capacity )
+					ComponentObjectSetValue( comp, "gun_config", "deck_capacity", deck_capacity2 + always_casts )
 					
 					local c = EntityGetAllChildren( wand )
 					
-					if ( c ~= nil ) and ( #c > deck_capacity ) then
-						for i=1,#c-deck_capacity do
+					if ( c ~= nil ) and ( #c > deck_capacity2 + always_casts ) then
+						for i=always_casts+1,#c do
 							local v = c[i]
-							local comp2 = EntityGetFirstComponentIncludingDisabled( v, "ItemComponent" )
+							local comp2 = EntityGetFirstComponentIncludingDisabled( v, "ItemActionComponent" )
 							
-							if ( comp2 ~= nil ) then
+							if ( comp2 ~= nil ) and ( i > deck_capacity2 + always_casts ) then
 								EntityRemoveFromParent( v )
 								EntitySetTransform( v, x, y )
 								

@@ -352,6 +352,7 @@ actions =
 		price = 200,
 		mana = 180,
 		max_uses    = 3, 
+		never_unlimited = true,
 		custom_xml_file = "data/entities/misc/custom_cards/black_hole.xml",
 		action 		= function()
 			add_projectile("data/entities/projectiles/deck/black_hole.xml")
@@ -1294,6 +1295,7 @@ actions =
 		price = 60,
 		mana = 15,
 		max_uses = 20,
+		never_unlimited = true,
 		custom_xml_file = "data/entities/misc/custom_cards/heal_bullet.xml",
 		action 		= function()
 			add_projectile("data/entities/projectiles/deck/heal_bullet.xml")
@@ -3132,6 +3134,7 @@ actions =
 		price = 420,
 		mana = 300,
 		max_uses    = 1, 
+		never_unlimited = true,
 		action 		= function()
 			add_projectile("data/entities/projectiles/deck/wand_ghost_player.xml")
 			add_projectile("data/entities/particles/image_emitters/wand_effect.xml")
@@ -4787,6 +4790,7 @@ actions =
 		price = 250,
 		mana = 80,
 		max_uses = 2,
+		never_unlimited = true,
 		action 		= function()
 			add_projectile("data/entities/projectiles/deck/regeneration_field.xml")
 			c.fire_rate_wait = c.fire_rate_wait + 15
@@ -5149,6 +5153,7 @@ actions =
 		price = 280,
 		mana = 120,
 		max_uses = 10,
+		never_unlimited = true,
 		action 		= function()
 			c.extra_entities = c.extra_entities .. "data/entities/misc/matter_eater.xml,"
 			draw_actions( 1, true )
@@ -6870,6 +6875,7 @@ actions =
 		sprite 		= "data/ui_gfx/gun_actions/all_nukes.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/rocket_unidentified.png",
 		spawn_requires_flag = "card_unlocked_alchemy",
+		never_unlimited		= true,
 		type 		= ACTION_TYPE_UTILITY,
 		spawn_level                       = "10", -- DESTRUCTION
 		spawn_probability                 = "1", -- DESTRUCTION
@@ -6909,6 +6915,7 @@ actions =
 		sprite 		= "data/ui_gfx/gun_actions/all_rockets.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/rocket_unidentified.png",
 		spawn_requires_flag = "card_unlocked_alchemy",
+		never_unlimited		= true,
 		type 		= ACTION_TYPE_UTILITY,
 		spawn_level                       = "10", -- DESTRUCTION
 		spawn_probability                 = "1", -- DESTRUCTION
@@ -6928,6 +6935,7 @@ actions =
 		sprite 		= "data/ui_gfx/gun_actions/all_deathcrosses.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/rocket_unidentified.png",
 		spawn_requires_flag = "card_unlocked_alchemy",
+		never_unlimited		= true,
 		type 		= ACTION_TYPE_UTILITY,
 		spawn_level                       = "10", -- DESTRUCTION
 		spawn_probability                 = "1", -- DESTRUCTION
@@ -6947,6 +6955,7 @@ actions =
 		sprite 		= "data/ui_gfx/gun_actions/all_blackholes.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/rocket_unidentified.png",
 		spawn_requires_flag = "card_unlocked_alchemy",
+		never_unlimited		= true,
 		type 		= ACTION_TYPE_UTILITY,
 		spawn_level                       = "10", -- DESTRUCTION
 		spawn_probability                 = "1", -- DESTRUCTION
@@ -6986,6 +6995,7 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
 		spawn_requires_flag = "card_unlocked_everything",
 		spawn_manual_unlock = true,
+		never_unlimited		= true,
 		type 		= ACTION_TYPE_OTHER,
 		recursive	= true,
 		ai_never_uses = true,
@@ -7330,12 +7340,10 @@ actions =
 			local rec = check_recursion( data, recursion_level )
 			
 			if ( data ~= nil ) and ( rec > -1 ) then
-				dont_draw_actions = true
 				data.action( rec )
-				dont_draw_actions = false
 			end
 			
-			draw_actions( 1, true )
+			--draw_actions( 1, true )
 		end,
 	},
 	{
@@ -7367,12 +7375,10 @@ actions =
 			local rec = check_recursion( data, recursion_level )
 			
 			if ( data ~= nil ) and ( rec > -1 ) then
-				dont_draw_actions = true
 				data.action( rec )
-				dont_draw_actions = false
 			end
 			
-			draw_actions( 1, true )
+			--draw_actions( 1, true )
 		end,
 	},
 	{
@@ -7823,6 +7829,7 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/bomb_unidentified.png",
 		related_projectiles	= {"data/entities/projectiles/deck/meteor_rain_meteor.xml"},
 		spawn_requires_flag = "card_unlocked_rain",
+		never_unlimited		= true,
 		type 		= ACTION_TYPE_STATIC_PROJECTILE,
 		spawn_level                       = "6,10", -- BOMB
 		spawn_probability                 = "0.1,1", -- BOMB
@@ -7845,6 +7852,7 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/bomb_unidentified.png",
 		related_projectiles	= {"data/entities/animals/worm_big.xml"},
 		spawn_requires_flag = "card_unlocked_rain",
+		never_unlimited		= true,
 		type 		= ACTION_TYPE_STATIC_PROJECTILE,
 		spawn_level                       = "6,10", -- BOMB
 		spawn_probability                 = "0.1,1", -- BOMB
