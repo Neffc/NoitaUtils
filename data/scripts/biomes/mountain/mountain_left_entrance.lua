@@ -174,6 +174,34 @@ g_props =
 	},
 }
 
+g_surprise =
+{
+	total_prob = 0,
+	{
+		prob   		= 0.875,
+		min_count	= 1,
+		max_count	= 1,
+		entity 	= ""
+	},
+	{
+		prob   		= 0.125,
+		min_count	= 1,
+		max_count	= 1,
+		offset_x 	= -96,    
+		offset_y 	= 128,    
+		entity 	= "data/entities/props/physics_pata.xml",
+		spawn_check = function()
+			local year, month, day = GameGetDateAndTimeLocal()
+			
+			if (( month == 12 ) and ( day >= 30 )) or (( month == 1 ) and ( day <= 2 )) then
+				return true
+			else
+				return false 
+			end
+		end,
+	},
+}
+
 function init( x, y, w, h )
 	LoadPixelScene( "data/biome_impl/mountain/left_entrance_bottom.png", "", x, y + 512, "", true )
 	LoadPixelScene( "data/biome_impl/mountain/left_stub_edge.png", "", x, y + 512, "", true )
@@ -207,6 +235,8 @@ function spawn_wasd( x, y )
 	else
 		EntityLoad( "data/entities/particles/image_emitters/controls_stick.xml", x-1, y-1 )
 	end
+	
+	spawn(g_surprise,x,y,0,0)
 end
 
 function spawn_mouse( x, y )

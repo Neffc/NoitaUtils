@@ -1,4 +1,4 @@
-<Entity tags="teleportable_NOT,item_physics,chest">
+<Entity tags="teleportable_NOT,item_physics,chest,item_pickup">
 	<UIInfoComponent
 		name="$item_chest_treasure"
 		>

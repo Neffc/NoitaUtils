@@ -1,4 +1,4 @@
-<Entity tags="teleportable_NOT,essence">
+<Entity tags="teleportable_NOT,essence,item_pickup">
 	<ItemComponent
 		item_name="$item_essence_laser"
 		ui_description="$itemdesc_essence_laser"

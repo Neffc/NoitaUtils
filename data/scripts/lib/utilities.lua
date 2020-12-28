@@ -83,26 +83,6 @@ end
 
 ----------------------------------------------------------------------------------------
 
-function pick_random_from_table_backwards( t, rnd )
-	local result = nil
-	local len = #t
-
-	for i=len,1, -1 do
-		if random_next( rnd, 0.0, 1.0 ) <= t[i].chance then
-			result = t[i]
-			break
-		end
-	end
-
-	if result == nil then
-		result = t[1]
-	end
-
-	return result
-end
-
-----------------------------------------------------------------------------------------
-
 function string_isempty(s)
   return s == nil or s == ''
 end
@@ -793,6 +773,63 @@ gsharp = "d",
 a2 = "e",
 }
 
+orb_list =
+{
+	{8,1},
+	{1,-3},
+	{-9,7},
+	{-10,17},
+	{-18,28},
+	{-20,5},
+	{-1,31},
+	{20,31},
+	{19,5},
+	{6,3},
+	{19,-3},
+}
+
+function orb_map_update()
+	local result = ""
+	
+	for i,v in ipairs( orb_list ) do
+		local part = tostring(v[1]) .. "," .. tostring(v[2])
+		result = result .. part
+		
+		if ( i < #orb_list ) then
+			result = result .. " "
+		end
+	end
+	
+	GlobalsSetValue( "ORB_MAP_STRING", result )
+end
+
+function orb_map_get()
+	local result = {}
+	
+	local data = GlobalsGetValue( "ORB_MAP_STRING", "" )
+	
+	if ( #data > 0 ) then
+		for word in string.gmatch( data, "%S+" ) do
+			local n1,n2
+			local i = 1
+			for num in string.gmatch( word, "[^,]+" ) do
+				if ( i == 1 ) then
+					n1 = tonumber( num )
+				elseif ( i == 2 ) then
+					n2 = tonumber( num )
+				end
+				
+				i = i + 1
+			end
+			
+			if ( n1 ~= nil ) and ( n2 ~= nil ) then
+				table.insert( result, {n1,n2})
+			end
+		end
+	end
+	
+	return result
+end
 
 -----------------------------------------------------------------------------------------
 -- gui

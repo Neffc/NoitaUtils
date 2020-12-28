@@ -5,7 +5,6 @@
   <PhysicsBodyComponent 
 	allow_sleep="1"
 	angular_damping="0"
-	fixed_rotation="0"
 	is_bullet="0"
 	linear_damping="0"
 	is_static="1"

@@ -7,18 +7,9 @@ function item_pickup( entity_item, entity_who_picked, name )
 
 	local max_hp_old = 0
 	local max_hp = 0
-	local multiplier = 1
+	local multiplier = tonumber( GlobalsGetValue( "HEARTS_MORE_EXTRA_HP_MULTIPLIER", "1" ) )
 	
 	local x, y = EntityGetTransform( entity_item )
-	
-	if ( variablestorages ~= nil ) then
-		for key,comp_id in pairs(variablestorages) do 
-			local var_name = ComponentGetValue( comp_id, "name" )
-			if ( var_name == "hearts_more_extra_hp" ) then
-				multiplier = ComponentGetValueInt( comp_id, "value_int" )
-			end
-		end
-	end
 
 	if( damagemodels ~= nil ) then
 		for i,damagemodel in ipairs(damagemodels) do

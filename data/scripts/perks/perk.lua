@@ -8,7 +8,21 @@ end
 
 -- returns true if perks can be picked many times
 function perk_is_stackable( perk_data )
-	return perk_data.stackable ~= nil and perk_data.stackable == true
+	local is_stackable = ( perk_data.stackable ~= nil ) and ( perk_data.stackable == true )
+	local is_rare = ( perk_data.stackable_is_rare ~= nil ) and ( perk_data.stackable_is_rare == true ) -- stackable_is_rare indicates a perk that does stack but only appears once per every spawn order
+	
+	-- Perks that can only be stacked a specific number of times won't reappear eventually
+	if is_stackable and ( perk_data.stackable_maximum ~= nil ) then
+		local flag_name = get_perk_picked_flag_name( perk_data.id )
+		local pickup_count = tonumber( GlobalsGetValue( flag_name .. "_PICKUP_COUNT", "0" ) )
+		
+		if ( pickup_count >= perk_data.stackable_maximum ) then
+			is_stackable = false
+			is_rare = false
+		end
+	end
+	
+	return is_stackable, is_rare
 end
 
 
@@ -87,6 +101,7 @@ function perk_get_spawn_order()
 	local perk_pool = create_perk_pool()
 
 	local result = { }
+	local nonstackables = { }
 
 	for i=1,PERK_SPAWN_ORDER_LENGTH do
 		local tries = 0
@@ -100,19 +115,30 @@ function perk_get_spawn_order()
 
 			local index_in_perk_pool = Random( 1, #perk_pool )
 			perk_data = perk_pool[index_in_perk_pool]
+			
+			local can_stack,only_once_per_spawn_order = perk_is_stackable( perk_data )
 
-			if perk_is_stackable( perk_data ) then --  ensure stackable perks are not spawned too close to each other
-				for ri=#result-MIN_DISTANCE_BETWEEN_DUPLICATE_PERKS,#result do
+			if can_stack and ( only_once_per_spawn_order == false ) then
+				
+				-- Perks may have a special reoccurrence value
+				local min_distance = perk_data.stackable_how_often_reappears or MIN_DISTANCE_BETWEEN_DUPLICATE_PERKS
+				
+				for ri=#result-min_distance,#result do --  ensure stackable perks are not spawned too close to each other
 					if ri >= 1 and result[ri] == perk_data.id then
 						ok = false
 						break
 					end
 				end
 			else
-				table.remove( perk_pool, index_in_perk_pool ) -- remove non-stackable perks from the pool
+				if ( can_stack == false ) then --  mark actual nonstackable perks so that they never appear again
+					nonstackables[perk_data.id] = 1
+				end
+				
+				table.remove( perk_pool, index_in_perk_pool ) -- remove non-stackable perks and rare stackable perks from the pool
 			end
 
 			if ok then
+				--print( "Ignoring " .. perk_data.id .. " because it tried to reappear too soon" )
 				break
 			end
 
@@ -121,8 +147,19 @@ function perk_get_spawn_order()
 
 		table.insert( result, perk_data.id )
 	end
+	
+	-- remove non-stackable perks already collected from the list
+	for i,perk_id in pairs( result ) do
+		local flag_name = get_perk_picked_flag_name( perk_id )
+		local pickup_count = tonumber( GlobalsGetValue( flag_name .. "_PICKUP_COUNT", "0" ) )
+		
+		if ( nonstackables[perk_id] ~= nil ) and ( pickup_count > 0 ) then
+			--print( "Removed " .. perk_id .. " from perk pool because it had been picked up already" )
+			table.remove( result, i )
+		end
+	end
 
-	-- shift the results a x number forward
+	-- shift the results a random number forward
 	local new_start_i = Random( 10, 20 )
 	local real_result = {}
 	for i=1,PERK_SPAWN_ORDER_LENGTH do
@@ -163,10 +200,19 @@ function perk_pickup( entity_item, entity_who_picked, item_name, do_cosmetic_fx,
 	if perk_data == nil then
 		return
 	end
+	
+	-- Get perk's flag name
+	
+	local flag_name = get_perk_picked_flag_name( perk_id )
+	
+	-- update how many times the perk has been picked up this run -----------------
+	
+	local pickup_count = tonumber( GlobalsGetValue( flag_name .. "_PICKUP_COUNT", "0" ) )
+	pickup_count = pickup_count + 1
+	GlobalsSetValue( flag_name .. "_PICKUP_COUNT", tostring( pickup_count ) )
 
 	-- load perk for entity_who_picked -----------------------------------
-
-	local flag_name = get_perk_picked_flag_name( perk_id )
+	
 	local flag_name_persistent = string.lower( flag_name )
 	if ( HasFlagPersistent( flag_name_persistent ) == false ) then
 		GameAddFlagRun( "new_" .. flag_name_persistent )
@@ -210,6 +256,28 @@ function perk_pickup( entity_item, entity_who_picked, item_name, do_cosmetic_fx,
 		end
 		
 		GamePrintImportant( GameTextGet( "$log_pickedup_perk", GameTextGetTranslatedOrNot( perk_name ) ), perk_desc )
+	end
+	
+	-- disable the perk rerolling machine --------------------------------
+	local x,y = EntityGetTransform( entity_who_picked )
+	local rerolls = EntityGetInRadiusWithTag( x, y, 200, "perk_reroll_machine" )
+	
+	for i,rid in ipairs( rerolls ) do
+		local reroll_comp = EntityGetFirstComponent( rid, "ItemCostComponent" )
+		
+		if ( reroll_comp ~= nil ) then
+			EntitySetComponentIsEnabled( rid, reroll_comp, false )
+		end
+		
+		reroll_comp = EntityGetComponent( rid, "SpriteComponent", "shop_cost" )
+		
+		if ( reroll_comp ~= nil ) then
+			for a,b in ipairs( reroll_comp ) do
+				EntitySetComponentIsEnabled( rid, b, false )
+			end
+		end
+		
+		EntitySetComponentsWithTagEnabled( rid, "perk_reroll_disable", false )
 	end
 	
 	-- remove all perk items (also this one!) ----------------------------
@@ -311,6 +379,20 @@ function perk_spawn_random( x, y )
 
 	GameAddFlagRun( get_perk_flag_name(perk_id) )
 	result_id = perk_spawn( x, y, perk_id )
+	
+	return result_id
+end
+
+-- spawns perk with text-based id
+function perk_spawn_with_name( x, y, id )
+	local result_id
+	
+	for i,v in ipairs( perk_list ) do
+		if ( v.id == id ) then
+			GameAddFlagRun( get_perk_flag_name(v.id) )
+			result_id = perk_spawn( x, y, v.id )
+		end
+	end
 	
 	return result_id
 end

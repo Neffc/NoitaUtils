@@ -3,7 +3,7 @@
   filename="data/enemies_gfx/ghost.png" 
   offset_x="20" 
   offset_y="20"
-  default_animation="stand" >
+>
 
   <RectAnimation 
     frame_count="8" 

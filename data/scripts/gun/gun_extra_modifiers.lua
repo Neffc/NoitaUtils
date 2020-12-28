@@ -32,7 +32,7 @@ extra_modifiers =
 		c.spread_degrees = c.spread_degrees - 30
 		c.damage_explosion_add = c.damage_explosion_add + 0.2
 		c.damage_projectile_add = c.damage_projectile_add + 0.5
-		c.fire_rate_wait   = c.fire_rate_wait + 12
+		c.fire_rate_wait   = c.fire_rate_wait + 5
 		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 10.0
 	end,
 	
@@ -52,6 +52,10 @@ extra_modifiers =
 	end,
 	
 	projectile_homing_shooter = function()
+		c.extra_entities = c.extra_entities .. "data/entities/misc/perks/projectile_homing_shooter.xml,"
+	end,
+	
+	projectile_homing_shooter_wizard = function()
 		c.extra_entities = c.extra_entities .. "data/entities/misc/perks/projectile_homing_shooter.xml,"
 	end,
 	

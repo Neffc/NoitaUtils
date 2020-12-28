@@ -14,12 +14,10 @@
     falling_damage_height_min="70" 
     falling_damages="0" 
     fire_damage_amount="0.2" 
-     
     fire_probability_of_ignition="0.5" 
     hp="10" 
     is_on_fire="0" 
     blood_material="sand_blue"
-    ragdoll_material=""
     materials_create_messages="0" 
     materials_damage="1" 
     materials_how_much_damage="" 

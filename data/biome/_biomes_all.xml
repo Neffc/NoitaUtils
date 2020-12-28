@@ -872,6 +872,12 @@
 	</Biome>
 	
 	<Biome 
+		biome_filename="data/biome/mestari_secret.xml" 
+		height_index="13"
+		color="ff1f3b62" >
+	</Biome>
+	
+	<Biome 
 		biome_filename="data/biome/clouds.xml" 
 		height_index="0"
 		color="ff36d5c9" >
@@ -890,8 +896,20 @@
 	</Biome>
 	
 	<Biome 
+		biome_filename="data/biome/moon_room.xml" 
+		height_index="0"
+		color="ff567cb0" >
+	</Biome>
+	
+	<Biome 
 		biome_filename="data/biome/song_room.xml" 
 		height_index="0"
 		color="ff9d99d1" >
+	</Biome>
+	
+	<Biome 
+		biome_filename="data/biome/rainforest_dark.xml" 
+		height_index="0"
+		color="ff375c00" >
 	</Biome>
 </BiomesToLoad>

@@ -107,6 +107,18 @@
 		
 		<PixelScene DEBUG_RELOAD_ME="0" background_filename="data/biome_impl/greed_treasure_background.png" clean_area_before="0" colors_filename="" material_filename="data/biome_impl/greed_treasure.png" pos_x="9216" pos_y="4096" skip_biome_checks="1" skip_edge_textures="0" >
 		</PixelScene>
+		
+		<PixelScene DEBUG_RELOAD_ME="0" background_filename="data/biome_impl/fishing_hut_background.png" clean_area_before="0" colors_filename="data/biome_impl/fishing_hut_visual.png" material_filename="data/biome_impl/fishing_hut.png" pos_x="-12600" pos_y="140" skip_biome_checks="1" skip_edge_textures="1" >
+		</PixelScene>
+		
+		<PixelScene DEBUG_RELOAD_ME="0" background_filename="" clean_area_before="0" colors_filename="data/biome_impl/overworld/essence_altar_visual.png" material_filename="data/biome_impl/overworld/essence_altar.png" pos_x="-6948" pos_y="-270" skip_biome_checks="1" skip_edge_textures="1" >
+		</PixelScene>
+		
+		<PixelScene DEBUG_RELOAD_ME="0" background_filename="data/biome_impl/bunker_background.png" clean_area_before="0" colors_filename="data/biome_impl/bunker_visual.png" material_filename="data/biome_impl/bunker.png" pos_x="-12603" pos_y="326" skip_biome_checks="1" skip_edge_textures="1" >
+		</PixelScene>
+		
+		<PixelScene DEBUG_RELOAD_ME="0" background_filename="data/biome_impl/bunker_background.png" clean_area_before="0" colors_filename="data/biome_impl/bunker_visual.png" material_filename="data/biome_impl/bunker2.png" pos_x="-12953" pos_y="540" skip_biome_checks="1" skip_edge_textures="1" >
+		</PixelScene>
 
 		<!-- just load an entity -->
 		
@@ -138,7 +150,9 @@
 		
 		<PixelScene pos_x="-9980" pos_y="-30" just_load_an_entity="data/entities/props/physics/bridge_spawner.xml" />
 		
-		<PixelScene pos_x="-14554" pos_y="146" just_load_an_entity="data/entities/props/physics_protective_armour.xml" />
+		<PixelScene pos_x="-6884" pos_y="-165" just_load_an_entity="data/entities/props/physics_protective_armour.xml" />
+		
+		<PixelScene pos_x="-12441" pos_y="190" just_load_an_entity="data/entities/buildings/hut_check.xml" />
 
 	</mBufferedPixelScenes>
 </PixelScenes>

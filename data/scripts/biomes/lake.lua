@@ -3,6 +3,11 @@ CHEST_LEVEL = 0
 dofile_once("data/scripts/director_helpers.lua")
 dofile_once("data/scripts/biome_scripts.lua")
 
+RegisterSpawnFunction( 0xff667600, "spawn_teleport_back" )
+RegisterSpawnFunction( 0xffb2a700, "spawn_bunker2" )
+RegisterSpawnFunction( 0xffb27600, "spawn_bunker" )
+RegisterSpawnFunction( 0xff390000, "spawn_alchemist" )
+
 ------------ SMALL ENEMIES ----------------------------------------------------
 
 g_small_enemies =
@@ -210,7 +215,7 @@ function spawn_unique_enemy(x, y)
 end
 
 function spawn_lamp(x, y)
-	spawn(g_lamp,x,y+6,0,0)
+	spawn(g_lamp,x-4,y,0,0)
 end
 
 function spawn_props(x, y)
@@ -218,3 +223,19 @@ function spawn_props(x, y)
 end
 
 function spawn_potions( x, y ) end
+
+function spawn_alchemist( x, y )
+	--EntityLoad( "data/entities/animals/failed_alchemist.xml", x, y )
+end
+
+function spawn_bunker( x, y )
+	EntityLoad( "data/entities/buildings/bunker.xml", x, y )
+end
+
+function spawn_bunker2( x, y )
+	EntityLoad( "data/entities/buildings/bunker2.xml", x, y )
+end
+
+function spawn_teleport_back( x, y )
+	EntityLoad( "data/entities/buildings/teleport_bunker_back.xml", x, y )
+end

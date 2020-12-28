@@ -357,25 +357,6 @@
 	
 	<VegetationComponent 
       _enabled="1" 
-      is_visual="0" 
-      rand_seed="834676.86" 
-      tree_extra_y="4" 
-      tree_image_file="data/vegetation/swamp_cropped_0$[1-6].png" 
-      tree_image_visual="" 
-      tree_material="wood_loose" 
-      tree_probability="0.328571" 
-      tree_radius_high="0.714286" 
-      tree_radius_low="0.428571" 
-      tree_width="20.1143" 
-      visual_color="0x00FFFF" 
-      visual_offset_x="4" 
-      visual_offset_y="3" 
-	  material_on_top_of="soil_lush"
-	  >
-    </VegetationComponent>
-	
-	<VegetationComponent 
-      _enabled="1" 
       is_visual="1" 
       rand_seed="507812" 
       tree_extra_y="-1" 

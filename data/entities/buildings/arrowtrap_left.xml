@@ -26,8 +26,8 @@
 	</AnimalAIComponent>
 	
 	<DamageModelComponent 
-        hp="1.5"
-        ragdoll_material="plastic"
+		hp="1.5"
+		ragdoll_material="plastic"
 		ragdoll_filenames_file="" 
 		blood_material="sand"
 		fire_probability_of_ignition="0" 
@@ -52,8 +52,8 @@
 	</SpriteAnimatorComponent>
 
 	<PathFindingComponent
-	    distance_to_reach_node_x="20"
-	    distance_to_reach_node_y="20"
+		distance_to_reach_node_x="20"
+		distance_to_reach_node_y="20"
 		frames_to_get_stuck="120"
 		can_jump="0" 
 		jump_speed="0" >
@@ -86,18 +86,18 @@
 	</CameraBoundComponent>
 	
 	<Entity>
-	    <GameEffectComponent 
-	        effect="PROTECTION_FREEZE"
-	        frames="-1"
-	    >
+		<GameEffectComponent 
+			effect="PROTECTION_FREEZE"
+			frames="-1"
+		>
 		</GameEffectComponent >
 	</Entity>
 	
 	<Entity>
-	    <GameEffectComponent 
-	        effect="PROTECTION_ELECTRICITY"
-	        frames="-1"
-	    >
+		<GameEffectComponent 
+			effect="PROTECTION_ELECTRICITY"
+			frames="-1"
+		>
 		</GameEffectComponent >
 	</Entity>
 	
@@ -107,4 +107,9 @@
 		>
 	</LuaComponent>
 
+	<PixelSceneComponent
+		pixel_scene="data/biome_impl/crypt/trap_frame_left.png"
+		offset_x="-5"
+		offset_y="-10" >
+	</PixelSceneComponent>
 </Entity>

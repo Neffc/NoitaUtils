@@ -12,6 +12,7 @@
 			attack_ranged_enabled="0"
 			can_fly="0" 
 			attack_melee_max_distance="10"
+			attack_melee_action_frame="3"
 			>
 		</AnimalAIComponent>
 		

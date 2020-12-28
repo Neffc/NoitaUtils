@@ -809,9 +809,17 @@ function wand_add_random_cards( gun, entity_id, level )
 		local p = Random(0,100) 
 		if( p < 77 ) then
 			card = GetRandomActionWithType( x, y, level+1, ACTION_TYPE_MODIFIER, 666 )
+		--[[
+		Arvi (9.12.2020): DRAW_MANY cards were causing oddities as always casts, so testing a different set of always_cast cards
 		elseif( p < 94 ) then
 			card = GetRandomActionWithType( x, y, level+1, ACTION_TYPE_DRAW_MANY, 666 )
 			good_card_count = good_card_count + 1
+		]]--
+		elseif ( p < 85 ) then
+			card = GetRandomActionWithType( x, y, level+1, ACTION_TYPE_MODIFIER, 666 )
+			good_card_count = good_card_count + 1
+		elseif ( p < 93 ) then
+			card = GetRandomActionWithType( x, y, level+1, ACTION_TYPE_STATIC_PROJECTILE, 666 )
 		else 
 			card = GetRandomActionWithType( x, y, level+1, ACTION_TYPE_PROJECTILE, 666 )
 		end

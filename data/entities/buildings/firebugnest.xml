@@ -101,8 +101,6 @@
     x_vel_max="50"
     y_vel_min="-50"
     y_vel_max="50"
-    count_min="5"
-    count_max="5"
     lifetime_min="0.1"
     lifetime_max="0.3"
     create_real_particles="1"

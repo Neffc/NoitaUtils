@@ -1188,6 +1188,44 @@ actions =
 		end,
 	},
 	{
+		id          = "LASER_EMITTER",
+		name 		= "$action_laser_emitter",
+		description = "$actiondesc_laser_emitter",
+		sprite 		= "data/ui_gfx/gun_actions/laser_emitter.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/laser_unidentified.png",
+		related_projectiles	= {"data/entities/projectiles/deck/orb_laseremitter.xml"},
+		type 		= ACTION_TYPE_PROJECTILE,
+		spawn_level                       = "1,2,3,4", -- LASER
+		spawn_probability                 = "0.2,1,1,0.5", -- LASER
+		price = 180,
+		mana = 60,
+		action 		= function()
+			add_projectile("data/entities/projectiles/deck/orb_laseremitter.xml")
+			shot_effects.recoil_knockback = shot_effects.recoil_knockback + 20.0
+			c.fire_rate_wait = c.fire_rate_wait + 6
+			c.game_effect_entities = c.game_effect_entities .. "data/entities/misc/effect_disintegrated.xml,"
+		end,
+	},
+	{
+		id          = "LASER_EMITTER_FOUR",
+		name 		= "$action_laser_emitter_four",
+		description = "$actiondesc_laser_emitter_four",
+		sprite 		= "data/ui_gfx/gun_actions/laser_emitter_four.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/laser_unidentified.png",
+		related_projectiles	= {"data/entities/projectiles/deck/orb_laseremitter.xml"},
+		type 		= ACTION_TYPE_PROJECTILE,
+		spawn_level                       = "1,2,3,4,5", -- LASER
+		spawn_probability                 = "0.2,1,0.2,0.5,1", -- LASER
+		price = 200,
+		mana = 80,
+		action 		= function()
+			add_projectile("data/entities/projectiles/deck/orb_laseremitter_four.xml")
+			shot_effects.recoil_knockback = shot_effects.recoil_knockback + 30.0
+			c.fire_rate_wait = c.fire_rate_wait + 15
+			c.game_effect_entities = c.game_effect_entities .. "data/entities/misc/effect_disintegrated.xml,"
+		end,
+	},
+	{
 		id          = "DIGGER",
 		name 		= "$action_digger",
 		description = "$actiondesc_digger",
@@ -1326,6 +1364,27 @@ actions =
 			c.fire_rate_wait = c.fire_rate_wait + 40
 		end,
 	},
+	--[[
+	{
+		id          = "BLOODTENTACLE",
+		name 		= "$action_bloodtentacle",
+		description = "$actiondesc_bloodtentacle",
+		spawn_requires_flag = "card_unlocked_mestari",
+		sprite 		= "data/ui_gfx/gun_actions/bloodtentacle.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/tentacle_unidentified.png",
+		related_projectiles	= {"data/entities/projectiles/deck/bloodtentacle.xml"},
+		type 		= ACTION_TYPE_PROJECTILE,
+		spawn_level                       = "3,4,5,6", -- TENTACLE
+		spawn_probability                 = "0.2,0.5,1,1", -- TENTACLE
+		price = 170,
+		mana = 30,
+		--max_uses = 40,
+		action 		= function()
+			add_projectile("data/entities/projectiles/deck/bloodtentacle.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 20
+		end,
+	},
+	]]--
 	{
 		id          = "HEAL_BULLET",
 		name 		= "$action_heal_bullet",
@@ -1407,7 +1466,7 @@ actions =
 		description = "$actiondesc_chain_bolt",
 		sprite 		= "data/ui_gfx/gun_actions/chain_bolt.png",
 		related_projectiles	= {"data/entities/projectiles/deck/chain_bolt.xml"},
-		type 		= ACTION_TYPE_OTHER,
+		type 		= ACTION_TYPE_PROJECTILE,
 		spawn_level                       = "0,4,5,6", -- CHAIN_BOLT
 		spawn_probability                 = "1,1,1,1", -- CHAIN_BOLT
 		price = 240,
@@ -1779,7 +1838,7 @@ actions =
 		id          = "CURSED_ORB",
 		name 		= "$action_cursed_orb",
 		description = "$actiondesc_cursed_orb",
-		sprite 		= "data/ui_gfx/gun_actions/cursed_orb.png", --TODO
+		sprite 		= "data/ui_gfx/gun_actions/cursed_orb.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/disc_bullet_unidentified.png",
 		related_projectiles	= {"data/entities/projectiles/orb_cursed.xml"},
 		type 		= ACTION_TYPE_PROJECTILE,
@@ -1791,6 +1850,24 @@ actions =
 			add_projectile("data/entities/projectiles/orb_cursed.xml")
 			c.fire_rate_wait = c.fire_rate_wait + 20
 			shot_effects.recoil_knockback = 40.0
+		end,
+	},
+	{
+		id          = "EXPANDING_ORB",
+		name 		= "$action_expanding_orb",
+		description = "$actiondesc_expanding_orb",
+		sprite 		= "data/ui_gfx/gun_actions/expanding_orb.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/disc_bullet_unidentified.png",
+		related_projectiles	= {"data/entities/projectiles/orb_expanding.xml"},
+		type 		= ACTION_TYPE_PROJECTILE,
+		spawn_level                       = "2,3,4,5,6", -- CURSED_ORB
+		spawn_probability                 = "0.5,0.5,1.0,1.0,1.0", -- CURSED_ORB
+		price = 200,
+		mana = 70,
+		action 		= function()
+			add_projectile("data/entities/projectiles/orb_expanding.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 30
+			shot_effects.recoil_knockback = 20.0
 		end,
 	},
 	{
@@ -3708,6 +3785,46 @@ actions =
 			draw_actions( 1, true )
 		end,
 	},
+	{
+		id          = "EXPLOSION_REMOVE",
+		name 		= "$action_explosion_remove",
+		description = "$actiondesc_explosion_remove",
+		sprite 		= "data/ui_gfx/gun_actions/explosion_remove.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,4,5,6", -- LIFETIME_DOWN
+		spawn_probability                 = "0.2,0.6,0.7,0.2", -- LIFETIME_DOWN
+		price = 50,
+		mana = 0,
+		--max_uses = 150,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/explosion_remove.xml,"
+			c.fire_rate_wait = c.fire_rate_wait - 15
+			c.explosion_radius = c.explosion_radius - 30.0
+			c.damage_explosion_add = c.damage_explosion_add - 0.8
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "EXPLOSION_TINY",
+		name 		= "$action_explosion_tiny",
+		description = "$actiondesc_explosion_tiny",
+		sprite 		= "data/ui_gfx/gun_actions/explosion_tiny.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,4,5,6", -- LIFETIME_DOWN
+		spawn_probability                 = "0.2,0.6,0.7,0.2", -- LIFETIME_DOWN
+		price = 160,
+		mana = 40,
+		--max_uses = 150,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/explosion_tiny.xml,"
+			c.fire_rate_wait = c.fire_rate_wait + 15
+			c.explosion_radius = c.explosion_radius - 30.0
+			c.damage_explosion_add = c.damage_explosion_add + 0.8
+			draw_actions( 1, true )
+		end,
+	},
 	--[[
 	{
 		id          = "LIFETIME_INFINITE",
@@ -4078,6 +4195,27 @@ actions =
 		end,
 	},
 	{
+		id          = "PHASING_ARC",
+		name 		= "$action_phasing_arc",
+		description = "$actiondesc_phasing_arc",
+		sprite 		= "data/ui_gfx/gun_actions/phasing_arc.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/sinewave_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,3,4,5", -- HORIZONTAL_ARC
+		spawn_probability                 = "0.2,0.3,0.6,0.1", -- HORIZONTAL_ARC
+		price = 170,
+		mana = 2,
+		--max_uses = 150,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/phasing_arc.xml,"
+			draw_actions( 1, true )
+			c.fire_rate_wait    = c.fire_rate_wait - 6
+			c.lifetime_add 		= c.lifetime_add + 50
+			c.speed_multiplier	= c.speed_multiplier * 0.33
+			c.child_speed_multiplier	= c.child_speed_multiplier * 0.33
+		end,
+	},
+	{
 		id          = "BOUNCE",
 		name 		= "$action_bounce",
 		description = "$actiondesc_bounce",
@@ -4179,6 +4317,42 @@ actions =
 		end,
 	},
 	{
+		id          = "HOMING_CURSOR",
+		name 		= "$action_homing_cursor",
+		description = "$actiondesc_homing_cursor",
+		sprite 		= "data/ui_gfx/gun_actions/homing_cursor.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,3,4,5,6", -- HOMING_ROTATE
+		spawn_probability                 = "0.4,0.4,0.4,0.4,0.4", -- HOMING_ROTATE
+		price = 175,
+		mana = 40,
+		--max_uses = 100,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/homing_cursor.xml,data/entities/particles/tinyspark_white.xml,"
+			draw_actions( 1, true )
+		end,
+	},
+	--[[
+	{
+		id          = "HOMING_PROJECTILE",
+		name 		= "$action_homing_projectile",
+		description = "$actiondesc_homing_projectile",
+		sprite 		= "data/ui_gfx/gun_actions/homing_projectile.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,3,4,5,6", -- HOMING_SHOOTER
+		spawn_probability                 = "0.2,0.2,0.2,0.2,0.2", -- HOMING_SHOOTER
+		price = 100,
+		mana = 10,
+		--max_uses = 100,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/homing_projectile.xml,data/entities/particles/tinyspark_white.xml,"
+			draw_actions( 1, true )
+		end,
+	},
+	]]--
+	{
 		id          = "PIERCING_SHOT",
 		name 		= "$action_piercing_shot",
 		description = "$actiondesc_piercing_shot",
@@ -4262,6 +4436,29 @@ actions =
 			c.fire_rate_wait    = c.fire_rate_wait + 5
 			c.extra_entities    = c.extra_entities .. "data/entities/particles/tinyspark_yellow.xml,"
 			shot_effects.recoil_knockback = shot_effects.recoil_knockback + 10.0 * multiplier
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "BLOODLUST",
+		name 		= "$action_bloodlust",
+		description = "$actiondesc_bloodlust",
+		sprite 		= "data/ui_gfx/gun_actions/bloodlust.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "1,3,4,5,6", -- PIERCING_SHOT
+		spawn_probability                 = "0.2,0.3,0.6,0.6,0.3", -- PIERCING_SHOT
+		price = 160,
+		mana = 2,
+		--max_uses = 100,
+		action 		= function()
+			c.damage_projectile_add = c.damage_projectile_add + 1.3
+			c.gore_particles    = c.gore_particles + 15
+			c.fire_rate_wait    = c.fire_rate_wait + 8
+			c.friendly_fire		= true
+			shot_effects.recoil_knockback = shot_effects.recoil_knockback + 30.0
+			c.spread_degrees = c.spread_degrees + 6
+			c.extra_entities    = c.extra_entities .. "data/entities/particles/tinyspark_red.xml,"
 			draw_actions( 1, true )
 		end,
 	},
@@ -4684,6 +4881,24 @@ actions =
 		end,
 	},
 	{
+		id          = "LIQUID_TO_EXPLOSION",
+		name 		= "$action_liquid_to_explosion",
+		description = "$actiondesc_liquid_to_explosion",
+		sprite 		= "data/ui_gfx/gun_actions/liquid_to_explosion.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/explosive_projectile_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,3,4", -- BLOOD_TO_ACID
+		spawn_probability                 = "0.3,0.3,0.3", -- BLOOD_TO_ACID
+		price = 120,
+		mana = 40,
+		--max_uses = 50,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/liquid_to_explosion.xml,data/entities/particles/tinyspark_red.xml,"
+			c.fire_rate_wait = c.fire_rate_wait + 20
+			draw_actions( 1, true )
+		end,
+	},
+	{
 		id          = "TOXIC_TO_ACID",
 		name 		= "$action_toxic_to_acid",
 		description = "$actiondesc_toxic_to_acid",
@@ -4743,7 +4958,7 @@ actions =
 		description = "$actiondesc_random_explosion",
 		sprite 		= "data/ui_gfx/gun_actions/random_explosion.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/explosive_projectile_unidentified.png",
-		type 		= ACTION_TYPE_PROJECTILE,
+		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "3,5,6", -- TRANSMUTATION
 		spawn_probability                 = "0.3,0.6,1", -- TRANSMUTATION
 		price = 240,
@@ -5126,7 +5341,7 @@ actions =
 		spawn_probability                 = "0.3,0.3,0.3,0.3,0.3", -- PROJECTILE_TRANSMUTATION_FIELD
 		price = 250,
 		mana = 120,
-		max_uses = 4,
+		max_uses = 6,
 		action 		= function()
 			add_projectile("data/entities/projectiles/deck/projectile_transmutation_field.xml")
 			c.fire_rate_wait = c.fire_rate_wait + 15
@@ -5144,7 +5359,7 @@ actions =
 		spawn_probability                 = "0.3,0.3,0.3,0.3", -- PROJECTILE_THUNDER_FIELD
 		price = 300,
 		mana = 140,
-		max_uses = 4,
+		max_uses = 6,
 		action 		= function()
 			add_projectile("data/entities/projectiles/deck/projectile_thunder_field.xml")
 			c.fire_rate_wait = c.fire_rate_wait + 15
@@ -5162,10 +5377,64 @@ actions =
 		spawn_probability                 = "0.3,0.3,0.3", -- PROJECTILE_GRAVITY_FIELD
 		price = 250,
 		mana = 120,
-		max_uses = 3,
+		max_uses = 6,
 		action 		= function()
 			add_projectile("data/entities/projectiles/deck/projectile_gravity_field.xml")
 			c.fire_rate_wait = c.fire_rate_wait + 15
+		end,
+	},
+	{
+		id          = "VACUUM_POWDER",
+		name 		= "$action_vacuum_powder",
+		description = "$actiondesc_vacuum_powder",
+		sprite 		= "data/ui_gfx/gun_actions/vacuum_powder.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/chaos_polymorph_field_unidentified.png",
+		related_projectiles	= {"data/entities/projectiles/deck/vacuum_powder.xml"},
+		type 		= ACTION_TYPE_STATIC_PROJECTILE,
+		spawn_level                       = "2,3,5,6", -- PROJECTILE_GRAVITY_FIELD
+		spawn_probability                 = "0.3,1,0.3,0.3", -- PROJECTILE_GRAVITY_FIELD
+		price = 150,
+		mana = 40,
+		max_uses = 20,
+		action 		= function()
+			add_projectile("data/entities/projectiles/deck/vacuum_powder.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 10
+		end,
+	},
+	{
+		id          = "VACUUM_LIQUID",
+		name 		= "$action_vacuum_liquid",
+		description = "$actiondesc_vacuum_liquid",
+		sprite 		= "data/ui_gfx/gun_actions/vacuum_liquid.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/chaos_polymorph_field_unidentified.png",
+		related_projectiles	= {"data/entities/projectiles/deck/vacuum_liquid.xml"},
+		type 		= ACTION_TYPE_STATIC_PROJECTILE,
+		spawn_level                       = "2,3,5,6", -- PROJECTILE_GRAVITY_FIELD
+		spawn_probability                 = "0.3,1,0.3,0.3", -- PROJECTILE_GRAVITY_FIELD
+		price = 150,
+		mana = 40,
+		max_uses = 20,
+		action 		= function()
+			add_projectile("data/entities/projectiles/deck/vacuum_liquid.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 10
+		end,
+	},
+	{
+		id          = "VACUUM_ENTITIES",
+		name 		= "$action_vacuum_entities",
+		description = "$actiondesc_vacuum_entities",
+		sprite 		= "data/ui_gfx/gun_actions/vacuum_entities.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/chaos_polymorph_field_unidentified.png",
+		related_projectiles	= {"data/entities/projectiles/deck/vacuum_liquid.xml"},
+		type 		= ACTION_TYPE_STATIC_PROJECTILE,
+		spawn_level                       = "2,3,5,6", -- PROJECTILE_GRAVITY_FIELD
+		spawn_probability                 = "0.3,1,0.3,0.3", -- PROJECTILE_GRAVITY_FIELD
+		price = 200,
+		mana = 50,
+		max_uses = 20,
+		action 		= function()
+			add_projectile("data/entities/projectiles/deck/vacuum_entities.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 10
 		end,
 	},
 	{
@@ -5710,6 +5979,26 @@ actions =
 		end,
 	},
 	{
+		id          = "BOUNCE_LASER_EMITTER",
+		name 		= "$action_bounce_laser_emitter",
+		description = "$actiondesc_bounce_laser_emitter",
+		sprite 		= "data/ui_gfx/gun_actions/bounce_laser_emitter.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/sinewave_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "3,4,5", -- BOUNCE_SPARK
+		spawn_probability                 = "0.4,0.8,0.4", -- BOUNCE_SPARK
+		price = 180,
+		mana = 40,
+		--max_uses = 150,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/bounce_laser_emitter.xml,"
+			c.bounces = c.bounces + 1
+			c.fire_rate_wait = c.fire_rate_wait + 12
+			shot_effects.recoil_knockback = shot_effects.recoil_knockback + 5.0
+			draw_actions( 1, true )
+		end,
+	},
+	{
 		id          = "BOUNCE_LARPA",
 		name 		= "$action_bounce_larpa",
 		description = "$actiondesc_bounce_larpa",
@@ -5738,7 +6027,7 @@ actions =
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "1,2,4,5", -- FIREBALL_RAY
 		spawn_probability                 = "0.6,0.6,0.4,0.4", -- FIREBALL_RAY
-		price = 260,
+		price = 150,
 		mana = 110,
 		max_uses = 16,
 		action 		= function()
@@ -5755,7 +6044,7 @@ actions =
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "1,2,3,4,5", -- LIGHTNING_RAY
 		spawn_probability                 = "0,0,0.4,0.4,0.4", -- LIGHTNING_RAY
-		price = 260,
+		price = 180,
 		mana = 110,
 		max_uses = 16,
 		custom_xml_file = "data/entities/misc/custom_cards/electric_charge.xml",
@@ -5773,11 +6062,28 @@ actions =
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "1,2,3,4,5", -- TENTACLE_RAY
 		spawn_probability                 = "0,0,0.4,0.4,0.4", -- TENTACLE_RAY
-		price = 260,
+		price = 150,
 		mana = 110,
 		max_uses = 16,
 		action 		= function()
 			c.extra_entities = c.extra_entities .. "data/entities/misc/tentacle_ray.xml,"
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "LASER_EMITTER_RAY",
+		name 		= "$action_laser_emitter_ray",
+		description = "$actiondesc_laser_emitter_ray",
+		sprite 		= "data/ui_gfx/gun_actions/laser_emitter_ray.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/electric_charge_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "1,2,3,4,5", -- TENTACLE_RAY
+		spawn_probability                 = "0,0,0.4,0.4,0.4", -- TENTACLE_RAY
+		price = 150,
+		mana = 110,
+		max_uses = 16,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/laser_emitter_ray.xml,"
 			draw_actions( 1, true )
 		end,
 	},
@@ -5790,7 +6096,7 @@ actions =
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "2,3,4,5,6", -- FIREBALL_RAY_LINE
 		spawn_probability                 = "0.6,0.4,0.4,0.4,1", -- FIREBALL_RAY_LINE
-		price = 280,
+		price = 120,
 		mana = 130,
 		max_uses = 20,
 		action 		= function()
@@ -5807,7 +6113,7 @@ actions =
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "1,2,4,5", -- FIREBALL_RAY_ENEMY
 		spawn_probability                 = "0.6,0.6,0.4,0.4", -- FIREBALL_RAY_ENEMY
-		price = 230,
+		price = 100,
 		mana = 90,
 		max_uses = 20,
 		action 		= function()
@@ -5824,7 +6130,7 @@ actions =
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "1,2,3,4,5", -- LIGHTNING_RAY_ENEMY
 		spawn_probability                 = "0,0,0.4,0.4,0.4", -- LIGHTNING_RAY_ENEMY
-		price = 230,
+		price = 150,
 		mana = 90,
 		max_uses = 20,
 		custom_xml_file = "data/entities/misc/custom_cards/electric_charge.xml",
@@ -5842,7 +6148,7 @@ actions =
 		type 		= ACTION_TYPE_MODIFIER,
 		spawn_level                       = "1,2,3,4,5", -- TENTACLE_RAY_ENEMY
 		spawn_probability                 = "0,0,0.4,0.4,0.4", -- TENTACLE_RAY_ENEMY
-		price = 230,
+		price = 150,
 		mana = 90,
 		max_uses = 20,
 		action 		= function()
@@ -6820,7 +7126,7 @@ actions =
 		description = "$actiondesc_random_spell",
 		sprite 		= "data/ui_gfx/gun_actions/random_spell.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
-		spawn_requires_flag = "card_unlocked_duplicate",
+		spawn_requires_flag = "card_unlocked_mestari",
 		type 		= ACTION_TYPE_OTHER,
 		recursive	= true,
 		spawn_level                       = "3,4,5,6,10", -- MANA_REDUCE
@@ -6852,7 +7158,7 @@ actions =
 		description = "$actiondesc_random_projectile",
 		sprite 		= "data/ui_gfx/gun_actions/random_projectile.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
-		spawn_requires_flag = "card_unlocked_duplicate",
+		spawn_requires_flag = "card_unlocked_mestari",
 		type 		= ACTION_TYPE_PROJECTILE,
 		recursive	= true,
 		spawn_level                       = "2,4,5,6,10", -- MANA_REDUCE
@@ -6884,7 +7190,7 @@ actions =
 		description = "$actiondesc_random_modifier",
 		sprite 		= "data/ui_gfx/gun_actions/random_modifier.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
-		spawn_requires_flag = "card_unlocked_duplicate",
+		spawn_requires_flag = "card_unlocked_mestari",
 		type 		= ACTION_TYPE_MODIFIER,
 		recursive	= true,
 		spawn_level                       = "4,5,6,10", -- MANA_REDUCE
@@ -6916,7 +7222,7 @@ actions =
 		description = "$actiondesc_random_static_projectile",
 		sprite 		= "data/ui_gfx/gun_actions/random_static_projectile.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
-		spawn_requires_flag = "card_unlocked_duplicate",
+		spawn_requires_flag = "card_unlocked_mestari",
 		type 		= ACTION_TYPE_STATIC_PROJECTILE,
 		recursive	= true,
 		spawn_level                       = "3,5,6,10", -- MANA_REDUCE
@@ -6948,7 +7254,7 @@ actions =
 		description = "$actiondesc_draw_random",
 		sprite 		= "data/ui_gfx/gun_actions/draw_random.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
-		spawn_requires_flag = "card_unlocked_duplicate",
+		spawn_requires_flag = "card_unlocked_mestari",
 		type 		= ACTION_TYPE_OTHER,
 		recursive	= true,
 		spawn_level                       = "2,3,4,5,6,10", -- MANA_REDUCE
@@ -7004,7 +7310,7 @@ actions =
 		description = "$actiondesc_draw_random_x3",
 		sprite 		= "data/ui_gfx/gun_actions/draw_random_x3.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
-		spawn_requires_flag = "card_unlocked_duplicate",
+		spawn_requires_flag = "card_unlocked_mestari",
 		type 		= ACTION_TYPE_OTHER,
 		recursive	= true,
 		spawn_level                       = "3,4,5,6,10", -- MANA_REDUCE
@@ -7062,7 +7368,7 @@ actions =
 		description = "$actiondesc_draw_3_random",
 		sprite 		= "data/ui_gfx/gun_actions/draw_3_random.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
-		spawn_requires_flag = "card_unlocked_duplicate",
+		spawn_requires_flag = "card_unlocked_mestari",
 		type 		= ACTION_TYPE_OTHER,
 		recursive	= true,
 		spawn_level                       = "2,3,5,6,10", -- MANA_REDUCE
@@ -7144,8 +7450,8 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/rocket_unidentified.png",
 		spawn_requires_flag = "card_unlocked_alchemy",
 		type 		= ACTION_TYPE_UTILITY,
-		spawn_level                       = "0,10", -- DESTRUCTION
-		spawn_probability                 = "0.1,1", -- DESTRUCTION
+		spawn_level                       = "0,6,10", -- DESTRUCTION
+		spawn_probability                 = "0.1,0.05,1", -- DESTRUCTION
 		price = 400,
 		mana = 100,
 		--max_uses    = 15, 
@@ -7164,8 +7470,8 @@ actions =
 		spawn_requires_flag = "card_unlocked_alchemy",
 		never_unlimited		= true,
 		type 		= ACTION_TYPE_UTILITY,
-		spawn_level                       = "1,10", -- DESTRUCTION
-		spawn_probability                 = "0.1,1", -- DESTRUCTION
+		spawn_level                       = "1,6,10", -- DESTRUCTION
+		spawn_probability                 = "0.1,0.05,1", -- DESTRUCTION
 		price = 400,
 		mana = 100,
 		max_uses    = 10, 
@@ -7184,8 +7490,8 @@ actions =
 		spawn_requires_flag = "card_unlocked_alchemy",
 		never_unlimited		= true,
 		type 		= ACTION_TYPE_UTILITY,
-		spawn_level                       = "2,10", -- DESTRUCTION
-		spawn_probability                 = "0.1,1", -- DESTRUCTION
+		spawn_level                       = "2,6,10", -- DESTRUCTION
+		spawn_probability                 = "0.1,0.05,1", -- DESTRUCTION
 		price = 350,
 		mana = 80,
 		max_uses    = 15, 
@@ -7204,8 +7510,8 @@ actions =
 		spawn_requires_flag = "card_unlocked_alchemy",
 		never_unlimited		= true,
 		type 		= ACTION_TYPE_UTILITY,
-		spawn_level                       = "3,10", -- DESTRUCTION
-		spawn_probability                 = "0.1,1", -- DESTRUCTION
+		spawn_level                       = "3,6,10", -- DESTRUCTION
+		spawn_probability                 = "0.1,0.05,1", -- DESTRUCTION
 		price = 500,
 		mana = 200,
 		max_uses    = 10, 
@@ -7223,8 +7529,8 @@ actions =
 		sprite_unidentified = "data/ui_gfx/gun_actions/rocket_unidentified.png",
 		spawn_requires_flag = "card_unlocked_alchemy",
 		type 		= ACTION_TYPE_UTILITY,
-		spawn_level                       = "4,10", -- DESTRUCTION
-		spawn_probability                 = "0.1,1", -- DESTRUCTION
+		spawn_level                       = "4,6,10", -- DESTRUCTION
+		spawn_probability                 = "0.1,0.05,1", -- DESTRUCTION
 		price = 600,
 		mana = 200,
 		--max_uses    = 15, 
@@ -8251,13 +8557,13 @@ actions =
 		description = "$actiondesc_reset",
 		sprite 		= "data/ui_gfx/gun_actions/reset.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/bomb_unidentified.png",
-		spawn_requires_flag = "card_unlocked_duplicate",
+		spawn_requires_flag = "card_unlocked_maths",
 		type 		= ACTION_TYPE_UTILITY,
 		recursive	= true,
 		spawn_level                       = "10", -- BOMB
 		spawn_probability                 = "1", -- BOMB
 		price = 120,
-		mana = 30, 
+		mana = 20, 
 		action 		= function()
 			current_reload_time = current_reload_time - 25
 			
@@ -8279,6 +8585,579 @@ actions =
 				move_discarded_to_deck()
 				order_deck()
 			end
+		end,
+	},
+	{
+		id          = "IF_ENEMY",
+		name 		= "$action_if_enemy",
+		description = "$actiondesc_if_enemy",
+		sprite 		= "data/ui_gfx/gun_actions/if_enemy.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
+		spawn_requires_flag = "card_unlocked_maths",
+		type 		= ACTION_TYPE_OTHER,
+		spawn_level                       = "10", -- MANA_REDUCE
+		spawn_probability                 = "1", -- MANA_REDUCE
+		price = 100,
+		mana = 0,
+		action 		= function( recursion_level, iteration )
+			local endpoint = -1
+			local elsepoint = -1
+			local x,y = EntityGetTransform( GetUpdatedEntityID() )
+			local enemies = EntityGetInRadiusWithTag( x, y, 240, "homing_target" )
+			
+			local doskip = false
+			if ( #enemies < 15 ) then
+				doskip = true
+			end
+			
+			if ( #deck > 0 ) then
+				for i,v in ipairs( deck ) do
+					if ( v ~= nil ) then
+						if ( string.sub( v.id, 1, 3 ) == "IF_" ) and ( v.id ~= "IF_END" ) and ( v.id ~= "IF_ELSE" ) then
+							endpoint = -1
+							break
+						end
+						
+						if ( v.id == "IF_ELSE" ) then
+							endpoint = i
+							elsepoint = i
+						end
+						
+						if ( v.id == "IF_END" ) then
+							endpoint = i
+							break
+						end
+					end
+				end
+				
+				local envelope_min = 1
+				local envelope_max = 1
+					
+				if doskip then
+					if ( elsepoint > 0 ) then
+						envelope_max = elsepoint
+					elseif ( endpoint > 0 ) then
+						envelope_max = endpoint
+					end
+					
+					for i=envelope_min,envelope_max do
+						local v = deck[envelope_min]
+						
+						if ( v ~= nil ) then
+							table.insert( discarded, v )
+							table.remove( deck, envelope_min )
+						end
+					end
+				else
+					if ( elsepoint > 0 ) then
+						envelope_min = elsepoint
+						
+						if ( endpoint > 0 ) then
+							envelope_max = endpoint
+						else
+							envelope_max = #deck
+						end
+						
+						for i=envelope_min,envelope_max do
+							local v = deck[envelope_min]
+							
+							if ( v ~= nil ) then
+								table.insert( discarded, v )
+								table.remove( deck, envelope_min )
+							end
+						end
+					end
+				end
+			end
+			
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "IF_PROJECTILE",
+		name 		= "$action_if_projectile",
+		description = "$actiondesc_if_projectile",
+		sprite 		= "data/ui_gfx/gun_actions/if_projectile.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
+		spawn_requires_flag = "card_unlocked_maths",
+		type 		= ACTION_TYPE_OTHER,
+		spawn_level                       = "10", -- MANA_REDUCE
+		spawn_probability                 = "1", -- MANA_REDUCE
+		price = 100,
+		mana = 0,
+		action 		= function( recursion_level, iteration )
+			local endpoint = -1
+			local elsepoint = -1
+			local x,y = EntityGetTransform( GetUpdatedEntityID() )
+			local enemies = EntityGetInRadiusWithTag( x, y, 160, "projectile" )
+			
+			local doskip = false
+			if ( #enemies < 20 ) then
+				doskip = true
+			end
+			
+			if ( #deck > 0 ) then
+				for i,v in ipairs( deck ) do
+					if ( v ~= nil ) then
+						if ( string.sub( v.id, 1, 3 ) == "IF_" ) and ( v.id ~= "IF_END" ) and ( v.id ~= "IF_ELSE" ) then
+							endpoint = -1
+							break
+						end
+						
+						if ( v.id == "IF_ELSE" ) then
+							endpoint = i
+							elsepoint = i
+						end
+						
+						if ( v.id == "IF_END" ) then
+							endpoint = i
+							break
+						end
+					end
+				end
+				
+				local envelope_min = 1
+				local envelope_max = 1
+					
+				if doskip then
+					if ( elsepoint > 0 ) then
+						envelope_max = elsepoint
+					elseif ( endpoint > 0 ) then
+						envelope_max = endpoint
+					end
+					
+					for i=envelope_min,envelope_max do
+						local v = deck[envelope_min]
+						
+						if ( v ~= nil ) then
+							table.insert( discarded, v )
+							table.remove( deck, envelope_min )
+						end
+					end
+				else
+					if ( elsepoint > 0 ) then
+						envelope_min = elsepoint
+						
+						if ( endpoint > 0 ) then
+							envelope_max = endpoint
+						else
+							envelope_max = #deck
+						end
+						
+						for i=envelope_min,envelope_max do
+							local v = deck[envelope_min]
+							
+							if ( v ~= nil ) then
+								table.insert( discarded, v )
+								table.remove( deck, envelope_min )
+							end
+						end
+					end
+				end
+			end
+			
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "IF_HP",
+		name 		= "$action_if_hp",
+		description = "$actiondesc_if_hp",
+		sprite 		= "data/ui_gfx/gun_actions/if_hp.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
+		spawn_requires_flag = "card_unlocked_maths",
+		type 		= ACTION_TYPE_OTHER,
+		spawn_level                       = "10", -- MANA_REDUCE
+		spawn_probability                 = "1", -- MANA_REDUCE
+		price = 100,
+		mana = 0,
+		action 		= function( recursion_level, iteration )
+			local endpoint = -1
+			local elsepoint = -1
+			local entity_id = GetUpdatedEntityID()
+			local comp = EntityGetFirstComponent( entity_id, "DamageModelComponent" )
+			local hpdiff = 1.0
+			
+			if ( comp ~= nil ) then
+				local hp = ComponentGetValue2( comp, "hp" )
+				local max_hp = ComponentGetValue2( comp, "max_hp" )
+				
+				hpdiff = hp / max_hp
+			end
+			
+			local doskip = false
+			if ( hpdiff > 0.25 ) then
+				doskip = true
+			end
+			
+			if ( #deck > 0 ) then
+				for i,v in ipairs( deck ) do
+					if ( v ~= nil ) then
+						if ( string.sub( v.id, 1, 3 ) == "IF_" ) and ( v.id ~= "IF_END" ) and ( v.id ~= "IF_ELSE" ) then
+							endpoint = -1
+							break
+						end
+						
+						if ( v.id == "IF_ELSE" ) then
+							endpoint = i
+							elsepoint = i
+						end
+						
+						if ( v.id == "IF_END" ) then
+							endpoint = i
+							break
+						end
+					end
+				end
+				
+				local envelope_min = 1
+				local envelope_max = 1
+					
+				if doskip then
+					if ( elsepoint > 0 ) then
+						envelope_max = elsepoint
+					elseif ( endpoint > 0 ) then
+						envelope_max = endpoint
+					end
+					
+					for i=envelope_min,envelope_max do
+						local v = deck[envelope_min]
+						
+						if ( v ~= nil ) then
+							table.insert( discarded, v )
+							table.remove( deck, envelope_min )
+						end
+					end
+				else
+					if ( elsepoint > 0 ) then
+						envelope_min = elsepoint
+						
+						if ( endpoint > 0 ) then
+							envelope_max = endpoint
+						else
+							envelope_max = #deck
+						end
+						
+						for i=envelope_min,envelope_max do
+							local v = deck[envelope_min]
+							
+							if ( v ~= nil ) then
+								table.insert( discarded, v )
+								table.remove( deck, envelope_min )
+							end
+						end
+					end
+				end
+			end
+			
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "IF_HALF",
+		name 		= "$action_if_half",
+		description = "$actiondesc_if_half",
+		sprite 		= "data/ui_gfx/gun_actions/if_half.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
+		spawn_requires_flag = "card_unlocked_maths",
+		type 		= ACTION_TYPE_OTHER,
+		spawn_level                       = "10", -- MANA_REDUCE
+		spawn_probability                 = "1", -- MANA_REDUCE
+		price = 100,
+		mana = 0,
+		action 		= function( recursion_level, iteration )
+			local endpoint = -1
+			local elsepoint = -1
+			local doskip = false
+			
+			if ( reflecting == false ) then
+				local status = tonumber( GlobalsGetValue( "GUN_ACTION_IF_HALF_STATUS", "0" ) ) or 0
+				
+				if ( status == 1 ) then
+					doskip = true
+				end
+				
+				status = 1 - status
+				GlobalsSetValue( "GUN_ACTION_IF_HALF_STATUS", tostring( status ) )
+			end
+			
+			if ( #deck > 0 ) then
+				for i,v in ipairs( deck ) do
+					if ( v ~= nil ) then
+						if ( string.sub( v.id, 1, 3 ) == "IF_" ) and ( v.id ~= "IF_END" ) and ( v.id ~= "IF_ELSE" ) then
+							endpoint = -1
+							break
+						end
+						
+						if ( v.id == "IF_ELSE" ) then
+							endpoint = i
+							elsepoint = i
+						end
+						
+						if ( v.id == "IF_END" ) then
+							endpoint = i
+							break
+						end
+					end
+				end
+				
+				local envelope_min = 1
+				local envelope_max = 1
+				
+				if doskip then
+					if ( elsepoint > 0 ) then
+						envelope_max = elsepoint
+					elseif ( endpoint > 0 ) then
+						envelope_max = endpoint
+					end
+					
+					for i=envelope_min,envelope_max do
+						local v = deck[envelope_min]
+					
+						if ( v ~= nil ) then
+							table.insert( discarded, v )
+							table.remove( deck, envelope_min )
+						end
+					end
+				else
+					if ( elsepoint > 0 ) then
+						envelope_min = elsepoint
+						
+						if ( endpoint > 0 ) then
+							envelope_max = endpoint
+						else
+							envelope_max = #deck
+						end
+						
+						for i=envelope_min,envelope_max do
+							local v = deck[envelope_min]
+							
+							if ( v ~= nil ) then
+								table.insert( discarded, v )
+								table.remove( deck, envelope_min )
+							end
+						end
+					end
+				end
+			end
+			
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "IF_END",
+		name 		= "$action_if_end",
+		description = "$actiondesc_if_end",
+		sprite 		= "data/ui_gfx/gun_actions/if_end.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
+		spawn_requires_flag = "card_unlocked_maths",
+		type 		= ACTION_TYPE_OTHER,
+		spawn_level                       = "10", -- MANA_REDUCE
+		spawn_probability                 = "1", -- MANA_REDUCE
+		price = 10,
+		mana = 0,
+		action 		= function( recursion_level, iteration )			
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "IF_ELSE",
+		name 		= "$action_if_else",
+		description = "$actiondesc_if_else",
+		sprite 		= "data/ui_gfx/gun_actions/if_else.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
+		spawn_requires_flag = "card_unlocked_maths",
+		type 		= ACTION_TYPE_OTHER,
+		spawn_level                       = "10", -- MANA_REDUCE
+		spawn_probability                 = "1", -- MANA_REDUCE
+		price = 10,
+		mana = 0,
+		action 		= function( recursion_level, iteration )			
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "COLOUR_RED",
+		name 		= "$action_colour_red",
+		description = "$actiondesc_colour_red",
+		sprite 		= "data/ui_gfx/gun_actions/colour_red.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "1,2,3,4,5,6", -- HOMING
+		spawn_probability                 = "0.2,0.2,0.2,0.2,0.2,0.2", -- HOMING
+		spawn_requires_flag = "card_unlocked_paint",
+		price = 40,
+		mana = 0,
+		--max_uses = 100,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/colour_red.xml,data/entities/particles/tinyspark_red.xml,"
+			c.fire_rate_wait = c.fire_rate_wait - 1
+			c.screenshake = c.screenshake - 2.5
+			if ( c.screenshake < 0 ) then
+				c.screenshake = 0
+			end
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "COLOUR_ORANGE",
+		name 		= "$action_colour_orange",
+		description = "$actiondesc_colour_orange",
+		sprite 		= "data/ui_gfx/gun_actions/colour_orange.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,3,4", -- HOMING
+		spawn_probability                 = "0.1,0.1,0.1", -- HOMING
+		spawn_requires_flag = "card_unlocked_paint",
+		price = 40,
+		mana = 0,
+		--max_uses = 100,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/colour_orange.xml,data/entities/particles/tinyspark_red.xml,"
+			c.fire_rate_wait = c.fire_rate_wait - 1
+			c.screenshake = c.screenshake - 2.5
+			if ( c.screenshake < 0 ) then
+				c.screenshake = 0
+			end
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "COLOUR_GREEN",
+		name 		= "$action_colour_green",
+		description = "$actiondesc_colour_green",
+		sprite 		= "data/ui_gfx/gun_actions/colour_green.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,3,4", -- HOMING
+		spawn_probability                 = "0.1,0.1,0.1", -- HOMING
+		spawn_requires_flag = "card_unlocked_paint",
+		price = 40,
+		mana = 0,
+		--max_uses = 100,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/colour_green.xml,data/entities/particles/tinyspark_red.xml,"
+			c.fire_rate_wait = c.fire_rate_wait - 1
+			c.screenshake = c.screenshake - 2.5
+			if ( c.screenshake < 0 ) then
+				c.screenshake = 0
+			end
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "COLOUR_YELLOW",
+		name 		= "$action_colour_yellow",
+		description = "$actiondesc_colour_yellow",
+		sprite 		= "data/ui_gfx/gun_actions/colour_yellow.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,3,4", -- HOMING
+		spawn_probability                 = "0.1,0.1,0.1", -- HOMING
+		spawn_requires_flag = "card_unlocked_paint",
+		price = 40,
+		mana = 0,
+		--max_uses = 100,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/colour_yellow.xml,data/entities/particles/tinyspark_red.xml,"
+			c.fire_rate_wait = c.fire_rate_wait - 1
+			c.screenshake = c.screenshake - 2.5
+			if ( c.screenshake < 0 ) then
+				c.screenshake = 0
+			end
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "COLOUR_PURPLE",
+		name 		= "$action_colour_purple",
+		description = "$actiondesc_colour_purple",
+		sprite 		= "data/ui_gfx/gun_actions/colour_purple.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,3,4", -- HOMING
+		spawn_probability                 = "0.1,0.1,0.1", -- HOMING
+		spawn_requires_flag = "card_unlocked_paint",
+		price = 40,
+		mana = 0,
+		--max_uses = 100,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/colour_purple.xml,data/entities/particles/tinyspark_red.xml,"
+			c.fire_rate_wait = c.fire_rate_wait - 1
+			c.screenshake = c.screenshake - 2.5
+			if ( c.screenshake < 0 ) then
+				c.screenshake = 0
+			end
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "COLOUR_BLUE",
+		name 		= "$action_colour_blue",
+		description = "$actiondesc_colour_blue",
+		sprite 		= "data/ui_gfx/gun_actions/colour_blue.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,3,4", -- HOMING
+		spawn_probability                 = "0.1,0.1,0.1", -- HOMING
+		spawn_requires_flag = "card_unlocked_paint",
+		price = 40,
+		mana = 0,
+		--max_uses = 100,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/colour_blue.xml,data/entities/particles/tinyspark_red.xml,"
+			c.fire_rate_wait = c.fire_rate_wait - 1
+			c.screenshake = c.screenshake - 2.5
+			if ( c.screenshake < 0 ) then
+				c.screenshake = 0
+			end
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "COLOUR_RAINBOW",
+		name 		= "$action_colour_rainbow",
+		description = "$actiondesc_colour_rainbow",
+		sprite 		= "data/ui_gfx/gun_actions/colour_rainbow.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,3,4", -- HOMING
+		spawn_probability                 = "0.1,0.1,0.1", -- HOMING
+		spawn_requires_flag = "card_unlocked_paint",
+		price = 40,
+		mana = 0,
+		--max_uses = 100,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/colour_rainbow.xml,data/entities/particles/tinyspark_red.xml,"
+			c.fire_rate_wait = c.fire_rate_wait - 1
+			c.screenshake = c.screenshake - 2.5
+			if ( c.screenshake < 0 ) then
+				c.screenshake = 0
+			end
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id          = "COLOUR_INVIS",
+		name 		= "$action_colour_invis",
+		description = "$actiondesc_colour_invis",
+		sprite 		= "data/ui_gfx/gun_actions/colour_invis.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/homing_unidentified.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "2,3,4", -- HOMING
+		spawn_probability                 = "0.1,0.1,0.1", -- HOMING
+		spawn_requires_flag = "card_unlocked_paint",
+		price = 40,
+		mana = 0,
+		--max_uses = 100,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "data/entities/misc/colour_invis.xml,"
+			c.fire_rate_wait = c.fire_rate_wait - 1
+			c.screenshake = c.screenshake - 2.5
+			if ( c.screenshake < 0 ) then
+				c.screenshake = 0
+			end
+			draw_actions( 1, true )
 		end,
 	},
 }

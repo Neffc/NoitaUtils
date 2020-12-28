@@ -1107,7 +1107,7 @@ end
 function spawn_meditation_cube( x, y )
 	SetRandomSeed( x, y )
 	local rnd = Random( 1, 100 )
-	if( rnd > 96 ) then
+	if( rnd > 96 and not ModIsEnabled("nightmare") ) then
 		LoadPixelScene( "data/biome_impl/excavationsite/meditation_cube.png", "data/biome_impl/excavationsite/meditation_cube_visual.png", x-20, y-29, "", true )
 		EntityLoad( "data/entities/buildings/teleport_meditation_cube.xml", x, y-70 )
 	end

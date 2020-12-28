@@ -15,6 +15,7 @@ RegisterSpawnFunction( 0xff00AC64, "load_pixel_scene4" )
 RegisterSpawnFunction( 0xff80FF5A, "spawn_vines" )
 RegisterSpawnFunction( 0xff943030, "spawn_dragonspot" )
 RegisterSpawnFunction( 0xff4c63e0, "spawn_root_grower" )
+RegisterSpawnFunction( 0xff806326, "spawn_tree" )
 
 ------------ SMALL ENEMIES ----------------------------------------------------
 
@@ -761,6 +762,75 @@ g_vines =
 	},
 }
 
+g_trees =
+{
+	total_prob = 0,
+	{
+		prob   		= 1.5,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= ""
+	},
+	{
+		prob   		= 0.4,
+		min_count	= 1,
+		max_count	= 1,
+		offset_x	= -10,
+		offset_y	= -113,
+		entity 	= "data/entities/props/rainforest_tree_01.xml"
+	},
+	{
+		prob   		= 0.4,
+		min_count	= 1,
+		max_count	= 1,
+		--[[
+		offset_x	= -4,
+		offset_y	= -30,
+		]]--
+		entity 	= "data/entities/props/rainforest_tree_02.xml"
+	},
+	{
+		prob   		= 0.4,
+		min_count	= 1,
+		max_count	= 1,
+		--[[
+		offset_x	= -7,
+		offset_y	= -32,
+		]]--
+		entity 	= "data/entities/props/rainforest_tree_03.xml"
+	},
+	{
+		prob   		= 0.4,
+		min_count	= 1,
+		max_count	= 1,
+		--[[
+		offset_x	= -31,
+		offset_y	= -93,
+		]]--
+		entity 	= "data/entities/props/rainforest_tree_04.xml"
+	},
+	{
+		prob   		= 0.4,
+		min_count	= 1,
+		max_count	= 1,
+		--[[
+		offset_x	= -24,
+		offset_y	= -84,
+		]]--
+		entity 	= "data/entities/props/rainforest_tree_05.xml"
+	},
+	{
+		prob   		= 0.4,
+		min_count	= 1,
+		max_count	= 1,
+		--[[
+		offset_x	= -3,
+		offset_y	= -84,
+		]]--
+		entity 	= "data/entities/props/rainforest_tree_06.xml"
+	},
+}
+
 -- actual functions that get called from the wang generator
 
 function init(x, y, w, h)
@@ -896,6 +966,10 @@ end
 
 function spawn_dragonspot(x, y)
 	EntityLoad( "data/entities/buildings/dragonspot.xml", x, y )
+end
+
+function spawn_tree(x, y)
+	spawn(g_trees,x+5,y+5)
 end
 
 function spawn_root_grower(x, y)

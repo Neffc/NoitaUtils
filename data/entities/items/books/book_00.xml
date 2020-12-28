@@ -1,4 +1,4 @@
-<Entity tags="tablet">
+<Entity tags="tablet,normal_tablet">
 	<Base file="data/entities/items/books/base_book.xml">
 		<UIInfoComponent
 			name="$booktitle00"

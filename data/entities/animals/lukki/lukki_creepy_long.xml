@@ -120,10 +120,12 @@
 		>
 		<damage_multipliers
 			melee="2.0"
-			projectile="1.0"
-			explosion="0.5"
-			electricity="1.2"
-			fire="1.2" >
+			projectile="0.5"
+			explosion="0.0"
+			electricity="0.6"
+			ice="0.0"
+			slice="0.0"
+			fire="0.6" >
 		</damage_multipliers>
 	</DamageModelComponent>
 

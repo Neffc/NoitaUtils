@@ -47,7 +47,10 @@
 		slice="0.2"
 		>
 	</damage_by_type>
-    <config_explosion>
+    <config_explosion
+		damage="0"
+		explosion_radius="1"
+		>
     </config_explosion>
   </ProjectileComponent>
   

@@ -1,6 +1,8 @@
 dofile_once("data/scripts/gun/procedural/gun_action_utils.lua")
 
-STACKABLE_DEFAULT = true
+STACKABLE_YES = true
+STACKABLE_NO = false
+
 STACKABLE_MAX_AMOUNT = true --this is left for mod backwards compatibility
 
 perk_list =
@@ -15,7 +17,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/critical_hit.png",
 		perk_icon = "data/items_gfx/perks/critical_hit.png",
 		game_effect = "CRITICAL_HIT_BOOST",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 		usable_by_enemies = true,
 	},
 	{
@@ -25,6 +27,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/breath_underwater.png",
 		perk_icon = "data/items_gfx/perks/breath_underwater.png",
 		game_effect = "BREATH_UNDERWATER",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 	},
 	-- gold / money related
@@ -35,7 +38,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/extra_money.png",
 		perk_icon = "data/items_gfx/perks/extra_money.png",
 		game_effect = "EXTRA_MONEY",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 	},
 	{
 		id = "EXTRA_MONEY_TRICK_KILL",
@@ -44,7 +47,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/extra_money_trick_kill.png",
 		perk_icon = "data/items_gfx/perks/extra_money_trick_kill.png",
 		game_effect = "EXTRA_MONEY_TRICK_KILL",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 	},
 	{
 		-- Gold nuggets never go away
@@ -53,6 +56,7 @@ perk_list =
 		ui_description = "$perkdesc_gold_is_forever",
 		ui_icon = "data/ui_gfx/perk_icons/gold_is_forever.png",
 		perk_icon = "data/items_gfx/perks/gold_is_forever.png",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			-- TODO trick gold, drops blood gold which gives back hp+3
 			local world_entity_id = GameGetWorldStateEntity()
@@ -70,6 +74,7 @@ perk_list =
 		ui_description = "$perkdesc_trick_blood_money",
 		ui_icon = "data/ui_gfx/perk_icons/trick_blood_money.png",
 		perk_icon = "data/items_gfx/perks/trick_blood_money.png",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			-- TODO trick gold, drops blood gold which gives back hp+3
 			local world_entity_id = GameGetWorldStateEntity()
@@ -87,6 +92,7 @@ perk_list =
 		ui_description = "$perkdesc_exploding_gold",
 		ui_icon = "data/ui_gfx/perk_icons/exploding_gold.png",
 		perk_icon = "data/items_gfx/perks/exploding_gold.png",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			GameAddFlagRun( "exploding_gold" )
 		end,
@@ -99,7 +105,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/hover_boost.png",
 		perk_icon = "data/items_gfx/perks/hover_boost.png",
 		game_effect = "HOVER_BOOST",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 	},
 	{
 		id = "FASTER_LEVITATION",
@@ -108,7 +114,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/faster_levitation.png",
 		perk_icon = "data/items_gfx/perks/faster_levitation.png",
 		game_effect = "FASTER_LEVITATION",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 
 			local models = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
@@ -128,7 +134,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/movement_faster.png",
 		perk_icon = "data/items_gfx/perks/movement_faster.png",
 		game_effect = "MOVEMENT_FASTER",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 		usable_by_enemies = true,
 	},
 	{
@@ -137,7 +143,8 @@ perk_list =
 		ui_description = "$perkdesc_low_gravity",
 		ui_icon = "data/ui_gfx/perk_icons/low_gravity.png",
 		perk_icon = "data/items_gfx/perks/low_gravity.png",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local models = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
@@ -174,7 +181,8 @@ perk_list =
 		ui_description = "$perkdesc_high_gravity",
 		ui_icon = "data/ui_gfx/perk_icons/high_gravity.png",
 		perk_icon = "data/items_gfx/perks/high_gravity.png",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 
@@ -212,7 +220,8 @@ perk_list =
 		ui_description = "$perkdesc_speed_diver",
 		ui_icon = "data/ui_gfx/perk_icons/speed_diver.png",
 		perk_icon = "data/items_gfx/perks/speed_diver.png",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
@@ -243,7 +252,7 @@ perk_list =
 		ui_description = "$perkdesc_strong_kick",
 		ui_icon = "data/ui_gfx/perk_icons/strong_kick.png",
 		perk_icon = "data/items_gfx/perks/strong_kick.png",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		 
 			local models = EntityGetComponent( entity_who_picked, "KickComponent" )
@@ -279,6 +288,7 @@ perk_list =
 		ui_description = "$perkdesc_telekinesis",
 		ui_icon = "data/ui_gfx/perk_icons/telekinesis.png",
 		perk_icon = "data/items_gfx/perks/telekinesis.png",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			EntityLoadToEntity( "data/entities/misc/perk_telekinesis.xml", entity_who_picked )
 			-- component_write( EntityGetFirstComponent( entity_who_picked, "KickComponent" ), { can_kick = false } )
@@ -305,6 +315,8 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/repelling_cape.png",
 		perk_icon = "data/items_gfx/perks/repelling_cape.png",
 		game_effect = "STAINS_DROP_FASTER",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 	},
 	{
@@ -313,6 +325,7 @@ perk_list =
 		ui_description = "$perkdesc_exploding_corpses",
 		ui_icon = "data/ui_gfx/perk_icons/exploding_corpses.png",
 		perk_icon = "data/items_gfx/perks/exploding_corpses.png",
+		stackable = STACKABLE_NO,
 		game_effect = "EXPLODING_CORPSE_SHOTS",
 	},
 	{
@@ -322,6 +335,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/saving_grace.png",
 		perk_icon = "data/items_gfx/perks/saving_grace.png",
 		game_effect = "SAVING_GRACE",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 	},
 	{
@@ -331,6 +345,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/invisibility.png",
 		perk_icon = "data/items_gfx/perks/invisibility.png",
 		game_effect = "INVISIBILITY",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 	},
 	{
@@ -340,7 +355,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/global_gore.png",
 		perk_icon = "data/items_gfx/perks/global_gore.png",
 		game_effect = "GLOBAL_GORE",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 	},
 	{
 		id = "REMOVE_FOG_OF_WAR",
@@ -349,6 +364,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/remove_fog_of_war.png",
 		perk_icon = "data/items_gfx/perks/remove_fog_of_war.png",
 		game_effect = "REMOVE_FOG_OF_WAR",
+		stackable = STACKABLE_NO,
 	},
 	{
 		id = "LEVITATION_TRAIL",
@@ -356,6 +372,8 @@ perk_list =
 		ui_description = "$perkdesc_levitation_trail",
 		ui_icon = "data/ui_gfx/perk_icons/levitation_trail.png",
 		perk_icon = "data/items_gfx/perks/levitation_trail.png",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
 			{
@@ -392,6 +410,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/vampirism.png",
 		perk_icon = "data/items_gfx/perks/vampirism.png",
 		game_effect = "HEALING_BLOOD",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 
 			local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
@@ -415,10 +434,9 @@ perk_list =
 		ui_description = "$perkdesc_extra_hp",
 		ui_icon = "data/ui_gfx/perk_icons/extra_hp.png",
 		perk_icon = "data/items_gfx/perks/extra_hp.png",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
-
 			local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
 			if( damagemodels ~= nil ) then
 				for i,damagemodel in ipairs(damagemodels) do
@@ -478,13 +496,20 @@ perk_list =
 		ui_description = "$perkdesc_hearts_more_extra_hp",
 		ui_icon = "data/ui_gfx/perk_icons/hearts_more_extra_hp.png",
 		perk_icon = "data/items_gfx/perks/hearts_more_extra_hp.png",
+		stackable = STACKABLE_YES,
+		stackable_maximum = 9,
+		stackable_is_rare = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			-- TODO heart containers give 2x more health
-			EntityAddComponent( entity_who_picked, "VariableStorageComponent", 
-			{ 
-				name = "hearts_more_extra_hp",
-				value_int = 2,
-			} )
+			local heart_multiplier = tonumber( GlobalsGetValue( "HEARTS_MORE_EXTRA_HP_MULTIPLIER", "1" ) )
+			
+			if ( heart_multiplier < 2.0 ) then
+				heart_multiplier = heart_multiplier + 1.0
+			elseif ( heart_multiplier < 4 ) then
+				heart_multiplier = heart_multiplier + 0.25
+			end
+			
+			GlobalsSetValue( "HEARTS_MORE_EXTRA_HP_MULTIPLIER", tostring( heart_multiplier ) )
 		end,
 	},
 	{
@@ -494,6 +519,9 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/glass_cannon.png",
 		perk_icon = "data/items_gfx/perks/glass_cannon.png",
 		game_effect = "DAMAGE_MULTIPLIER",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
+		stackable_maximum = 2,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
@@ -537,6 +565,8 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/low_hp_damage_boost.png",
 		perk_icon = "data/items_gfx/perks/low_hp_damage_boost.png",
 		game_effect = "LOW_HP_DAMAGE_BOOST",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 		func_enemy = function( entity_perk_item, entity_who_picked )
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
@@ -553,6 +583,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/respawn.png",
 		perk_icon = "data/items_gfx/perks/respawn.png",
 		game_effect = "RESPAWN",
+		stackable = STACKABLE_NO,
 	},
 
 	{
@@ -562,6 +593,8 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/worm_attractor.png",
 		perk_icon = "data/items_gfx/perks/worm_attractor.png",
 		game_effect = "WORM_ATTRACTOR",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 	},
 
@@ -572,6 +605,8 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/worm_detractor.png",
 		perk_icon = "data/items_gfx/perks/worm_detractor.png",
 		game_effect = "WORM_DETRACTOR",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 	},
 	{
@@ -580,6 +615,7 @@ perk_list =
 		ui_description = "$perkdesc_radar_enemy",
 		ui_icon = "data/ui_gfx/perk_icons/radar_enemy.png",
 		perk_icon = "data/items_gfx/perks/radar_enemy.png",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
@@ -595,11 +631,45 @@ perk_list =
 		ui_description = "$perkdesc_radar_wand",
 		ui_icon = "data/ui_gfx/perk_icons/radar_wand.png",
 		perk_icon = "data/items_gfx/perks/radar_wand.png",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
 			{ 
 				script_source_file = "data/scripts/perks/radar_wand.lua",
+				execute_every_n_frame = "1",
+			} )
+		end,
+	},
+	{
+		id = "ITEM_RADAR",
+		ui_name = "$perk_radar_item",
+		ui_description = "$perkdesc_radar_item",
+		ui_icon = "data/ui_gfx/perk_icons/radar_item.png",
+		perk_icon = "data/items_gfx/perks/radar_item.png",
+		stackable = STACKABLE_NO,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+		
+			EntityAddComponent( entity_who_picked, "LuaComponent", 
+			{ 
+				script_source_file = "data/scripts/perks/radar_item.lua",
+				execute_every_n_frame = "1",
+			} )
+		end,
+	},
+	{
+		id = "MOON_RADAR",
+		ui_name = "$perk_radar_moon",
+		ui_description = "$perkdesc_radar_moon",
+		ui_icon = "data/ui_gfx/perk_icons/radar_moon.png",
+		perk_icon = "data/items_gfx/perks/radar_moon.png",
+		not_in_default_perk_pool = true,
+		stackable = STACKABLE_NO,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+		
+			EntityAddComponent( entity_who_picked, "LuaComponent", 
+			{ 
+				script_source_file = "data/scripts/perks/radar_moon.lua",
 				execute_every_n_frame = "1",
 			} )
 		end,
@@ -612,6 +682,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/protection_fire.png",
 		perk_icon = "data/items_gfx/perks/protection_fire.png",
 		game_effect = "PROTECTION_FIRE",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 	},
 	{
@@ -621,6 +692,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/protection_radioactivity.png",
 		perk_icon = "data/items_gfx/perks/protection_radioactivity.png",
 		game_effect = "PROTECTION_RADIOACTIVITY",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 	},
 	{
@@ -630,6 +702,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/protection_explosion.png",
 		perk_icon = "data/items_gfx/perks/protection_explosion.png",
 		game_effect = "PROTECTION_EXPLOSION",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 	},
 	{
@@ -639,6 +712,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/protection_melee.png",
 		perk_icon = "data/items_gfx/perks/protection_melee.png",
 		game_effect = "PROTECTION_MELEE",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 	},
 	{
@@ -648,6 +722,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/protection_electricity.png",
 		perk_icon = "data/items_gfx/perks/protection_electricity.png",
 		game_effect = "PROTECTION_ELECTRICITY",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 	},
 	--[[
@@ -670,6 +745,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/teleportitis.png",
 		perk_icon = "data/items_gfx/perks/teleportitis.png",
 		game_effect = "TELEPORTITIS",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 	},
 	{
@@ -678,6 +754,7 @@ perk_list =
 		ui_description = "$perkdesc_teleportitis_dodge",
 		ui_icon = "data/ui_gfx/perk_icons/teleportitis_dodge.png",
 		perk_icon = "data/items_gfx/perks/teleportitis_dodge.png",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local x,y = EntityGetTransform( entity_who_picked )
 			local child_id = EntityLoad( "data/entities/misc/perks/teleportitis_dodge.xml", x, y )
@@ -691,6 +768,8 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/stainless_armour.png",
 		perk_icon = "data/items_gfx/perks/stainless_armour.png",
 		game_effect = "STAINLESS_ARMOUR",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 	},
 
@@ -702,6 +781,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/edit_wands_everywhere.png",
 		perk_icon = "data/items_gfx/perks/edit_wands_everywhere.png",
 		game_effect = "EDIT_WANDS_EVERYWHERE",
+		stackable = STACKABLE_NO,
 	},
 	{
 		id = "NO_WAND_EDITING",
@@ -710,6 +790,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/no_wand_editing.png",
 		perk_icon = "data/items_gfx/perks/no_wand_editing.png",
 		game_effect = "NO_WAND_EDITING",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
 			--[[
@@ -739,6 +820,8 @@ perk_list =
 		ui_description = "$perkdesc_wand_experimenter",
 		ui_icon = "data/ui_gfx/perk_icons/wand_experimenter.png",
 		perk_icon = "data/items_gfx/perks/wand_experimenter.png",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
@@ -756,6 +839,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/ability_actions_materialized.png",
 		perk_icon = "data/items_gfx/perks/ability_actions_materialized.png",
 		game_effect = "ABILITY_ACTIONS_MATERIALIZED",
+		stackable = STACKABLE_NO,
 	},
 	{
 		id = "PROJECTILE_HOMING",
@@ -764,6 +848,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/projectile_homing.png",
 		perk_icon = "data/items_gfx/perks/projectile_homing.png",
 		game_effect = "PROJECTILE_HOMING",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 		func_enemy = function( entity_perk_item, entity_who_picked )
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
@@ -779,6 +864,7 @@ perk_list =
 		ui_description = "$perkdesc_projectile_homing_shooter",
 		ui_icon = "data/ui_gfx/perk_icons/projectile_homing_shooter.png",
 		perk_icon = "data/items_gfx/perks/projectile_homing_shooter.png",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
@@ -835,6 +921,7 @@ perk_list =
 		ui_description = "$perkdesc_unlimited_spells",
 		ui_icon = "data/ui_gfx/perk_icons/unlimited_spells.png",
 		perk_icon = "data/items_gfx/perks/unlimited_spells.png",
+		stackable = STACKABLE_NO,
 		-- almost all spells of limited use become unlimited
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local world_entity_id = GameGetWorldStateEntity()
@@ -866,6 +953,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/freeze_field.png",
 		perk_icon = "data/items_gfx/perks/freeze_field.png",
 		game_effect = "PROTECTION_FIRE",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
@@ -881,6 +969,7 @@ perk_list =
 		ui_description = "$perkdesc_gas_fire",
 		ui_icon = "data/ui_gfx/perk_icons/fire_gas.png",
 		perk_icon = "data/items_gfx/perks/fire_gas.png",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
@@ -896,13 +985,14 @@ perk_list =
 		ui_description = "$perkdesc_dissolve_powders",
 		ui_icon = "data/ui_gfx/perk_icons/dissolve_powders.png",
 		perk_icon = "data/items_gfx/perks/dissolve_powders.png",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
 			local x,y = EntityGetTransform( entity_who_picked )
 			local child_id = EntityLoad( "data/entities/misc/perks/dissolve_powders.xml", x, y )
 			EntityAddChild( entity_who_picked, child_id )
-				
+			
 		end,
 	},
 	{
@@ -912,6 +1002,8 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/slime_blood.png",
 		perk_icon = "data/items_gfx/perks/slime_blood.png",
 		game_effect = "NO_SLIME_SLOWDOWN",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
@@ -939,6 +1031,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/oil_blood.png",
 		perk_icon = "data/items_gfx/perks/oil_blood.png",
 		game_effect = "PROTECTION_FIRE",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
@@ -952,7 +1045,6 @@ perk_list =
 					ComponentSetValue( damagemodel, "blood_sprite_large", "data/particles/bloodsplatters/bloodsplatter_oil_$[1-3].xml" )
 				end
 			end
-			
 		end,
 	},
 	{
@@ -961,8 +1053,46 @@ perk_list =
 		ui_description = "$perkdesc_shield",
 		ui_icon = "data/ui_gfx/perk_icons/shield.png",
 		perk_icon = "data/items_gfx/perks/shield.png",
+		stackable = STACKABLE_YES,
+		stackable_how_often_reappears = 10,
+		stackable_maximum = 5,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
+			local x,y = EntityGetTransform( entity_who_picked )
+			local child_id = EntityLoad( "data/entities/misc/perks/shield.xml", x, y )
+			
+			local shield_num = tonumber( GlobalsGetValue( "PERK_SHIELD_COUNT", "0" ) )
+			local shield_radius = 10 + shield_num * 2.5
+			local charge_speed = math.max( 0.22 - shield_num * 0.05, 0.02 )
+			shield_num = shield_num + 1
+			GlobalsSetValue( "PERK_SHIELD_COUNT", tostring( shield_num ) )
+			
+			local comps = EntityGetComponent( child_id, "EnergyShieldComponent" )
+			if( comps ~= nil ) then
+				for i,comp in ipairs( comps ) do
+					ComponentSetValue2( comp, "radius", shield_radius )
+					ComponentSetValue2( comp, "recharge_speed", charge_speed )
+				end
+			end
+			
+			comps = EntityGetComponent( child_id, "ParticleEmitterComponent" )
+			if( comps ~= nil ) then
+				for i,comp in ipairs( comps ) do
+					local minradius,maxradius = ComponentGetValue2( comp, "area_circle_radius" )
+					
+					if ( minradius ~= nil ) and ( maxradius ~= nil ) then
+						if ( minradius == 0 ) then
+							ComponentSetValue2( comp, "area_circle_radius", 0, shield_radius )
+						elseif ( minradius == 10 ) then
+							ComponentSetValue2( comp, "area_circle_radius", shield_radius, shield_radius )
+						end
+					end
+				end
+			end
+			
+			EntityAddChild( entity_who_picked, child_id )
+		end,
+		func_enemy = function( entity_perk_item, entity_who_picked )
 			local x,y = EntityGetTransform( entity_who_picked )
 			local child_id = EntityLoad( "data/entities/misc/perks/shield.xml", x, y )
 			EntityAddChild( entity_who_picked, child_id )
@@ -974,6 +1104,8 @@ perk_list =
 		ui_description = "$perkdesc_revenge_explosion",
 		ui_icon = "data/ui_gfx/perk_icons/revenge_explosion.png",
 		perk_icon = "data/items_gfx/perks/revenge_explosion.png",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
@@ -999,6 +1131,8 @@ perk_list =
 		ui_description = "$perkdesc_revenge_tentacle",
 		ui_icon = "data/ui_gfx/perk_icons/revenge_tentacle.png",
 		perk_icon = "data/items_gfx/perks/revenge_tentacle.png",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
@@ -1019,11 +1153,60 @@ perk_list =
 		end,
 	},
 	{
+		id = "REVENGE_RATS",
+		ui_name = "$perk_revenge_rats",
+		ui_description = "$perkdesc_revenge_rats",
+		ui_icon = "data/ui_gfx/perk_icons/revenge_rats.png",
+		perk_icon = "data/items_gfx/perks/revenge_rats.png",
+		stackable = STACKABLE_NO,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+		
+			EntityAddComponent( entity_who_picked, "LuaComponent", 
+			{ 
+				script_damage_received = "data/scripts/perks/revenge_rats.lua",
+				execute_every_n_frame = "-1",
+			} )
+			
+			local world_entity_id = GameGetWorldStateEntity()
+			if ( world_entity_id ~= nil ) then
+				component_write( EntityGetFirstComponent( world_entity_id, "WorldStateComponent" ), { perk_rats_player_friendly = true, } )
+			end
+			
+			local rattiness = tonumber( GlobalsGetValue( "PLAYER_RATTINESS_LEVEL", "0" ) )
+			rattiness = rattiness + 1
+			GlobalsSetValue( "PLAYER_RATTINESS_LEVEL", tostring( rattiness ) )
+			
+			if ( rattiness == 3 ) then
+				child_id = EntityLoad( "data/entities/verlet_chains/tail/verlet_tail.xml", x, y )
+				EntityAddChild( entity_who_picked, child_id )
+				
+				local platformingcomponents = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
+				if( platformingcomponents ~= nil ) then
+					for i,component in ipairs(platformingcomponents) do
+						local run_speed = tonumber( ComponentGetMetaCustom( component, "run_velocity" ) ) * 1.15
+						local vel_x = math.abs( tonumber( ComponentGetMetaCustom( component, "velocity_max_x" ) ) ) * 1.15
+						
+						local vel_x_min = 0 - vel_x
+						local vel_x_max = vel_x
+						
+						ComponentSetMetaCustom( component, "run_velocity", run_speed )
+						ComponentSetMetaCustom( component, "velocity_min_x", vel_x_min )
+						ComponentSetMetaCustom( component, "velocity_max_x", vel_x_max )
+					end
+				end
+			end
+
+			--GenomeSetHerdId( entity_who_picked, "rat" )
+		end,
+	},
+	{
 		id = "REVENGE_BULLET",
 		ui_name = "$perk_revenge_bullet",
 		ui_description = "$perkdesc_revenge_bullet",
 		ui_icon = "data/ui_gfx/perk_icons/revenge_bullet.png",
 		perk_icon = "data/items_gfx/perks/revenge_bullet.png",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
@@ -1053,6 +1236,8 @@ perk_list =
 		ui_description = "$perkdesc_attack_foot",
 		ui_icon = "data/ui_gfx/perk_icons/attack_foot.png",
 		perk_icon = "data/items_gfx/perks/attack_foot.png",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
@@ -1089,6 +1274,8 @@ perk_list =
 		ui_description = "$perkdesc_leggy_feet",
 		ui_icon = "data/ui_gfx/perk_icons/leggy_feet.png",
 		perk_icon = "data/items_gfx/perks/leggy_feet.png",
+		stackable = STACKABLE_YES, -- Arvi: these variables don't really make sense for this perk but putting them in anyway
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 		not_in_default_perk_pool = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
@@ -1130,6 +1317,7 @@ perk_list =
 		ui_description = "$perkdesc_plague_rats",
 		ui_icon = "data/ui_gfx/perk_icons/plague_rats.png",
 		perk_icon = "data/items_gfx/perks/plague_rats.png",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
@@ -1142,6 +1330,76 @@ perk_list =
 			if ( world_entity_id ~= nil ) then
 				component_write( EntityGetFirstComponent( world_entity_id, "WorldStateComponent" ), { perk_rats_player_friendly = true, } )
 			end
+			
+			local rattiness = tonumber( GlobalsGetValue( "PLAYER_RATTINESS_LEVEL", "0" ) )
+			rattiness = rattiness + 1
+			GlobalsSetValue( "PLAYER_RATTINESS_LEVEL", tostring( rattiness ) )
+			
+			if ( rattiness == 3 ) then
+				child_id = EntityLoad( "data/entities/verlet_chains/tail/verlet_tail.xml", x, y )
+				EntityAddChild( entity_who_picked, child_id )
+				
+				local platformingcomponents = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
+				if( platformingcomponents ~= nil ) then
+					for i,component in ipairs(platformingcomponents) do
+						local run_speed = tonumber( ComponentGetMetaCustom( component, "run_velocity" ) ) * 1.15
+						local vel_x = math.abs( tonumber( ComponentGetMetaCustom( component, "velocity_max_x" ) ) ) * 1.15
+						
+						local vel_x_min = 0 - vel_x
+						local vel_x_max = vel_x
+						
+						ComponentSetMetaCustom( component, "run_velocity", run_speed )
+						ComponentSetMetaCustom( component, "velocity_min_x", vel_x_min )
+						ComponentSetMetaCustom( component, "velocity_max_x", vel_x_max )
+					end
+				end
+			end
+
+			--GenomeSetHerdId( entity_who_picked, "rat" )
+		end,
+	},
+	{
+		id = "VOMIT_RATS",
+		ui_name = "$perk_vomit_rats",
+		ui_description = "$perkdesc_vomit_rats",
+		ui_icon = "data/ui_gfx/perk_icons/vomit_rats.png",
+		perk_icon = "data/items_gfx/perks/vomit_rats.png",
+		stackable = STACKABLE_NO,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			local x,y = EntityGetTransform( entity_perk_item )
+			local child_id = EntityLoad( "data/entities/misc/perks/vomit_rats.xml", x, y )
+			EntityAddChild( entity_who_picked, child_id )
+			
+			EntityLoad( "data/entities/items/pickup/potion_vomit.xml", x, y )
+			
+			local world_entity_id = GameGetWorldStateEntity()
+			if ( world_entity_id ~= nil ) then
+				component_write( EntityGetFirstComponent( world_entity_id, "WorldStateComponent" ), { perk_rats_player_friendly = true, } )
+			end
+			
+			local rattiness = tonumber( GlobalsGetValue( "PLAYER_RATTINESS_LEVEL", "0" ) )
+			rattiness = rattiness + 1
+			GlobalsSetValue( "PLAYER_RATTINESS_LEVEL", tostring( rattiness ) )
+			
+			if ( rattiness == 3 ) then
+				child_id = EntityLoad( "data/entities/verlet_chains/tail/verlet_tail.xml", x, y )
+				EntityAddChild( entity_who_picked, child_id )
+				
+				local platformingcomponents = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
+				if( platformingcomponents ~= nil ) then
+					for i,component in ipairs(platformingcomponents) do
+						local run_speed = tonumber( ComponentGetMetaCustom( component, "run_velocity" ) ) * 1.15
+						local vel_x = math.abs( tonumber( ComponentGetMetaCustom( component, "velocity_max_x" ) ) ) * 1.15
+						
+						local vel_x_min = 0 - vel_x
+						local vel_x_max = vel_x
+						
+						ComponentSetMetaCustom( component, "run_velocity", run_speed )
+						ComponentSetMetaCustom( component, "velocity_min_x", vel_x_min )
+						ComponentSetMetaCustom( component, "velocity_max_x", vel_x_max )
+					end
+				end
+			end
 
 			--GenomeSetHerdId( entity_who_picked, "rat" )
 		end,
@@ -1152,6 +1410,7 @@ perk_list =
 		ui_description = "$perkdesc_worm_smaller_holes",
 		ui_icon = "data/ui_gfx/perk_icons/worm_smaller_holes.png",
 		perk_icon = "data/items_gfx/perks/worm_smaller_holes.png",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
@@ -1186,14 +1445,14 @@ perk_list =
 		ui_description = "$perkdesc_projectile_repulsion",
 		ui_icon = "data/ui_gfx/perk_icons/projectile_repulsion.png",
 		perk_icon = "data/items_gfx/perks/projectile_repulsion.png",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
-		
-			EntityAddComponent( entity_who_picked, "LuaComponent", 
-			{ 
-				script_source_file = "data/scripts/perks/projectile_repulsion.lua",
-				execute_every_n_frame = "2",
-			} )
+			
+			local x,y = EntityGetTransform( entity_who_picked )
+			local child_id = EntityLoad( "data/entities/misc/perks/projectile_repulsion_field.xml", x, y )
+			EntityAddChild( entity_who_picked, child_id )
 			
 			local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
 			if( damagemodels ~= nil ) then
@@ -1211,6 +1470,8 @@ perk_list =
 		ui_description = "$perkdesc_projectile_slow_field",
 		ui_icon = "data/ui_gfx/perk_icons/projectile_slow_field.png",
 		perk_icon = "data/items_gfx/perks/projectile_slow_field.png",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local x,y = EntityGetTransform( entity_who_picked )
@@ -1224,6 +1485,8 @@ perk_list =
 		ui_description = "$perkdesc_projectile_repulsion_sector",
 		ui_icon = "data/ui_gfx/perk_icons/projectile_repulsion_sector.png",
 		perk_icon = "data/items_gfx/perks/projectile_repulsion_sector.png",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local x,y = EntityGetTransform( entity_who_picked )
 			local child_id = EntityLoad( "data/entities/misc/perks/projectile_repulsion_sector.xml", x, y )
@@ -1236,6 +1499,7 @@ perk_list =
 		ui_description = "$perkdesc_projectile_eater_sector",
 		ui_icon = "data/ui_gfx/perk_icons/projectile_eater_sector.png",
 		perk_icon = "data/items_gfx/perks/projectile_eater_sector.png",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local x,y = EntityGetTransform( entity_who_picked )
 			local child_id = EntityLoad( "data/entities/misc/perks/projectile_eater_sector.xml", x, y )
@@ -1249,7 +1513,8 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/orbit.png",
 		perk_icon = "data/items_gfx/perks/orbit.png",
 		usable_by_enemies = true,
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
+		stackable_how_often_reappears = 10,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
@@ -1278,7 +1543,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/angry_ghost.png",
 		perk_icon = "data/items_gfx/perks/angry_ghost.png",
 		usable_by_enemies = true,
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local x,y = EntityGetTransform( entity_who_picked )
 			local child_id = EntityLoad( "data/entities/misc/perks/angry_ghost.xml", x, y )
@@ -1291,6 +1556,7 @@ perk_list =
 		ui_description = "$perkdesc_homunculus",
 		ui_icon = "data/ui_gfx/perk_icons/homunculus.png",
 		perk_icon = "data/items_gfx/perks/homunculus.png",
+		stackable = STACKABLE_YES,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local x,y = EntityGetTransform( entity_who_picked )
 			local child_id = EntityLoad( "data/entities/misc/perks/homunculus_spawner.xml", x, y )
@@ -1304,6 +1570,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/electricity.png",
 		perk_icon = "data/items_gfx/perks/electricity.png",
 		game_effect = "PROTECTION_ELECTRICITY",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
@@ -1320,7 +1587,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/attract_items.png",
 		perk_icon = "data/items_gfx/perks/attract_items.png",
 		usable_by_enemies = true,
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
 			{ 
@@ -1335,6 +1602,8 @@ perk_list =
 		ui_description = "$perkdesc_extra_knockback",
 		ui_icon = "data/ui_gfx/perk_icons/extra_knockback.png",
 		perk_icon = "data/items_gfx/perks/extra_knockback.png",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
@@ -1356,6 +1625,8 @@ perk_list =
 		ui_description = "$perkdesc_lower_spread",
 		ui_icon = "data/ui_gfx/perk_icons/lower_spread.png",
 		perk_icon = "data/items_gfx/perks/lower_spread.png",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
@@ -1377,6 +1648,7 @@ perk_list =
 		ui_description = "$perkdesc_low_recoil",
 		ui_icon = "data/ui_gfx/perk_icons/low_recoil.png",
 		perk_icon = "data/items_gfx/perks/low_recoil.png",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
 			{ 
@@ -1390,6 +1662,7 @@ perk_list =
 		ui_description = "$perkdesc_bounce",
 		ui_icon = "data/ui_gfx/perk_icons/bounce.png",
 		perk_icon = "data/items_gfx/perks/bounce.png",
+		stackable = STACKABLE_NO,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
@@ -1412,7 +1685,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/fast_projectiles.png",
 		perk_icon = "data/items_gfx/perks/fast_projectiles.png",
 		usable_by_enemies = true,
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
 			{ 
@@ -1433,7 +1706,7 @@ perk_list =
 		ui_description = "$perkdesc_always_cast",
 		ui_icon = "data/ui_gfx/perk_icons/always_cast.png",
 		perk_icon = "data/items_gfx/perks/always_cast.png",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 
 			local good_cards = { "DAMAGE", "CRITICAL_HIT", "HOMING", "SPEED", "ACID_TRAIL", "SINEWAVE" }
@@ -1448,13 +1721,27 @@ perk_list =
 			local level = 6
 
 			if( r <= 50 ) then
-				local p = Random(1,100) 
+				local p = Random(1,100)
+				
+				--[[
+				Arvi (9.12.2020): DRAW_MANY cards were causing odd behaviour as always casts, so testing a different set of always_cast cards
 				if( p <= 80 ) then
 					card = GetRandomActionWithType( x, y, level, ACTION_TYPE_MODIFIER, 666 )
 				elseif( p <= 95 ) then
 					card = GetRandomActionWithType( x, y, level, ACTION_TYPE_DRAW_MANY, 666 )
 				else 
 					card = GetRandomActionWithType( x, y, level, ACTION_TYPE_PROJECTILE, 666 )
+				end
+				]]--
+				
+				if( p <= 86 ) then
+					card = GetRandomActionWithType( x, y, level, ACTION_TYPE_MODIFIER, 666 )
+				elseif( p <= 93 ) then
+					card = GetRandomActionWithType( x, y, level, ACTION_TYPE_STATIC_PROJECTILE, 666 )
+				elseif ( p < 100 ) then
+					card = GetRandomActionWithType( x, y, level, ACTION_TYPE_PROJECTILE, 666 )
+				else
+					card = GetRandomActionWithType( x, y, level, ACTION_TYPE_UTILITY, 666 )
 				end
 			end
 
@@ -1484,7 +1771,7 @@ perk_list =
 		ui_description = "$perkdesc_extra_mana",
 		ui_icon = "data/ui_gfx/perk_icons/extra_mana.png",
 		perk_icon = "data/items_gfx/perks/extra_mana.png",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local wand = find_the_wand_held( entity_who_picked )
 			local x,y = EntityGetTransform( entity_who_picked )
@@ -1540,6 +1827,7 @@ perk_list =
 		ui_description = "$perkdesc_no_more_shuffle",
 		ui_icon = "data/ui_gfx/perk_icons/no_more_shuffle.png",
 		perk_icon = "data/items_gfx/perks/no_more_shuffle.png",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 
 			GlobalsSetValue( "PERK_NO_MORE_SHUFFLE_WANDS", "1" )
@@ -1567,6 +1855,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/no_player_knockback.png",
 		perk_icon = "data/items_gfx/perks/no_player_knockback.png",
 		game_effect = "KNOCKBACK_IMMUNITY",
+		stackable = STACKABLE_NO,
 	},
 	{
 		id = "DUPLICATE_PROJECTILE",
@@ -1574,7 +1863,7 @@ perk_list =
 		ui_description = "$perkdesc_spell_duplication",
 		ui_icon = "data/ui_gfx/perk_icons/duplicate_projectile.png",
 		perk_icon = "data/items_gfx/perks/duplicate_projectile.png",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
@@ -1617,7 +1906,7 @@ perk_list =
 		ui_description = "$perkdesc_faster_wands",
 		ui_icon = "data/ui_gfx/perk_icons/faster_wands.png",
 		perk_icon = "data/items_gfx/perks/faster_wands.png",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local x, y = EntityGetTransform( entity_who_picked )
 			local wands = EntityGetInRadiusWithTag( x, y, 24, "wand" )
@@ -1654,7 +1943,7 @@ perk_list =
 		ui_description = "$perkdesc_extra_slots",
 		ui_icon = "data/ui_gfx/perk_icons/extra_slots.png",
 		perk_icon = "data/items_gfx/perks/extra_slots.png",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local x, y = EntityGetTransform( entity_who_picked )
 			local wands = EntityGetInRadiusWithTag( x, y, 24, "wand" )
@@ -1669,14 +1958,50 @@ perk_list =
 					if( models ~= nil ) then
 						for j,model in ipairs(models) do
 							local deck_capacity = tonumber( ComponentObjectGetValue( model, "gun_config", "deck_capacity" ) )
+							local deck_capacity2 = EntityGetWandCapacity( entity_id )
 							
-							deck_capacity = math.min( deck_capacity + Random( 1, 3 ), math.max( 25, deck_capacity ) )
+							local always_casts = deck_capacity - deck_capacity2
+							
+							deck_capacity = math.min( deck_capacity + Random( 1, 3 ), math.max( 25 + always_casts, deck_capacity ) )
 							
 							ComponentObjectSetValue( model, "gun_config", "deck_capacity", tostring(deck_capacity) )
 						end
 					end
 				end
 			end
+		end,
+	},
+	{
+		id = "EXTRA_POTION_CAPACITY",
+		ui_name = "$perk_extra_potion_capacity",
+		ui_description = "$perkdesc_extra_potion_capacity",
+		ui_icon = "data/ui_gfx/perk_icons/extra_potion_capacity.png",
+		perk_icon = "data/items_gfx/perks/extra_potion_capacity.png",
+		stackable = STACKABLE_YES,
+		stackable_maximum = 3,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			local capacity = tonumber( GlobalsGetValue( "EXTRA_POTION_CAPACITY_LEVEL", "1000" ) ) or 1000
+			capacity = math.floor( capacity * 1.8 )
+			GlobalsSetValue( "EXTRA_POTION_CAPACITY_LEVEL", tostring( capacity ) )
+		end,
+	},
+	{
+		id = "CONTACT_DAMAGE",
+		ui_name = "$perk_contact_damage",
+		ui_description = "$perkdesc_contact_damage",
+		ui_icon = "data/ui_gfx/perk_icons/contact_damage.png",
+		perk_icon = "data/items_gfx/perks/contact_damage.png",
+		stackable = STACKABLE_NO,
+		usable_by_enemies = true,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			local x,y = EntityGetTransform( entity_who_picked )
+			local child_id = EntityLoad( "data/entities/misc/perks/contact_damage.xml", x, y )
+			EntityAddChild( entity_who_picked, child_id )
+		end,
+		func_enemy = function( entity_perk_item, entity_who_picked )
+			local x,y = EntityGetTransform( entity_who_picked )
+			local child_id = EntityLoad( "data/entities/misc/perks/contact_damage_enemy.xml", x, y )
+			EntityAddChild( entity_who_picked, child_id )
 		end,
 	},
 
@@ -1788,6 +2113,7 @@ perk_list =
 		ui_description = "$perkdesc_extra_perk",
 		ui_icon = "data/ui_gfx/perk_icons/extra_perk.png",
 		perk_icon = "data/items_gfx/perks/extra_perk.png",
+		stackable = STACKABLE_YES,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			-- TODO - this should work - seems to work
 			local perk_count = tonumber( GlobalsGetValue( "TEMPLE_PERK_COUNT", "3" ) )
@@ -1801,6 +2127,9 @@ perk_list =
 		ui_description = "$perkdesc_perks_lottery",
 		ui_icon = "data/ui_gfx/perk_icons/perks_lottery.png",
 		perk_icon = "data/items_gfx/perks/perks_lottery.png",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
+		stackable_maximum = 6,
 		-- when picking up a perk, there's 50% chance less (instead of 100%) of other perks disappearing
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			-- TODO - this should work - seems to work
@@ -1815,6 +2144,8 @@ perk_list =
 		ui_description = "$perkdesc_extra_shop_item",
 		ui_icon = "data/ui_gfx/perk_icons/extra_shop_item.png",
 		perk_icon = "data/items_gfx/perks/extra_shop_item.png",
+		stackable = STACKABLE_YES,
+		stackable_maximum = 5,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			-- TODO: this should work
 			local shop_item_count = tonumber( GlobalsGetValue( "TEMPLE_SHOP_ITEM_COUNT", "5" ) )
@@ -1829,6 +2160,7 @@ perk_list =
 		ui_description = "$perkdesc_genome_more_hatred",
 		ui_icon = "data/ui_gfx/perk_icons/genome_more_hatred.png",
 		perk_icon = "data/items_gfx/perks/genome_more_hatred.png",
+		stackable = STACKABLE_YES,
 		-- enemies hate each other more by 25%
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			-- TODO - impl
@@ -1850,6 +2182,7 @@ perk_list =
 		ui_description = "$perkdesc_genome_more_love",
 		ui_icon = "data/ui_gfx/perk_icons/genome_more_love.png",
 		perk_icon = "data/items_gfx/perks/genome_more_love.png",
+		stackable = STACKABLE_YES,
 		-- enemies love each other more by 25%
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local world_entity_id = GameGetWorldStateEntity()
@@ -1869,6 +2202,7 @@ perk_list =
 		ui_description = "$perkdesc_peace_with_steve",
 		ui_icon = "data/ui_gfx/perk_icons/peace_with_gods.png",
 		perk_icon = "data/items_gfx/perks/peace_with_gods.png",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			GlobalsSetValue( "TEMPLE_PEACE_WITH_GODS", "1" )
 			if( GlobalsGetValue( "TEMPLE_SPAWN_GUARDIAN" ) == "1" ) then
@@ -1890,6 +2224,7 @@ perk_list =
 		ui_description = "$perkdesc_mana_from_kills",
 		ui_icon = "data/ui_gfx/perk_icons/mana_from_kills.png",
 		perk_icon = "data/items_gfx/perks/mana_from_kills.png",
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
@@ -1905,7 +2240,8 @@ perk_list =
 		ui_description = "$perkdesc_laser_aim",
 		ui_icon = "data/ui_gfx/perk_icons/laser_aim.png",
 		perk_icon = "data/items_gfx/perks/laser_aim.png",
-		stackable = false,
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local x,y = EntityGetTransform( entity_who_picked )
 			local child_id = EntityLoad( "data/entities/misc/perks/laser_aim.xml", x, y )
@@ -1923,7 +2259,8 @@ perk_list =
 		ui_description = "$perkdesc_personal_laser",
 		ui_icon = "data/ui_gfx/perk_icons/personal_laser.png",
 		perk_icon = "data/items_gfx/perks/personal_laser.png",
-		stackable = false,
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local x,y = EntityGetTransform( entity_who_picked )
 			local child_id = EntityLoad( "data/entities/misc/perks/personal_laser.xml", x, y )
@@ -1944,7 +2281,7 @@ perk_list =
 		ui_description = "$perkdesc_ingest_projectiles", -- TODO
 		ui_icon = "data/ui_gfx/perk_icons/ingest_projectiles.png",
 		perk_icon = "data/items_gfx/perks/ingest_projectiles.png",
-		stackable = STACKABLE_DEFAULT,
+		stackable = STACKABLE_YES,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
 			{ 
