@@ -1,4 +1,4 @@
-<Entity _tags="death cross">
+<Entity tags="death cross">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

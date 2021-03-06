@@ -1,4 +1,4 @@
-<Entity _tags="lightning">
+<Entity tags="lightning">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

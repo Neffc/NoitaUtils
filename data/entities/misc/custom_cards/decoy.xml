@@ -1,4 +1,4 @@
-<Entity _tags="decoy">
+<Entity tags="decoy">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

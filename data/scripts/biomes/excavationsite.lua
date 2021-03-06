@@ -23,6 +23,7 @@ RegisterSpawnFunction( 0xff70d7a0, "load_gunpowderpool_03" )
 RegisterSpawnFunction( 0xff70d7a1, "load_gunpowderpool_04" )
 RegisterSpawnFunction( 0xff33934c, "spawn_shopitem" )
 RegisterSpawnFunction( 0xffb09016, "spawn_meditation_cube" )
+RegisterSpawnFunction( 0xff00855c, "spawn_receptacle" )
 
 RegisterSpawnFunction( 0xffb1ff99, "spawn_tower_short" )
 RegisterSpawnFunction( 0xff5c8550, "spawn_tower_tall" )
@@ -672,6 +673,13 @@ g_pixel_scene_04_alt =
 		is_unique		= 0
 	},
 	{
+		prob   			= 0.7,
+		material_file 	= "data/biome_impl/excavationsite/receptacle_steam.png",
+		visual_file		= "",
+		background_file	= "data/biome_impl/excavationsite/receptacle_steam_background.png",
+		is_unique		= 0
+	},
+	{
 		prob   			= 0.8,
 		material_file 	= "data/biome_impl/excavationsite/lake_alt.png",
 		visual_file		= "",
@@ -1111,6 +1119,10 @@ function spawn_meditation_cube( x, y )
 		LoadPixelScene( "data/biome_impl/excavationsite/meditation_cube.png", "data/biome_impl/excavationsite/meditation_cube_visual.png", x-20, y-29, "", true )
 		EntityLoad( "data/entities/buildings/teleport_meditation_cube.xml", x, y-70 )
 	end
+end
+
+function spawn_receptacle( x, y )
+	EntityLoad( "data/entities/buildings/receptacle_steam.xml", x, y )
 end
 
 -- Background sprites

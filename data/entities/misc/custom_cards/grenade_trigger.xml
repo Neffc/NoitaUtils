@@ -1,4 +1,4 @@
-<Entity _tags="grenade trigger">
+<Entity tags="grenade trigger">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

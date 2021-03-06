@@ -10,7 +10,12 @@ function spawn_ghost()
 	edit_all_components( entity_ghost, "GhostComponent", function(comp,vars)
 		vars.mEntityHome = entity_id
 	end)
-
+	
+	local comp = EntityGetFirstComponent( entity_id, "VariableStorageComponent", "ghost_id" )
+	
+	if ( comp ~= nil ) then
+		ComponentSetValue2( comp, "value_int", entity_ghost )
+	end
 end
 
 spawn_ghost()

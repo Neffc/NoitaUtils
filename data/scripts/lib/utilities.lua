@@ -440,7 +440,12 @@ function shoot_projectile_from_projectile( who_shot, entity_file, x, y, vel_x, v
 	local entity_id = EntityLoad( entity_file, x, y )
 	local herd_id   = get_herd_id( who_shot )
 
-	GameShootProjectile( who_shot, x, y, x+vel_x, y+vel_y, entity_id )
+	local who_shot_creature = 0
+	edit_component( who_shot, "ProjectileComponent", function(comp,vars)
+		who_shot_creature = ComponentGetValue2( comp, "mWhoShot" )
+	end)
+
+	GameShootProjectile( who_shot_creature, x, y, x+vel_x, y+vel_y, entity_id )
 
 	edit_component( entity_id, "ProjectileComponent", function(comp,vars)
 		vars.mWhoShot       = component_get_value_int( who_shot, "ProjectileComponent", "mWhoShot", 0 )
@@ -669,6 +674,15 @@ end
 
 -----------------------------------------------------------------------------------------
 
+-- interpolates between radian angles
+function rot_lerp(a, b, weight)
+    local pi2 = math.pi * 2
+    local shortest = ((a-b) + math.pi) % pi2 - math.pi
+    return b + (shortest * weight) % pi2
+end
+
+-----------------------------------------------------------------------------------------
+
 function vec_add(x1, y1, x2, y2)
 	x1 = x1 + x2
 	y1 = y1 + y2
@@ -757,7 +771,71 @@ function get_flag_name( text )
 	
 	return result
 end
+
 -----------------------------------------------------------------------------------------
+
+function change_entity_ingame_name( entity_id, new_name, new_description )
+	if ( entity_id ~= nil ) then
+		local uiinfo_comps = EntityGetComponent( entity_id, "UIInfoComponent" )
+		local uiicon_comps = EntityGetComponent( entity_id, "UIIconComponent" )
+		local item_comps = EntityGetComponent( entity_id, "ItemComponent" )
+		local ability_comps = EntityGetComponent( entity_id, "AbilityComponent" )
+		
+		if ( uiinfo_comps ~= nil ) then
+			for i,comp in ipairs( uiinfo_comps ) do
+				if ( new_name ~= nil ) then
+					ComponentSetValue2( comp, "name", new_name )
+				end
+			end
+		end
+		
+		if ( uiicon_comps ~= nil ) then
+			for i,comp in ipairs( uiicon_comps ) do
+				if ( new_name ~= nil ) then
+					ComponentSetValue2( comp, "name", new_name )
+				end
+				
+				if ( new_description ~= nil ) then
+					ComponentSetValue2( comp, "description", new_description )
+				end
+			end
+		end
+		
+		if ( item_comps ~= nil ) then
+			for i,comp in ipairs( item_comps ) do
+				if ( new_name ~= nil ) then
+					ComponentSetValue2( comp, "item_name", new_name )
+				end
+				
+				if ( new_description ~= nil ) then
+					ComponentSetValue2( comp, "ui_description", new_description )
+				end
+			end
+		end
+		
+		if ( ability_comps ~= nil ) then
+			for i,comp in ipairs( ability_comps ) do
+				if ( new_name ~= nil ) then
+					ComponentSetValue2( comp, "ui_name", new_name )
+				end
+			end
+		end
+	end
+end
+
+--
+
+function check_parallel_pos( x )
+	local pw = GetParallelWorldPosition( x, 0 )
+	
+	local mapwidth = BiomeMapGetSize() * 512
+	local half = mapwidth * 0.5
+	
+	local mx = ( x + half ) % mapwidth
+	
+	return pw,mx
+end
+
 -- Used for secrets
 
 alt_notes = {
@@ -778,7 +856,7 @@ orb_list =
 	{8,1},
 	{1,-3},
 	{-9,7},
-	{-10,17},
+	{-8,19},
 	{-18,28},
 	{-20,5},
 	{-1,31},
@@ -799,6 +877,8 @@ function orb_map_update()
 			result = result .. " "
 		end
 	end
+	
+	print( result )
 	
 	GlobalsSetValue( "ORB_MAP_STRING", result )
 end
@@ -887,6 +967,7 @@ GUI_OPTION = {
 	Hack_AllowDuplicateIds = 49,
 
 	ScrollContainer_Smooth = 50,
+	IsExtraDraggable = 51,
 
 	_SnapToCenter = 62,
 	Disabled = 63,

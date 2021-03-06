@@ -1,4 +1,4 @@
-<Entity _tags="energy_shield">
+<Entity tags="energy_shield">
 
 	<InheritTransformComponent>
 		<Transform 

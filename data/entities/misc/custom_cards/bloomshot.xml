@@ -1,4 +1,4 @@
-<Entity _tags="slime arc">
+<Entity tags="slime arc">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

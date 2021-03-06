@@ -760,8 +760,9 @@ function check_death()
 			boss_kill_count = boss_kill_count + 1
 			print( "boss_kill_count: " .. boss_kill_count )
 			GlobalsSetValue( "GLOBAL_BOSS_KILL_COUNT", tostring( boss_kill_count ) )
-
-			StatsLogPlayerKill() -- this is needed because otherwise the boss kill doesn't get registered as a kill for the player
+			
+			AddFlagPersistent( "boss_centipede" )
+			StatsLogPlayerKill( GetUpdatedEntityID() ) -- this is needed because otherwise the boss kill doesn't get registered as a kill for the player
 			is_dead = true
 
 			return

@@ -1,4 +1,4 @@
-<Entity _tags="black hole">
+<Entity tags="black hole">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

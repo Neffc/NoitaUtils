@@ -1,4 +1,4 @@
-<Entity _tags="burn trail">
+<Entity tags="burn trail">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

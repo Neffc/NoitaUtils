@@ -352,7 +352,7 @@
   <CellData
 	name="sand_static"
 	ui_name="$mat_sand_static"
-	tags="[static],[corrodible],[alchemy],[solid]"
+	tags="[static],[corrodible],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="10"
 	cell_type="liquid"
@@ -638,7 +638,7 @@
   <CellData
 	name="nest_static"
 	ui_name="$mat_nest_static"
-	tags="[static],[corrodible],[burnable],[alchemy],[solid]"
+	tags="[static],[corrodible],[burnable],[alchemy],[solid],[earth]"
 	burnable="1"
 	density="10"
 	cell_type="liquid"
@@ -664,7 +664,7 @@
   <CellData
 	name="bluefungi_static"
 	ui_name="$mat_bluefungi_static"
-	tags="[static],[corrodible],[burnable],[alchemy],[solid]"
+	tags="[static],[corrodible],[burnable],[alchemy],[solid],[earth]"
 	burnable="1"
 	density="10"
 	cell_type="liquid"
@@ -716,7 +716,7 @@
   <CellData
 	name="rock_static"
 	ui_name="$mat_rock_static"
-	tags="[static],[corrodible],[meltable_to_lava],[alchemy],[solid]"
+	tags="[static],[corrodible],[meltable_to_lava],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="10"
 	cell_type="liquid"
@@ -782,7 +782,7 @@
   <CellDataChild
   	_parent="rock_static"
   	_inherit_reactions="1"
-	tags="[static],[alchemy],[solid]"
+	tags="[static],[alchemy],[solid],[earth]"
   	name="rock_static_intro" 
 	ui_name="$mat_rock_static_intro"
 	wang_color="ff0a3344"
@@ -839,7 +839,121 @@
   <CellDataChild
   	_parent="rock_static"
   	_inherit_reactions="1"
-	tags="[static],[alchemy],[solid]"
+	tags="[static],[alchemy],[solid],[earth]"
+  	name="rock_static_trip_secret"
+	ui_name="$mat_rock_static"
+	wang_color="ff0abba4"
+	hp="160000"
+	audio_physics_material_event="rock"
+	audio_physics_material_wall="rock"
+	audio_physics_material_solid="rock"
+	>
+  	<Graphics
+		texture_file="data/materials_gfx/rock.png"
+		color="ff313b36"
+		pixel_all_around="ff313b36"
+		>
+		<Edge>
+			<EdgeGraphics 
+				color="ff233112" 
+				overwrite="0" 
+				percent="0.3" 
+				require_same_material="0" 
+				require_same_material_type="1" 
+				type="EVERYWHERE" 
+				z="1" >
+				<Images>
+					<Image 
+						allow_random_rotation="1"
+						filename="data/materials_gfx/edge_files/edge_rock_1.png" 
+					/>
+					<Image 
+						allow_random_rotation="1"
+						filename="data/materials_gfx/edge_files/edge_rock_2.png" 
+					/>
+					<Image 
+						allow_random_rotation="1"
+						filename="data/materials_gfx/edge_files/edge_rock_3.png" 
+					/>
+					<Image 
+						allow_random_rotation="1"
+						filename="data/materials_gfx/edge_files/edge_rock_4.png" 
+					/>
+					<Image 
+						allow_random_rotation="1"
+						filename="data/materials_gfx/edge_files/edge_rock_5.png" 
+					/>
+					<Image 
+						allow_random_rotation="1"
+						filename="data/materials_gfx/edge_files/edge_rock_6.png" 
+					/>
+				</Images>
+			</EdgeGraphics>
+		</Edge>
+	</Graphics>
+  </CellDataChild>
+  
+  <CellDataChild
+  	_parent="rock_static"
+  	_inherit_reactions="1"
+	tags="[static],[alchemy],[solid],[earth]"
+  	name="rock_static_trip_secret2"
+	ui_name="$mat_rock_static"
+	wang_color="ff0baab4"
+	hp="160000"
+	audio_physics_material_event="rock"
+	audio_physics_material_wall="rock"
+	audio_physics_material_solid="rock"
+	>
+  	<Graphics
+		texture_file="data/materials_gfx/rock.png"
+		color="ff313b36"
+		pixel_all_around="ff313b36"
+		>
+		<Edge>
+			<EdgeGraphics 
+				color="ff233112" 
+				overwrite="0" 
+				percent="0.3" 
+				require_same_material="0" 
+				require_same_material_type="1" 
+				type="EVERYWHERE" 
+				z="1" >
+				<Images>
+					<Image 
+						allow_random_rotation="1"
+						filename="data/materials_gfx/edge_files/edge_rock_1.png" 
+					/>
+					<Image 
+						allow_random_rotation="1"
+						filename="data/materials_gfx/edge_files/edge_rock_2.png" 
+					/>
+					<Image 
+						allow_random_rotation="1"
+						filename="data/materials_gfx/edge_files/edge_rock_3.png" 
+					/>
+					<Image 
+						allow_random_rotation="1"
+						filename="data/materials_gfx/edge_files/edge_rock_4.png" 
+					/>
+					<Image 
+						allow_random_rotation="1"
+						filename="data/materials_gfx/edge_files/edge_rock_5.png" 
+					/>
+					<Image 
+						allow_random_rotation="1"
+						filename="data/materials_gfx/edge_files/edge_rock_6.png" 
+					/>
+				</Images>
+			</EdgeGraphics>
+		</Edge>
+	</Graphics>
+  </CellDataChild>
+  
+  <CellDataChild
+  	_parent="rock_static"
+  	_inherit_reactions="1"
+	tags="[static],[alchemy],[solid],[earth],[matter_eater_ignore_list]"
   	name="rock_static_cursed" 
 	ui_name="$mat_rock_static_cursed"
 	wang_color="ff3f4d3e"
@@ -915,7 +1029,7 @@
   <CellDataChild
   	_parent="rock_static"
   	_inherit_reactions="1"
-	tags="[static],[alchemy],[solid]"
+	tags="[static],[alchemy],[solid],[earth]"
   	name="rock_static_purple" 
 	ui_name="$mat_rock_static_intro"
 	wang_color="ff272224"
@@ -996,7 +1110,7 @@
   <CellData
 	name="endslime_static"
 	ui_name="$mat_endslime_static"
-  	tags="[static],[alchemy],[solid]"
+  	tags="[static],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="4"
 	cell_type="liquid"
@@ -1059,7 +1173,7 @@
  <CellData 
 	name="slime_static"
 	ui_name="$mat_slime_static"
-	tags="[static],[alchemy],[solid]"
+	tags="[static],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="4"
 	cell_type="liquid"
@@ -1091,7 +1205,7 @@
  <CellData 
 	name="spore_pod_stalk"
 	ui_name="$mat_bluefungi_static"
-	tags="[static],[alchemy],[solid],[burnable]"
+	tags="[static],[alchemy],[solid],[burnable],[earth]"
 	burnable="1"
 	density="4"
 	cell_type="liquid"
@@ -1124,7 +1238,7 @@
   <CellDataChild
   	_parent="rock_static"
   	_inherit_reactions="1"
-	tags="[static],[alchemy],[solid]"
+	tags="[static],[alchemy],[solid],[earth]"
   	name="rock_hard" 
 	ui_name="$mat_rock_hard"
 	wang_color="ff003344"
@@ -1180,11 +1294,12 @@
   <CellDataChild
   	_parent="rock_static"
   	_inherit_reactions="1"
-	tags="[static],[alchemy],[solid]"
+	tags="[static],[alchemy],[solid],[earth]"
   	name="wood_tree" 
 	ui_name="$mat_wood"
 	wang_color="ff005345"
 	hp="200000"
+	durability="12"
 	audio_physics_material_event="rock"
 	audio_physics_material_wall="woodwall"
 	audio_physics_material_solid="wood"
@@ -1198,7 +1313,7 @@
   <CellDataChild
   	_parent="rock_static"
   	_inherit_reactions="1"
-	tags="[static],[alchemy],[solid]"
+	tags="[static],[alchemy],[solid],[earth]"
   	name="rock_static_noedge" 
 	ui_name="$mat_rock_static_noedge"
 	wang_color="ff003345"
@@ -1216,7 +1331,7 @@
 	<CellDataChild
   	_parent="rock_static"
   	_inherit_reactions="1"
-  	tags="[static],[alchemy],[solid]"
+  	tags="[static],[alchemy],[solid],[earth]"
   	name="rock_hard_border" 
 	ui_name="$mat_rock_hard_border"
 	wang_color="ff104344"
@@ -1456,7 +1571,7 @@
   <CellDataChild
   	_parent="rock_static"
   	_inherit_reactions="1"
-	tags="[static],[alchemy],[meltable_to_lava],[corrodible],[solid]"
+	tags="[static],[alchemy],[meltable_to_lava],[corrodible],[solid],[earth]"
   	name="rock_static_radioactive" 
 	ui_name="$mat_rock_static_radioactive"
 	wang_color="ff00f344"
@@ -1530,7 +1645,7 @@
   <CellDataChild
   	_parent="rock_static"
   	_inherit_reactions="1"
-	tags="[static],[alchemy],[meltable_to_lava],[corrodible],[solid]"
+	tags="[static],[alchemy],[meltable_to_lava],[corrodible],[solid],[earth]"
   	name="rock_static_cursed_green" 
 	ui_name="$mat_rock_static_cursed_green"
 	wang_color="ff659244"
@@ -1605,7 +1720,7 @@
   <CellDataChild
   	_parent="rock_static"
   	_inherit_reactions="1"
-	tags="[static],[alchemy],[meltable_to_lava],[corrodible],[solid]"
+	tags="[static],[alchemy],[meltable_to_lava],[corrodible],[solid],[earth]"
   	name="rock_static_poison" 
 	ui_name="$mat_rock_static_poison"
 	wang_color="ff00fa44"
@@ -1679,7 +1794,7 @@
   <CellDataChild
   	_parent="the_end"
   	_inherit_reactions="1"
-	tags="[static],[corrodible],[alchemy],[solid]"
+	tags="[static],[corrodible],[alchemy],[solid],[earth]"
   	name="skullrock" 
 	ui_name="$mat_skullrock"
 	wang_color="ff00a344"
@@ -1794,7 +1909,7 @@
     <CellData
 	name="lavarock_static"
 	ui_name="$mat_lavarock_static"
-	tags="[static],[corrodible],[alchemy],[solid]"
+	tags="[static],[corrodible],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="10"
 	cell_type="liquid"
@@ -1833,7 +1948,7 @@
   <CellData
 	name="meteorite_static"
 	ui_name="$mat_meteorite_static"
-	tags="[static],[corrodible],[alchemy],[solid]"
+	tags="[static],[corrodible],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="10"
 	cell_type="liquid"
@@ -1871,7 +1986,7 @@
   <CellData
 	name="templerock_static"
 	ui_name="$mat_templerock_static"
-	tags="[static],[corrodible],[alchemy],[solid]"
+	tags="[static],[corrodible],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="10"
 	cell_type="liquid"
@@ -2126,7 +2241,7 @@
   	_inherit_reactions="1"
   	name="templerock_soft" 
 	ui_name="$mat_templerock_static"
-	tags="[static],[corrodible],[alchemy],[solid]"
+	tags="[static],[corrodible],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="10"
 	cell_type="liquid"
@@ -2836,7 +2951,7 @@
   <CellData
 	name="steel_static"
 	ui_name="$mat_steel_static"
-	tags="[static],[corrodible],[rust],[alchemy],[meltable_metal_generic],[solid]"
+	tags="[static],[corrodible],[rust],[alchemy],[meltable_metal_generic],[solid],[earth]"
 	burnable="0"
 	density="10"
 	cell_type="liquid"
@@ -2907,6 +3022,7 @@
     </Graphics>
   </CellData>
   
+  <!--
   <CellDataChild
   	_parent="steel_static"
   	_inherit_reactions="1"
@@ -2961,6 +3077,135 @@
 				do_only_horizontal_stripe="0" 
 				do_only_vertical_stripe="1" 
 				filename="data/materials_gfx/edge_files/edge_steelmoss_ver.png" 
+				min_angle="0" 
+				max_angle="45" />
+			</Images>
+		  </EdgeGraphics>
+		</Edge>
+    </Graphics>
+  </CellDataChild>
+-->
+
+  <CellDataChild
+  	_parent="steel_static"
+  	_inherit_reactions="1"
+  	name="steelmoss_static"
+	ui_name="$mat_steelrusted"	
+	wang_color="ff787A55" 
+	wang_noise_percent="0.0"
+	wang_curvature="0.5"
+	solid_friction="0.9"
+	electrical_conductivity="1"
+	durability="11"
+	show_in_creative_mode="1"
+	cell_holes_in_texture="1"
+	>
+  	<Graphics
+		texture_file="data/materials_gfx/steel_rusted.png"
+		color="ff787A55" >
+
+		<Edge>
+		  <EdgeGraphics 
+			color="ff233112" 
+			overwrite="0" 
+			percent="1" 
+			require_same_material="0" 
+			require_same_material_type="1" 
+			type="CARDINAL_DIRECTIONS" 
+			z="1" >
+			<Images>
+			  <Image 
+				do_only_horizontal_stripe="1" 
+				do_only_vertical_stripe="0" 
+				filename="data/materials_gfx/edge_files/edge_steel_rusted_hor.png" 
+				min_angle="45" 
+				max_angle="135" />
+			  <Image 
+				do_only_horizontal_stripe="0" 
+				do_only_vertical_stripe="1" 
+				filename="data/materials_gfx/edge_files/edge_steel_rusted_ver.png" 
+				min_angle="135" 
+				max_angle="225" />
+			  <Image 
+				do_only_horizontal_stripe="1" 
+				do_only_vertical_stripe="0" 
+				filename="data/materials_gfx/edge_files/edge_steel_rusted_hor.png" 
+				min_angle="225" 
+				max_angle="315" />
+			  <Image 
+				do_only_horizontal_stripe="0" 
+				do_only_vertical_stripe="1" 
+				filename="data/materials_gfx/edge_files/edge_steel_rusted_ver.png" 
+				min_angle="315" 
+				max_angle="360" />
+			  <Image 
+				do_only_horizontal_stripe="0" 
+				do_only_vertical_stripe="1" 
+				filename="data/materials_gfx/edge_files/edge_steel_rusted_ver.png" 
+				min_angle="0" 
+				max_angle="45" />
+			</Images>
+		  </EdgeGraphics>
+		</Edge>
+    </Graphics>
+  </CellDataChild>
+
+  <CellDataChild
+  	_parent="steelmoss_static"
+  	_inherit_reactions="1"
+  	name="steel_rusted_no_holes"
+	ui_name="$mat_steelrusted"	
+	wang_color="ff904F3A" 
+	wang_noise_percent="0.0"
+	wang_curvature="0.5"
+	solid_friction="0.9"
+	electrical_conductivity="1"
+	durability="11"
+	show_in_creative_mode="1"
+	cell_holes_in_texture="0"
+	>
+  	<Graphics
+		texture_file="data/materials_gfx/steelpanelmoss.png"
+		color="ff904F3A" >
+
+		<Edge>
+		  <EdgeGraphics 
+			color="ff233112" 
+			overwrite="0" 
+			percent="1" 
+			require_same_material="0" 
+			require_same_material_type="1" 
+			type="CARDINAL_DIRECTIONS" 
+			z="1" >
+			<Images>
+			  <Image 
+				do_only_horizontal_stripe="1" 
+				do_only_vertical_stripe="0" 
+				filename="data/materials_gfx/edge_files/edge_steel_rusted_hor.png" 
+				min_angle="45" 
+				max_angle="135" />
+			  <Image 
+				do_only_horizontal_stripe="0" 
+				do_only_vertical_stripe="1" 
+				filename="data/materials_gfx/edge_files/edge_steel_rusted_ver.png" 
+				min_angle="135" 
+				max_angle="225" />
+			  <Image 
+				do_only_horizontal_stripe="1" 
+				do_only_vertical_stripe="0" 
+				filename="data/materials_gfx/edge_files/edge_steel_rusted_hor.png" 
+				min_angle="225" 
+				max_angle="315" />
+			  <Image 
+				do_only_horizontal_stripe="0" 
+				do_only_vertical_stripe="1" 
+				filename="data/materials_gfx/edge_files/edge_steel_rusted_ver.png" 
+				min_angle="315" 
+				max_angle="360" />
+			  <Image 
+				do_only_horizontal_stripe="0" 
+				do_only_vertical_stripe="1" 
+				filename="data/materials_gfx/edge_files/edge_steel_rusted_ver.png" 
 				min_angle="0" 
 				max_angle="45" />
 			</Images>
@@ -3080,7 +3325,7 @@
   	_inherit_reactions="1"
   	name="steel_static_strong" 
 	ui_name="$mat_steel_static_strong"
-	tags="[static],[alchemy],[solid]"
+	tags="[static],[alchemy],[solid],[earth]"
 	wang_color="ff404a41" >
   	<Graphics
 		texture_file="data/materials_gfx/steelpanel.png"
@@ -3136,7 +3381,7 @@
   	_inherit_reactions="1"
   	name="steel_static_unmeltable" 
 	ui_name="$mat_steel_static_unmeltable"
-	tags="[static],[alchemy],[corrodible],[solid]"
+	tags="[static],[alchemy],[corrodible],[solid],[earth]"
 	wang_color="ff404F50" >
   	<Graphics
 		texture_file="data/materials_gfx/steelpanel.png"
@@ -3190,7 +3435,7 @@
   <CellData
 	name="rock_static_glow"
 	ui_name="$mat_rock_static_glow"
-	tags="[static],[corrodible],[meltable_to_lava],[alchemy],[solid]"
+	tags="[static],[corrodible],[meltable_to_lava],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="10"
 	cell_type="liquid"
@@ -3305,7 +3550,7 @@
   <CellDataChild
   	_parent="ice_static"
   	_inherit_reactions="0"
-	tags="[static],[alchemy],[solid]"
+	tags="[static],[alchemy],[solid],[earth]"
   	name="rock_static_intro_breakable" 
 	ui_name="$mat_rock_static_intro_breakable"
 	wang_color="ff0a3355"
@@ -3590,7 +3835,7 @@
   <CellData
 	name="ice_meteor_static"
 	ui_name="$mat_ice_meteor_static"
-	tags="[static],[corrodible],[frozen],[meltable_to_lava],[alchemy],[solid]"
+	tags="[static],[corrodible],[frozen],[meltable_to_lava],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="10"
 	cell_type="liquid"
@@ -3638,7 +3883,7 @@
   <CellData
 	name="tubematerial"
 	ui_name="$mat_tubematerial"
-	tags="[static],[corrodible],[alchemy],[solid]"
+	tags="[static],[corrodible],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="10"
 	cell_type="liquid"
@@ -3668,7 +3913,7 @@
   <CellData
 	name="glass_static"
 	ui_name="$mat_glass_static"
-	tags="[static],[alchemy],[solid]"
+	tags="[static],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="10"
 	cell_type="liquid"
@@ -3695,7 +3940,7 @@
   <CellData
 	name="waterrock"
 	ui_name="$mat_waterrock"
-	tags="[static],[alchemy],[solid]"
+	tags="[static],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="6"
 	cell_type="solid"
@@ -3753,7 +3998,7 @@
   <CellDataChild
   	_parent="ice_glass"
   	_inherit_reactions="1"
-	tags="[box2d],[static],[meltable_to_lava],[alchemy],[solid]"
+	tags="[box2d],[static],[meltable_to_lava],[alchemy],[solid],[earth]"
   	slippery="0"
   	solid_friction="0.05"
   	name="tube_physics" 
@@ -3966,7 +4211,7 @@
   <CellData
 	name="glass_brittle"
 	ui_name="$mat_glass_brittle"
-	tags="[static],[alchemy],[solid]"
+	tags="[static],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="6"
 	cell_type="solid"
@@ -3997,7 +4242,7 @@
   <CellData
 	name="snowrock_static"
 	ui_name="$mat_snowrock_static"
-	tags="[static],[corrodible],[alchemy],[solid]"
+	tags="[static],[corrodible],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="10"
 	cell_type="liquid"
@@ -4061,7 +4306,7 @@
   <CellData
 	name="concrete_static"
 	ui_name="$mat_concrete_static"
-	tags="[static],[corrodible],[meltable_to_lava],[alchemy],[solid]"
+	tags="[static],[corrodible],[meltable_to_lava],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="10"
 	cell_type="liquid"
@@ -4090,7 +4335,7 @@
   <CellData
 	name="wood_static"
 	ui_name="$mat_wood_static"
-  	tags="[corrodible],[burnable],[alchemy],[solid]"
+  	tags="[corrodible],[burnable],[alchemy],[solid],[earth]"
 	burnable="1"
 	density="11"
 	cell_type="liquid"
@@ -4170,7 +4415,7 @@
   <CellData
 	name="cheese_static"
 	ui_name="$mat_cheese_static"
-	tags="[static],[corrodible],[meltable_to_lava],[alchemy],[solid]"
+	tags="[static],[corrodible],[meltable_to_lava],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="5"
 	cell_type="liquid"
@@ -4257,7 +4502,7 @@
   <CellDataChild
   	_parent="wood_static"
   	_inherit_reactions="1"
-	tags="[corrodible],[alchemy],[gold],[solid]"
+	tags="[corrodible],[alchemy],[gold],[solid],[earth]"
   	name="gold_static"
 	ui_name="$mat_gold_static"
 	solid_friction="0.5"
@@ -4275,7 +4520,7 @@
   <CellDataChild
   	_parent="wood_static"
   	_inherit_reactions="1"
-	tags="[corrodible],[alchemy],[gold],[solid]"
+	tags="[corrodible],[alchemy],[gold],[solid],[earth]"
   	name="gold_static_radioactive"
 	ui_name="$mat_gold_radioactive"
 	solid_friction="0.5"
@@ -4296,7 +4541,7 @@
   <CellDataChild
   	_parent="wood_static"
   	_inherit_reactions="1"
-	tags="[corrodible],[alchemy],[gold],[solid]"
+	tags="[corrodible],[alchemy],[gold],[solid],[earth]"
   	name="gold_static_dark"
 	ui_name="$mat_gold_static_dark"
 	solid_friction="0.5"
@@ -4444,7 +4689,7 @@
 	ui_name="$mat_cloud"
   	tags="[gas]"
 	burnable="0"
-	density="1"
+	density="4.17"
 	lifetime="350"
 	cell_type="gas"
 	liquid_static="1"
@@ -4825,13 +5070,39 @@
 	</ParticleEffect>
   </CellData>
 
+  <CellData
+	name="rainbow_gas"
+	ui_name="$mat_rainbow_gas"
+  	tags="[gas]"
+	burnable="0"
+	density="2"
+	cell_type="gas"
+	lifetime="250"
+	wang_color="7fF2E604"
+	generates_smoke="0"
+	liquid_gravity="0.5"
+	liquid_sand="0"
+	on_fire="0"
+	requires_oxygen="0"
+	temperature_of_fire="0"
+	autoignition_temperature="99" 
+	gfx_glow="255"
+	show_in_creative_mode="1"
+	>
+	<Graphics 
+	texture_file="data/materials_gfx/rainbow_gas.png" 
+	color="80FFA2CD"
+	fire_colors_index="2" >
+    </Graphics>
+  </CellData>
+
   <!-- =================================================================================================================  -->
   <!-- LIQUID  -->
   
   <CellData
 	name="water"
 	ui_name="$mat_water"
-  	tags="[liquid],[corrodible],[freezable],[water]"
+  	tags="[liquid],[corrodible],[freezable],[water],[liquid_common]"
 	burnable="0"
 	density="4"
 	cell_type="liquid"
@@ -4881,7 +5152,7 @@
   <CellDataChild
   	_parent="water"
 	name="water_salt"
-  	tags="[liquid],[corrodible],[freezable],[water]"
+  	tags="[liquid],[corrodible],[freezable],[water],[liquid_common]"
 	ui_name="$mat_water_salt"
 	wang_color="a02F754C"
 	density="4.01"
@@ -4929,7 +5200,7 @@
   <CellData
 	name="water_temp"
 	ui_name="$mat_water_temp"
-  	tags="[liquid],[corrodible],[freezable],[water]"
+  	tags="[liquid],[corrodible],[freezable],[water],[liquid_common]"
 	burnable="0"
 	density="4"
 	cell_type="liquid"
@@ -4952,7 +5223,7 @@
   <CellData
 	name="water_ice"
 	ui_name="$mat_water_ice"
-  	tags="[liquid],[corrodible],[meltable_to_water],[freezable],[water]"
+  	tags="[liquid],[corrodible],[meltable_to_water],[freezable],[water],[liquid_common]"
 	burnable="0"
 	density="3.5"
 	cell_type="liquid"
@@ -4985,7 +5256,7 @@
   <CellData
 	name="water_swamp"
 	ui_name="$mat_water_swamp"
-  	tags="[liquid],[corrodible],[meltable_to_water],[water],[impure]"
+  	tags="[liquid],[corrodible],[meltable_to_water],[water],[impure],[liquid_common]"
 	burnable="0"
 	density="3.4"
 	cell_type="liquid"
@@ -5015,7 +5286,7 @@
   <CellData
 	name="oil"
 	ui_name="$mat_oil"
-  	tags="[liquid],[burnable],[impure]"
+  	tags="[liquid],[burnable],[impure],[liquid_common]"
 	burnable="1"
 	density="1"
 	cell_type="liquid"
@@ -5051,7 +5322,7 @@
   <CellDataChild
   	_parent="oil"
 	name="liquid_fire"
-	tags="[liquid],[burnable],[impure],[hot]"
+	tags="[liquid],[burnable],[impure],[hot],[fire_strong],[liquid_common]"
 	ui_name="$mat_liquid_fire"
 	wang_color="af3B3B3D"
 	requires_oxygen="0"
@@ -5081,7 +5352,7 @@
   <CellDataChild
   	_parent="oil"
 	name="liquid_fire_weak"
-	tags="[liquid],[burnable],[impure],[hot]"
+	tags="[liquid],[burnable],[impure],[hot],[fire_strong],[liquid_common]"
 	ui_name="$mat_liquid_fire_weak"
 	wang_color="ff3B3B4D"
 	requires_oxygen="0"
@@ -5105,7 +5376,7 @@
   <CellData
 	name="alcohol"
 	ui_name="$mat_alcohol"
-  	tags="[liquid],[water],[impure]"
+  	tags="[liquid],[water],[impure],[liquid_common]"
 	density="3.5"
 	cell_type="liquid"
 	wang_color="90d0ffe8"
@@ -5132,7 +5403,7 @@
   <CellData
 	name="sima"
 	ui_name="$mat_sima"
-  	tags="[liquid],[water],[impure]"
+  	tags="[liquid],[water],[impure],[liquid_common]"
 	density="3.5"
 	cell_type="liquid"
 	wang_color="90d0ffe9"
@@ -5324,7 +5595,7 @@
 	name="material_darkness"
 	ui_name="$mat_darkness"
   	tags="[liquid],[water],[magic_liquid],[impure]"
-	density="1.2"
+	density="1.2434"
 	cell_type="liquid"
 	wang_color="80563e66"
 	generates_smoke="0"
@@ -5361,6 +5632,50 @@
 	<StatusEffects>
 		<Ingestion>
 			<StatusEffect type="POISONED" amount="0.1" />
+		</Ingestion>
+	</StatusEffects>
+  </CellData>
+
+  <CellData
+	name="material_rainbow"
+	ui_name="$mat_rainbow"
+  	tags="[liquid],[water],[magic_liquid],[impure]"
+	density="1.874"
+	cell_type="liquid"
+	wang_color="80FFA2CD"
+	generates_smoke="0"
+	lifetime="240"
+	liquid_gravity="0.8"
+	liquid_sand="0"
+	gfx_glow="220"
+	on_fire="0"
+	requires_oxygen="0"
+	liquid_stains="1"
+	liquid_sprite_stain_shaken_drop_chance="5"
+	audio_materialaudio_type="MAGICAL" 
+	show_in_creative_mode="1" 
+	>
+
+	<Graphics 
+	texture_file="data/materials_gfx/rainbow.png" 
+	color="80FFA2CD"
+	fire_colors_index="2" >
+    </Graphics>
+	<ParticleEffect
+		vel.y="2.86"
+		vel_random.min_x="-6"
+		vel_random.max_x="6"
+		vel_random.min_y="-2.9"
+		vel_random.max_y="3.2"
+		render_on_grid="1"
+		probability="0.6"
+		count.min="0"
+		count.max="1"
+	>
+	</ParticleEffect>
+	<StatusEffects>
+		<Ingestion>
+			<StatusEffect type="RAINBOW_FARTS" amount="0.1" />
 		</Ingestion>
 	</StatusEffects>
   </CellData>
@@ -5616,7 +5931,6 @@
 	name="magic_liquid_unstable_teleportation"
 	ui_name="$mat_magic_liquid_unstable_teleportation"
   	tags="[liquid],[water],[magic_liquid],[impure]"
-
 	density="4.43"
 	cell_type="liquid"
 	wang_color="8000BEE4"
@@ -5637,7 +5951,8 @@
 	autoignition_temperature="10"
 	electrical_conductivity="1"
 	on_fire_smoke_material="blood_cold_vapour"
-
+	liquid_sprite_stains_status_threshold="0.2"
+	liquid_sprite_stains_check_offset="1"
 	>
 	<Graphics 
 		texture_file="data/materials_gfx/magic_liquid_unstable_telep.png" 
@@ -5684,14 +5999,14 @@
 	status_effects="TELEPORTATION"
 	audio_materialaudio_type="MAGICAL" 
 	show_in_creative_mode="1"
-
 	on_fire_smoke_material="blood_cold_vapour"
-
+	liquid_sprite_stains_status_threshold="0.2"
 	burnable="1"
 	on_fire_flame_material="fire_blue"
 	temperature_of_fire="95"
 	autoignition_temperature="10"
 	electrical_conductivity="1"
+	liquid_sprite_stains_check_offset="1"
 	>
 	<ParticleEffect
 		vel.y="17.14"
@@ -5815,11 +6130,12 @@
 	on_fire="0"
 	requires_oxygen="0"
 	liquid_stains="1"
-	liquid_sprite_stains_status_threshold="0.2"
+	liquid_sprite_stains_status_threshold="0.25"
 	liquid_sprite_stain_shaken_drop_chance="5"
 	status_effects="POLYMORPH"
 	audio_materialaudio_type="MAGICAL" 
 	show_in_creative_mode="1"
+	liquid_sprite_stains_check_offset="1"
 	>
 	<ParticleEffect
 		vel.y="-2.857"
@@ -5862,11 +6178,12 @@
 	on_fire="0"
 	requires_oxygen="0"
 	liquid_stains="1"
-	liquid_sprite_stains_status_threshold="0.2"
+	liquid_sprite_stains_status_threshold="0.25"
 	liquid_sprite_stain_shaken_drop_chance="5"
 	status_effects="POLYMORPH_RANDOM"
 	audio_materialaudio_type="MAGICAL" 
 	show_in_creative_mode="1"
+	liquid_sprite_stains_check_offset="1"
 	>
 	<ParticleEffect
 		vel.y="0"
@@ -5909,10 +6226,12 @@
 	on_fire="0"
 	requires_oxygen="0"
 	liquid_stains="1"
+	liquid_sprite_stains_status_threshold="0.25"
 	liquid_sprite_stain_shaken_drop_chance="2"
 	status_effects="POLYMORPH_UNSTABLE"
 	audio_materialaudio_type="MAGICAL" 
 	show_in_creative_mode="1"
+	liquid_sprite_stains_check_offset="1"
 	>
 	<Graphics 
 		texture_file="data/materials_gfx/polymorph_unstable.png" 
@@ -6079,7 +6398,7 @@
   <CellData
 	name="cloud_radioactive"
 	ui_name="$mat_cloud_radioactive"
-  	tags="[liquid],[radioactive],[impure]"
+  	tags="[liquid],[radioactive],[impure],[liquid_common]"
 	burnable="0"
 	density="1"
 	cell_type="liquid"
@@ -6113,7 +6432,7 @@
   <CellData
 	name="cloud_blood"
 	ui_name="$mat_cloud_blood"
-  	tags="[liquid],[blood],[impure]"
+  	tags="[liquid],[blood],[impure],[liquid_common]"
 	burnable="0"
 	density="1"
 	cell_type="liquid"
@@ -6140,7 +6459,7 @@
   <CellData
 	name="cloud_slime"
 	ui_name="$mat_cloud_slime"
-  	tags="[liquid],[impure],[slime]"
+  	tags="[liquid],[impure],[slime],[liquid_common]"
 	burnable="0"
 	density="1"
 	cell_type="liquid"
@@ -6171,7 +6490,7 @@
   <CellData
 	name="swamp"
 	ui_name="$mat_swamp"
-  	tags="[liquid],[corrodible],[soluble],[meltable_to_water],[freezable],[water],[impure]"
+  	tags="[liquid],[corrodible],[soluble],[meltable_to_water],[freezable],[water],[impure],[liquid_common]"
 	burnable="0"
 	density="3.5"
 	cell_type="liquid"
@@ -6233,7 +6552,7 @@
   <CellData
 	name="blood"
 	ui_name="$mat_blood"
-  	tags="[liquid],[corrodible],[soluble],[blood],[impure]"
+  	tags="[liquid],[corrodible],[soluble],[blood],[impure],[liquid_common]"
 	burnable="0"
 	density="4.1"
 	cell_type="liquid"
@@ -6255,7 +6574,7 @@
   <CellData
 	name="blood_fading"
 	ui_name="$mat_blood_fading"
-  	tags="[liquid],[corrodible],[soluble],[evaporable_fast],[blood],[impure]"
+  	tags="[liquid],[corrodible],[soluble],[evaporable_fast],[blood],[impure],[liquid_common]"
 	burnable="0"
 	density="3"
 	cell_type="liquid"
@@ -6288,7 +6607,7 @@
   <CellData
 	name="blood_fungi"
 	ui_name="$mat_blood_fungi"
-  	tags="[liquid],[corrodible],[soluble],[evaporable],[blood],[impure]"
+  	tags="[liquid],[corrodible],[soluble],[evaporable],[blood],[impure],[liquid_common]"
 	burnable="0"
 	density="3"
 	cell_type="liquid"
@@ -6337,7 +6656,7 @@
   <CellData
 	name="blood_worm"
 	ui_name="$mat_blood_worm"
-  	tags="[liquid],[corrodible],[soluble],[blood],[impure]"
+  	tags="[liquid],[corrodible],[soluble],[blood],[impure],[liquid_common]"
 	burnable="0"
 	density="2.123"
 	cell_type="liquid"
@@ -6363,9 +6682,42 @@
   </CellData>
   
   <CellData
+	name="porridge"
+	ui_name="$mat_porridge"
+  	tags="[liquid],[corrodible],[soluble],[impure],[liquid_common],[evaporable_by_fire]"
+	burnable="1"
+	density="2.123"
+	cell_type="liquid"
+	wang_color="EEd7cfae"
+	generates_smoke="0"
+	liquid_gravity="1.0"
+	liquid_sand="0"
+	liquid_stains="2"
+	liquid_viscosity="0.9"
+	on_fire="0"
+	requires_oxygen="1"
+	temperature_of_fire="10"
+	autoignition_temperature="50"
+	show_in_creative_mode="1"
+	fire_hp="100"
+	hp="1000"
+	audio_is_soft="1"
+	>
+    <Graphics 
+	texture_file="data/materials_gfx/porridge.png" 
+	color="EEd7cfae" >
+    </Graphics>
+	<StatusEffects>
+		<Ingestion>
+			<StatusEffect type="HP_REGENERATION" amount="0.015" />
+		</Ingestion>
+	</StatusEffects>
+  </CellData>
+  
+  <CellData
 	name="blood_cold"
 	ui_name="$mat_blood_cold"
-  	tags="[liquid],[corrodible],[soluble],[evaporable_custom],[blood],[impure],[cold]"
+  	tags="[liquid],[corrodible],[soluble],[evaporable_custom],[blood],[impure],[cold],[liquid_common]"
 	burnable="0"
 	density="3"
 	cell_type="liquid"
@@ -6396,7 +6748,7 @@
   <CellData
 	name="radioactive_liquid"
 	ui_name="$mat_radioactive_liquid"
-  	tags="[liquid],[corrodible],[soluble],[radioactive],[impure]"
+  	tags="[liquid],[corrodible],[soluble],[radioactive],[impure],[liquid_common]"
 	burnable="0"
 	density="3"
 	cell_type="liquid"
@@ -6452,7 +6804,7 @@
   <CellDataChild
   	_parent="radioactive_liquid"
 	_inherit_reactions="0"
-	tags="[liquid],[corrodible],[soluble],[impure]"
+	tags="[liquid],[corrodible],[soluble],[impure],[liquid_common]"
 	name="poison"
 	ui_name="$mat_poison"
 	wang_color="44B43CFF"
@@ -6577,7 +6929,7 @@
   <CellData
 	name="radioactive_liquid_fading"
 	ui_name="$mat_radioactive_liquid_fading"
-  	tags="[liquid],[corrodible],[soluble],[evaporable],[radioactive],[impure]"
+  	tags="[liquid],[corrodible],[soluble],[evaporable],[radioactive],[impure],[liquid_common]"
 	burnable="0"
 	density="3"
 	cell_type="liquid"
@@ -6624,7 +6976,7 @@
   <CellData
 	name="plasma_fading"
 	ui_name="$mat_plasma_fading"
-  	tags="[liquid],[corrodible],[soluble],[evaporable_fast],[impure]"
+  	tags="[liquid],[corrodible],[soluble],[evaporable_fast],[impure],[liquid_common]"
 	burnable="0"
 	density="3"
 	cell_type="liquid"
@@ -6697,7 +7049,7 @@
   <CellData
 	name="gold_molten"
 	ui_name="$mat_gold_molten"
-  	tags="[liquid],[corrodible],[molten],[alchemy],[gold],[solid]"
+  	tags="[liquid],[corrodible],[molten],[alchemy],[gold],[solid],[liquid_common],[earth]"
 	burnable="1"
 	density="5"
 	cell_type="liquid"
@@ -6730,7 +7082,7 @@
   
   <CellDataChild
   	_parent="gold_molten"
-	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid]"
+	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid],[liquid_common],[earth]"
 	name="steel_static_molten"
 	ui_name="$mat_steel_static_molten"
 	gfx_glow="200"
@@ -6757,7 +7109,7 @@
   
   <CellDataChild
   	_parent="gold_molten"
-	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid]"
+	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid],[liquid_common],[earth]"
 	name="steelmoss_slanted_molten"
 	ui_name="$mat_steelmoss_slanted_molten"
 	gfx_glow="200"
@@ -6783,7 +7135,7 @@
   
   <CellDataChild
   	_parent="gold_molten"
-	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid]"
+	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid],[liquid_common],[earth]"
 	name="steelmoss_static_molten"
 	ui_name="$mat_steelmoss_static_molten"
 	gfx_glow="200"
@@ -6809,7 +7161,7 @@
   
   <CellDataChild
   	_parent="gold_molten"
-	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid]"
+	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid],[liquid_common],[earth]"
 	name="steelsmoke_static_molten"
 	ui_name="$mat_steelsmoke_static_molten"
 	gfx_glow="200"
@@ -6835,7 +7187,7 @@
   
   <CellDataChild
   	_parent="gold_molten"
-	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid]"
+	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid],[liquid_common],[earth]"
 	name="metal_sand_molten"
 	ui_name="$mat_metal_sand_molten"
 	gfx_glow="200"
@@ -6861,7 +7213,7 @@
   
   <CellDataChild
   	_parent="gold_molten"
-	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid]"
+	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid],[liquid_common],[earth]"
 	name="metal_molten"
 	ui_name="$mat_metal_molten"
 	gfx_glow="200"
@@ -6887,7 +7239,7 @@
   
   <CellDataChild
   	_parent="gold_molten"
-	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid]"
+	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid],[liquid_common],[earth]"
 	name="metal_rust_molten"
 	ui_name="$mat_metal_rust_molten"
 	gfx_glow="200"
@@ -6913,7 +7265,7 @@
   
   <CellDataChild
   	_parent="gold_molten"
-	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid]"
+	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid],[liquid_common],[earth]"
 	name="metal_nohit_molten"
 	ui_name="$mat_metal_nohit_molten"
 	gfx_glow="200"
@@ -6939,7 +7291,7 @@
   
   <CellDataChild
   	_parent="gold_molten"
-	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid]"
+	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid],[liquid_common],[earth]"
 	name="aluminium_molten"
 	ui_name="$mat_aluminium_molten"
 	gfx_glow="200"
@@ -6965,7 +7317,7 @@
   
   <CellDataChild
   	_parent="gold_molten"
-	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid]"
+	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid],[liquid_common],[earth]"
 	name="aluminium_robot_molten"
 	ui_name="$mat_aluminium_robot_molten"
 	gfx_glow="200"
@@ -6991,7 +7343,7 @@
   
   <CellDataChild
   	_parent="gold_molten"
-	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid]"
+	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid],[liquid_common],[earth]"
 	name="metal_prop_molten"
 	gfx_glow="200"
 	ui_name="$mat_metal_prop_molten"
@@ -7017,7 +7369,7 @@
   
   <CellDataChild
   	_parent="gold_molten"
-	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid]"
+	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid],[liquid_common],[earth]"
 	name="steel_rust_molten"
 	gfx_glow="200"
 	ui_name="$mat_steel_rust_molten"
@@ -7043,7 +7395,7 @@
   
   <CellDataChild
   	_parent="gold_molten"
-	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid]"
+	tags="[liquid],[corrodible],[molten_metal],[alchemy],[gold],[solid],[liquid_common],[earth]"
 	name="aluminium_oxide_molten"
 	gfx_glow="200"
 	ui_name="$mat_aluminium_oxide_molten"
@@ -7070,7 +7422,7 @@
   <CellData
 	name="wax_molten"
 	ui_name="$mat_wax_molten"
-  	tags="[liquid],[corrodible],[molten],[alchemy],[impure],[solid]"
+  	tags="[liquid],[corrodible],[molten],[alchemy],[impure],[solid],[liquid_common],[earth]"
 	burnable="1"
 	density="2"
 	cell_type="liquid"
@@ -7095,7 +7447,7 @@
   <CellData
 	name="silver_molten"
 	ui_name="$mat_silver_molten"
-  	tags="[liquid],[corrodible],[molten],[alchemy],[solid]"
+  	tags="[liquid],[corrodible],[molten],[alchemy],[solid],[liquid_common],[earth]"
 	burnable="1"
 	density="3"
 	cell_type="liquid"
@@ -7129,7 +7481,7 @@
   <CellData
 	name="copper_molten"
 	ui_name="$mat_copper_molten"
-  	tags="[liquid],[corrodible],[molten],[alchemy],[solid]"
+  	tags="[liquid],[corrodible],[molten],[alchemy],[solid],[liquid_common],[earth]"
 	burnable="1"
 	density="3"
 	cell_type="liquid"
@@ -7163,7 +7515,7 @@
   <CellData
 	name="brass_molten"
 	ui_name="$mat_brass_molten"
-  	tags="[liquid],[corrodible],[molten],[alchemy],[solid]"
+  	tags="[liquid],[corrodible],[molten],[alchemy],[solid],[liquid_common],[earth]"
 	burnable="1"
 	density="3"
 	cell_type="liquid"
@@ -7197,7 +7549,7 @@
   <CellData
 	name="glass_molten"
 	ui_name="$mat_glass_molten"
-  	tags="[liquid],[molten],[meltable_to_lava],[alchemy],[solid]"
+  	tags="[liquid],[molten],[meltable_to_lava],[alchemy],[solid],[liquid_common],[earth]"
 	burnable="1"
 	density="3"
 	cell_type="liquid"
@@ -7229,7 +7581,7 @@
   <CellData
 	name="glass_broken_molten"
 	ui_name="$mat_glass_broken_molten"
-  	tags="[liquid],[molten],[meltable_to_lava],[alchemy],[solid]"
+  	tags="[liquid],[molten],[meltable_to_lava],[alchemy],[solid],[liquid_common],[earth]"
 	burnable="1"
 	density="3"
 	cell_type="liquid"
@@ -7261,7 +7613,7 @@
   <CellData
 	name="steel_molten"
 	ui_name="$mat_steel_molten"
-  	tags="[liquid],[molten],[alchemy],[solid]"
+  	tags="[liquid],[molten],[alchemy],[solid],[liquid_common],[earth]"
 	burnable="1"
 	density="2"
 	cell_type="liquid"
@@ -7315,7 +7667,7 @@
   <CellData
 	name="cement"
 	ui_name="$mat_cement"
-  	tags="[corrodible],[meltable_to_lava],[alchemy],[impure],[solid]"
+  	tags="[corrodible],[meltable_to_lava],[alchemy],[impure],[solid],[earth]"
 	burnable="0"
 	density="6"
 	cell_type="liquid"
@@ -7671,7 +8023,7 @@
   <CellData 
 	name="sandstone"
 	ui_name="$mat_sandstone"
-  	tags="[sand_ground],[corrodible],[meltable_to_lava],[alchemy],[solid]"
+  	tags="[sand_ground],[corrodible],[meltable_to_lava],[alchemy],[solid],[earth]"
 	burnable="0"  
 	density="6"  
 	cell_type="liquid" 
@@ -7730,7 +8082,7 @@
   <CellData 
 	name="fungisoil"
 	ui_name="$mat_fungisoil"
-  	tags="[sand_ground],[corrodible],[grows_fungus],[meltable_to_lava],[alchemy],[solid]"
+  	tags="[sand_ground],[corrodible],[grows_fungus],[meltable_to_lava],[alchemy],[solid],[earth]"
 	burnable="0"  
 	density="6"  
 	cell_type="liquid" 
@@ -7776,11 +8128,52 @@
 	color="ffE8BD5A" >
     </Graphics>
   </CellData>
+
+  <CellData 
+	name="glue"
+	ui_name="$mat_glue"
+  	tags="[liquid],[burnable],[alchemy],[impure]"
+	burnable="1"  
+	density="6"
+	durability="4"
+	hp="100"
+	cell_type="liquid" 
+	wang_color="fff6fce3"  
+	generates_smoke="0"
+	liquid_gravity="0.2"  
+	liquid_sand="1"  
+	liquid_viscosity="0"
+	liquid_damping="0.9"
+	liquid_sticks_to_ceiling="100"
+	liquid_flow_speed="0.1"
+	audio_physics_material_event="slime"
+	audio_physics_material_wall="slime"
+	audio_physics_material_solid="slime"
+	stickyness="1.0"
+	solid_friction="1.0"
+	fire_hp="50"
+	on_fire="0"
+	autoignition_temperature="10"
+	electrical_conductivity="0"
+	requires_oxygen="1"  
+	temperature_of_fire="10"
+	show_in_creative_mode="1"
+	>
+	<StatusEffects>
+		<Ingestion>
+			<StatusEffect type="FOOD_POISONING" amount="0.2" />
+			<StatusEffect type="TRIP" amount="0.3" />
+		</Ingestion>
+	</StatusEffects>
+    <Graphics
+		color="fff6fce3" >
+    </Graphics>
+  </CellData>
   
   <CellData 
 	name="slime"
 	ui_name="$mat_slime_pink"
-  	tags="[corrodible],[meltable_to_lava],[alchemy],[slime]"
+  	tags="[corrodible],[meltable_to_lava],[alchemy],[slime],[liquid_common]"
 	burnable="0"  
 	density="5"  
 	cell_type="liquid" 
@@ -8075,7 +8468,7 @@
   <CellData 
 	name="root"
 	ui_name="$mat_root"
-  	tags="[static],[sand_ground],[corrodible],[burnable],[alchemy],[solid]"
+  	tags="[static],[sand_ground],[corrodible],[burnable],[alchemy],[solid],[earth]"
 	burnable="1"  
 	density="6"  
 	cell_type="liquid"
@@ -8356,7 +8749,7 @@
   <CellData
 	name="rotten_meat_radioactive"
 	ui_name="$mat_rotten_meat_radioactive"
-  	tags="[sand_ground],[corrodible],[meltable_to_lava],[alchemy],[meat],[solid]"
+  	tags="[sand_ground],[corrodible],[meltable_to_lava],[alchemy],[meat],[solid],[earth]"
 	burnable="0"
 	density="6"
 	cell_type="liquid"
@@ -8719,7 +9112,7 @@
   <CellData
 	name="wax"
 	ui_name="$mat_wax"
-  	tags="[burnable],[corrodible],[meltable],[alchemy],[solid]"
+  	tags="[burnable],[corrodible],[meltable],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="6"
 	cell_type="liquid"
@@ -8751,7 +9144,7 @@
   <CellData
 	name="gold"
 	ui_name="$mat_gold"
-  	tags="[sand_metal],[corrodible],[meltable_metal],[alchemy],[gold],[solid]"
+  	tags="[sand_metal],[corrodible],[meltable_metal],[alchemy],[gold],[solid],[earth]"
 	burnable="0"
 	density="9"
 	cell_type="liquid"
@@ -8778,7 +9171,7 @@
   <CellDataChild
   	_parent="gold"
 	name="gold_radioactive"
-	tags="[sand_metal],[corrodible],[meltable_metal_generic],[alchemy],[gold],[solid]"
+	tags="[sand_metal],[corrodible],[meltable_metal_generic],[alchemy],[gold],[solid],[earth]"
 	ui_name="$mat_gold_radioactive"
 	wang_color="fffbf451"
 	gfx_glow_color="FF00DD00"
@@ -8813,7 +9206,7 @@
   <CellData
 	name="silver"
 	ui_name="$mat_silver"
-  	tags="[sand_metal],[corrodible],[meltable_metal],[alchemy],[solid]"
+  	tags="[sand_metal],[corrodible],[meltable_metal],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="8"
 	cell_type="liquid"
@@ -8873,7 +9266,7 @@
   <CellData
 	name="copper"
 	ui_name="$mat_copper"
-  	tags="[sand_metal],[corrodible],[meltable_metal],[alchemy],[solid]"
+  	tags="[sand_metal],[corrodible],[meltable_metal],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="8"
 	cell_type="liquid"
@@ -8899,7 +9292,7 @@
   <CellData
 	name="brass"
 	ui_name="$mat_brass"
-  	tags="[sand_metal],[corrodible],[meltable_metal],[alchemy],[solid]"
+  	tags="[sand_metal],[corrodible],[meltable_metal],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="8"
 	cell_type="liquid"
@@ -8925,7 +9318,7 @@
   <CellData
 	name="diamond"
 	ui_name="$mat_diamond"
-  	tags="[sand_metal],[alchemy],[solid]"
+  	tags="[sand_metal],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="8"
 	cell_type="liquid"
@@ -9359,7 +9752,7 @@
 	name="rat_powder"
 	ui_name="$mat_rat_powder"
   	tags="[sand_other]"
-	burnable="1"
+	burnable="0"
 	density="7"
 	durability="3"
 	cell_type="liquid"
@@ -9367,7 +9760,7 @@
 	generates_smoke="0"
 	liquid_gravity="2"
 	liquid_sand="1"
-	on_fire="1"
+	on_fire="0"
 	requires_oxygen="0"
 	temperature_of_fire="10"
 	autoignition_temperature="0"
@@ -9381,25 +9774,47 @@
 	show_in_creative_mode="0"
 	lifetime="4.0"
 	>
-	<ExplosionConfig 
-		damage="0"
-		cell_explosion_power="2"
-		cell_explosion_damage_required="1"
-		cell_explosion_radius_min="2"
-		explosion_sprite=""
-		load_this_entity="data/entities/misc/rat_powder.xml"
-		ray_energy="0"
-		audio_enabled="0"
-		create_cell_probability="0"
-		sparks_enabled="0"
-		light_enabled="0"
-		hole_enabled="1"
-		crack_count="0"
-		stains_enabled="0"
-		damage_mortals="0"
-		particle_effect="0"
-		>
-	</ExplosionConfig>
+    <Graphics
+	  texture_file="data/materials_gfx/meat_rotten.png"
+	  color="ffb89e57" >
+    </Graphics>
+	<StatusEffects>
+		<Ingestion>
+			<StatusEffect type="POISONED" amount="0.15" />
+			<StatusEffect type="FOOD_POISONING" amount="0.05" />
+		</Ingestion>
+		<Stains>
+			<StatusEffect type="WET" />
+		</Stains>
+	</StatusEffects>
+  </CellData>
+  
+  <CellData
+	name="fungus_powder"
+	ui_name="$mat_fungisoil"
+  	tags="[sand_other]"
+	burnable="0"
+	density="7"
+	durability="3"
+	cell_type="liquid"
+	wang_color="ffbecafe"
+	generates_smoke="0"
+	liquid_gravity="2"
+	liquid_sand="1"
+	on_fire="0"
+	requires_oxygen="0"
+	temperature_of_fire="10"
+	autoignition_temperature="0"
+	generates_flames="0"
+	on_fire_flame_material="swamp"
+	hp="1000" 
+	fire_hp="20"
+	audio_physics_material_event="sand"
+	audio_physics_material_wall="sand"
+	audio_physics_material_solid="sand"
+	show_in_creative_mode="0"
+	lifetime="4.0"
+	>
     <Graphics
 	  texture_file="data/materials_gfx/meat_rotten.png"
 	  color="ffb89e57" >
@@ -9529,7 +9944,7 @@
   <CellData
 	name="plastic_red_molten"
 	ui_name="$mat_plastic_red_molten"
-  	tags="[liquid],[corrodible],[molten],[meltable_to_lava],[alchemy]"
+  	tags="[liquid],[corrodible],[molten],[meltable_to_lava],[alchemy],[liquid_common]"
 	burnable="0"
 	density="5.1"
 	cell_type="liquid"
@@ -10208,7 +10623,7 @@
   <CellData
 	name="acid"
 	ui_name="$mat_acid"
-  	tags="[liquid],[acid],[impure]"
+  	tags="[liquid],[acid],[impure],[liquid_common]"
 	burnable="0"
 	density="2.9"
 	cell_type="liquid"
@@ -10254,7 +10669,7 @@
   <CellData
 	name="lava"
 	ui_name="$mat_lava"
-  	tags="[fire_lava],[liquid],[lava]"
+  	tags="[fire_lava],[liquid],[lava],[liquid_common]"
 	burnable="0"
 	density="6"
 	cell_type="liquid"
@@ -10304,7 +10719,7 @@
   <CellData
 	name="wood_player"
 	ui_name="$mat_wood_player"
-	tags="[static],[corrodible],[alchemy],[solid]"
+	tags="[static],[corrodible],[alchemy],[solid],[earth]"
 	burnable="1"
 	density="6"
 	cell_type="liquid"
@@ -10383,7 +10798,7 @@
   <CellData
 	name="wood_player_b2"
 	ui_name="$mat_wood_player_b2"
-	tags="[static],[box2d],[alchemy],[corrodible],[solid]"
+	tags="[static],[box2d],[alchemy],[corrodible],[solid],[earth]"
 	burnable="1"
 	density="6"
 	cell_type="solid"
@@ -10479,7 +10894,7 @@
   <CellData
 	name="wood"
 	ui_name="$mat_wood"
-  	tags="[box2d],[corrodible],[alchemy],[burnable],[solid]"
+  	tags="[box2d],[corrodible],[alchemy],[burnable],[solid],[earth]"
 	burnable="1"
 	density="6"
 	cell_type="solid"
@@ -10554,7 +10969,7 @@
   <CellData
 	name="wax_b2"
 	ui_name="$mat_wax_b2"
-  	tags="[box2d],[alchemy],[solid]"
+  	tags="[box2d],[alchemy],[solid],[earth]"
 	burnable="1"
 	density="6"
 	cell_type="solid"
@@ -10891,7 +11306,7 @@
   <CellData
 	name="wood_loose"
 	ui_name="$mat_wood_loose"
-  	tags="[box2d],[corrodible],[alchemy],[solid]"
+  	tags="[box2d],[corrodible],[alchemy],[solid],[earth]"
 	burnable="1"
 	density="6"
 	cell_type="solid"
@@ -10921,7 +11336,7 @@
   <CellData
 	name="rock_loose"
 	ui_name="$mat_rock_loose"
-  	tags="[box2d],[corrodible],[alchemy],[solid]"
+  	tags="[box2d],[corrodible],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="6"
 	cell_type="solid"
@@ -10986,7 +11401,7 @@
   <CellData
 	name="brick"
 	ui_name="$mat_brick"
-  	tags="[box2d],[corrodible],[alchemy],[solid]"
+  	tags="[box2d],[corrodible],[alchemy],[solid],[earth]"
 	burnable="1"
 	density="50"
 	cell_type="solid"
@@ -11025,7 +11440,7 @@
   <CellData
 	name="concrete_collapsed"
 	ui_name="$mat_concrete_collapsed"
-  	tags="[box2d],[corrodible],[alchemy],[solid]"
+  	tags="[box2d],[corrodible],[alchemy],[solid],[earth]"
 	burnable="1"
 	density="10"
 	cell_type="solid"
@@ -11088,11 +11503,12 @@
   <CellData
 	name="tnt"
 	ui_name="$mat_tnt"
-  	tags="[box2d],[corrodible],[burnable],[alchemy],[solid]"
+  	tags="[box2d],[corrodible],[burnable],[alchemy],[solid],[earth]"
 	burnable="1"
 	density="8"
 	cell_type="solid"
 	wang_color="ffab5e4f"
+	durability="11"
 	generates_smoke="0"
 	on_fire="0"
 	requires_oxygen="1"
@@ -11100,12 +11516,13 @@
 	autoignition_temperature="85"
 	fire_hp="600"
 	solid_friction="0.9"
-	hp="500"
+	hp="10000"
 	audio_physics_material_wall="gravel"
 	audio_physics_material_solid="wood"
 	show_in_creative_mode="1"
 	>
-	<ExplosionConfig 
+	<ExplosionConfig
+		damage="5"
       	camera_shake="10" 
 		cell_explosion_power="40"
 		cell_explosion_damage_required="30"
@@ -11137,7 +11554,7 @@
   <CellData
 	name="tnt_static"
 	ui_name="$mat_tnt"
-  	tags="[box2d],[corrodible],[burnable],[alchemy],[solid]"
+  	tags="[box2d],[corrodible],[burnable],[alchemy],[solid],[earth]"
 	burnable="1"
 	density="8"
 	cell_type="solid"
@@ -11217,7 +11634,7 @@
   <CellData
 	name="meteorite"
 	ui_name="$mat_meteorite"
-  	tags="[box2d],[alchemy],[solid]"
+  	tags="[box2d],[alchemy],[solid],[earth]"
 	burnable="0"
 	fire_hp="-1"
 	density="8"
@@ -11268,7 +11685,7 @@
   <CellData
 	name="sulphur_box2d"
 	ui_name="$mat_sulphur"
-  	tags="[box2d],[alchemy],[solid],[corrodible]"
+  	tags="[box2d],[solid],[sunbaby_ignore_list]"
 	burnable="0"
 	fire_hp="-1"
 	density="8"
@@ -11307,7 +11724,7 @@
    <CellData
 	name="meteorite_test"
 	ui_name="$mat_meteorite"
-  	tags="[box2d],[alchemy],[solid]"
+  	tags="[box2d],[alchemy],[solid],[earth]"
 	burnable="0"
 	fire_hp="-1"
 	density="8"
@@ -11387,7 +11804,7 @@
   <CellData
 	name="meteorite_green"
 	ui_name="$mat_meteorite_green"
-  	tags="[box2d],[alchemy],[solid]"
+  	tags="[box2d],[alchemy],[solid],[earth]"
 	burnable="0"
 	fire_hp="-1"
 	density="8"
@@ -11439,7 +11856,7 @@
   <CellData
 	name="steel"
 	ui_name="$mat_steel"
-  	tags="[box2d],[rust_box2d],[alchemy],[meltable_metal],[solid]"
+  	tags="[box2d],[rust_box2d],[alchemy],[meltable_metal],[solid],[earth]"
 	burnable="0"
 	density="8"
 	cell_type="solid"
@@ -11482,7 +11899,7 @@
   <CellData
 	name="steel_rust"
 	ui_name="$mat_steel_rust"
-  	tags="[box2d],[alchemy],[meltable_metal],[solid]"
+  	tags="[box2d],[alchemy],[meltable_metal],[solid],[earth]"
 	burnable="0"
 	density="8"
 	cell_type="solid"
@@ -11522,7 +11939,7 @@
   <CellData
 	name="metal_rust_rust"
 	ui_name="$mat_metal_rust_rust"
-  	tags="[box2d],[alchemy],[corrodible],[solid]"
+  	tags="[box2d],[alchemy],[corrodible],[solid],[meltable_metal_generic],[earth]"
 	burnable="0"
 	density="8"
 	cell_type="solid"
@@ -11562,7 +11979,7 @@
   <CellData
 	name="metal_rust_barrel_rust"
 	ui_name="$mat_metal_rust_barrel_rust"
-  	tags="[box2d],[alchemy],[corrodible],[solid]"
+  	tags="[box2d],[alchemy],[corrodible],[solid],[meltable_metal_generic],[earth]"
 	burnable="0"
 	density="8"
 	cell_type="solid"
@@ -11602,7 +12019,7 @@
   <CellData
 	name="plastic"
 	ui_name="$mat_plastic"
-  	tags="[box2d],[corrodible],[meltable],[alchemy],[solid]"
+  	tags="[box2d],[corrodible],[meltable],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="8"
 	cell_type="solid"
@@ -11657,7 +12074,7 @@
   <CellData
 	name="aluminium"
 	ui_name="$mat_aluminium"
-	tags="[box2d],[corrodible],[rust_oxide],[alchemy],[meltable_metal],[solid]"
+	tags="[box2d],[corrodible],[rust_oxide],[alchemy],[meltable_metal],[solid],[earth]"
 	burnable="0"
 	density="8"
 	cell_type="solid"
@@ -11685,7 +12102,7 @@
   <CellDataChild
   	_parent="aluminium"
   	_inherit_reactions="1"
-	tags="[box2d],[corrodible],[alchemy],[meltable_metal],[solid]"
+	tags="[box2d],[corrodible],[alchemy],[meltable_metal],[solid],[earth]"
   	name="aluminium_robot" 
 	ui_name="$mat_aluminium"
 	wang_color="ff3c2d3c"
@@ -11704,7 +12121,7 @@
   	_inherit_reactions="1"
   	name="metal_prop" 
 	ui_name="$mat_metal_prop"
-	tags="[box2d],[corrodible],[alchemy],[meltable_metal],[solid]"
+	tags="[box2d],[corrodible],[alchemy],[meltable_metal],[solid],[earth]"
 	platform_type="1"
 	solid_static_type="0"
 	solid_collide_with_self="1"
@@ -11725,7 +12142,7 @@
   	_inherit_reactions="1"
   	name="metal_prop_loose" 
 	ui_name="$mat_metal_prop"
-	tags="[box2d],[corrodible],[alchemy],[meltable_to_lava],[solid]"
+	tags="[box2d],[corrodible],[alchemy],[meltable_metal_generic],[solid],[earth]"
 	platform_type="1"
 	solid_static_type="0"
 	solid_collide_with_self="0"
@@ -11744,7 +12161,7 @@
   <CellDataChild
   	_parent="aluminium"
   	_inherit_reactions="1"
-	tags="[box2d],[corrodible],[alchemy],[meltable_metal],[solid]"
+	tags="[box2d],[corrodible],[alchemy],[meltable_metal],[solid],[earth]"
   	name="metal"
   	ui_name="$mat_metal"
 	platform_type="1"
@@ -11762,7 +12179,25 @@
   <CellDataChild
   	_parent="aluminium"
   	_inherit_reactions="1"
-	tags="[box2d],[solid]"
+	tags="[box2d],[corrodible],[alchemy],[meltable_metal_generic],[solid]"
+  	name="metal_hard"
+  	ui_name="$mat_metal"
+	platform_type="1"
+	wang_color="ff3df03c" 
+	electrical_conductivity="1"
+	audio_physics_material_wall="gravel"
+	audio_physics_material_solid="metalhollow"
+	>
+  	<Graphics
+		texture_file="data/materials_gfx/steel.png"
+		color="ff3d2d3c" >
+    </Graphics>
+  </CellDataChild>
+  
+  <CellDataChild
+  	_parent="aluminium"
+  	_inherit_reactions="1"
+	tags="[box2d],[solid],[earth]"
   	name="rock_box2d"
 	ui_name="$mat_rock_box2d"
 	platform_type="1"
@@ -11784,7 +12219,7 @@
   <CellDataChild
   	_parent="aluminium"
   	_inherit_reactions="1"
-	tags="[box2d],[solid]"
+	tags="[box2d],[solid],[sunbaby_ignore_list]"
   	name="rock_box2d_hard"
 	ui_name="$mat_rock_box2d_hard"
 	platform_type="1"
@@ -11831,7 +12266,7 @@
   <CellDataChild
   	_parent="aluminium"
   	_inherit_reactions="1"
-	tags="[box2d],[solid]"
+	tags="[box2d],[solid],[earth]"
   	name="rock_box2d_nohit"
 	ui_name="$mat_rock_box2d_nohit"
 	electrical_conductivity="0"
@@ -11866,7 +12301,7 @@
    <CellData
 	name="rock_static_box2d"
 	ui_name="$mat_rock_static_box2d"
-	tags="[box2d],[static],[alchemy],[solid]"
+	tags="[box2d],[static],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="6"
 	cell_type="solid"
@@ -11898,7 +12333,7 @@
 	<CellData
 		name="rock_box2d"
 		ui_name="$mat_rock_box2d"
-		tags="[box2d],[static],[alchemy],[solid]"
+		tags="[box2d],[static],[alchemy],[solid],[earth]"
 		burnable="0"
 		density="6"
 		cell_type="solid"
@@ -11967,11 +12402,30 @@
 	color="fffe2dac" >
     </Graphics>
   </CellDataChild>
+
+  <CellDataChild
+  	_parent="item_box2d"
+  	_inherit_reactions="1"
+	tags="[box2d]"
+  	name="item_box2d_meat"
+	ui_name="$mat_meat"
+	gfx_glow="188"
+	wang_color="fffe11a1"
+	stainable="0" 
+	solid_restitution="0.2"
+	audio_physics_material_wall="meat"
+	audio_physics_material_solid="meat"
+	>
+  	<Graphics
+	texture_file="data/materials_gfx/meat.png"
+	color="fffe2dac" >
+    </Graphics>
+  </CellDataChild>
   
   <CellDataChild
   	_parent="aluminium"
   	_inherit_reactions="1"
-	tags="[box2d]"
+	tags="[box2d],[sunbaby_ignore_list]"
   	name="gem_box2d"
 	ui_name="$mat_gem_box2d"
 	platform_type="0"
@@ -12039,6 +12493,40 @@
 	color="ff5787E7" >
     </Graphics>
   </CellDataChild>
+  
+  <CellDataChild
+  	_parent="gem_box2d"
+  	_inherit_reactions="1"
+	tags="[box2d],[matter_eater_ignore_list],[indestructible],[sunbaby_ignore_list]"
+  	name="gem_box2d_yellow_sun"
+	ui_name="$mat_gem_box2d_red"
+	gfx_glow_color="0xffff9919"
+	gfx_glow="255"
+	wang_color="ffff9919"
+	show_in_creative_mode="0"
+	solid_gravity_scale="0"
+	durability="15"
+	>
+  	<Graphics
+	color="ffffc74e" >
+    </Graphics>
+  </CellDataChild>
+  
+  <CellDataChild
+  	_parent="gem_box2d"
+  	_inherit_reactions="1"
+  	name="gem_box2d_red_float"
+	ui_name="$mat_gem_box2d_red"
+	gfx_glow_color="0xFFFF0000"
+	wang_color="fffd2d7d"
+	show_in_creative_mode="0"
+	solid_gravity_scale="0.2"
+	durability="15"
+	>
+  	<Graphics
+	color="ffE72850" >
+    </Graphics>
+  </CellDataChild>
 
   <CellDataChild
   	_parent="gem_box2d"
@@ -12065,6 +12553,34 @@
 	>
   	<Graphics
 	color="ffE72850" >
+    </Graphics>
+  </CellDataChild>
+  
+  <CellDataChild
+  	_parent="gem_box2d"
+  	_inherit_reactions="1"
+  	name="gem_box2d_turquoise"
+	ui_name="$mat_gem_box2d_turquoise"
+	gfx_glow_color="0xFF42ffbd"
+	wang_color="ff14ffd7"
+	show_in_creative_mode="1"
+	>
+  	<Graphics
+	color="ff42ffbd" >
+    </Graphics>
+  </CellDataChild>
+  
+  <CellDataChild
+  	_parent="gem_box2d"
+  	_inherit_reactions="1"
+  	name="gem_box2d_white"
+	ui_name="$mat_gem_box2d_white"
+	gfx_glow_color="0xFFebeaef"
+	wang_color="ffebeaef"
+	show_in_creative_mode="1"
+	>
+  	<Graphics
+	color="ffebeaef" >
     </Graphics>
   </CellDataChild>
   
@@ -12135,7 +12651,7 @@
   <CellDataChild
   	_parent="aluminium"
   	_inherit_reactions="1"
-	tags="[box2d],[corrodible],[alchemy],[meltable_metal],[solid]"
+	tags="[box2d],[corrodible],[alchemy],[meltable_metal],[solid],[earth]"
   	name="metal_nohit"
 	ui_name="$mat_metal_nohit"
 	hp="40000"
@@ -12153,7 +12669,7 @@
   <CellDataChild
   	_parent="aluminium"
   	_inherit_reactions="1"
-	tags="[box2d],[corrodible],[alchemy],[meltable_metal_generic],[solid]"
+	tags="[box2d],[corrodible],[alchemy],[meltable_metal_generic],[solid],[earth]"
   	name="metal_chain_nohit"
 	ui_name="$mat_metal_nohit"
 	hp="40000"
@@ -12172,7 +12688,7 @@
   <CellDataChild
   	_parent="aluminium"
   	_inherit_reactions="1"
-	tags="[box2d],[corrodible],[alchemy],[meltable_metal_generic],[solid]"
+	tags="[box2d],[corrodible],[alchemy],[meltable_metal_generic],[solid],[earth]"
   	name="metal_wire_nohit"
 	ui_name="$mat_metal_nohit"
 	hp="40000"
@@ -12190,7 +12706,7 @@
   <CellDataChild
   	_parent="aluminium"
   	_inherit_reactions="1"
-	tags="[box2d],[corrodible],[rust_box2d],[alchemy],[meltable_metal],[solid]"
+	tags="[box2d],[corrodible],[rust_box2d],[alchemy],[meltable_metal],[solid],[earth]"
   	name="metal_rust"
 	ui_name="$mat_metal_rust"
 	platform_type="1"
@@ -12208,7 +12724,7 @@
   <CellDataChild
   	_parent="aluminium"
   	_inherit_reactions="1"
-	tags="[box2d],[corrodible],[rust_box2d],[alchemy],[meltable_metal_generic],[solid]"
+	tags="[box2d],[corrodible],[rust_box2d],[alchemy],[meltable_metal_generic],[solid],[earth]"
   	name="metal_rust_barrel"
 	ui_name="$mat_metal_rust_barrel"
 	platform_type="1"
@@ -12225,7 +12741,7 @@
   <CellDataChild
   	_parent="aluminium"
   	_inherit_reactions="1"
-	tags="[box2d],[corrodible],[alchemy],[meltable_to_lava],[solid]"
+	tags="[box2d],[corrodible],[alchemy],[meltable_to_lava],[solid],[earth]"
   	name="bone_box2d" 
 	ui_name="$mat_bone_box2d"
 	solid_break_to_type="bone"
@@ -12338,7 +12854,7 @@
   <CellDataChild
   	name="gold_b2" 
 	ui_name="$mat_gold_b2"
-	tags="[box2d],[gold],[alchemy],[solid]"
+	tags="[box2d],[gold],[alchemy],[solid],[earth]"
   	_parent="crystal"
   	_inherit_reactions="1"
 	wang_color="fffefae4" 
@@ -12413,7 +12929,7 @@
   <CellData
 	name="aluminium_oxide"
 	ui_name="$mat_aluminium_oxide"
-	tags="[box2d],[corrodible],[alchemy],[meltable_metal],[solid]"
+	tags="[box2d],[corrodible],[alchemy],[meltable_metal],[solid],[earth]"
 	burnable="0"
 	density="8"
 	cell_type="solid"
@@ -12440,7 +12956,7 @@
   <CellData
 	name="meat"
 	ui_name="$mat_meat"
-  	tags="[box2d],[corrodible],[meltable_to_lava],[alchemy],[meat],[solid]"
+  	tags="[box2d],[corrodible],[meltable_to_lava],[alchemy],[meat],[solid],[earth]"
 	burnable="1"
 	density="6"
 	solid_friction="1"
@@ -12517,7 +13033,7 @@
   <CellData
 	name="meat_slime"
 	ui_name="$mat_meat_slime"
-  	tags="[box2d],[corrodible],[meltable_to_lava],[alchemy],[meat],[solid]"
+  	tags="[box2d],[corrodible],[meltable_to_lava],[alchemy],[meat],[solid],[earth]"
 	burnable="1"
 	density="3"
 	cell_type="solid"
@@ -12558,7 +13074,7 @@
   <CellData 
 	name="urine"  
 	ui_name="$mat_urine"
-  	tags="[liquid],[corrodible],[soluble]"
+  	tags="[liquid],[corrodible],[soluble],[liquid_common]"
 	burnable="0"  
 	density="3"  
 	cell_type="liquid" 
@@ -12740,7 +13256,7 @@
 	audio_physics_material_solid="ice" 
 	gfx_glow="50"
 	platform_type="1"
-	tags="[box2d],[alchemy],[solid]"
+	tags="[box2d],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="6"
 	cell_type="solid"
@@ -12777,7 +13293,7 @@
   <CellData
 	name="glass"
 	ui_name="$mat_glass"
-	tags="[static],[meltable_metal],[alchemy],[solid]"
+	tags="[static],[meltable_metal],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="6"
 	cell_type="solid"
@@ -12817,7 +13333,7 @@
   <CellData
 	name="glass_broken"
 	ui_name="$mat_glass"
-  	tags="[sand_other],[meltable_metal],[alchemy],[solid]"
+  	tags="[sand_other],[meltable_metal],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="6"
 	cell_type="liquid"
@@ -12841,7 +13357,7 @@
  <CellData
 	name="neon_tube_purple"
 	ui_name="$mat_neon_tube_purple"
-	tags="[static],[corrodible],[box2d],[alchemy],[solid]"
+	tags="[static],[corrodible],[box2d],[alchemy],[solid],[earth]"
 	burnable="0"
 	density="6"
 	cell_type="solid"
@@ -12943,6 +13459,32 @@
 	texture_file="data/materials_gfx/snow.png"
 	color="ffF4F4F3" >
     </Graphics>
+  </CellData>
+
+  <!-- this is not an actual material that is used anywhere. only the particle effect is used for materials converted by fungal_shift -->
+  <CellData
+	name="fungal_shift_particle_fx"
+	wang_color="80c1dba5"
+	is_just_particle_fx="1"
+	>
+	<Graphics
+	texture_file="data/materials_gfx/confusion.png"
+	color="80c1dba5" >
+    </Graphics>
+	<ParticleEffect
+		vel.y="2.14"
+		vel_random.min_y="-55"
+		vel_random.max_y="25"
+		lifetime.min="0"
+		gravity.y="0"
+		render_on_grid="1"
+		airflow_force="3"
+		airflow_scale="0.1"
+		draw_as_long="1"
+		friction="0.04"
+		probability="0.0118"
+	>
+	</ParticleEffect>
   </CellData>
 
 <!-- =================================================================================================================  -->
@@ -13062,8 +13604,8 @@
   </Reaction>
   
   <Reaction probability="30"
-	input_cell1="[fire]" 		input_cell2="[meltable_metal]"
-	output_cell1="[fire]" 		output_cell2="[meltable_metal]_molten"  >
+	input_cell1="[fire_strong]" 		input_cell2="[meltable_metal]"
+	output_cell1="[fire_strong]" 		output_cell2="[meltable_metal]_molten"  >
   </Reaction>
 
  
@@ -13314,7 +13856,7 @@
   <!-- [meltable] melts when colliding with [fire] -->
   <Reaction probability="20"
 	input_cell1="[fire]"				input_cell2="[meltable]" 		        
-	output_cell1="[meltable]_molten"	output_cell2="smoke"  >
+	output_cell1="smoke"				output_cell2="[meltable]_molten"  >
   </Reaction>
 
   <!-- molten turns to solid when colliding with air (solid as a state of material) -->
@@ -13531,6 +14073,16 @@
   <Reaction probability="45"
    input_cell1="[evaporable_fast]" 		input_cell2="air"
    output_cell1="air" 					output_cell2="air" >
+  </Reaction>
+  
+  <Reaction probability="80"
+	input_cell1="[evaporable_by_fire]" 	input_cell2="[lava]"
+	output_cell1="air" 	output_cell2="[lava]"  >
+  </Reaction>
+  
+  <Reaction probability="80"
+	input_cell1="[evaporable_by_fire]" 	input_cell2="[fire]"
+	output_cell1="air" 	output_cell2="[fire]"  >
   </Reaction>
   
   <Reaction probability="80"
@@ -13856,6 +14408,14 @@
 	output_cell1="alcohol_gas"	output_cell2="alcohol_gas">
   </Reaction>
 
+  <!-- glue. evaporates slowly and burns quick into poison gas -->
+  <Reaction probability="60"
+  	fast_reaction="1"
+	input_cell1="glue" 		input_cell2="[fire]"
+	output_cell1="[fire]"		output_cell2="poison_gas">
+  </Reaction>
+
+
 	<!-- =================================================================================================================  -->
 	<!-- [slime] reactions -->
 
@@ -14161,6 +14721,12 @@
 	output_cell1="magic_liquid_mana_regeneration" 		output_cell2="steam" 
 	>
   </Reaction>
+  
+  <Reaction probability="25" 
+	input_cell1="magic_liquid_mana_regeneration" 		input_cell2="[meltable_metal_generic]"  
+	output_cell1="magic_liquid_mana_regeneration" 		output_cell2="steam" 
+	>
+  </Reaction>
 
 
 
@@ -14416,8 +14982,8 @@
 	</Reaction>
 	
 	<Reaction probability="30"
-		input_cell1="[meltable_metal_generic]" input_cell2="[fire]"
-		output_cell1="metal_sand_molten" output_cell2="[fire]"
+		input_cell1="[meltable_metal_generic]" input_cell2="[fire_strong]"
+		output_cell1="metal_sand_molten" output_cell2="[fire_strong]"
 		>
 	</Reaction>
 	
@@ -14426,6 +14992,21 @@
 		output_cell1="metal_sand_molten" output_cell2="[lava]"
 		>
 	</Reaction>
-
+	
+	<!-- Special powders -->
+	
+	<Reaction probability="100"
+		input_cell1="rat_powder" input_cell2="air"
+		output_cell1="air" output_cell2="air"
+		entity="data/entities/misc/rat_powder.xml"
+		>
+	</Reaction>
+	
+	<Reaction probability="100"
+		input_cell1="fungus_powder" input_cell2="air"
+		output_cell1="air" output_cell2="air"
+		entity="data/entities/misc/fungus_powder.xml"
+		>
+	</Reaction>
 
 </Materials>

@@ -1,4 +1,4 @@
-<Entity name="$animal_healerdrone_physics" >
+<Entity tags="glue_NOT" name="$animal_healerdrone_physics" >
   
 	<PhysicsAIComponent
 		target_vec_max_len="15.0"
@@ -180,6 +180,8 @@
 	</Base>
 	
 	<Entity>
+		<InheritTransformComponent />
+		
 	    <GameEffectComponent 
 	        effect="PROTECTION_FREEZE"
 	        frames="-1"

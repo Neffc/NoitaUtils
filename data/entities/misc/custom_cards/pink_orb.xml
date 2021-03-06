@@ -1,4 +1,4 @@
-<Entity _tags="homing orb">
+<Entity tags="homing orb">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

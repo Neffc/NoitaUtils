@@ -4,16 +4,23 @@ extra_modifiers =
 		c.damage_critical_chance = c.damage_critical_chance + 5
 	end,
 	
+	critical_plus_small = function()
+		c.damage_critical_chance = c.damage_critical_chance + 20
+	end,
+	
 	powerful_shot = function()
 		c.damage_explosion_add = c.damage_explosion_add + 0.1
 		c.damage_projectile_add = c.damage_projectile_add + 0.6
 		c.speed_multiplier = c.speed_multiplier * 2.5
+		c.lifetime_add = c.lifetime_add + 20
 	end,
 	
-	powerful_shot_placeholder = function()
-		c.damage_explosion_add = c.damage_explosion_add + 1.0
-		c.lifetime_add = c.lifetime_add + 20
-		c.speed_multiplier = c.speed_multiplier * 2.5
+	food_clock = function()
+		c.extra_entities = c.extra_entities .. "data/entities/misc/perks/food_clock.xml,"
+	end,
+	
+	damage_plus_small = function()
+		c.damage_projectile_add = c.damage_projectile_add + 0.4
 	end,
 
 	damage_projectile_boost = function()
@@ -32,7 +39,7 @@ extra_modifiers =
 		c.spread_degrees = c.spread_degrees - 30
 		c.damage_explosion_add = c.damage_explosion_add + 0.2
 		c.damage_projectile_add = c.damage_projectile_add + 0.5
-		c.fire_rate_wait   = c.fire_rate_wait + 5
+		c.fire_rate_wait   = c.fire_rate_wait + 3
 		shot_effects.recoil_knockback = shot_effects.recoil_knockback + 10.0
 	end,
 	

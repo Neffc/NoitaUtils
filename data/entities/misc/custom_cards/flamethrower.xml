@@ -1,4 +1,4 @@
-<Entity _tags="flamethrower">
+<Entity tags="flamethrower">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

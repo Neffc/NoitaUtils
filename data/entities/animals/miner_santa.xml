@@ -102,5 +102,12 @@
 	    >
 		</GameEffectComponent >
 	</Entity>
+	
+	<HotspotComponent
+		_tags="hand_hotspot,hand"
+		sprite_hotspot_name="hand"
+		offset.x="0" 
+		offset.y="0">
+	</HotspotComponent>
 </Entity>
 

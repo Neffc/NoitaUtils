@@ -21,7 +21,7 @@
     explosion_dont_damage_shooter="0" 
     on_collision_die="1"
     lifetime="500"
-    damage="2.8"
+    damage="1.6"
     velocity_sets_scale="1"
     lifetime_randomness="7"
     ragdoll_force_multiplier="0.04"
@@ -37,6 +37,10 @@
 	knockback_force="1.0"
 	physics_impulse_coeff="4000"
 	>
+	<damage_by_type
+		fire="1.2"
+		>
+	</damage_by_type>
     <config_explosion
       never_cache="0" 
       camera_shake="10" 

@@ -1,5 +1,5 @@
 <Entity 
-	tags="mortal,hittable,teleportable_NOT,homing_target,enemy,worm" 
+	tags="mortal,hittable,teleportable_NOT,homing_target,enemy,worm,glue_NOT" 
 	name="$animal_worm"
 	>
 	<_Transform 
@@ -162,7 +162,6 @@
 		z_index="-0.45"
 		>
 	</SpriteComponent>
-		
 
 	<SpriteStainsComponent
     	fade_stains_towards_srite_top="0"

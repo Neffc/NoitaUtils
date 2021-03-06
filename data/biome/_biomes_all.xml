@@ -452,6 +452,12 @@
 		height_index="10"
 		color="ff3d5a4f" >
 	</Biome>
+
+	<Biome 
+		biome_filename="data/biome/lavalake_racing.xml" 
+		height_index="10"
+		color="ff4118d6" >
+	</Biome>
 	
 	<Biome 
 		biome_filename="data/biome/shop_room.xml" 
@@ -878,6 +884,12 @@
 	</Biome>
 	
 	<Biome 
+		biome_filename="data/biome/ghost_secret.xml" 
+		height_index="13"
+		color="ff1f3b64" >
+	</Biome>
+	
+	<Biome 
 		biome_filename="data/biome/clouds.xml" 
 		height_index="0"
 		color="ff36d5c9" >
@@ -911,5 +923,17 @@
 		biome_filename="data/biome/rainforest_dark.xml" 
 		height_index="0"
 		color="ff375c00" >
+	</Biome>
+	
+	<Biome 
+		biome_filename="data/biome/funroom.xml" 
+		height_index="0"
+		color="ff0a95a4" >
+	</Biome>
+	
+	<Biome 
+		biome_filename="data/biome/rock_room.xml" 
+		height_index="0"
+		color="ff326655" >
 	</Biome>
 </BiomesToLoad>

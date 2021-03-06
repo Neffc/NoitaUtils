@@ -1,4 +1,4 @@
-<Entity _tags="heal bullet">
+<Entity tags="heal bullet">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

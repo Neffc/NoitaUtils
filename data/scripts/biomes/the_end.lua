@@ -136,6 +136,12 @@ g_small_enemies_sky =
 		max_count	= 2,    
 		entity 	= "data/entities/animals/wizard_tele.xml"
 	},
+	{
+		prob   		= 0.04,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/thundermage_big.xml"
+	},
 }
 
 g_big_enemies_sky =
@@ -373,7 +379,11 @@ function spawn_potions( x, y ) end
 function spawn_heart( x, y ) end
 
 function spawn_moon( x, y )
-	EntityLoad( "data/entities/buildings/moon_altar.xml", x, y )
+	if ( y <= 0 ) then
+		EntityLoad( "data/entities/buildings/moon_altar.xml", x, y )
+	else
+		EntityLoad( "data/entities/buildings/dark_moon_altar.xml", x, y )
+	end
 end
 
 function spawn_wands()

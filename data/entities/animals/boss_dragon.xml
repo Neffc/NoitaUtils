@@ -1,5 +1,5 @@
 <Entity 
-	tags="enemy,mortal,hittable,teleportable_NOT,boss_dragon,homing_target" name="$animal_boss_dragon">
+	tags="enemy,mortal,hittable,teleportable_NOT,boss_dragon,homing_target,glue_NOT" name="$animal_boss_dragon">
 
 	<_Transform 
 		position.x="0" 
@@ -51,7 +51,7 @@
 		<damage_multipliers
 			explosion="0.5"
 			fire="0.5"
-			freeze="0.5"
+			ice="0.5"
 			electricity="0.3"
 			>
 		</damage_multipliers>
@@ -265,11 +265,6 @@
 		set_speed_parameter="1"
 		auto_play="1">
 	</AudioLoopComponent>
-	
-	<LuaComponent
-		script_death="data/scripts/animals/boss_dragon_death.lua"
-		>
-	</LuaComponent>
 	
 	<Entity>
 		

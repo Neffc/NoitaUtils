@@ -153,8 +153,8 @@ function perk_get_spawn_order()
 		local flag_name = get_perk_picked_flag_name( perk_id )
 		local pickup_count = tonumber( GlobalsGetValue( flag_name .. "_PICKUP_COUNT", "0" ) )
 		
-		if ( nonstackables[perk_id] ~= nil ) and ( pickup_count > 0 ) then
-			--print( "Removed " .. perk_id .. " from perk pool because it had been picked up already" )
+		if ( nonstackables[perk_id] ~= nil ) and ( ( pickup_count > 0 ) or GameHasFlagRun( flag_name ) ) then
+			print( "Removed " .. perk_id .. " from perk pool because it had been picked up already" )
 			table.remove( result, i )
 		end
 	end
@@ -227,6 +227,13 @@ function perk_pickup( entity_item, entity_who_picked, item_name, do_cosmetic_fx,
 			ComponentSetValue( game_effect_comp, "frames", "-1" )
 		end
 	end
+	
+	if perk_data.remove_other_perks ~= nil then
+		for i,v in ipairs( perk_data.remove_other_perks ) do
+			local f = get_perk_picked_flag_name( v )
+			GameAddFlagRun( f )
+		end
+	end
 
 	if perk_data.func ~= nil then
 		perk_data.func( entity_item, entity_who_picked, item_name )
@@ -261,23 +268,14 @@ function perk_pickup( entity_item, entity_who_picked, item_name, do_cosmetic_fx,
 	-- disable the perk rerolling machine --------------------------------
 	local x,y = EntityGetTransform( entity_who_picked )
 	local rerolls = EntityGetInRadiusWithTag( x, y, 200, "perk_reroll_machine" )
+	local other_perks = EntityGetInRadiusWithTag( x, y, 200, "item_perk" )
 	
-	for i,rid in ipairs( rerolls ) do
-		local reroll_comp = EntityGetFirstComponent( rid, "ItemCostComponent" )
-		
-		if ( reroll_comp ~= nil ) then
-			EntitySetComponentIsEnabled( rid, reroll_comp, false )
-		end
-		
-		reroll_comp = EntityGetComponent( rid, "SpriteComponent", "shop_cost" )
-		
-		if ( reroll_comp ~= nil ) then
-			for a,b in ipairs( reroll_comp ) do
-				EntitySetComponentIsEnabled( rid, b, false )
-			end
-		end
-		
-		EntitySetComponentsWithTagEnabled( rid, "perk_reroll_disable", false )
+	print( "Other perks: " .. tostring( #other_perks ) .. ", " .. tostring( kill_other_perks ) )
+	
+	local disable_reroll = false
+	
+	if ( #other_perks <= 1 ) then
+		disable_reroll = true
 	end
 	
 	-- remove all perk items (also this one!) ----------------------------
@@ -288,6 +286,7 @@ function perk_pickup( entity_item, entity_who_picked, item_name, do_cosmetic_fx,
 		if( Random( 1, 100 ) <= perk_destroy_chance ) then
 			-- removes all the perks
 			local all_perks = EntityGetWithTag( "perk" )
+			disable_reroll = true
 		
 			if ( #all_perks > 0 ) then
 				for i,entity_perk in ipairs(all_perks) do
@@ -296,6 +295,26 @@ function perk_pickup( entity_item, entity_who_picked, item_name, do_cosmetic_fx,
 					end
 				end
 			end
+		end
+	end
+	
+	if disable_reroll then
+		for i,rid in ipairs( rerolls ) do
+			local reroll_comp = EntityGetFirstComponent( rid, "ItemCostComponent" )
+			
+			if ( reroll_comp ~= nil ) then
+				EntitySetComponentIsEnabled( rid, reroll_comp, false )
+			end
+			
+			reroll_comp = EntityGetComponent( rid, "SpriteComponent", "shop_cost" )
+			
+			if ( reroll_comp ~= nil ) then
+				for a,b in ipairs( reroll_comp ) do
+					EntitySetComponentIsEnabled( rid, b, false )
+				end
+			end
+			
+			EntitySetComponentsWithTagEnabled( rid, "perk_reroll_disable", false )
 		end
 	end
 
@@ -465,6 +484,23 @@ function perk_reroll_perks( entity_item )
 		if next_perk_index <= 0 then
 			next_perk_index = #perks
 		end
+		
+		local is_stackable = get_perk_stackable_status( perk_id )
+		local tries = 0
+		
+		while ( is_stackable == false ) and ( tries < 10 ) do
+			perk_id = perks[next_perk_index]
+			
+			next_perk_index = next_perk_index - 1
+			if next_perk_index <= 0 then
+				next_perk_index = #perks
+			end
+			
+			tries = tries + 1
+			
+			is_stackable = get_perk_stackable_status( perk_id )
+		end
+		
 		GlobalsSetValue( "TEMPLE_REROLL_PERK_INDEX", tostring(next_perk_index) )
 
 		GameAddFlagRun( get_perk_flag_name(perk_id) )
@@ -472,6 +508,25 @@ function perk_reroll_perks( entity_item )
 	end
 end
 
+function get_perk_stackable_status( perk_id )
+	for i,v in ipairs( perk_list ) do
+		if ( v.id == perk_id ) then
+			local result = perk_is_stackable( v )
+			
+			if ( result == false ) then
+				local flag_name = get_perk_picked_flag_name( perk_id )
+				
+				if GameHasFlagRun( flag_name ) then
+					return false
+				end
+			end
+			
+			return true
+		end
+	end
+	
+	return false
+end
 
 function DEBUG_PERKS()
 

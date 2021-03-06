@@ -1,4 +1,4 @@
-<Entity _tags="levitation projectile">
+<Entity tags="levitation projectile">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

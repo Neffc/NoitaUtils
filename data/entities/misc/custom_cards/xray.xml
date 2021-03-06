@@ -1,4 +1,4 @@
-<Entity _tags="xray">
+<Entity tags="xray">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

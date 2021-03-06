@@ -1,4 +1,4 @@
-<Entity _tags="ice circle">
+<Entity tags="ice circle">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

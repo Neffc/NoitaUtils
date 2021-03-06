@@ -1,4 +1,4 @@
-<Entity _tags="heavy shot">
+<Entity tags="heavy shot">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

@@ -1,4 +1,4 @@
-<Entity _tags="grenade_tier_2">
+<Entity tags="grenade_tier_2">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

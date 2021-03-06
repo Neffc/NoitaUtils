@@ -28,6 +28,7 @@ RegisterSpawnFunction( 0xffb4a00a, "spawn_fish" )
 RegisterSpawnFunction( 0xffaa42ff, "spawn_electricity_trap" )
 RegisterSpawnFunction( 0xff366178, "spawn_buried_eye_teleporter" )
 RegisterSpawnFunction( 0xff876543, "spawn_statue_hand" )
+RegisterSpawnFunction( 0xff00855c, "spawn_receptacle" )
 
 
 ------------ SMALL ENEMIES ----------------------------------------------------
@@ -106,6 +107,20 @@ g_small_enemies =
 		max_count	= 1,    
 		entity 	= "data/entities/animals/tank_rocket.xml"
 	},
+	{
+		prob   		= 0.09,
+		min_count	= 1,
+		max_count	= 1,
+		ngpluslevel	= 1,
+		entity 	= "data/entities/animals/thundermage.xml"
+	},
+	{
+		prob   		= 0.09,
+		min_count	= 1,
+		max_count	= 1,
+		ngpluslevel	= 2,
+		entity 	= "data/entities/animals/thundermage_big.xml"
+	},
 }
 
 
@@ -127,6 +142,13 @@ g_big_enemies =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/thundermage.xml"
+	},
+	{
+		prob   		= 0.08,
+		min_count	= 1,
+		max_count	= 1,
+		ngpluslevel	= 1,
+		entity 	= "data/entities/animals/thundermage_big.xml"
 	},
 	{
 		prob   		= 0.05,
@@ -276,11 +298,39 @@ g_big_enemies =
 		entity 	= "data/entities/animals/thunderskull.xml"
 	},
 	{
+		prob   		= 0.1,
+		min_count	= 2,
+		max_count	= 4,    
+		entity 	= "data/entities/animals/scavenger_glue.xml",
+	},
+	{
 		prob   		= 0.05,
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/drone_shield.xml",
 		ngpluslevel = 2,
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/buildings/hpcrystal.xml",
+		ngpluslevel = 1,
+	},
+	{
+		prob   		= 0.01,
+		min_count	= 1,
+		max_count	= 2,    
+		entity 	= "data/entities/animals/easter/sniper.xml",
+		spawn_check = function() 
+			local year, month, day = GameGetDateAndTimeLocal()
+			
+			if ( month == 8 ) and ( day == 24 ) then
+				return true
+			else
+				return false 
+			end
+		end,
 	},
 }
 
@@ -400,7 +450,7 @@ g_unique_enemy2 =
 		min_count	= 1,
 		max_count	= 1,    
 		entity 	= "data/entities/animals/sniper.xml"
-	},
+	}
 }
 
 ------------ ITEMS ------------------------------------------------------------
@@ -469,43 +519,10 @@ g_pixel_scene_01 =
 		is_unique		= 0
 	},
 	{
-		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave/icepillar.png",
+		prob   			= 0.25,
+		material_file 	= "data/biome_impl/snowcave/receptacle_water.png",
 		visual_file		= "",
-		background_file	= "",
-		is_unique		= 0
-	},
-}
-
-g_pixel_scene_01 =
-{
-	total_prob = 0,
-	{
-		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave/verticalobservatory.png",
-		visual_file		= "data/biome_impl/snowcave/verticalobservatory_visual.png",
-		background_file	= "data/biome_impl/snowcave/verticalobservatory_background.png",
-		is_unique		= 0
-	},
-	{
-		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave/verticalobservatory2.png",
-		visual_file		= "data/biome_impl/snowcave/verticalobservatory2_visual.png",
-		background_file	= "data/biome_impl/snowcave/verticalobservatory2_background.png",
-		is_unique		= 0
-	},
-	{
-		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave/icebridge2.png",
-		visual_file		= "",
-		background_file	= "",
-		is_unique		= 0
-	},
-	{
-		prob   			= 0.5,
-		material_file 	= "data/biome_impl/snowcave/pipe.png",
-		visual_file		= "data/biome_impl/snowcave/pipe_visual.png",
-		background_file	= "",
+		background_file	= "data/biome_impl/snowcave/receptacle_water_background.png",
 		is_unique		= 0
 	},
 }
@@ -1213,4 +1230,8 @@ end
 
 function spawn_statue_hand(x, y)
 	EntityLoad("data/entities/buildings/statue_hand_1.xml", x, y)
+end
+
+function spawn_receptacle( x, y )
+	EntityLoad( "data/entities/buildings/receptacle_water.xml", x, y )
 end

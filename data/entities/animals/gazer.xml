@@ -13,7 +13,7 @@
 		</AnimalAIComponent>
 
 		<DamageModelComponent 
-            hp="6" 
+            hp="9" 
             ragdoll_material="meat_slime_cursed"
 			blood_material="lava"
 			blood_spray_material="lava"

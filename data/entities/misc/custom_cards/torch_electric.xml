@@ -1,4 +1,4 @@
-<Entity _tags="torch">
+<Entity tags="torch">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

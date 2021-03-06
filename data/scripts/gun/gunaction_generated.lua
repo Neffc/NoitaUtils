@@ -34,6 +34,11 @@ function ConfigGunActionInfo_Init( value )
     value.damage_electricity_add = 0.0
     value.damage_fire_add = 0.0
     value.damage_explosion_add = 0.0
+    value.damage_ice_add = 0.0
+    value.damage_slice_add = 0.0
+    value.damage_healing_add = 0.0
+    value.damage_curse_add = 0.0
+    value.damage_drill_add = 0.0
     value.damage_critical_chance = 0
     value.damage_critical_multiplier = 0.0
     value.explosion_damage_to_materials = 0
@@ -97,6 +102,11 @@ function ConfigGunActionInfo_PassToGame( value )
         value.damage_electricity_add, 
         value.damage_fire_add, 
         value.damage_explosion_add, 
+        value.damage_ice_add, 
+        value.damage_slice_add, 
+        value.damage_healing_add, 
+        value.damage_curse_add, 
+        value.damage_drill_add, 
         value.damage_critical_chance, 
         value.damage_critical_multiplier, 
         value.explosion_damage_to_materials, 
@@ -123,7 +133,7 @@ function ConfigGunActionInfo_PassToGame( value )
         value.projectile_file
   )
 end
-function ConfigGunActionInfo_ReadToLua( action_id, action_name, action_description, action_sprite_filename, action_unidentified_sprite_filename, action_type, action_spawn_level, action_spawn_probability, action_spawn_requires_flag, action_spawn_manual_unlock, action_max_uses, custom_xml_file, action_mana_drain, action_is_dangerous_blast, action_draw_many_count, action_ai_never_uses, action_never_unlimited, state_shuffled, state_cards_drawn, state_discarded_action, state_destroyed_action, fire_rate_wait, speed_multiplier, child_speed_multiplier, dampening, explosion_radius, spread_degrees, pattern_degrees, screenshake, recoil, damage_melee_add, damage_projectile_add, damage_electricity_add, damage_fire_add, damage_explosion_add, damage_critical_chance, damage_critical_multiplier, explosion_damage_to_materials, knockback_force, reload_time, lightning_count, material, material_amount, trail_material, trail_material_amount, bounces, gravity, light, blood_count_multiplier, gore_particles, ragdoll_fx, friendly_fire, physics_impulse_coeff, lifetime_add, sprite, extra_entities, game_effect_entities, sound_loop_tag, projectile_file )
+function ConfigGunActionInfo_ReadToLua( action_id, action_name, action_description, action_sprite_filename, action_unidentified_sprite_filename, action_type, action_spawn_level, action_spawn_probability, action_spawn_requires_flag, action_spawn_manual_unlock, action_max_uses, custom_xml_file, action_mana_drain, action_is_dangerous_blast, action_draw_many_count, action_ai_never_uses, action_never_unlimited, state_shuffled, state_cards_drawn, state_discarded_action, state_destroyed_action, fire_rate_wait, speed_multiplier, child_speed_multiplier, dampening, explosion_radius, spread_degrees, pattern_degrees, screenshake, recoil, damage_melee_add, damage_projectile_add, damage_electricity_add, damage_fire_add, damage_explosion_add, damage_ice_add, damage_slice_add, damage_healing_add, damage_curse_add, damage_drill_add, damage_critical_chance, damage_critical_multiplier, explosion_damage_to_materials, knockback_force, reload_time, lightning_count, material, material_amount, trail_material, trail_material_amount, bounces, gravity, light, blood_count_multiplier, gore_particles, ragdoll_fx, friendly_fire, physics_impulse_coeff, lifetime_add, sprite, extra_entities, game_effect_entities, sound_loop_tag, projectile_file )
     __globaldata = {}
     __globaldata.action_id = action_id
     __globaldata.action_name = action_name
@@ -160,6 +170,11 @@ function ConfigGunActionInfo_ReadToLua( action_id, action_name, action_descripti
     __globaldata.damage_electricity_add = damage_electricity_add
     __globaldata.damage_fire_add = damage_fire_add
     __globaldata.damage_explosion_add = damage_explosion_add
+    __globaldata.damage_ice_add = damage_ice_add
+    __globaldata.damage_slice_add = damage_slice_add
+    __globaldata.damage_healing_add = damage_healing_add
+    __globaldata.damage_curse_add = damage_curse_add
+    __globaldata.damage_drill_add = damage_drill_add
     __globaldata.damage_critical_chance = damage_critical_chance
     __globaldata.damage_critical_multiplier = damage_critical_multiplier
     __globaldata.explosion_damage_to_materials = explosion_damage_to_materials
@@ -221,6 +236,11 @@ function ConfigGunActionInfo_Copy( source, dest )
     dest.damage_electricity_add = source.damage_electricity_add
     dest.damage_fire_add = source.damage_fire_add
     dest.damage_explosion_add = source.damage_explosion_add
+    dest.damage_ice_add = source.damage_ice_add
+    dest.damage_slice_add = source.damage_slice_add
+    dest.damage_healing_add = source.damage_healing_add
+    dest.damage_curse_add = source.damage_curse_add
+    dest.damage_drill_add = source.damage_drill_add
     dest.damage_critical_chance = source.damage_critical_chance
     dest.damage_critical_multiplier = source.damage_critical_multiplier
     dest.explosion_damage_to_materials = source.explosion_damage_to_materials

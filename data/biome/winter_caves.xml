@@ -1,6 +1,6 @@
 <Biome>
   <Topology 
-    name="$biome_coalmine"
+    name="$biome_winter_caves"
     type="BIOME_WANG_TILE"
     background_image="data/weather_gfx/background_cave_04_alt.png"
     background_edge_left="data/weather_gfx/edges/background_cave_04_alt_left.png"
@@ -9,8 +9,8 @@
     background_edge_bottom="data/weather_gfx/edges/background_cave_04_alt_bottom.png"
     background_edge_priority="9"     
 
-    wang_template_file="data/wang_tiles/winter_caves.png" 
-    lua_script="data/scripts/biomes/hills.lua"
+    wang_template_file="data/wang_tiles/snowchasm.png" 
+    lua_script="data/scripts/biomes/winter.lua"
 	limit_background_image="0"
 	noise_biome_edges="1"
     wang_map_width="256"

@@ -1,4 +1,4 @@
-<Entity _tags="thunder blast">
+<Entity tags="thunder blast">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

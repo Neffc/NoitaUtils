@@ -144,8 +144,10 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			-- Potion
 			-------------------------------------------------------------------
 			rnd = Random(0,100)
-			if (rnd <= 98) then
+			if (rnd <= 94) then
 				table.insert( entities, { "data/entities/items/pickup/potion.xml" } )
+			elseif (rnd <= 98) then
+				table.insert( entities, { "data/entities/items/pickup/powder_stash.xml" } )
 			elseif (rnd <= 100) then
 				rnd = Random(0,100)
 				if( rnd <= 98 ) then
@@ -164,7 +166,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			-------------------------------------------------------------------
 			-- Misc items
 			-------------------------------------------------------------------
-			local opts = { "data/entities/items/pickup/safe_haven.xml", "data/entities/items/pickup/moon.xml", "data/entities/items/pickup/thunderstone.xml", "data/entities/items/pickup/brimstone.xml", "runestone", "die" }
+			local opts = { "data/entities/items/pickup/safe_haven.xml", "data/entities/items/pickup/moon.xml", "data/entities/items/pickup/thunderstone.xml", "data/entities/items/pickup/evil_eye.xml", "data/entities/items/pickup/brimstone.xml", "runestone", "die", "orb" }
 			rnd = Random( 1, #opts )
 			local opt = opts[rnd]
 			
@@ -172,16 +174,26 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 				local flag_status = HasFlagPersistent( "card_unlocked_duplicate" )
 				
 				if flag_status then
-					opt = "data/entities/items/pickup/physics_die.xml"
+					if GameHasFlagRun( "greed_curse" ) and ( GameHasFlagRun( "greed_curse_gone" ) == false ) then
+						opt = "data/entities/items/pickup/physics_greed_die.xml"
+					else
+						opt = "data/entities/items/pickup/physics_die.xml"
+					end
 				else
 					opt = "data/entities/items/pickup/potion.xml"
 				end
 			elseif ( opt == "runestone" ) then
-				local r_opts = { "laser", "fireball", "lava", "slow", "null", "disc" }
+				local r_opts = { "laser", "fireball", "lava", "slow", "null", "disc", "metal" }
 				rnd = Random( 1, #r_opts )
 				local r_opt = r_opts[rnd]
 				
 				opt = "data/entities/items/pickup/runestones/runestone_" .. r_opt .. ".xml"
+			elseif ( opt == "orb" ) then
+				if GameHasFlagRun( "greed_curse" ) and ( GameHasFlagRun( "greed_curse_gone" ) == false ) then
+					opt = "data/entities/items/pickup/physics_gold_orb_greed.xml"
+				else
+					opt = "data/entities/items/pickup/physics_gold_orb.xml"
+				end
 			end
 			
 			table.insert( entities, { opt, x, y - 10 } )

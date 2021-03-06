@@ -1,4 +1,4 @@
-<Entity _tags="darkflame">
+<Entity tags="darkflame">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

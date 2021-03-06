@@ -1,5 +1,5 @@
 <Entity name="$animal_miner">
-	<Base file="data/entities/animals/miner.xml" >
+	<Base file="data/entities/animals/miner.xml" include_children="1" >
 		<DamageModelComponent
 			ragdoll_filenames_file="data/ragdolls/miner_weak/filenames.txt"
 			hp="0.44"
@@ -15,5 +15,6 @@
     <MusicEnergyAffectorComponent
     	energy_target="0.5">
     </MusicEnergyAffectorComponent>
+
 </Entity>
 

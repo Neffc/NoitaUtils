@@ -1,4 +1,4 @@
-<Entity _tags="high explosive">
+<Entity tags="high explosive">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

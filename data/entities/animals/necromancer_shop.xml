@@ -152,6 +152,10 @@
     >
     </LuaComponent>
 
+    <LuaComponent 
+        script_death="data/scripts/animals/necromancer_shop_death.lua" 
+    >
+    </LuaComponent>
 
 	<Entity>
 		<InheritTransformComponent>

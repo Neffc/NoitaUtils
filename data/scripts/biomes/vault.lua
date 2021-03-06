@@ -37,6 +37,7 @@ RegisterSpawnFunction( 0xffaa42ff, "spawn_electricity_trap" )
 RegisterSpawnFunction( 0xff33934c, "spawn_shopitem" )
 
 RegisterSpawnFunction( 0xffacf14b, "spawn_laser_trap" )
+RegisterSpawnFunction( 0xffa45aff, "spawn_lab_puzzle" )
 
 
 ------------ small enemies -------------------------------
@@ -172,6 +173,12 @@ g_small_enemies =
 			"data/entities/animals/vault/coward.xml",
 		}
 	},
+	{
+		prob   		= 0.1,
+		min_count	= 1,
+		max_count	= 3,    
+		entity 	= "data/entities/animals/vault/scavenger_glue.xml",
+	},
 }
 
 g_big_enemies =
@@ -257,6 +264,11 @@ g_big_enemies =
 				max_count	= 3,    
 				entity 	= "data/entities/animals/vault/scavenger_grenade.xml"
 			},
+			{
+				min_count	= 0,
+				max_count	= 3,    
+				entity 	= "data/entities/animals/vault/scavenger_glue.xml"
+			},
 			"data/entities/animals/vault/scavenger_leader.xml",
 			"data/entities/animals/vault/scavenger_heal.xml",
 		}
@@ -310,6 +322,20 @@ g_big_enemies =
 			"data/entities/animals/vault/healerdrone_physics.xml",
 			"data/entities/animals/vault/coward.xml",
 		},
+	},
+	{
+		prob   		= 0.075,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/necrobot.xml",
+		ngpluslevel = 1,
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/necrobot_super.xml",
+		ngpluslevel = 2,
 	},
 }
 
@@ -523,6 +549,14 @@ g_pixel_scene_02 =
 		visual_file		= "",
 		background_file	= "",
 		is_unique		= 0,
+	},
+	{
+		prob   			= 0.3,
+		material_file 	= "data/biome_impl/vault/lab_puzzle.png",
+		visual_file		= "data/biome_impl/vault/lab_puzzle_visual.png",
+		background_file	= "data/biome_impl/vault/lab_puzzle_background.png",
+		is_unique		= 0,
+		background_z_index = 38,
 	},
 }
 
@@ -1164,6 +1198,25 @@ end
 function spawn_shopitem( x, y )
 	generate_shop_item( x, y, false, nil )
 end
+
+function spawn_lab_puzzle(x, y)
+	SetRandomSeed(x, y)
+	local type_a = random_from_array({
+		"poly",
+		"tele",
+		"charm",
+		"berserk",
+	})
+	local type_b = random_from_array({
+		"protect",
+		"worm",
+		"invis",
+		"speed",
+	})
+	EntityLoad("data/entities/buildings/vault_lab_puzzle_" .. type_a .. ".xml", x - 10, y)
+	EntityLoad("data/entities/buildings/vault_lab_puzzle_" .. type_b .. ".xml", x + 11, y)
+end
+
 
 -----------------------------------------
 -- PIPES

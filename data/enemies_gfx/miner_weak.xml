@@ -1,8 +1,14 @@
 <Sprite 
-  filename="data/enemies_gfx/miner_weak.png" 
+  filename="data/enemies_gfx/miner_weak.png"
+  hotspots_filename="data/enemies_gfx/miner_hotspots.png"
   offset_x="7" 
   offset_y="12"
   default_animation="stand" >
+  
+	<Hotspot 
+		color="ff0000" 
+		name="hand" >
+	</Hotspot>
 
   <RectAnimation 
     frame_count="6" 

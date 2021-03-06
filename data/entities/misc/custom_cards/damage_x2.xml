@@ -1,4 +1,4 @@
-<Entity _tags="damage x2">
+<Entity tags="damage x2">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

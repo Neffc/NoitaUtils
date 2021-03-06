@@ -22,6 +22,10 @@ RegisterSpawnFunction( 0xff4e175e, "load_oiltank_alt" )
 RegisterSpawnFunction( 0xff33934c, "spawn_shopitem" )
 RegisterSpawnFunction( 0xff50fafa, "spawn_trapwand" )
 RegisterSpawnFunction( 0xfff12ab5, "spawn_bbqbox" )
+RegisterSpawnFunction( 0xff005cfd, "spawn_swing_puzzle_box" )
+RegisterSpawnFunction( 0xff00b5fc, "spawn_swing_puzzle_target" )
+RegisterSpawnFunction( 0xff93ca00, "spawn_oiltank_puzzle" )
+RegisterSpawnFunction( 0xffb97300, "spawn_receptacle_oil" )
 
 ------------ small enemies -------------------------------
 
@@ -757,6 +761,20 @@ g_pixel_scene_02 =
 		is_unique		= 0,
 		color_material = { ["fff0bbee"] = { "water", "oil", "alcohol", "radioactive_liquid" } }
 	},
+	{
+		prob   			= 0.5,
+		material_file 	= "data/biome_impl/coalmine/physics_swing_puzzle.png",
+		visual_file		= "data/biome_impl/coalmine/physics_swing_puzzle_visual.png",
+		background_file	= "",
+		is_unique		= 0,
+	},
+	{
+		prob   			= 0.5,
+		material_file 	= "data/biome_impl/coalmine/receptacle_oil.png",
+		visual_file		= "data/biome_impl/coalmine/receptacle_oil_visual.png",
+		background_file	= "data/biome_impl/coalmine/receptacle_oil_background.png",
+		is_unique		= 0,
+	},
 	--[[
 	-- TODO( Petri ): Disabled the other wand traps for now, to test if this box2d electricty based wand trap is even a good idea
 	{
@@ -837,6 +855,13 @@ g_oiltank =
 		background_file	= "",
 		is_unique		= 0,
 		color_material = { ["fff0bbee"] = { "water", "oil", "water", "oil", "alcohol", "radioactive_liquid", "coal", "radioactive_liquid" } }
+	},
+	{
+		prob   			= 0.05,
+		material_file 	= "data/biome_impl/coalmine/oiltank_puzzle.png",
+		visual_file		= "data/biome_impl/coalmine/oiltank_puzzle_visual.png",
+		background_file	= "data/biome_impl/coalmine/oiltank_puzzle_background.png",
+		is_unique		= 0,
 	},
 }
 
@@ -1167,9 +1192,14 @@ end
 
 function spawn_chest(x, y)
 	SetRandomSeed( x, y )
-	local rnd = Random(1,100)
+	local super_chest_spawn_rate = 2000
+	if GameHasFlagRun( "greed_curse" ) and ( GameHasFlagRun( "greed_curse_gone" ) == false ) then
+		super_chest_spawn_rate = 100
+	end
+
+	local rnd = Random(1,super_chest_spawn_rate)
 	
-	if (rnd >= 99) then
+	if (rnd >= super_chest_spawn_rate-1) then
 		EntityLoad( "data/entities/items/pickup/chest_random_super.xml", x, y)
 	else
 		EntityLoad( "data/entities/items/pickup/chest_random.xml", x, y)
@@ -1205,4 +1235,21 @@ function spawn_bbqbox( x, y )
 		EntityLoadCameraBound( "data/entities/items/pickup/jar_of_urine.xml", x, y )
 		EntityLoad( "data/entities/animals/shotgunner_weak.xml", x + 10, y )
 	end
+end
+
+function spawn_swing_puzzle_box( x, y )
+	EntityLoad( "data/entities/props/physics/trap_electricity_suspended.xml", x, y)
+end
+
+function spawn_swing_puzzle_target( x, y )
+	EntityLoad( "data/entities/buildings/swing_puzzle_target.xml", x, y)
+end
+
+function spawn_oiltank_puzzle( x, y )
+	EntityLoad( "data/entities/buildings/oiltank_puzzle.xml", x, y)
+end
+
+function spawn_receptacle_oil( x, y )
+	EntityLoad( "data/entities/buildings/receptacle_oil.xml", x, y )
+	EntityLoad( "data/entities/items/pickup/potion_empty.xml", x+72, y-17 )
 end

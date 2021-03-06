@@ -10,5 +10,5 @@ local rnd = 1
 if (rnd == 1) then
 	local offset_x = Random( -32, 32 )
 
-	shoot_projectile( entity_id, "data/entities/projectiles/deck/lightning_extra_arcs.xml", pos_x + offset_x, pos_y - 20, 0, 4000 )
+	shoot_projectile( entity_id, "data/entities/projectiles/deck/lightning_extra_arcs.xml", pos_x + offset_x, pos_y + 13, 0, 4000 )
 end

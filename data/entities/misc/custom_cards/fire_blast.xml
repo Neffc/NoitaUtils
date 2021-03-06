@@ -1,4 +1,4 @@
-<Entity _tags="fireblast">
+<Entity tags="fireblast">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

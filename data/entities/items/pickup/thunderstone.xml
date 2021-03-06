@@ -1,10 +1,10 @@
-<Entity tags="hittable,teleportable_NOT,item_physics,item_pickup" >
+<Entity tags="hittable,teleportable_NOT,item_physics,item_pickup,thunderstone" >
   <Base file="data/entities/base_item_projectile.xml">
     <ProjectileComponent>
       <damage_by_type
       electricity="0.5"
       >
-      </damage_by_type>>
+      </damage_by_type>
     </ProjectileComponent>
   </Base>
 

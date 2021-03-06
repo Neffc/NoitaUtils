@@ -1,8 +1,14 @@
 <Sprite
  filename="data/enemies_gfx/shotgunner.png"
+ hotspots_filename="data/enemies_gfx/shotgunner_hotspots.png"
  offset_x="8"
  offset_y="7.5"
-  default_animation="stand" >
+ default_animation="stand" >
+ 
+	<Hotspot 
+		color="ff0000" 
+		name="hand" >
+	</Hotspot>
 
  <!-- stand -->
  <RectAnimation

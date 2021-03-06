@@ -37,8 +37,9 @@ function do_money_drop( amount_multiplier, trick_kill )
 
 	local money = 10 * amount
 	local x, y = EntityGetTransform( entity )
-
-
+	
+	local entity_list = {}
+	
 	local gold_entity = "data/entities/items/pickup/goldnugget_"
 	local remove_timer = false
 	local drop_first_10 = true
@@ -62,8 +63,10 @@ function do_money_drop( amount_multiplier, trick_kill )
 		local hp_drop_chance = tonumber( ComponentGetValue2( comp_worldstate, "perk_hp_drop_chance" ) )
 		hp_drop_chance = amount_multiplier * hp_drop_chance
 		if( hp_drop_chance > 0 and Random( 1, 100 ) <= hp_drop_chance ) then
-			load_gold_entity( "data/entities/items/pickup/bloodmoney_50.xml", x, y-8, remove_timer )
+			local eid = load_gold_entity( "data/entities/items/pickup/bloodmoney_50.xml", x, y-8, remove_timer )
 			money = money - 50
+			
+			table.insert( entity_list, {eid, 9} )
 		end
 	end
 
@@ -71,38 +74,70 @@ function do_money_drop( amount_multiplier, trick_kill )
 	if( drop_first_10 ) then
 		local nugget_10_count = 0
 		while money >= 10 and nugget_10_count < 5 do
-			load_gold_entity( gold_entity .. "10.xml", x, y-8, remove_timer )
+			local eid = load_gold_entity( gold_entity .. "10.xml", x, y-8, remove_timer )
 			money = money - 10
 			nugget_10_count = nugget_10_count + 1
+			
+			table.insert( entity_list, {eid, 6} )
 		end	
 	end
-
+	
 	---
 	while money >= 10000 do
-		load_gold_entity( gold_entity .. "10000.xml", x, y-8, remove_timer )
+		local eid = load_gold_entity( gold_entity .. "10000.xml", x, y-8, remove_timer )
 		money = money - 10000
+		
+		table.insert( entity_list, {eid, 12} )
 	end	
 
 	while money >= 1000 do
-		load_gold_entity( gold_entity .. "1000.xml", x, y-8, remove_timer )
+		local eid = load_gold_entity( gold_entity .. "1000.xml", x, y-8, remove_timer )
 		money = money - 1000
+		
+		table.insert( entity_list, {eid, 20} )
 	end	
 
 	while money >= 200 do
-		load_gold_entity( gold_entity .. "200.xml", x, y-8, remove_timer )
+		local eid = load_gold_entity( gold_entity .. "200.xml", x, y-8, remove_timer )
 		money = money - 200
+		
+		table.insert( entity_list, {eid, 12} )
 	end	
 
 	while money >= 50 do
-		load_gold_entity( gold_entity .. "50.xml", x, y-8, remove_timer )
+		local eid = load_gold_entity( gold_entity .. "50.xml", x, y-8, remove_timer )
 		money = money - 50
+		
+		table.insert( entity_list, {eid, 9} )
 	end	
 
 	while money >= 10 do
-		load_gold_entity( gold_entity .. "10.xml", x, y-8, remove_timer )
+		local eid = load_gold_entity( gold_entity .. "10.xml", x, y-8, remove_timer )
 		money = money - 10
+		
+		table.insert( entity_list, {eid, 6} )
 	end	
-
+	
+	if GameHasFlagRun( "exploding_gold" ) then
+		for i,v in ipairs( entity_list ) do
+			local eid = v[1]
+			local size = tostring(v[2])
+			
+			EntityAddComponent( eid, "CollisionTriggerComponent", 
+			{ 
+				width = size,
+				height = size,
+				required_tag = "enemy",
+				timer_for_destruction = "5",
+			} )
+			
+			EntityAddComponent( eid, "LuaComponent", 
+			{ 
+				execute_every_n_frame = "-1",
+				script_collision_trigger_hit = "data/scripts/perks/gold_explosion_collision_trigger.lua"
+			} )
+		end
+	end
 end
 
 function death( damage_type_bit_field, damage_message, entity_thats_responsible, drop_items )

@@ -1,4 +1,4 @@
-<Entity _tags="circle shot">
+<Entity tags="circle shot">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

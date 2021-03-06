@@ -137,6 +137,7 @@ perk_list =
 		stackable = STACKABLE_YES,
 		usable_by_enemies = true,
 	},
+	--[[
 	{
 		id = "LOW_GRAVITY",
 		ui_name = "$perk_low_gravity",
@@ -146,6 +147,7 @@ perk_list =
 		stackable = STACKABLE_YES,
 		stackable_is_rare = true,
 		usable_by_enemies = true,
+		not_in_default_perk_pool = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			local models = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
 			if( models ~= nil ) then
@@ -184,6 +186,7 @@ perk_list =
 		stackable = STACKABLE_YES,
 		stackable_is_rare = true,
 		usable_by_enemies = true,
+		not_in_default_perk_pool = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 
 			local models = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
@@ -214,6 +217,7 @@ perk_list =
 			end
 		end,
 	},
+	]]--
 	{
 		id = "SPEED_DIVER",
 		ui_name = "$perk_speed_diver",
@@ -263,12 +267,14 @@ perk_list =
 					local kick_damage = tonumber( ComponentGetMetaCustom( model, "kick_damage" ) ) + 2.4
 					local kick_knockback = tonumber( ComponentGetMetaCustom( model, "kick_knockback" ) ) + 250
 					local telekinesis_throw_speed = tonumber( ComponentGetValue2( model, "telekinesis_throw_speed") ) + 25
+					local kick_entities = tostring( ComponentGetValue2( model, "kick_entities" ) ) .. ",data/entities/misc/crack_ice.xml"
 
 					ComponentSetMetaCustom( model, "max_force", kick_force )
 					ComponentSetMetaCustom( model, "player_kickforce", player_kick_force )
 					ComponentSetMetaCustom( model, "kick_damage", kick_damage )
 					ComponentSetMetaCustom( model, "kick_knockback", kick_knockback )
 					ComponentSetValue2( model, "telekinesis_throw_speed", telekinesis_throw_speed )
+					ComponentSetValue2( model, "kick_entities", kick_entities )
 				end
 			end
 
@@ -317,6 +323,7 @@ perk_list =
 		game_effect = "STAINS_DROP_FASTER",
 		stackable = STACKABLE_YES,
 		stackable_is_rare = true,
+		stackable_maximum = 8,
 		usable_by_enemies = true,
 	},
 	{
@@ -597,18 +604,6 @@ perk_list =
 		stackable_is_rare = true,
 		usable_by_enemies = true,
 	},
-
-	{
-		id = "WORM_DETRACTOR",
-		ui_name = "$perk_worm_detractor",
-		ui_description = "$perkdesc_worm_detractor",
-		ui_icon = "data/ui_gfx/perk_icons/worm_detractor.png",
-		perk_icon = "data/items_gfx/perks/worm_detractor.png",
-		game_effect = "WORM_DETRACTOR",
-		stackable = STACKABLE_YES,
-		stackable_is_rare = true,
-		usable_by_enemies = true,
-	},
 	{
 		id = "RADAR_ENEMY",
 		ui_name = "$perk_radar_enemy",
@@ -623,6 +618,40 @@ perk_list =
 				script_source_file = "data/scripts/perks/radar.lua",
 				execute_every_n_frame = "1",
 			} )
+		end,
+	},
+	{
+		id = "FOOD_CLOCK",
+		ui_name = "$perk_food_clock",
+		ui_description = "$perkdesc_food_clock",
+		ui_icon = "data/ui_gfx/perk_icons/food_clock.png",
+		perk_icon = "data/items_gfx/perks/food_clock.png",
+		stackable = STACKABLE_NO,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+		
+			EntityAddComponent( entity_who_picked, "LuaComponent", 
+			{ 
+				script_source_file = "data/scripts/perks/food_clock.lua",
+				execute_every_n_frame = "60",
+			} )
+			
+			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
+			{ 
+				extra_modifier = "food_clock",
+			} )
+			
+			local x,y = EntityGetTransform( entity_perk_item )
+			EntityLoad( "data/entities/items/pickup/potion_porridge.xml", x, y )
+			
+			local comp = EntityGetFirstComponent( entity_who_picked, "IngestionComponent" )
+
+			if ( comp ~= nil ) then
+				ComponentSetValue2( comp, "ingestion_cooldown_delay_frames", 400 )
+				ComponentSetValue2( comp, "ingestion_reduce_every_n_frame", 15 )
+				
+				local curr = ComponentGetValue2( comp, "ingestion_size" )
+				ComponentSetValue2( comp, "ingestion_size", math.max( curr, 8000 ) )
+			end
 		end,
 	},
 	{
@@ -833,6 +862,24 @@ perk_list =
 		end,
 	},
 	{
+		-- shooting unedited wands gives back HP
+		id = "ADVENTURER",
+		ui_name = "$perk_adventurer",
+		ui_description = "$perkdesc_adventurer",
+		ui_icon = "data/ui_gfx/perk_icons/adventurer.png",
+		perk_icon = "data/items_gfx/perks/adventurer.png",
+		stackable = STACKABLE_NO,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+		
+			EntityAddComponent( entity_who_picked, "LuaComponent", 
+			{ 
+				script_source_file = "data/scripts/perks/adventurer.lua",
+				execute_every_n_frame = "60",
+			} )
+			
+		end,
+	},
+	{
 		id = "ABILITY_ACTIONS_MATERIALIZED",
 		ui_name = "$perk_ability_actions_materialized",
 		ui_description = "$perkdesc_ability_actions_materialized",
@@ -874,7 +921,7 @@ perk_list =
 			
 			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
 			{ 
-				extra_modifier = "powerful_shot_placeholder",
+				extra_modifier = "powerful_shot",
 			} )
 			
 			--[[
@@ -1032,6 +1079,7 @@ perk_list =
 		perk_icon = "data/items_gfx/perks/oil_blood.png",
 		game_effect = "PROTECTION_FIRE",
 		stackable = STACKABLE_NO,
+		remove_other_perks = {"PROTECTION_FIRE"},
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
@@ -1179,6 +1227,7 @@ perk_list =
 			if ( rattiness == 3 ) then
 				child_id = EntityLoad( "data/entities/verlet_chains/tail/verlet_tail.xml", x, y )
 				EntityAddChild( entity_who_picked, child_id )
+				AddFlagPersistent( "player_status_ratty" )
 				
 				local platformingcomponents = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
 				if( platformingcomponents ~= nil ) then
@@ -1338,6 +1387,7 @@ perk_list =
 			if ( rattiness == 3 ) then
 				child_id = EntityLoad( "data/entities/verlet_chains/tail/verlet_tail.xml", x, y )
 				EntityAddChild( entity_who_picked, child_id )
+				AddFlagPersistent( "player_status_ratty" )
 				
 				local platformingcomponents = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
 				if( platformingcomponents ~= nil ) then
@@ -1384,6 +1434,7 @@ perk_list =
 			if ( rattiness == 3 ) then
 				child_id = EntityLoad( "data/entities/verlet_chains/tail/verlet_tail.xml", x, y )
 				EntityAddChild( entity_who_picked, child_id )
+				AddFlagPersistent( "player_status_ratty" )
 				
 				local platformingcomponents = EntityGetComponent( entity_who_picked, "CharacterPlatformingComponent" )
 				if( platformingcomponents ~= nil ) then
@@ -1405,12 +1456,88 @@ perk_list =
 		end,
 	},
 	{
+		id = "CORDYCEPS",
+		ui_name = "$perk_cordyceps",
+		ui_description = "$perkdesc_cordyceps",
+		ui_icon = "data/ui_gfx/perk_icons/cordyceps.png",
+		perk_icon = "data/items_gfx/perks/cordyceps.png",
+		stackable = STACKABLE_NO,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+		
+			EntityAddComponent( entity_who_picked, "LuaComponent", 
+			{ 
+				script_source_file = "data/scripts/perks/cordyceps.lua",
+				execute_every_n_frame = "20",
+			} )
+			
+			if ( GameHasFlagRun( "player_status_cordyceps" ) == false ) then
+				GameAddFlagRun( "player_status_cordyceps" )
+				local funginess = tonumber( GlobalsGetValue( "PLAYER_FUNGAL_LEVEL", "0" ) )
+				funginess = funginess + 1
+				GlobalsSetValue( "PLAYER_FUNGAL_LEVEL", tostring( funginess ) )
+				
+				if ( funginess == 3 ) then
+					EntitySetComponentsWithTagEnabled( entity_who_picked, "player_hat", true )
+					
+					AddFlagPersistent( "player_status_funky" )
+					
+					local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
+					if( damagemodels ~= nil ) then
+						for i,damagemodel in ipairs(damagemodels) do
+							local explosion_resistance = tonumber(ComponentObjectGetValue( damagemodel, "damage_multipliers", "explosion" ))
+							explosion_resistance = explosion_resistance * 0.9
+							ComponentObjectSetValue( damagemodel, "damage_multipliers", "explosion", tostring(explosion_resistance) )
+						end
+					end
+				end
+			end
+		end,
+	},
+	{
+		id = "MOLD",
+		ui_name = "$perk_mold",
+		ui_description = "$perkdesc_mold",
+		ui_icon = "data/ui_gfx/perk_icons/mold.png",
+		perk_icon = "data/items_gfx/perks/mold.png",
+		stackable = STACKABLE_NO,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			local x,y = EntityGetTransform( entity_perk_item )
+			local child_id = EntityLoad( "data/entities/misc/perks/slime_fungus.xml", x, y )
+			EntityAddChild( entity_who_picked, child_id )
+			
+			EntityLoad( "data/entities/items/pickup/potion_slime.xml", x, y )
+			
+			if ( GameHasFlagRun( "player_status_mold" ) == false ) then
+				GameAddFlagRun( "player_status_mold" )
+				local funginess = tonumber( GlobalsGetValue( "PLAYER_FUNGAL_LEVEL", "0" ) )
+				funginess = funginess + 1
+				GlobalsSetValue( "PLAYER_FUNGAL_LEVEL", tostring( funginess ) )
+				
+				if ( funginess == 3 ) then
+					EntitySetComponentsWithTagEnabled( entity_who_picked, "player_hat", true )
+					
+					AddFlagPersistent( "player_status_funky" )
+					
+					local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
+					if( damagemodels ~= nil ) then
+						for i,damagemodel in ipairs(damagemodels) do
+							local explosion_resistance = tonumber(ComponentObjectGetValue( damagemodel, "damage_multipliers", "explosion" ))
+							explosion_resistance = explosion_resistance * 0.9
+							ComponentObjectSetValue( damagemodel, "damage_multipliers", "explosion", tostring(explosion_resistance) )
+						end
+					end
+				end
+			end
+		end,
+	},
+	{
 		id = "WORM_SMALLER_HOLES",
 		ui_name = "$perk_worm_smaller_holes",
 		ui_description = "$perkdesc_worm_smaller_holes",
 		ui_icon = "data/ui_gfx/perk_icons/worm_smaller_holes.png",
 		perk_icon = "data/items_gfx/perks/worm_smaller_holes.png",
 		stackable = STACKABLE_NO,
+		game_effect = "WORM_DETRACTOR",
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
@@ -1460,6 +1587,58 @@ perk_list =
 					local projectile_resistance = tonumber(ComponentObjectGetValue( damagemodel, "damage_multipliers", "projectile" ))
 					projectile_resistance = projectile_resistance * 1.26
 					ComponentObjectSetValue( damagemodel, "damage_multipliers", "projectile", tostring(projectile_resistance) )
+				end
+			end
+		end,
+	},
+	{
+		id = "RISKY_CRITICAL",
+		ui_name = "$perk_risky_critical",
+		ui_description = "$perkdesc_risky_critical",
+		ui_icon = "data/ui_gfx/perk_icons/risky_critical.png",
+		perk_icon = "data/items_gfx/perks/risky_critical.png",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
+		stackable_maximum = 3,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			local x,y = EntityGetTransform( entity_who_picked )
+			local child_id = EntityLoad( "data/entities/misc/perks/risky_critical.xml", x, y )
+			EntityAddChild( entity_who_picked, child_id )
+		end,
+	},
+	{
+		id = "FUNGAL_DISEASE",
+		ui_name = "$perk_fungal_disease",
+		ui_description = "$perkdesc_fungal_disease",
+		ui_icon = "data/ui_gfx/perk_icons/fungal_disease.png",
+		perk_icon = "data/items_gfx/perks/fungal_disease.png",
+		stackable = STACKABLE_YES,
+		stackable_is_rare = true,
+		stackable_maximum = 3,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			local x,y = EntityGetTransform( entity_who_picked )
+			local child_id = EntityLoad( "data/entities/misc/perks/fungal_disease.xml", x, y )
+			EntityAddChild( entity_who_picked, child_id )
+			
+			if ( GameHasFlagRun( "player_status_fungal_disease" ) == false ) then
+				GameAddFlagRun( "player_status_fungal_disease" )
+				local funginess = tonumber( GlobalsGetValue( "PLAYER_FUNGAL_LEVEL", "0" ) )
+				funginess = funginess + 1
+				GlobalsSetValue( "PLAYER_FUNGAL_LEVEL", tostring( funginess ) )
+				
+				if ( funginess == 3 ) then
+					EntitySetComponentsWithTagEnabled( entity_who_picked, "player_hat", true )
+					
+					AddFlagPersistent( "player_status_funky" )
+					
+					local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
+					if( damagemodels ~= nil ) then
+						for i,damagemodel in ipairs(damagemodels) do
+							local explosion_resistance = tonumber(ComponentObjectGetValue( damagemodel, "damage_multipliers", "explosion" ))
+							explosion_resistance = explosion_resistance * 0.9
+							ComponentObjectSetValue( damagemodel, "damage_multipliers", "explosion", tostring(explosion_resistance) )
+						end
+					end
 				end
 			end
 		end,
@@ -1548,6 +1727,115 @@ perk_list =
 			local x,y = EntityGetTransform( entity_who_picked )
 			local child_id = EntityLoad( "data/entities/misc/perks/angry_ghost.xml", x, y )
 			EntityAddChild( entity_who_picked, child_id )
+			
+			EntityAddComponent( entity_who_picked, "LuaComponent", 
+			{ 
+				script_wand_fired = "data/scripts/perks/angry_ghost_shoot.lua",
+				execute_every_n_frame = "1",
+			} )
+			
+			if ( GameHasFlagRun( "player_status_angry_ghost" ) == false ) then
+				GameAddFlagRun( "player_status_angry_ghost" )
+				local ghostness = tonumber( GlobalsGetValue( "PLAYER_GHOSTNESS_LEVEL", "0" ) )
+				ghostness = ghostness + 1
+				GlobalsSetValue( "PLAYER_GHOSTNESS_LEVEL", tostring( ghostness ) )
+				
+				if ( ghostness == 3 ) then
+					child_id = EntityLoad( "data/entities/misc/perks/ghostly_ghost.xml", x, y )
+					child_id2 = EntityLoad( "data/entities/misc/perks/tiny_ghost_extra.xml", x, y )
+					EntityAddChild( entity_who_picked, child_id )
+					EntityAddChild( entity_who_picked, child_id2 )
+					
+					AddFlagPersistent( "player_status_ghostly" )
+					
+					local platformingcomponents = EntityGetComponent( entity_who_picked, "CharacterDataComponent" )
+					if( platformingcomponents ~= nil ) then
+						for i,component in ipairs(platformingcomponents) do
+							local fly_time = ComponentGetValue2( component, "fly_recharge_spd" ) * 1.15
+							ComponentSetValue2( component, "fly_recharge_spd", fly_time )
+						end
+					end
+				end
+			end
+		end,
+	},
+	{
+		id = "HUNGRY_GHOST",
+		ui_name = "$perk_hungry_ghost",
+		ui_description = "$perkdesc_hungry_ghost",
+		ui_icon = "data/ui_gfx/perk_icons/hungry_ghost.png",
+		perk_icon = "data/items_gfx/perks/hungry_ghost.png",
+		usable_by_enemies = true,
+		stackable = STACKABLE_YES,
+		stackable_maximum = 5,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			local x,y = EntityGetTransform( entity_who_picked )
+			local child_id = EntityLoad( "data/entities/misc/perks/hungry_ghost.xml", x, y )
+			EntityAddChild( entity_who_picked, child_id )
+			
+			if ( GameHasFlagRun( "player_status_hungry_ghost" ) == false ) then
+				GameAddFlagRun( "player_status_hungry_ghost" )
+				local ghostness = tonumber( GlobalsGetValue( "PLAYER_GHOSTNESS_LEVEL", "0" ) )
+				ghostness = ghostness + 1
+				GlobalsSetValue( "PLAYER_GHOSTNESS_LEVEL", tostring( ghostness ) )
+				
+				if ( ghostness == 3 ) then
+					child_id = EntityLoad( "data/entities/misc/perks/ghostly_ghost.xml", x, y )
+					child_id2 = EntityLoad( "data/entities/misc/perks/tiny_ghost_extra.xml", x, y )
+					EntityAddChild( entity_who_picked, child_id )
+					EntityAddChild( entity_who_picked, child_id2 )
+					
+					AddFlagPersistent( "player_status_ghostly" )
+					
+					local platformingcomponents = EntityGetComponent( entity_who_picked, "CharacterDataComponent" )
+					if( platformingcomponents ~= nil ) then
+						for i,component in ipairs(platformingcomponents) do
+							local fly_time = ComponentGetValue2( component, "fly_recharge_spd" ) * 1.15
+							ComponentSetValue2( component, "fly_recharge_spd", fly_time )
+						end
+					end
+				end
+			end
+		end,
+	},
+	{
+		id = "DEATH_GHOST",
+		ui_name = "$perk_death_ghost",
+		ui_description = "$perkdesc_death_ghost",
+		ui_icon = "data/ui_gfx/perk_icons/death_ghost.png",
+		perk_icon = "data/items_gfx/perks/death_ghost.png",
+		stackable = STACKABLE_NO,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+		
+			EntityAddComponent( entity_who_picked, "LuaComponent", 
+			{ 
+				script_source_file = "data/scripts/perks/death_ghost.lua",
+				execute_every_n_frame = "20",
+			} )
+			
+			if ( GameHasFlagRun( "player_status_death_ghost" ) == false ) then
+				GameAddFlagRun( "player_status_death_ghost" )
+				local ghostness = tonumber( GlobalsGetValue( "PLAYER_GHOSTNESS_LEVEL", "0" ) )
+				ghostness = ghostness + 1
+				GlobalsSetValue( "PLAYER_GHOSTNESS_LEVEL", tostring( ghostness ) )
+				
+				if ( ghostness == 3 ) then
+					child_id = EntityLoad( "data/entities/misc/perks/ghostly_ghost.xml", x, y )
+					child_id2 = EntityLoad( "data/entities/misc/perks/tiny_ghost_extra.xml", x, y )
+					EntityAddChild( entity_who_picked, child_id )
+					EntityAddChild( entity_who_picked, child_id2 )
+					
+					AddFlagPersistent( "player_status_ghostly" )
+					
+					local platformingcomponents = EntityGetComponent( entity_who_picked, "CharacterDataComponent" )
+					if( platformingcomponents ~= nil ) then
+						for i,component in ipairs(platformingcomponents) do
+							local fly_time = ComponentGetValue2( component, "fly_recharge_spd" ) * 1.15
+							ComponentSetValue2( component, "fly_recharge_spd", fly_time )
+						end
+					end
+				end
+			end
 		end,
 	},
 	{
@@ -1571,6 +1859,7 @@ perk_list =
 		perk_icon = "data/items_gfx/perks/electricity.png",
 		game_effect = "PROTECTION_ELECTRICITY",
 		stackable = STACKABLE_NO,
+		remove_other_perks = {"PROTECTION_ELECTRICITY"},
 		usable_by_enemies = true,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 		
@@ -1588,12 +1877,28 @@ perk_list =
 		perk_icon = "data/items_gfx/perks/attract_items.png",
 		usable_by_enemies = true,
 		stackable = STACKABLE_YES,
+		stackable_maximum = 6,
 		func = function( entity_perk_item, entity_who_picked, item_name )
+			local distance_full = tonumber( GlobalsGetValue( "PERK_ATTRACT_ITEMS_RANGE", "0" ) )
+			
+			if ( distance_full == 0 ) then
+				GlobalsSetValue( "PERK_ATTRACT_ITEMS_RANGE", "72" )
+				EntityAddComponent( entity_who_picked, "LuaComponent", 
+				{ 
+					script_source_file = "data/scripts/perks/attract_items.lua",
+					execute_every_n_frame = "2",
+				} )
+			else
+				distance_full = distance_full + 24
+				GlobalsSetValue( "PERK_ATTRACT_ITEMS_RANGE", tostring(distance_full) )
+			end
+		end,
+		func_enemy = function( entity_perk_item, entity_who_picked )
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
 			{ 
-				script_source_file = "data/scripts/perks/attract_items.lua",
+				script_source_file = "data/scripts/perks/attract_items_enemy.lua",
 				execute_every_n_frame = "2",
-			} )	
+			} )
 		end,
 	},
 	{
@@ -1685,7 +1990,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/fast_projectiles.png",
 		perk_icon = "data/items_gfx/perks/fast_projectiles.png",
 		usable_by_enemies = true,
-		stackable = STACKABLE_YES,
+		stackable = STACKABLE_NO,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			EntityAddComponent( entity_who_picked, "ShotEffectComponent", 
 			{ 
@@ -1971,6 +2276,7 @@ perk_list =
 			end
 		end,
 	},
+	--[[
 	{
 		id = "EXTRA_POTION_CAPACITY",
 		ui_name = "$perk_extra_potion_capacity",
@@ -1985,6 +2291,7 @@ perk_list =
 			GlobalsSetValue( "EXTRA_POTION_CAPACITY_LEVEL", tostring( capacity ) )
 		end,
 	},
+	]]--
 	{
 		id = "CONTACT_DAMAGE",
 		ui_name = "$perk_contact_damage",
@@ -2114,6 +2421,7 @@ perk_list =
 		ui_icon = "data/ui_gfx/perk_icons/extra_perk.png",
 		perk_icon = "data/items_gfx/perks/extra_perk.png",
 		stackable = STACKABLE_YES,
+		stackable_maximum = 5,
 		func = function( entity_perk_item, entity_who_picked, item_name )
 			-- TODO - this should work - seems to work
 			local perk_count = tonumber( GlobalsGetValue( "TEMPLE_PERK_COUNT", "3" ) )
@@ -2136,6 +2444,18 @@ perk_list =
 			local perk_destroy_chance = tonumber( GlobalsGetValue( "TEMPLE_PERK_DESTROY_CHANCE", "100" ) )
 			perk_destroy_chance = perk_destroy_chance / 2
 			GlobalsSetValue( "TEMPLE_PERK_DESTROY_CHANCE", tostring(perk_destroy_chance) )
+		end,
+	},
+	{
+		id = "GAMBLE",
+		ui_name = "$perk_gamble",
+		ui_description = "$perkdesc_gamble",
+		ui_icon = "data/ui_gfx/perk_icons/gamble.png", -- TODO
+		perk_icon = "data/items_gfx/perks/gamble.png", -- TODO
+		stackable = STACKABLE_YES,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			local pos_x, pos_y = EntityGetTransform(entity_who_picked)
+			EntityLoad("data/entities/misc/perk_gamble_spawner.xml", pos_x, pos_y)
 		end,
 	},
 	{
@@ -2230,6 +2550,22 @@ perk_list =
 			EntityAddComponent( entity_who_picked, "LuaComponent", 
 			{ 
 				script_source_file = "data/scripts/perks/mana_from_kills.lua",
+				execute_every_n_frame = "20",
+			} )
+		end,
+	},
+	{
+		id = "ANGRY_LEVITATION",
+		ui_name = "$perk_angry_levitation",
+		ui_description = "$perkdesc_angry_levitation",
+		ui_icon = "data/ui_gfx/perk_icons/angry_levitation.png",
+		perk_icon = "data/items_gfx/perks/angry_levitation.png",
+		stackable = STACKABLE_NO,
+		func = function( entity_perk_item, entity_who_picked, item_name )
+			
+			EntityAddComponent( entity_who_picked, "LuaComponent", 
+			{ 
+				script_source_file = "data/scripts/perks/angry_levitation.lua",
 				execute_every_n_frame = "20",
 			} )
 		end,

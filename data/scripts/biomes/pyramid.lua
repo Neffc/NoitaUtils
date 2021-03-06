@@ -62,6 +62,12 @@ g_small_enemies =
 		entity 	= "data/entities/animals/alchemist.xml"
 	},
 	{
+		prob   		= 0.005,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/animals/thundermage_big.xml"
+	},
+	{
 		prob   		= 0.1,
 		min_count	= 1,
 		max_count	= 1,    
@@ -90,6 +96,19 @@ g_small_enemies =
 		min_count	= 1,
 		max_count	= 2,    
 		entity 	= "data/entities/animals/wizard_weaken.xml"
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 2,    
+		entity 	= "data/entities/animals/ethereal_being.xml"
+	},
+	{
+		prob   		= 0.05,
+		min_count	= 1,
+		max_count	= 1,    
+		entity 	= "data/entities/buildings/hpcrystal.xml",
+		ngpluslevel = 1,
 	},
 }
 
@@ -649,4 +668,5 @@ end
 
 function spawn_boss_limbs_trigger( x, y )
 	EntityLoad("data/entities/animals/boss_limbs/boss_limbs_trigger.xml", x, y )
+	EntityLoad("data/entities/items/books/book_music_b.xml", x, y )
 end

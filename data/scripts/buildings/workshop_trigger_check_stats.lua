@@ -30,7 +30,8 @@ function collision_trigger()
 		end
 		
 		print("Loading chest_random.xml to " .. tostring(sx) .. ", " .. tostring(sy))
-		EntityLoad( "data/entities/items/pickup/chest_random.xml", sx, sy )
+		local eid = EntityLoad( "data/entities/items/pickup/chest_random.xml", sx, sy )
+		change_entity_ingame_name( eid, "$item_chest_treasure_pacifist" )
 	else
 		print("KILLED ALL")
 	end

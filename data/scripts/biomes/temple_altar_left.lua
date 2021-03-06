@@ -228,9 +228,8 @@ end
 
 function spawn_statue( x, y )
 	local curse = GameHasFlagRun( "greed_curse" )
-	local cursegone = GameHasFlagRun( "greed_curse_gone" )
 	
-	if curse and ( cursegone == false ) then
+	if curse then
 		EntityLoad( "data/entities/misc/greed_curse/greed_crystal.xml", x, y - 48 )
 		EntityLoad( "data/entities/props/temple_statue_01_green.xml", x, y )
 	else

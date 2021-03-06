@@ -1,4 +1,4 @@
-<Entity _tags="poison trail">
+<Entity tags="poison trail">
 	
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 

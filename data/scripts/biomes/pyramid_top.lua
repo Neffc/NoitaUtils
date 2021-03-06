@@ -28,7 +28,7 @@ function spawn_candles( x, y ) end
 function init( x, y, w, h )
 	LoadPixelScene( "data/biome_impl/pyramid/right_bottom.png", "", x+512-61, y + 512, "", true )
 	LoadPixelScene( "data/biome_impl/pyramid/left_bottom.png", "", x, y + 512, "", true )
-	LoadPixelScene( "data/biome_impl/pyramid/top.png", "", x, y, "data/biome_impl/pyramid/top_background.png", true )
+	LoadPixelScene( "data/biome_impl/pyramid/top.png", "data/biome_impl/pyramid/top_visual.png", x, y, "data/biome_impl/pyramid/top_background.png", true )
 end
 
 function load_building_stash( x, y )
@@ -37,4 +37,5 @@ end
 function spawn_orb(x, y)
 	EntityLoad( "data/entities/items/orbs/orb_01.xml", x, y )
 	EntityLoad( "data/entities/items/books/book_01.xml", x+24, y )
+	EntityLoad( "data/entities/buildings/sun/spot_1.xml", x+24, y )
 end

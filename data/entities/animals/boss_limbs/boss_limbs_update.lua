@@ -306,7 +306,7 @@ function check_death()
 				ComponentSetValue( comp, "kill_now", "1" )
 			end
 			
-			StatsLogPlayerKill()
+			StatsLogPlayerKill( GetUpdatedEntityID() )
 			is_dead = true
 			AddFlagPersistent( "miniboss_limbs" )
 
